@@ -38,14 +38,12 @@
     </div>
 
     <!-- ПАРАЛАКС ДЕКОР (ПАЛЬМИ) -->
-    <div class="parallax-wrapper" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 90; overflow: hidden;">
+    <div class="parallax-wrapper" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; overflow: hidden;">
         <img src="assets/img/palm_1.png" alt="" class="parallax-el p-palm-1" data-speed="0.08" style="position: absolute; top: -5%; right: -5%; width: clamp(300px, 35vw, 550px); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.4));">
         <img src="assets/img/palm_2.png" alt="" class="parallax-el p-palm-2" data-speed="-0.05" style="position: absolute; bottom: -5%; left: -5%; width: clamp(350px, 40vw, 650px); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.4));">
     </div>
 
-    <!-- ==========================================
-         HEADER
-         ========================================== -->
+    <!-- HEADER -->
     <header class="header js-header" role="banner">
         <div class="container header__container">
             
@@ -61,7 +59,6 @@
                             Тури
                             <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
                         </a>
-                        
                         <div class="mega-menu" role="menu">
                             <div class="mega-menu__inner container">
                                 <div class="mega-menu__col">
@@ -121,7 +118,6 @@
                     <li class="nav__item"><a href="index.html#faq" class="nav__link">Поширені питання</a></li>
                     <li class="nav__item"><a href="index.html#blog" class="nav__link">Блог</a></li>
                     
-                    <!-- АКТИВНИЙ РОЗДІЛ "КОНТАКТИ" -->
                     <li class="nav__item">
                         <a href="contacts.html" class="nav__link" style="color: var(--color-primary);">Контакти</a>
                     </li>
@@ -137,7 +133,7 @@
                 
                 <div class="header__contacts">
                     <span class="header__contacts-hint">Ми на зв'язку</span>
-                    <a href="tel:+380995337227" class="header__phone">+38 (099) 533-72-27</a><!-- -->
+                    <a href="tel:+380995337227" class="header__phone">+38 (099) 533-72-27</a>
                 </div>
 
                 <button class="btn btn--solid-yellow js-open-modal" aria-label="Відкрити форму підбору туру">
@@ -155,12 +151,8 @@
 
     <main id="main-content" role="main">
         
-        <!-- ==========================================
-             INNER HERO (КОНТАКТИ)
-             ========================================== -->
         <section class="hero-screen hero-screen--inner">
             <div class="hero-screen__bg">
-                <!-- Картинка для Контактів -->
                 <img src="assets/img/50571182.jpg" alt="Зв'язатися з нами" class="hero-screen__img js-parallax-bg" style="object-position: center;" fetchpriority="high">
                 <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);"></div>
             </div>
@@ -174,9 +166,6 @@
             </div>
         </section>
 
-        <!-- ==========================================
-             БЛОК КОНТАКТІВ ТА МАПИ
-             ========================================== -->
         <section class="section bg-light" style="position: relative; z-index: 100;">
             <div class="container">
                 <div class="contacts-grid">
@@ -188,16 +177,16 @@
                         <div class="contact-row">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                             <div>
-                                <a href="tel:+380995337227" style="display:block;">+38 (099) 533-72-27</a><!-- -->
-                                <a href="tel:+380995337447" style="display:block; margin-top:8px;">+38 (099) 533-74-47</a><!-- -->
+                                <a href="tel:+380995337227" style="display:block;">+38 (099) 533-72-27</a>
+                                <a href="tel:+380995337447" style="display:block; margin-top:8px;">+38 (099) 533-74-47</a>
                             </div>
                         </div>
 
                         <div class="contact-row">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                             <address>
-                                м. Павлоград<br><!-- -->
-                                м. Ірпінь / Буча / Гостомель / Ворзель<!-- -->
+                                м. Павлоград<br>
+                                м. Ірпінь / Буча / Гостомель / Ворзель
                             </address>
                         </div>
 
@@ -217,7 +206,6 @@
 
                     <!-- Мапа -->
                     <div class="map-container js-reveal" style="transition-delay: 0.2s">
-                        <!-- ІНТЕГРАЦІЯ: Вставити iframe з Google Maps (Наприклад, Павлоград) -->
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d168536.87786481745!2d35.74836696569106!3d48.52924041764669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d99b7dfb5f9227%3A0xc3b8b60f27426177!2z0J_QsNCy0LvQvtCz0YDQsNC0LCDQlNC90ZbQv9GA0L7Qv9C10YLRgNC-0LLRgdGM0LrQsCDQvtCx0LvQsNGB0YLRjCwgNTE0MDA!5e0!3m2!1suk!2sua!4v1717200000000!5m2!1suk!2sua" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" aria-label="Карта з адресою"></iframe>
                     </div>
 
@@ -225,12 +213,9 @@
             </div>
         </section>
 
-        <!-- ==========================================
-             LEAD FORM (SPLIT SCREEN)
-             ========================================== -->
+        <!-- LEAD FORM (SPLIT SCREEN) -->
         <section class="lead-section" id="lead-form-contacts" style="position: relative; z-index: 100;">
             <div class="lead-split">
-                
                 <div class="lead-split__visual">
                     <img src="assets/img/50571182.jpg" alt="Відпочинок у горах" class="lead-split__img" loading="lazy">
                     <div class="lead-split__visual-content js-reveal">
@@ -277,20 +262,16 @@
                         </div>
                     </form>
                 </div>
-
             </div>
         </section>
 
     </main>
 
-    <!-- ==========================================
-         FOOTER (З МІКРОРОЗМІТКОЮ SCHEMA.ORG)
-         ========================================== -->
-    <footer class="footer js-reveal" itemscope itemtype="https://schema.org/TravelAgency" style="position: relative; z-index: 100;">
+    <!-- FOOTER -->
+    <footer class="footer js-reveal" itemscope itemtype="https://schema.org/TravelAgency" style="position: relative; z-index: 10; background-color: var(--color-dark);">
         <div class="container">
             <div class="footer__grid">
                 
-                <!-- Блок 1: Бренд -->
                 <div class="footer__col footer__col--brand">
                     <img src="assets/img/logo.png" alt="Лимон Турів" class="footer__logo" itemprop="image">
                     <p class="footer__desc mt-4">
@@ -299,7 +280,6 @@
                     </p>
                 </div>
 
-                <!-- Блок 2: Навігація Тури -->
                 <div class="footer__col">
                     <h4 class="footer__title">Тури</h4>
                     <ul class="footer__nav" role="navigation">
@@ -310,18 +290,16 @@
                     </ul>
                 </div>
 
-                <!-- Блок 3: Навігація Інфо -->
                 <div class="footer__col">
                     <h4 class="footer__title">Інформація</h4>
                     <ul class="footer__nav" role="navigation">
-                        <li><a href="index.html#about">Про компанію</a></li>
+                        <li><a href="about.html">Про компанію</a></li>
+                        <li><a href="oferta.html">Договір оферти</a></li>
                         <li><a href="index.html#services">Послуги</a></li>
                         <li><a href="index.html#faq">Поширені питання</a></li>
-                        <li><a href="index.html#blog">Блог</a></li>
                     </ul>
                 </div>
 
-                <!-- Блок 4: Контакти -->
                 <div class="footer__col footer__col--contacts">
                     <h4 class="footer__title">Контакти</h4>
                     <ul class="footer__contact-list">
@@ -341,7 +319,6 @@
                         </li>
                     </ul>
                     
-                    <!-- Соціальні мережі -->
                     <div class="footer__socials mt-4">
                         <a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
                         <a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
@@ -352,9 +329,8 @@
 
             </div>
 
-            <!-- Нижній рядок -->
             <div class="footer__bottom">
-                <p>&copy; <span id="current-year-contacts">2026</span> Лимон Турів. Всі права захищені.</p>
+                <p>&copy; <span id="current-year-contacts">2026</span> Лимон Турів. Всі права захищені. <a href="oferta.html" style="color: var(--color-text-muted); text-decoration: underline; margin-left: 10px;">Договір оферти</a></p>
                 <div class="footer__lang-switch">
                     <a href="#" class="active" aria-label="Українська мова">УКР</a>
                     <span style="margin: 0 8px; color: var(--color-dark-border);">|</span>
@@ -364,23 +340,18 @@
         </div>
     </footer>
 
-    <!-- ==========================================
-         FLOATING WIDGETS (КНОПКИ ЗВ'ЯЗКУ)
-         ========================================== -->
+    <!-- ВІДЖЕТИ ЗВ'ЯЗКУ -->
     <div class="floating-widget" role="complementary" aria-label="Віджети зв'язку">
         <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Написати в Telegram">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
         </a>
-        
         <button class="fw-btn fw-btn--call js-binotel-trigger" aria-label="Замовити зворотній дзвінок">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-dark)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             <span class="fw-btn__tooltip">Замовити дзвінок</span>
         </button>
     </div>
 
-    <!-- ==========================================
-         MODAL WINDOW (ФОРМА ПІДБОРУ ТУРУ)
-         ========================================== -->
+    <!-- МОДАЛЬНЕ ВІКНО -->
     <div class="modal-backdrop js-modal" id="modal-tour" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-dialog">
             <button class="modal-close js-modal-close" aria-label="Закрити вікно">
@@ -391,7 +362,6 @@
                 <h3 class="modal-title" id="modal-title">Підібрати тур</h3>
                 
                 <form class="custom-form js-form" id="modal-lead-form" style="max-width: 100%;">
-                    
                     <div class="form-row">
                         <div class="cf-group col-6">
                             <input type="text" class="cf-input" id="modal-destination" required placeholder=" ">
@@ -461,20 +431,17 @@
                         <span class="cf-line"></span>
                     </div>
 
-                    <div class="cf-captcha mt-4 text-center">
-                        <p style="font-size: 12px; color: #666;">Форма захищена reCAPTCHA</p>
-                    </div>
-
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn--solid-yellow btn--wide">Відправити запит</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
 
     <script src="script.js"></script>
-    <script>document.getElementById('current-year-contacts').textContent = new Date().getFullYear();</script>
+    <script>
+        document.getElementById('current-year-contacts').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
