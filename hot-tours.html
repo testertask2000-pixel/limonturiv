@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="uk" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Гарячі тури та путівки | Лимон Турів</title>
+    <meta name="description" content="Найсвіжіші гарячі тури зі знижками до 40%. Оновлення щохвилини. Бронюйте вигідно з турагентством Лимон Турів.">
+    
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon.ico">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .hero-screen--inner { min-height: 50vh; padding-bottom: 40px; }
+        .seo-text-block { background: var(--color-white); padding: 60px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #EAEAEA; }
+        .seo-text-block h2 { font-size: 2rem; margin-bottom: 24px; font-family: var(--font-display); }
+        .seo-text-block p { margin-bottom: 16px; color: var(--color-text-muted); font-size: 1.125rem; line-height: 1.7; }
+    </style>
+</head>
+<body class="theme-premium">
+
+    <!-- ГЛОБАЛЬНИЙ LOADER -->
+    <div id="global-loader" class="loader" aria-hidden="true">
+        <div class="loader__brand">
+            <img src="assets/img/_.png" alt="Завантаження Лимон Турів" width="200" height="auto" class="loader__logo" style="animation: pulseGlow 2s infinite;">
+        </div>
+    </div>
+
+    <!-- ПАРАЛАКС ДЕКОР -->
+    <div class="parallax-wrapper" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 90; overflow: hidden;">
+        <img src="assets/img/palm_1.png" alt="" class="parallax-el p-palm-1" data-speed="0.08" style="position: absolute; top: -5%; right: -5%; width: clamp(300px, 35vw, 550px); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.4));">
+        <img src="assets/img/palm_2.png" alt="" class="parallax-el p-palm-2" data-speed="-0.05" style="position: absolute; bottom: -5%; left: -5%; width: clamp(350px, 40vw, 650px); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.4));">
+    </div>
+
+    <!-- ==========================================
+         HEADER
+         ========================================== -->
+    <header class="header js-header" role="banner">
+        <div class="container header__container">
+            
+            <a href="/" class="header__logo" aria-label="Головна сторінка Лимон Турів">
+                <img src="assets/img/_.png" alt="Лимон Турів" width="180" height="auto" class="logo-img">
+            </a>
+
+            <nav class="header__nav nav" role="navigation" aria-label="Головне меню">
+                <ul class="nav__list">
+                    
+                    <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#tours" class="nav__link" style="color: var(--color-primary);">
+                            Тури
+                            <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                        </a>
+                        
+                        <div class="mega-menu" role="menu">
+                            <div class="mega-menu__inner container">
+                                <div class="mega-menu__col">
+                                    <h4 class="mega-menu__title">Напрямки та пошук</h4>
+                                    <ul class="mega-menu__list">
+                                        <li role="none">
+                                            <a href="index.html#search-module" class="mega-menu__link" role="menuitem">
+                                                <div class="mega-menu__icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+                                                <span>Пошук туру</span>
+                                            </a>
+                                        </li>
+                                        <li role="none">
+                                            <a href="hot-tours.html" class="mega-menu__link" role="menuitem" style="background-color: var(--color-dark); color: var(--color-white);">
+                                                <div class="mega-menu__icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M17.5 19C19.9853 19 22 16.9853 22 14.5C22 11.5 19 9 19 9C19 9 18 10.5 18 12C18 12 16 9 12 3C12 3 12 8 12 12C12 12 11.5 10 9 10C6.5 10 3 13.5 3 17C3 19.5 5 21.5 7.5 21.5C9.5 21.5 10.5 20 12 18.5C13.5 20 15.5 19 17.5 19Z"/></svg></div>
+                                                <span>Гарячі тури</span>
+                                            </a>
+                                        </li>
+                                        <li role="none">
+                                            <a href="excursions.html" class="mega-menu__link" role="menuitem">
+                                                <div class="mega-menu__icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                                                <span>Екскурсійні тури</span>
+                                            </a>
+                                        </li>
+                                        <li role="none">
+                                            <a href="cruises.html" class="mega-menu__link" role="menuitem">
+                                                <div class="mega-menu__icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20l-2 8H4z"/><path d="M12 12v-8"/><path d="M8 8h8"/></svg></div>
+                                                <span>Круїзи</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu__col mega-menu__col--promo">
+                                    <div class="menu-promo hover-zoom">
+                                        <img src="assets/img/68512519-cyprus-wall.jpg" alt="Раннє бронювання Кіпр" loading="lazy">
+                                        <div class="menu-promo__overlay">
+                                            <span class="badge badge--yellow">Спецпропозиція</span>
+                                            <h5>Раннє бронювання 2026: Кіпр від 15 000 ₴</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#services" class="nav__link">
+                            Послуги
+                            <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                        </a>
+                        <ul class="dropdown-simple" role="menu">
+                            <li role="none"><a href="hotels.html" role="menuitem">Готелі</a></li>
+                            <li role="none"><a href="flights.html" role="menuitem">Авіаквитки</a></li>
+                            <li role="none"><a href="rent-car.html" role="menuitem">Оренда авто</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav__item"><a href="about.html" class="nav__link">Про компанію</a></li>
+                    <li class="nav__item"><a href="index.html#faq" class="nav__link">Поширені питання</a></li>
+                    <li class="nav__item"><a href="contacts.html" class="nav__link">Контакти</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <div class="lang-switcher" aria-label="Перемикач мов">
+                    <button class="lang-btn is-active" aria-pressed="true">UA</button>
+                    <span class="lang-sep"></span>
+                    <button class="lang-btn" aria-pressed="false">RU</button>
+                </div>
+                <div class="header__contacts">
+                    <span class="header__contacts-hint">Ми на зв'язку</span>
+                    <a href="tel:+380995337227" class="header__phone">+38 (099) 533-72-27</a>
+                </div>
+                <button class="btn btn--solid-yellow js-open-modal" aria-label="Відкрити форму підбору туру">
+                    <span>Підібрати тур</span>
+                </button>
+                <button class="burger js-burger" aria-label="Відкрити мобільне меню" aria-expanded="false">
+                    <span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" role="main">
+        
+        <!-- ==========================================
+             INNER HERO (ГАРЯЧІ ТУРИ)
+             ========================================== -->
+        <section class="hero-screen hero-screen--inner">
+            <div class="hero-screen__bg">
+                <img src="assets/img/Egypt_main.jpg" alt="Гарячі тури" class="hero-screen__img js-parallax-bg" style="object-position: center;" fetchpriority="high">
+                <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);"></div>
+            </div>
+
+            <div class="container hero-screen__container">
+                <div class="hero-screen__content text-center" style="margin-bottom: 0;">
+                    <span class="hero-screen__badge" style="background: #E81C2E; color: white;">Знижки до -40%</span>
+                    <h1 class="hero-screen__title js-split-text" style="font-size: clamp(3rem, 7vw, 6rem); margin-top: 16px;">
+                        ГАРЯЧІ <span class="text-gradient">ТУРИ</span>
+                    </h1>
+                </div>
+            </div>
+            
+            <ul class="hero-socials" style="z-index: 100;">
+                <li><a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a></li>
+                <li><a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a></li>
+                <li><a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a></li>
+                <li><a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a></li>
+            </ul>
+        </section>
+
+        <!-- ==========================================
+             ВІТРИНА ГАРЯЧИХ ТУРІВ (OTPUSK.COM)
+             ========================================== -->
+        <section class="section bg-light" style="padding-top: 60px; position: relative; z-index: 100;">
+            <div class="container">
+                <div class="search-widget-glass" style="margin-top: -120px; margin-bottom: 60px; max-width: 100%;">
+                    <div class="search-widget-glass__wrapper" style="background: var(--color-white); border-color: #EAEAEA; padding: 20px;">
+                        
+                        <!-- Стилі віджета -->
+                        <style>
+                            /*==== Стилизация для модуля горящих туров с типом "плитки" ====*/
+                            body .hot-block_tiles .hot-wrapper { margin-top: 0px; margin-left: 0px; margin-bottom: 0px; margin-right: -10px !important; }
+                            body .hot-block_tiles .hot-otp-form-wrap { margin-top: 10px; margin-right: 10px; border-radius: var(--radius-md, 16px); overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+                            body .hot-block_tiles .hot-otp-img, body .hot-block_tiles .hot-otp-tour-block { width: calc(25% - 10px) !important; min-width: 240px; }
+                            body .hot-block_tiles .hot-otp-tour-block { background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%); }
+                            body .hot-block_tiles .hot-otp-img:after { background: transparent; height: 0; }
+                            body .hot-block_tiles .hot-otp-form-wrap:hover .hot-otp-img { transform: scale(1.05); transition: transform 0.5s ease; opacity: 1; }
+                            body .hot-block_tiles .hot-otp-description { font-family: var(--font-display, sans-serif); font-size: 1.25rem; font-weight: 700; color: #fff !important; padding: 20px 20px 5px; }
+                            body .hot-block_tiles .hot-otp-place { font-family: var(--font-primary, sans-serif); font-size: 14px; font-weight: normal; color: rgba(255,255,255,0.8) !important; padding: 0 20px; }
+                            body .hot-block_tiles .hot-otp-tour-info { font-family: var(--font-primary, sans-serif); font-size: 13px; font-style: normal; color: #fff; left: 20px; bottom: 20px; width: 130px; }
+                            body .hot-block_tiles .hot-price-block { padding-right: 20px; padding-bottom: 20px; }
+                            body .hot-block_tiles .hot-otp-price-count, body .hot-block_tiles .hot-otp-price-count nobr { font-family: var(--font-primary, sans-serif); font-size: 12px; color: rgba(255,255,255,0.8) !important; }
+                            body .hot-block_tiles .hot-otp-price a { font-family: var(--font-display, sans-serif); font-size: 1.5rem; font-weight: 700; color: var(--color-primary, #F4B400) !important; }
+                            
+                            @media (max-width: 1024px) { body .hot-block_tiles .hot-otp-img, body .hot-block_tiles .hot-otp-tour-block { width: calc(33.33% - 10px) !important; } }
+                            @media (max-width: 768px) { body .hot-block_tiles .hot-otp-img, body .hot-block_tiles .hot-otp-tour-block { width: calc(50% - 10px) !important; } }
+                            @media (max-width: 480px) { body .hot-block_tiles .hot-otp-img, body .hot-block_tiles .hot-otp-tour-block { width: 100% !important; margin-right: 0 !important; } body .hot-block_tiles .hot-wrapper { margin-right: 0 !important; } }
+                        </style>
+
+                        <!-- Скрипт віджета -->
+                        <div class="hot-size-checker" id="otpusk_onsite_hot26865" style="min-height: 400px; display: flex; justify-content: center; align-items: center;">
+                            <img src="https://export.otpusk.com/os/ajax-loader.gif" alt="Завантаження гарячих турів"/><span></span>
+                        </div>
+                        <script>
+                            var osTarget26865 = "index.html#search-module"; /* Куди вести після кліку */
+                            var osLang = "ua"; 
+                            var osCurrency = "converted"; 
+                            var osTargetBlank26865 = true; 
+
+                            (function (d, s) {
+                                function loadScript(src, id, callback) {if (d.getElementById(id)) {if (typeof callback === "function") callback();return;}var js = d.createElement(s);js.id = id;js.src = src;js.defer = true;js.onload = function () {if (typeof callback === "function") callback();};d.head.appendChild(js);}
+                                if (!window._otpuskApiLoaded) {window._otpuskApiLoaded = true;
+                                    loadScript("https://export.otpusk.com/api/session?access_token=2c1f4-78bec-0741d-68154-053c8", "OShotApi26865", function () {
+                                        loadScript("https://export.otpusk.com/js/view?id=26865", "OShotGetData26865");
+                                    });
+                                } else {
+                                    loadScript("https://export.otpusk.com/js/view?id=26865", "OShotGetData26865");
+                                }
+                            }(document, "script"));
+                        </script>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             ТЕКСТОВЕ ПОЛЕ (SEO)
+             ========================================== -->
+        <section class="section bg-light" style="padding-top: 0; position: relative; z-index: 100;">
+            <div class="container">
+                <div class="seo-text-block js-reveal">
+                    <h2>Що таке гарячі тури та чому вони такі вигідні?</h2>
+                    <p>Гарячий тур — це унікальна можливість відпочити в розкішних готелях за значно зниженою ціною (іноді знижки сягають до 40-50%). Такі пропозиції з'являються за кілька днів до вильоту, коли туроператори прагнуть заповнити останні вільні місця на чартерних рейсах або викуплені номери в готелях.</p>
+                    <p>На нашій вітрині ви бачите найсвіжіші путівки, які оновлюються в режимі реального часу. Бачите вигідний варіант? Не зволікайте! Гарячі пропозиції розкуповуються за лічені години. Зв'яжіться з експертами "Лимон Турів" для миттєвого бронювання вашої ідеальної відпустки.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             LEAD FORM (SPLIT SCREEN)
+             ========================================== -->
+        <section class="lead-section" id="contacts" style="position: relative; z-index: 100;">
+            <div class="lead-split">
+                
+                <div class="lead-split__visual">
+                    <img src="assets/img/50571182.jpg" alt="Море та гори" class="lead-split__img" loading="lazy">
+                    <div class="lead-split__visual-content js-reveal">
+                        <h2 class="h1" style="line-height: 1.1;">Вполюємо<br><span class="text-primary">найкращу ціну</span></h2>
+                        <div class="contact-block mt-5">
+                            <p class="cb-row">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                <a href="tel:+380995337227">+38 (099) 533-72-27</a>
+                            </p>
+                            <p class="cb-row mt-3">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                <a href="tel:+380995337447">+38 (099) 533-74-47</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lead-split__form-wrap">
+                    <form class="custom-form js-form" id="hottours-lead-form">
+                        <div class="js-reveal">
+                            <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-white); margin-bottom: 8px;">Не знайшли свій тур?</h3>
+                            <p style="color: var(--color-text-light); margin-bottom: 40px; font-size: 1.125rem;">Залиште заявку, і наші менеджери підберуть для вас ексклюзивні пропозиції зі знижкою.</p>
+                        </div>
+
+                        <div class="cf-group js-reveal">
+                            <input type="text" id="lf-name" class="cf-input" required placeholder=" ">
+                            <label for="lf-name" class="cf-label">Ваше ім'я</label>
+                            <span class="cf-line"></span>
+                        </div>
+                        
+                        <div class="cf-group js-reveal" style="transition-delay: 0.1s">
+                            <input type="tel" id="lf-phone" class="cf-input js-phone-mask" required placeholder=" ">
+                            <label for="lf-phone" class="cf-label">Номер телефону</label>
+                            <span class="cf-line"></span>
+                        </div>
+                        
+                        <div class="cf-group js-reveal" style="transition-delay: 0.2s">
+                            <textarea id="lf-details" class="cf-input cf-textarea" rows="2" placeholder=" "></textarea>
+                            <label for="lf-details" class="cf-label">Країна, дати, кількість осіб та бюджет</label>
+                            <span class="cf-line"></span>
+                        </div>
+                        
+                        <div class="cf-captcha js-reveal" style="transition-delay: 0.3s; background: rgba(255,255,255,0.05); padding: 16px; border-radius: 8px; margin-bottom: 32px; border: 1px dashed rgba(255,255,255,0.2);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="width:24px; height:24px; border: 2px solid #ccc; border-radius: 4px;"></div>
+                                <span style="font-size: 14px; color: #ccc;">Я не робот (reCAPTCHA)</span>
+                            </div>
+                        </div>
+
+                        <div class="js-reveal" style="transition-delay: 0.4s">
+                            <button type="submit" class="btn btn--solid-yellow btn--full" style="height: 64px; font-size: 1.125rem;">
+                                ВІДПРАВИТИ ЗАЯВКУ
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer class="footer js-reveal" itemscope itemtype="https://schema.org/TravelAgency" style="position: relative; z-index: 100;">
+        <div class="container">
+            <div class="footer__grid">
+                
+                <div class="footer__col footer__col--brand">
+                    <img src="assets/img/_.png" alt="Лимон Турів" class="footer__logo" itemprop="image">
+                    <p class="footer__desc mt-4">
+                        <span itemprop="name" style="display:none;">Лимон Турів</span>
+                        <span itemprop="description">Ми створюємо ідеальні подорожі, враховуючи всі ваші побажання. Ваша відпустка буде огорнута турботою 24/7.</span>
+                    </p>
+                </div>
+
+                <div class="footer__col">
+                    <h4 class="footer__title">Тури</h4>
+                    <ul class="footer__nav" role="navigation">
+                        <li><a href="index.html#search-module">Пошук туру</a></li>
+                        <li><a href="hot-tours.html">Гарячі тури</a></li>
+                        <li><a href="excursions.html">Екскурсійні тури</a></li>
+                        <li><a href="cruises.html">Круїзи</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__col">
+                    <h4 class="footer__title">Інформація</h4>
+                    <ul class="footer__nav" role="navigation">
+                        <li><a href="about.html">Про компанію</a></li>
+                        <li><a href="oferta.html">Договір оферти</a></li>
+                        <li><a href="index.html#faq">Поширені питання</a></li>
+                        <li><a href="index.html#blog">Блог</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__col footer__col--contacts">
+                    <h4 class="footer__title">Контакти</h4>
+                    <ul class="footer__contact-list">
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <div class="phones">
+                                <a href="tel:+380995337227" itemprop="telephone">+38-099-533-7227</a>
+                                <a href="tel:+380995337447" itemprop="telephone">+38-099-533-7447</a>
+                            </div>
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" style="font-style: normal; line-height: 1.6;">
+                                <span itemprop="addressLocality">м. Павлоград</span><br>
+                                <span>м. Ірпінь / Буча / Гостомель / Ворзель</span>
+                            </address>
+                        </li>
+                    </ul>
+                    
+                    <div class="footer__socials mt-4">
+                        <a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
+                        <a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
+                        <a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer__bottom">
+                <p>&copy; <span id="current-year-hottours">2026</span> Лимон Турів. Всі права захищені. <a href="oferta.html" style="color: var(--color-text-muted); text-decoration: underline; margin-left: 10px;">Договір оферти</a></p>
+                <div class="footer__lang-switch">
+                    <a href="#" class="active" aria-label="Українська мова">УКР</a>
+                    <span style="margin: 0 8px; color: var(--color-dark-border);">|</span>
+                    <a href="#" aria-label="Русский язык">РУС</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         FLOATING WIDGETS
+         ========================================== -->
+    <div class="floating-widget" role="complementary" aria-label="Віджети зв'язку">
+        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Написати в Telegram">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </a>
+        
+        <button class="fw-btn fw-btn--call js-binotel-trigger" aria-label="Замовити зворотній дзвінок">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-dark)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="fw-btn__tooltip">Замовити дзвінок</span>
+        </button>
+    </div>
+
+    <!-- ==========================================
+         MODAL WINDOW (ФОРМА ПІДБОРУ ТУРУ)
+         ========================================== -->
+    <div class="modal-backdrop js-modal" id="modal-tour" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-dialog">
+            <button class="modal-close js-modal-close" aria-label="Закрити вікно">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            
+            <div class="modal-content">
+                <h3 class="modal-title" id="modal-title">Підібрати тур</h3>
+                
+                <form class="custom-form js-form" id="modal-lead-form" style="max-width: 100%;">
+                    
+                    <div class="form-row">
+                        <div class="cf-group col-6">
+                            <input type="text" class="cf-input" id="modal-destination" required placeholder=" ">
+                            <label for="modal-destination" class="cf-label">Куди (Країна, курорт)?</label>
+                            <span class="cf-line"></span>
+                        </div>
+                        
+                        <div class="col-6 flex-align-center counter-group">
+                            <label class="mr-2" style="color: var(--color-text-light);">Дорослі</label>
+                            <div class="ui-counter">
+                                <button type="button" class="js-count-minus" aria-label="Зменшити">-</button>
+                                <input type="number" value="2" min="1" max="10" readonly aria-label="Кількість дорослих">
+                                <button type="button" class="js-count-plus" aria-label="Збільшити">+</button>
+                            </div>
+                            
+                            <label class="mx-2" style="color: var(--color-text-light);">та діти</label>
+                            <div class="ui-counter">
+                                <button type="button" class="js-count-minus" aria-label="Зменшити">-</button>
+                                <input type="number" value="0" min="0" max="5" readonly aria-label="Кількість дітей">
+                                <button type="button" class="js-count-plus" aria-label="Збільшити">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row mt-4">
+                        <div class="cf-group col-6" style="position: relative;">
+                            <input type="text" class="cf-input js-date-mask" id="modal-date" placeholder=" " required>
+                            <label for="modal-date" class="cf-label">Дата вильоту (дд.мм.рррр)</label>
+                            <span class="cf-line"></span>
+                            <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </div>
+                        
+                        <div class="col-6 flex-align-center">
+                            <label class="ui-checkbox">
+                                <input type="checkbox" name="flex_dates" checked>
+                                <span class="checkmark"></span>
+                                Можливі інші дати (±3 дні)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="cf-group mt-4">
+                        <input type="text" class="cf-input" id="modal-duration" placeholder=" " required>
+                        <label for="modal-duration" class="cf-label">Тривалість (напр., 7-10 ночей)</label>
+                        <span class="cf-line"></span>
+                    </div>
+
+                    <div class="form-row mt-4">
+                        <div class="cf-group col-6">
+                            <input type="text" class="cf-input" id="modal-name" required placeholder=" ">
+                            <label for="modal-name" class="cf-label">Ваше ім'я *</label>
+                            <span class="cf-line"></span>
+                        </div>
+                        <div class="cf-group col-6">
+                            <input type="tel" class="cf-input js-phone-mask" id="modal-phone" required placeholder=" ">
+                            <label for="modal-phone" class="cf-label">Телефон *</label>
+                            <span class="cf-line"></span>
+                        </div>
+                    </div>
+
+                    <div class="cf-group mt-4">
+                        <input type="email" class="cf-input" id="modal-email" placeholder=" ">
+                        <label for="modal-email" class="cf-label">E-mail (необов'язково)</label>
+                        <span class="cf-line"></span>
+                    </div>
+
+                    <div class="cf-group mt-4">
+                        <textarea class="cf-input cf-textarea" id="modal-details" rows="2" placeholder=" "></textarea>
+                        <label for="modal-details" class="cf-label">Побажання (категорія готелю, харчування, бюджет...)</label>
+                        <span class="cf-line"></span>
+                    </div>
+
+                    <div class="cf-captcha mt-4 text-center">
+                        <p style="font-size: 12px; color: #666;">Форма захищена reCAPTCHA</p>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn--solid-yellow btn--wide">Відправити запит</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('current-year-hottours').textContent = new Date().getFullYear();
+
+        /* ==========================================
+           ПЕРЕМИКАЧ МОВ (STATIC HTML)
+           ========================================== */
+        document.addEventListener('DOMContentLoaded', () => {
+            const langSwitchers = document.querySelectorAll('.lang-switcher');
+            
+            langSwitchers.forEach(switcher => {
+                const btns = switcher.querySelectorAll('.lang-btn');
+                
+                btns.forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (this.classList.contains('is-active')) return;
+
+                        const selectedLang = this.textContent.trim().toLowerCase();
+                        let currentPath = window.location.pathname;
+                        let currentFile = currentPath.split('/').pop() || 'hot-tours.html'; 
+                        
+                        let newUrl = '';
+
+                        if (selectedLang === 'ru') {
+                            if (!currentFile.includes('-ru')) {
+                                newUrl = currentFile.replace('.html', '-ru.html');
+                                if(currentFile === '') newUrl = 'hot-tours-ru.html'; 
+                            }
+                        } else {
+                            if (currentFile.includes('-ru')) {
+                                newUrl = currentFile.replace('-ru.html', '.html');
+                            }
+                        }
+
+                        if (newUrl) {
+                            window.location.href = newUrl;
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

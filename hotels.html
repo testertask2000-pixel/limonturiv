@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="uk" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Бронювання готелів по всьому світу | Лимон Турів</title>
+    <meta name="description" content="Пошук та бронювання готелів за найкращими цінами. Преміальний сервіс, перевірені відгуки та підтримка 24/7 від Лимон Турів.">
+    
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon.ico">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .hero-screen--inner { min-height: 50vh; padding-bottom: 40px; }
+        .seo-text-block { background: var(--color-white); padding: 60px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #EAEAEA; }
+        .seo-text-block h2 { font-size: 2rem; margin-bottom: 24px; font-family: var(--font-display); }
+        .seo-text-block p { margin-bottom: 16px; color: var(--color-text-muted); font-size: 1.125rem; line-height: 1.7; }
+    </style>
+</head>
+<body class="theme-premium">
+
+    <!-- Глобальний Loader -->
+    <div id="global-loader" class="loader" aria-hidden="true">
+        <div class="loader__brand">
+            <img src="assets/img/_.png" alt="Завантаження Лимон Турів" width="200" height="auto" class="loader__logo" style="animation: pulseGlow 2s infinite;">
+        </div>
+    </div>
+
+    <!-- Декоративні елементи паралаксу -->
+    <div class="parallax-wrapper" aria-hidden="true">
+        <img src="assets/img/palm_1.png" alt="" class="parallax-el p-palm-1" data-speed="0.08" style="position: fixed; top: -5%; right: -5%; width: 450px; z-index: 10; pointer-events: none;">
+        <img src="assets/img/palm_2.png" alt="" class="parallax-el p-palm-2" data-speed="-0.05" style="position: fixed; bottom: -10%; left: -5%; width: 500px; z-index: 10; pointer-events: none;">
+    </div>
+
+    <!-- ==========================================
+         HEADER
+         ========================================== -->
+    <header class="header js-header" role="banner">
+        <div class="container header__container">
+            
+            <a href="/" class="header__logo" aria-label="Головна сторінка Лимон Турів">
+                <img src="assets/img/_.png" alt="Лимон Турів" width="180" height="auto" class="logo-img">
+            </a>
+
+            <nav class="header__nav nav" role="navigation" aria-label="Головне меню">
+                <ul class="nav__list">
+                    
+                    <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#tours" class="nav__link">
+                            Тури
+                            <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                        </a>
+                        <div class="mega-menu" role="menu">
+                            <div class="mega-menu__inner container">
+                                <div class="mega-menu__col">
+                                    <h4 class="mega-menu__title">Напрямки та пошук</h4>
+                                    <ul class="mega-menu__list">
+                                        <li role="none"><a href="index.html#search-module" class="mega-menu__link" role="menuitem">Пошук туру</a></li>
+                                        <li role="none"><a href="hot-tours.html" class="mega-menu__link" role="menuitem">Гарячі тури</a></li>
+                                        <li role="none"><a href="excursions.html" class="mega-menu__link" role="menuitem">Екскурсійні тури</a></li>
+                                        <li role="none"><a href="cruises.html" class="mega-menu__link" role="menuitem">Круїзи</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu__col mega-menu__col--promo">
+                                    <div class="menu-promo">
+                                        <img src="assets/img/68512519-cyprus-wall.jpg" alt="Раннє бронювання Кіпр" loading="lazy">
+                                        <div class="menu-promo__overlay">
+                                            <span class="badge badge--yellow">Спецпропозиція</span>
+                                            <h5>Раннє бронювання 2026</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Активний розділ Послуги -> Готелі -->
+                    <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#services" class="nav__link" style="color: var(--color-primary);">
+                            Послуги
+                            <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                        </a>
+                        <ul class="dropdown-simple" role="menu">
+                            <li role="none"><a href="hotels.html" role="menuitem" style="font-weight:700; color:var(--color-primary-hover);">Готелі</a></li>
+                            <li role="none"><a href="flights.html" role="menuitem">Авіаквитки</a></li>
+                            <li role="none"><a href="rent-car.html" role="menuitem">Оренда авто</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav__item"><a href="about.html" class="nav__link">Про компанію</a></li>
+                    <li class="nav__item"><a href="index.html#faq" class="nav__link">Поширені питання</a></li>
+                    <li class="nav__item"><a href="index.html#blog" class="nav__link">Блог</a></li>
+                    <li class="nav__item"><a href="contacts.html" class="nav__link">Контакти</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <div class="lang-switcher" aria-label="Перемикач мов">
+                    <button class="lang-btn is-active" aria-pressed="true">UA</button>
+                    <span class="lang-sep"></span>
+                    <button class="lang-btn" aria-pressed="false">RU</button>
+                </div>
+                <div class="header__contacts">
+                    <a href="tel:+380995337227" class="header__phone">+38 (099) 533-72-27</a>
+                </div>
+                <button class="btn btn--solid-yellow js-open-modal" aria-label="Відкрити форму підбору туру">
+                    <span>Підібрати тур</span>
+                </button>
+                <button class="burger js-burger" aria-label="Відкрити мобільне меню" aria-expanded="false">
+                    <span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         INNER HERO
+         ========================================== -->
+    <main id="main-content" role="main">
+        <section class="hero-screen hero-screen--inner">
+            <div class="hero-screen__bg">
+                <!-- Панорамне пляжне фото з твого відео -->
+                <img src="assets/img/___1920x1280.jpg" alt="Бронювання готелів" class="hero-screen__img js-parallax-bg" style="object-position: center;">
+                <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);"></div>
+            </div>
+
+            <div class="container hero-screen__container">
+                <div class="hero-screen__content text-center" style="margin-bottom: 0;">
+                    <h1 class="hero-screen__title js-split-text" style="font-size: clamp(3rem, 7vw, 6rem);">
+                        БРОНЮВАННЯ <span class="text-gradient">ГОТЕЛІВ</span>
+                    </h1>
+                </div>
+            </div>
+            
+            <ul class="hero-socials">
+                <li><a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a></li>
+                <li><a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a></li>
+                <li><a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a></li>
+                <li><a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a></li>
+            </ul>
+        </section>
+
+        <!-- ==========================================
+             ВІДЖЕТ UNIT.TRAVEL (Готелі)
+             ========================================== -->
+        <section class="section bg-light" style="padding-top: 60px;">
+            <div class="container">
+                <div class="search-widget-glass" style="margin-top: -120px; margin-bottom: 60px; max-width: 100%;">
+                    <div class="search-widget-glass__wrapper" style="background: var(--color-white); border-color: #EAEAEA;">
+                        
+                        <!-- ІНТЕГРАЦІЯ: ВІДЖЕТ ГОТЕЛІВ З B2B.UNIT.TRAVEL -->
+                        <div class="unit-widget-container" style="padding: 20px;">
+                            <div id="06cc1f57-d8ab-4804-a2cd-4ad483422412"></div>
+                            <script>
+                                var script = document.createElement('script');
+                                script.src = '//limonturov.unit.travel/static/form-widget/js/proxy/base.js';
+                                document.head.append(script);
+                                script.onload = function() {EmbeddedFormWidget.build({"containerId":"06cc1f57-d8ab-4804-a2cd-4ad483422412","domain":"limonturov.unit.travel","config":{"refmid":"162403","products":"hotel,flight,rfp","lang":"ua","currency":"46688","searchmode":"default","bookmode":"offer","form":{"view":"horizontal","bg":"default","tabtxtcl":"#3E3E3E","tabunderlinecl":"#0064CE","btnbg":"#0064CE","btntxtcl":"#ffffff"},"search":{"hotel":{"adl":"2"},"flight":{"dep":"21389","adl":"1"}}}});};
+                            </script>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SEO ТЕКСТ
+             ========================================== -->
+        <section class="section bg-light" style="padding-top: 0;">
+            <div class="container">
+                <div class="seo-text-block js-reveal">
+                    <h2>Найкращі готелі світу за ексклюзивними тарифами</h2>
+                    <p>Плануєте індивідуальну подорож чи бізнес-поїздку? Турагентство "Лимон Турів" надає доступ до прямого бронювання понад 500 000 готелів, апартаментів та вілл у будь-якому куточку планети за допомогою преміальних b2b інструментів. Ми пропонуємо ціни, які часто вигідніші, ніж на популярних публічних сервісах, завдяки спеціальним операторським контрактам.</p>
+                    <p>Ви можете самостійно обрати категорію номера, тип харчування та додаткові послуги. Наша команда надає цілодобову підтримку 24/7 протягом усього вашого проживання, гарантуючи безпеку, офіційне оформлення документів та миттєве вирішення будь-яких нюансів на рецепції.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEAD FORM (SPLIT SCREEN) -->
+        <section class="lead-section">
+            <div class="lead-split">
+                <div class="lead-split__visual">
+                    <img src="assets/img/50571182.jpg" alt="Преміум готелі" class="lead-split__img" loading="lazy">
+                    <div class="lead-split__visual-content js-reveal">
+                        <h2 class="h1" style="line-height: 1.1;">Знайдемо<br><span class="text-primary">кращий готель</span></h2>
+                        <div class="contact-block mt-5">
+                            <p class="cb-row">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                <a href="tel:+380995337227">+38 (099) 533-72-27</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lead-split__form-wrap">
+                    <form class="custom-form js-form" id="hotel-lead-form">
+                        <div class="js-reveal">
+                            <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-white); margin-bottom: 8px;">Індивідуальний підбір</h3>
+                            <p style="color: var(--color-text-light); margin-bottom: 40px; font-size: 1.125rem;">Довірте пошук експертам "Лимон Турів". Надішлемо підбірку готелів під ваші параметри.</p>
+                        </div>
+
+                        <div class="cf-group js-reveal">
+                            <input type="text" id="lf-name" class="cf-input" required placeholder=" ">
+                            <label for="lf-name" class="cf-label">Ваше ім'я</label>
+                            <span class="cf-line"></span>
+                        </div>
+                        <div class="cf-group js-reveal" style="transition-delay: 0.1s">
+                            <input type="tel" id="lf-phone" class="cf-input js-phone-mask" required placeholder=" ">
+                            <label for="lf-phone" class="cf-label">Номер телефону</label>
+                            <span class="cf-line"></span>
+                        </div>
+                        <div class="cf-group js-reveal" style="transition-delay: 0.2s">
+                            <textarea id="lf-details" class="cf-input cf-textarea" rows="2" placeholder=" "></textarea>
+                            <label for="lf-details" class="cf-label">Країна, бюджет, побажання до харчування</label>
+                            <span class="cf-line"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn--solid-yellow btn--full mt-4">ВІДПРАВИТИ ЗАЯВКУ</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer js-reveal">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__col footer__col--brand">
+                    <img src="assets/img/_.png" alt="Лимон Турів" class="footer__logo">
+                    <p class="footer__desc mt-2">Ми створюємо ідеальні подорожі, враховуючи всі ваші побажання.</p>
+                </div>
+                <div class="footer__col">
+                    <h4 class="footer__title">Послуги</h4>
+                    <ul class="footer__nav">
+                        <li><a href="hotels.html">Готелі</a></li>
+                        <li><a href="flights.html">Авіаквитки</a></li>
+                        <li><a href="rent-car.html">Оренда авто</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col footer__col--contacts">
+                    <h4 class="footer__title">Контакти</h4>
+                    <ul class="footer__contact-list">
+                        <li><a href="tel:+380995337227">+38-099-533-72-27</a></li>
+                        <li><address style="font-style:normal; color:var(--color-text-light);">м. Павлоград <br> м. Ірпінь / Буча / Гостомель / Ворзель</address></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Лимон Турів. Всі права захищені. <a href="oferta.html" style="color: var(--color-text-muted); text-decoration: underline; margin-left: 10px;">Договір оферти</a></p>
+                <div class="footer__lang-switch">
+                    <a href="#" class="active" aria-label="Українська мова">УКР</a>
+                    <span style="margin: 0 8px; color: var(--color-dark-border);">|</span>
+                    <a href="#" aria-label="Русский язык">РУС</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Віджети зв'язку та модалки -->
+    <div class="floating-widget" role="complementary" aria-label="Віджети зв'язку">
+        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Написати в Telegram">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </a>
+        <button class="fw-btn fw-btn--call js-binotel-trigger" aria-label="Замовити зворотній дзвінок">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-dark)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="fw-btn__tooltip">Замовити дзвінок</span>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        /* ==========================================
+           ПЕРЕМИКАЧ МОВ (STATIC HTML)
+           ========================================== */
+        document.addEventListener('DOMContentLoaded', () => {
+            const langSwitchers = document.querySelectorAll('.lang-switcher');
+            
+            langSwitchers.forEach(switcher => {
+                const btns = switcher.querySelectorAll('.lang-btn');
+                
+                btns.forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (this.classList.contains('is-active')) return;
+
+                        const selectedLang = this.textContent.trim().toLowerCase();
+                        let currentPath = window.location.pathname;
+                        let currentFile = currentPath.split('/').pop() || 'hotels.html'; 
+                        
+                        let newUrl = '';
+
+                        if (selectedLang === 'ru') {
+                            if (!currentFile.includes('-ru')) {
+                                newUrl = currentFile.replace('.html', '-ru.html');
+                                if(currentFile === '') newUrl = 'hotels-ru.html'; 
+                            }
+                        } else {
+                            if (currentFile.includes('-ru')) {
+                                newUrl = currentFile.replace('-ru.html', '.html');
+                            }
+                        }
+
+                        if (newUrl) {
+                            window.location.href = newUrl;
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
