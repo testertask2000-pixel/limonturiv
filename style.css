@@ -1923,3 +1923,95 @@ h1, h2, h3, h4, h5, h6 {
         z-index: -100; 
     }
 }
+
+
+@media (max-width: 991px) {
+    /* Прячем лишнее в шапке для мобилок */
+    .header__contacts, 
+    .header .btn--solid-yellow {
+        display: none !important;
+    }
+    
+    /* Уменьшаем логотип */
+    .header__logo img {
+        max-width: 120px !important;
+    }
+
+    /* Выравниваем оставшиеся элементы (Лого, Язык, Бургер) */
+    .header__actions {
+        gap: 15px;
+    }
+
+    /* Отодвигаем огромный текст вниз, чтобы он не лез на шапку */
+    .hero-screen__content {
+        padding-top: 100px !important; 
+    }
+}
+
+
+/* ==========================================
+   МОБІЛЬНЕ МЕНЮ ТА БУРГЕР
+   ========================================== */
+@media (max-width: 991px) {
+    /* Ховаємо навігацію за правим краєм екрану */
+    .header__nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Ховаємо за екраном */
+        width: 100%; 
+        height: 100vh;
+        background-color: var(--color-white);
+        z-index: 999;
+        padding: 100px 20px 40px;
+        transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        overflow-y: auto;
+    }
+
+    /* ЦЕЙ КЛАС ДОДАЄ JS — Меню виїжджає */
+    .header__nav.is-active {
+        right: 0;
+    }
+
+    /* Вишиковуємо пункти меню в стовпчик */
+    .nav__list {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        width: 100%;
+    }
+
+    /* Бургер має бути поверх відкритого меню */
+    .burger {
+        position: relative;
+        z-index: 1000;
+        display: flex; /* Якщо раніше не було дисплея */
+        flex-direction: column;
+        gap: 6px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .burger__line {
+        width: 30px;
+        height: 2px;
+        background-color: var(--color-dark);
+        transition: all 0.3s ease;
+    }
+
+    /* Анімація: перетворюємо бургер на хрестик при кліку */
+    .burger.is-active .burger__line:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .burger.is-active .burger__line:nth-child(2) {
+        opacity: 0;
+    }
+    .burger.is-active .burger__line:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+/* Блокуємо скрол самого сайту, коли меню відкрите */
+body.no-scroll {
+    overflow: hidden;
+}

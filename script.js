@@ -393,3 +393,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const burger = document.querySelector('.js-burger');
+    const nav = document.querySelector('.header__nav');
+
+    if (burger && nav) {
+        burger.addEventListener('click', function() {
+            // Переключаем активный класс для анимации крестика
+            this.classList.toggle('is-active');
+            // Открываем/закрываем само меню
+            nav.classList.toggle('is-active');
+            // Блокируем скролл страницы, когда меню открыто
+            document.body.classList.toggle('no-scroll');
+        });
+    }
+});
