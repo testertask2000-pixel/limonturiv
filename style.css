@@ -1905,3 +1905,21 @@ h1, h2, h3, h4, h5, h6 {
         width: 320px !important;
     }
 }
+
+
+/* Принудительное скрытие лоадера без JavaScript */
+#global-loader {
+    animation: forceHideLoader 3.5s forwards !important;
+}
+
+@keyframes forceHideLoader {
+    0%, 80% { 
+        opacity: 1; 
+        visibility: visible; 
+    }
+    100% { 
+        opacity: 0; 
+        visibility: hidden; 
+        z-index: -100; 
+    }
+}
