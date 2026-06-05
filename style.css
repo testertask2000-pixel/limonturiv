@@ -1925,39 +1925,38 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+/* ==========================================
+   МОБІЛЬНА АДАПТАЦІЯ ТА БУРГЕР МЕНЮ
+   ========================================== */
 @media (max-width: 991px) {
-    /* Прячем лишнее в шапке для мобилок */
+    /* 1. Шапка та логотип */
     .header__contacts, 
     .header .btn--solid-yellow {
         display: none !important;
     }
-    
-    /* Уменьшаем логотип */
     .header__logo img {
         max-width: 120px !important;
     }
-
-    /* Выравниваем оставшиеся элементы (Лого, Язык, Бургер) */
     .header__actions {
         gap: 15px;
     }
 
-    /* Отодвигаем огромный текст вниз, чтобы он не лез на шапку */
-    .hero-screen__content {
-        padding-top: 100px !important; 
+    /* 2. Фікс тексту, що налізає на шапку */
+    .hero-screen {
+        padding-top: 150px !important; /* Опускаємо весь екран нижче */
     }
-}
+    .hero-screen__title {
+        font-size: 2.2rem !important; /* Робимо заголовок акуратнішим */
+    }
+    .search-widget-glass {
+        margin-top: -30px; /* Трохи підіймаємо віджет, щоб все влізло */
+    }
 
-
-/* ==========================================
-   МОБІЛЬНЕ МЕНЮ ТА БУРГЕР
-   ========================================== */
-@media (max-width: 991px) {
-    /* Ховаємо навігацію за правим краєм екрану */
+    /* 3. Фон мобільного меню */
     .header__nav {
         position: fixed;
         top: 0;
-        right: -100%; /* Ховаємо за екраном */
+        right: -100%; 
         width: 100%; 
         height: 100vh;
         background-color: var(--color-white);
@@ -1966,40 +1965,70 @@ h1, h2, h3, h4, h5, h6 {
         transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
         overflow-y: auto;
     }
-
-    /* ЦЕЙ КЛАС ДОДАЄ JS — Меню виїжджає */
     .header__nav.is-active {
         right: 0;
     }
 
-    /* Вишиковуємо пункти меню в стовпчик */
+    /* 4. ФІКС БІЛОГО ТЕКСТУ ТА ВИПАДАЮЧИХ СПИСКІВ */
     .nav__list {
         flex-direction: column;
         align-items: center;
         gap: 24px;
         width: 100%;
     }
+    .nav__link {
+        color: var(--color-dark) !important; /* Робимо текст темним! */
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+    .nav__chevron {
+        display: none; /* Ховаємо стрілочки на мобільному */
+    }
+    
+    /* Розгортаємо складні меню у звичайний список на мобільному */
+    .has-dropdown:hover .mega-menu,
+    .has-dropdown:hover .dropdown-simple {
+        position: relative;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        padding: 16px 0 0 0;
+    }
+    .mega-menu__inner {
+        grid-template-columns: 1fr; /* В один стовпчик */
+        gap: 20px;
+    }
+    .menu-promo {
+        display: none; /* Ховаємо банер з меню, щоб не займав пів екрану */
+    }
 
-    /* Бургер має бути поверх відкритого меню */
+    /* 5. Кнопка бургера та її колір */
     .burger {
         position: relative;
         z-index: 1000;
-        display: flex; /* Якщо раніше не було дисплея */
+        display: flex; 
         flex-direction: column;
         gap: 6px;
         background: none;
         border: none;
         cursor: pointer;
     }
-
     .burger__line {
         width: 30px;
         height: 2px;
-        background-color: var(--color-dark);
+        background-color: var(--color-white); 
         transition: all 0.3s ease;
     }
+    
+    /* Перефарбовуємо бургер в чорний, якщо меню відкрите або шапка біла */
+    .header.is-scrolled .burger__line,
+    .burger.is-active .burger__line {
+        background-color: var(--color-dark);
+    }
 
-    /* Анімація: перетворюємо бургер на хрестик при кліку */
+    /* Анімація перетворення на хрестик */
     .burger.is-active .burger__line:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
@@ -2009,9 +2038,4 @@ h1, h2, h3, h4, h5, h6 {
     .burger.is-active .burger__line:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
     }
-}
-
-/* Блокуємо скрол самого сайту, коли меню відкрите */
-body.no-scroll {
-    overflow: hidden;
 }
