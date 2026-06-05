@@ -635,5 +635,22 @@
             });
         });
     </script>
+    <!-- Бронебійний скрипт для лоадера -->
+<script>
+    function hideGlobalLoader() {
+        const loader = document.getElementById('global-loader');
+        if (loader && loader.style.display !== 'none') {
+            loader.style.opacity = '0';
+            loader.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => { loader.style.display = 'none'; }, 500);
+        }
+    }
+
+    // Варіант 1: Ховаємо, коли сторінка повністю завантажилась
+    window.addEventListener('load', hideGlobalLoader);
+
+    // Варіант 2: Запобіжник (ховаємо примусово через 3.5 секунди, якщо щось зламалося)
+    setTimeout(hideGlobalLoader, 3500);
+</script>
 </body>
 </html>
