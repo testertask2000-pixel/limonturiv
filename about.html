@@ -11,11 +11,27 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Unbounded:wght@400;600;700;800&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     
     <style>
+        :root {
+            --color-primary: #FFEC00 !important;
+            --color-primary-hover: #E5D400 !important;
+        }
+
+        /* Хедер */
+        .header { background-color: #FFFFFF !important; padding: 12px 0 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important; border-bottom: none !important; }
+        .header__logo img { filter: none !important; height: 40px !important; }
+        .nav__link { color: #1A1A1A !important; font-size: 0.85rem !important; } 
+        .header__phone { color: #1A1A1A !important; }
+        .burger__line { background-color: #1A1A1A !important; }
+        .lang-switcher { background: #F7F9FC !important; }
+        .lang-btn { color: #666 !important; }
+        .lang-btn.is-active { color: #0A0A0A !important; background: #fff !important; box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;}
+
+        .hero-screen__title { font-family: var(--font-primary) !important; font-size: clamp(2.5rem, 5vw, 4.5rem) !important; font-weight: 800 !important; letter-spacing: -0.5px !important; text-transform: none !important; color: #fff; text-shadow: 0 10px 30px rgba(0,0,0,0.6); }
         .hero-screen--inner { min-height: 50vh; padding-bottom: 40px; }
         
         /* Блок про компанію (Текст + Фото) */
@@ -27,7 +43,7 @@
         }
         .about-text-block h2 { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 24px; color: var(--color-dark); line-height: 1.2;}
         .about-text-block p { color: var(--color-text-muted); font-size: 1.125rem; line-height: 1.8; margin-bottom: 20px; }
-        .about-text-block .highlight { color: var(--color-primary-hover); font-weight: 700; }
+        .about-text-block .highlight { color: var(--color-primary-hover); font-weight: 800; }
         
         /* Співробітники */
         .team-grid {
@@ -44,67 +60,120 @@
             border: 1px solid #EAEAEA;
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
         }
-        .member-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+        .member-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: var(--color-primary); }
         .member-card__img-wrap { width: 100%; height: 400px; overflow: hidden; position: relative;}
-        .member-card__img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .member-card__img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; object-position: top; }
         .member-card:hover .member-card__img { transform: scale(1.05); }
         .member-card__info { padding: 32px 24px; text-align: center; background: var(--color-white); position: relative; z-index: 2;}
         .member-card__name { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 8px; font-weight: 700;}
-        .member-card__role { color: var(--color-text-light); font-weight: 500; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .member-card__role { color: var(--color-text-light); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Дипломи */
-        .diplomas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 40px; }
-        .diploma-item { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid #EAEAEA; transition: transform 0.3s ease; background: #fff; padding: 10px;}
-        .diploma-item:hover { transform: scale(1.05); z-index: 10; box-shadow: var(--shadow-lg);}
-        .diploma-item img { width: 100%; height: auto; display: block; border-radius: 8px;}
+        /* ВАУ-ЕФЕКТ ДЛЯ НАГОРОД (13 ДИПЛОМІВ) */
+        .diplomas-wow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 24px;
+            grid-auto-flow: dense;
+            margin-top: 40px;
+        }
+        .diploma-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 1;
+            border: 1px solid #F0F0F0;
+        }
+        .diploma-card::after {
+            content: ''; position: absolute; inset: 0; border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(255, 236, 0, 0.3); opacity: 0; transition: opacity 0.5s ease; z-index: -1;
+        }
+        .diploma-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            z-index: 10;
+            border-color: var(--color-primary);
+        }
+        .diploma-card:hover::after { opacity: 1; }
+        .diploma-card img {
+            max-width: 100%; height: auto; max-height: 350px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .diploma-horizontal { grid-column: span 2; } 
 
-        /* Відгуки (Masonry/Grid) */
-        .reviews-masonry {
+        /* ВІДГУКИ ТА ФОРМА ВІДГУКІВ */
+        .reviews-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 24px;
             margin-top: 40px;
         }
         .review-card {
-            background: var(--color-white);
-            padding: 32px;
-            border-radius: 24px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid #EAEAEA;
-            transition: all 0.3s ease;
+            background: #fff; padding: 32px; border-radius: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #EAEAEA; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column;
         }
-        .review-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .review-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--color-primary); }
         .review-card__header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-        .review-card__avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--color-light); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; color: var(--color-primary-hover); font-size: 1.25rem; }
-        .review-card__name { font-weight: 700; font-size: 1.125rem; color: var(--color-dark); margin: 0; }
-        .review-card__date { font-size: 0.85rem; color: var(--color-text-light); }
-        .review-card__stars { color: #FFB400; font-size: 1.25rem; margin-top: 4px; letter-spacing: 2px;}
-        .review-card__text { color: var(--color-text-muted); font-size: 1rem; line-height: 1.7; font-style: italic; }
-
-        /* Форма відгуків */
-        .review-form-wrapper { background: var(--color-white); padding: 48px; border-radius: 24px; box-shadow: var(--shadow-lg); margin-top: 40px; position: relative; overflow: hidden;}
-        .review-form-wrapper::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--color-primary); }
+        .review-card__avatar {
+            width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--color-primary-light); color: var(--color-dark);
+        }
+        .review-card__stars { color: #FFB400; font-size: 1.25rem; letter-spacing: 2px; }
+        .review-card__text { color: var(--color-text-muted); font-size: 1rem; line-height: 1.6; font-style: italic; flex-grow: 1;}
         
-        .interactive-stars { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 8px; margin-bottom: 24px; }
+        .leave-review-box {
+            background: var(--color-dark); color: #fff; border-radius: 24px; padding: 48px; margin-top: 60px;
+            box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
+        }
+        .leave-review-box::before { content: ''; position: absolute; top: 0; left: 0; width: 8px; height: 100%; background: var(--color-primary); }
+        .interactive-stars { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 8px; }
         .interactive-stars input { display: none; }
-        .interactive-stars label { cursor: pointer; width: 32px; height: 32px; background-image: url('assets/about/star_rate.png'); background-size: cover; filter: grayscale(100%) opacity(0.3); transition: filter 0.2s ease; }
+        .interactive-stars label { cursor: pointer; width: 32px; height: 32px; background-image: url('assets/about/star_rate.png'); background-size: cover; filter: grayscale(100%) opacity(0.4); transition: filter 0.2s ease; }
         .interactive-stars label:hover, .interactive-stars label:hover ~ label, .interactive-stars input:checked ~ label { filter: grayscale(0%) opacity(1); }
 
-        .social-review-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
-        .social-btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: 50px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.3s ease; }
-        .social-btn--google { background: #fff; color: #333; border: 1px solid #EAEAEA; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .social-btn--google:hover { border-color: #EA4335; color: #EA4335; }
-        .social-btn--fb { background: #1877F2; color: #fff; }
-        .social-btn--fb:hover { background: #166FE5; box-shadow: 0 4px 15px rgba(24,119,242,0.3); }
+        /* Партнери (Кольорові) */
+        .partners-colored-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; margin-top: 40px; }
+        .partners-colored-grid img { max-width: 140px; height: auto; max-height: 60px; object-fit: contain; filter: none !important; opacity: 1 !important; transition: transform 0.3s ease; }
+        .partners-colored-grid img:hover { transform: scale(1.1); }
 
-        /* Партнери */
-        .partners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 40px; align-items: center; justify-items: center; margin-top: 40px; background: var(--color-white); padding: 60px; border-radius: 24px; box-shadow: var(--shadow-sm); border: 1px solid #EAEAEA; }
-        .partners-grid img { max-width: 130px; height: auto; filter: grayscale(100%); opacity: 0.5; transition: all 0.4s ease; cursor: pointer; }
-        .partners-grid img:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
+        /* Модалка */
+        .modal-dialog { background-color: #F7F9FC !important; }
+        .modal-title, .cf-label { color: #1A1A1A !important; }
+        .cf-input { color: #1A1A1A !important; border-bottom-color: #CCCCCC !important; }
+        .ui-checkbox { color: #1A1A1A !important; }
+        .ui-counter, .ui-counter button { border-color: #DDD !important; background-color: #FFF !important; color: #1A1A1A !important; }
+        .ui-counter input { color: #1A1A1A !important; }
+        .checkmark { border-color: #CCC !important; background-color: #FFF !important; }
+        .modal-close { background-color: rgba(0,0,0,0.05) !important; color: #1A1A1A !important; }
+        .modal-close:hover { background-color: var(--color-primary) !important; }
 
         @media (max-width: 992px) {
             .about-company-grid { grid-template-columns: 1fr; gap: 40px; }
-            .review-form-wrapper { padding: 32px 24px; }
+            .leave-review-box { padding: 32px 24px; }
+            
+            .header__contacts, .header .btn--solid-yellow { display: none !important; }
+            .header__logo img { max-width: 120px !important; }
+            .header__actions { gap: 15px; }
+            .hero-screen { padding-top: 150px !important; }
+            .hero-screen__title { font-size: 2.2rem !important; }
+            .header__nav { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background-color: var(--color-white); z-index: 999; padding: 100px 20px 40px; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); overflow-y: auto; }
+            .header__nav.is-active { right: 0; }
+            .nav__list { flex-direction: column; align-items: center; gap: 24px; width: 100%; display: flex !important; }
+            .nav__link { color: var(--color-dark) !important; font-size: 1.25rem !important; font-weight: 700; }
+            .nav__chevron { display: none; }
+            .burger { position: relative; z-index: 1000; display: flex; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; }
+            .burger__line { width: 30px; height: 2px; background-color: var(--color-dark) !important; transition: all 0.3s ease; }
+            .burger.is-active .burger__line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .burger.is-active .burger__line:nth-child(2) { opacity: 0; }
+            .burger.is-active .burger__line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        }
+        @media (max-width: 768px) {
+            .diploma-horizontal { grid-column: span 1; }
         }
     </style>
 </head>
@@ -112,14 +181,20 @@
 
     <div id="global-loader" class="loader" aria-hidden="true">
         <div class="loader__brand">
-            <img src="assets/img/logo.png" alt="Завантаження Лимон Турів" width="200" height="auto" class="loader__logo" style="animation: pulseGlow 2s infinite;">
+            <img src="assets/hero/logo1.png" alt="Завантаження Лимон Турів" width="200" height="auto" class="loader__logo" onerror="this.src='assets/img/logo.png'">
+            <div class="loader__spinner mt-3">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;">
+                    <line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                </svg>
+            </div>
+            <span class="loader__text mt-2">Завантаження...</span>
         </div>
     </div>
 
     <header class="header js-header" role="banner">
         <div class="container header__container">
             <a href="/" class="header__logo" aria-label="Головна сторінка Лимон Турів">
-                <img src="assets/img/logo.png" alt="Лимон Турів" width="180" height="auto" class="logo-img">
+                <img src="assets/hero/logo1.png" alt="Лимон Турів" width="180" height="auto" class="logo-img" onerror="this.src='assets/img/logo.png'">
             </a>
             <nav class="header__nav nav" role="navigation" aria-label="Головне меню">
                 <ul class="nav__list">
@@ -132,10 +207,10 @@
                                 <div class="mega-menu__col">
                                     <h4 class="mega-menu__title">Напрямки та пошук</h4>
                                     <ul class="mega-menu__list">
-                                        <li role="none"><a href="index.html#search-module" class="mega-menu__link" role="menuitem">Пошук туру</a></li>
-                                        <li role="none"><a href="hot-tours.html" class="mega-menu__link" role="menuitem">Гарячі тури</a></li>
-                                        <li role="none"><a href="excursions.html" class="mega-menu__link" role="menuitem">Екскурсійні тури</a></li>
-                                        <li role="none"><a href="cruises.html" class="mega-menu__link" role="menuitem">Круїзи</a></li>
+                                        <li role="none"><a href="index.html#search-module" class="mega-menu__link" role="menuitem"><span>Пошук туру</span></a></li>
+                                        <li role="none"><a href="hot-tours.html" class="mega-menu__link" role="menuitem"><span>Гарячі тури</span></a></li>
+                                        <li role="none"><a href="excursions.html" class="mega-menu__link" role="menuitem"><span>Екскурсійні тури</span></a></li>
+                                        <li role="none"><a href="cruises.html" class="mega-menu__link" role="menuitem"><span>Круїзи</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -151,7 +226,7 @@
                             <li role="none"><a href="rent-car.html" role="menuitem">Оренда авто</a></li>
                         </ul>
                     </li>
-                    <li class="nav__item"><a href="about.html" class="nav__link" style="color: var(--color-primary); font-weight: 700;">Про компанію</a></li>
+                    <li class="nav__item"><a href="about.html" class="nav__link" style="color: var(--color-primary) !important;">Про компанію</a></li>
                     <li class="nav__item"><a href="index.html#faq" class="nav__link">Поширені питання</a></li>
                     <li class="nav__item"><a href="contacts.html" class="nav__link">Контакти</a></li>
                 </ul>
@@ -163,7 +238,7 @@
                     <button class="lang-btn">RU</button>
                 </div>
                 <div class="header__contacts">
-                    <span class="header__contacts-hint">Ми на зв'язку</span>
+                    <span class="header__contacts-hint" style="font-size: 0.75rem; color: #666;">Ми на зв'язку</span>
                     <a href="tel:+380995337227" class="header__phone">+38 (099) 533-72-27</a>
                 </div>
                 <button class="btn btn--solid-yellow js-open-modal"><span>Підібрати тур</span></button>
@@ -176,12 +251,12 @@
         
         <section class="hero-screen hero-screen--inner">
             <div class="hero-screen__bg">
-                <img src="assets/img/Egypt_main.jpg" alt="Про Лимон Турів" class="hero-screen__img js-parallax-bg" style="object-position: center;" fetchpriority="high">
+                <img src="assets/hero/hero-bus.webp" alt="Про Лимон Турів" class="hero-screen__img" style="object-position: center;" fetchpriority="high" onerror="this.src='assets/img/Egypt_main.jpg'">
                 <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%);"></div>
             </div>
             <div class="container hero-screen__container">
                 <div class="hero-screen__content text-center" style="margin-bottom: 0;">
-                    <h1 class="hero-screen__title js-split-text" style="font-size: clamp(3rem, 7vw, 6rem);">
+                    <h1 class="hero-screen__title js-split-text">
                         ПРО <span class="text-gradient">КОМПАНІЮ</span>
                     </h1>
                 </div>
@@ -192,16 +267,17 @@
             <div class="container">
                 <div class="about-company-grid">
                     <div class="about-text-block js-reveal">
-                        <h2>Привіт! Ми — команда турагентства «Лимон Турів»</h2>
-                        <p>Ми дуже раді, що ви плануєте свою відпустку саме з нами! Погодьтеся, дружний колектив професіоналів, які щиро люблять свою справу — це перший і найважливіший крок до успішного відпочинку.</p>
-                        <p>Склад нашої команди — це менеджери з туризму високого класу, справжні фахівці в галузі міжнародного та внутрішнього туризму. Наші працівники мають безліч сертифікатів від провідних туроператорів, регулярно відвідують міжнародні туристичні виставки, семінари та навчання.</p>
-                        <p><span class="highlight">Мінімум 3 рази на рік</span> кожен наш менеджер подорожує особисто, щоб на власному досвіді перевірити якість обслуговування, стан готелів та рівень сервісу на світових курортах.</p>
-                        <p>З «Лимон Турів» ваша відпустка буде огорнута турботою 24/7. Безсумнівно, вона стане найяскравішою та найприємнішою подією у вашому житті!</p>
+                        <h2>Привіт! Ми — команда турагентства «Лимон Турів»!</h2>
+                        <p>Ми дуже раді, що ви плануєте відпустку саме з нами! Погодьтеся, дружний колектив професіоналів, які знають свою справу — перший і важливий крок до початку успішного відпочинку.</p>
+                        <p>Склад команди Лимон турів — менеджери по туризму високого класу, спеціалісти в області туризму закордоном і по Україні. Наші працівники мають багато сертифікатів від туроператорів, регулярно відвідують туристичні виставки, семінари, навчання. <span class="highlight">Мінімум 3 рази на рік подорожує кожен наш менеджер</span>, особисто перевіряючи якість обслуговування в готелях на собі.</p>
+                        <p>Ми співпрацюємо з такими туристичними операторами: Тез тур, Джойн ап, Анекс, Пегас, Корал тревел, Аккорд, Феєрія, Музенідіс тревел, Туи, ТПГ та інші.</p>
+                        <p>Краща оцінка роботи турагентства — це відгуки туристів, які обслуговуються в нашому турбюро. Ми раді, що задовольняємо найвищі вимоги наших клієнтів. Якщо ви досі думаєте, де купити путівку — нижче почитайте що говорять про наше обслуговування та супровід інші мандрівники.</p>
+                        <p style="font-weight: 700; color: var(--color-dark); font-size: 1.25rem; margin-top: 32px;">З Лимон турів ваша відпустка буде огорнута турботою 24/7. Безсумнівно вона стане подією, що запам'ятається у вашому житті!</p>
                     </div>
                     <div class="js-reveal" style="position: relative;">
                         <img src="assets/about/photo_2025-01-24_09-51-57.jpg" alt="Лимон Турів Команда" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); object-fit: cover; aspect-ratio: 4/5;">
                         <div style="position: absolute; bottom: -20px; left: -20px; background: var(--color-white); padding: 24px; border-radius: 20px; box-shadow: var(--shadow-lg);">
-                            <img src="assets/img/logo.png" alt="Лимон Турів" width="120">
+                            <img src="assets/hero/logo1.png" alt="Лимон Турів" width="120" onerror="this.src='assets/img/logo.png'">
                             <p style="margin: 8px 0 0 0; font-size: 0.85rem; font-weight: 700; color: var(--color-text-muted);">Надійно з 2018 року</p>
                         </div>
                     </div>
@@ -213,49 +289,21 @@
             <div class="container">
                 <div class="section-header text-center js-reveal">
                     <span class="badge badge--dark">Обличчя компанії</span>
-                    <h2 class="h2 mt-3">Ваші персональні тревел-експерти</h2>
+                    <h2 class="h2 mt-3">Керівник та головний тревел-експерт</h2>
                     <div class="divider"></div>
                 </div>
                 
-                <div class="team-grid">
-                    <div class="member-card js-reveal">
+                <div class="team-grid" style="display: flex; justify-content: center;">
+                    <div class="member-card js-reveal" style="max-width: 380px; width: 100%;">
                         <div class="member-card__img-wrap">
-                            <img src="assets/about/photo_2025-01-24_09-56-24.jpg" class="member-card__img" alt="Надія Дубовська">
+                            <img src="assets/about/photo_2025-01-24_09-56-24.jpg" class="member-card__img" alt="Надія Дубовська" onerror="this.src='assets/about/ж-min.jpg'">
                         </div>
                         <div class="member-card__info">
                             <h3 class="member-card__name">Надія Дубовська</h3>
                             <span class="member-card__role">Директор агенції</span>
                             <div style="margin-top: 16px; font-size: 0.95rem;">
-                                <a href="tel:+380995337227" style="color: var(--color-text-muted); display: block; margin-bottom: 4px;">+38 099 533 7227</a>
-                                <a href="tel:+380995337447" style="color: var(--color-text-muted); display: block;">+38 099 533 7447</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="member-card js-reveal" style="transition-delay: 0.1s">
-                        <div class="member-card__img-wrap">
-                            <img src="assets/about/photo_2025-01-24_09-51-43.jpg" class="member-card__img" alt="Олександра">
-                        </div>
-                        <div class="member-card__info">
-                            <h3 class="member-card__name">Олександра</h3>
-                            <span class="member-card__role">Провідний менеджер</span>
-                            <div style="margin-top: 16px; font-size: 0.95rem;">
-                                <a href="tel:+380995337227" style="color: var(--color-text-muted); display: block; margin-bottom: 4px;">+38 099 533 7227</a>
-                                <a href="tel:+380995337447" style="color: var(--color-text-muted); display: block;">+38 099 533 7447</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="member-card js-reveal" style="transition-delay: 0.2s">
-                        <div class="member-card__img-wrap">
-                            <img src="assets/about/photo_2025-01-24_09-53-38.jpg" class="member-card__img" alt="Аліна Бабич">
-                        </div>
-                        <div class="member-card__info">
-                            <h3 class="member-card__name">Аліна Бабич</h3>
-                            <span class="member-card__role">VIP-менеджер / Екзотика</span>
-                            <div style="margin-top: 16px; font-size: 0.95rem;">
-                                <a href="tel:+380995337227" style="color: var(--color-text-muted); display: block; margin-bottom: 4px;">+38 099 533 7227</a>
-                                <a href="mailto:info@limonturov.com" style="color: var(--color-text-muted); display: block;">Написати на пошту</a>
+                                <a href="tel:+380995337227" style="color: var(--color-text-muted); display: block; margin-bottom: 4px; font-weight: 700;">+38 099 533 7227</a>
+                                <a href="tel:+380995337447" style="color: var(--color-text-muted); display: block; font-weight: 700;">+38 099 533 7447</a>
                             </div>
                         </div>
                     </div>
@@ -263,37 +311,44 @@
             </div>
         </section>
 
-        <section class="section bg-light">
-            <div class="container text-center">
+        <section class="section bg-light text-center">
+            <div class="container">
                 <div class="section-header js-reveal">
                     <span class="badge badge--dark">Кваліфікація</span>
-                    <h2 class="h2 mt-3">Наші досягнення та сертифікати</h2>
-                    <div class="divider"></div>
+                    <h2 class="h2 mt-3 mb-2">Наші досягнення та сертифікати</h2>
+                    <p style="color: var(--color-text-muted);">Відзнаки від світових туроператорів за лідерство у продажах.</p>
                 </div>
                 
-                <div class="diplomas-grid js-reveal">
-                    <div class="diploma-item"><img src="assets/diplomas/0001-2-min.jpg" alt="Зірка якості Tez Tour" loading="lazy"></div>
-                    <div class="diploma-item"><img src="assets/diplomas/0001-min.jpg" alt="Диплом Anex Tour" loading="lazy"></div>
-                    <div class="diploma-item"><img src="assets/diplomas/IMG_0001-min.jpg" alt="Сертифікат Anex Tour" loading="lazy"></div>
-                    <div class="diploma-item"><img src="assets/diplomas/IMG_0002-min.jpg" alt="Сертифікат Єгипет" loading="lazy"></div>
-                    <div class="diploma-item"><img src="assets/diplomas/IMG_0003-min-1.jpg" alt="Диплом Турдом" loading="lazy"></div>
-                    <div class="diploma-item"><img src="assets/diplomas/IMG_0004-min-1.jpg" alt="Статус Адмірал Круїзи" loading="lazy"></div>
-                    <div class="diploma-item"><img src="assets/diplomas/IMG_0005-min.jpg" alt="Сертифікат Tourist Club Екзотика" loading="lazy"></div>
-                    <div class="diploma-item"><img src="assets/diplomas/IMG_0006-min-1.jpg" alt="Сертифікат ALF Чорногорія" loading="lazy"></div>
-                    <div class="diploma-item"><img src="assets/diplomas/kyFdVBkwAeQ-min.jpg" alt="Сертифікат Tourist Club" loading="lazy"></div>
+                <div class="diplomas-wow-grid js-reveal">
+                    <div class="diploma-card"><img src="assets/diplomas/cert-1.webp" alt="Диплом 1" loading="lazy" onerror="this.src='assets/diplomas/0001-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-2.webp" alt="Диплом 2" loading="lazy" onerror="this.src='assets/diplomas/IMG_0001-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-3.webp" alt="Диплом 3" loading="lazy" onerror="this.src='assets/diplomas/IMG_0002-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-4.webp" alt="Диплом 4" loading="lazy" onerror="this.src='assets/diplomas/IMG_0003-min-1.jpg'"></div>
+                    
+                    <div class="diploma-card diploma-horizontal"><img src="assets/diplomas/cert-5.webp" alt="Диплом Горизонтальний" loading="lazy" onerror="this.src='assets/diplomas/0001-2-min.jpg'"></div>
+                    
+                    <div class="diploma-card"><img src="assets/diplomas/cert-6.webp" alt="Диплом 6" loading="lazy" onerror="this.src='assets/diplomas/IMG_0004-min-1.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-7.webp" alt="Диплом 7" loading="lazy" onerror="this.src='assets/diplomas/IMG_0005-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-8.webp" alt="Диплом 8" loading="lazy" onerror="this.src='assets/diplomas/IMG_0006-min-1.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-9.webp" alt="Диплом 9" loading="lazy" onerror="this.src='assets/diplomas/kyFdVBkwAeQ-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-10.webp" alt="Диплом 10" loading="lazy" onerror="this.src='assets/diplomas/0001-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-11.webp" alt="Диплом 11" loading="lazy" onerror="this.src='assets/diplomas/IMG_0001-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-12.webp" alt="Диплом 12" loading="lazy" onerror="this.src='assets/diplomas/IMG_0002-min.jpg'"></div>
+                    
+                    <div class="diploma-card diploma-horizontal"><img src="assets/diplomas/cert-13.webp" alt="Диплом Горизонтальний 2" loading="lazy" onerror="this.src='assets/diplomas/0001-2-min.jpg'"></div>
                 </div>
             </div>
         </section>
 
-        <section class="section" id="reviews-section">
+        <section class="section text-center" id="reviews">
             <div class="container">
-                <div class="section-header text-center js-reveal">
+                <div class="section-header js-reveal">
                     <span class="badge badge--dark">Репутація</span>
-                    <h2 class="h2 mt-3">Найкраща оцінка нашої роботи — це ваші відгуки!</h2>
-                    <p class="mt-3" style="color: var(--color-text-muted); max-width: 800px; margin: 0 auto; font-size: 1.125rem;">Ми пишаємося тим, що задовольняємо найвищі вимоги наших клієнтів. Якщо ви досі сумніваєтесь, де придбати путівку — прочитайте, що кажуть про наш сервіс та супровід інші мандрівники.</p>
+                    <h2 class="h2 mt-3 mb-2">Відгуки про нашу роботу</h2>
+                    <p style="color: var(--color-text-muted);">Що про нас кажуть мандрівники.</p>
                 </div>
 
-                <div class="reviews-masonry js-reveal">
+                <div class="reviews-container js-reveal text-left" style="text-align: left;">
                     
                     <div class="review-card">
                         <div class="review-card__header">
@@ -303,29 +358,29 @@
                                 <div class="review-card__stars">★★★★★</div>
                             </div>
                         </div>
-                        <p class="review-card__text">"Ми звернулися вперше в агентство і не знали куди нам поїхати. Зайшли просто дізнатися, а вийшли вже з путівкою! Все пояснили, все пройшло як і обіцяли. Маршрут без запізнень. Дякую дівчатам, завжди були на зв'язку. Звернемось ще!"</p>
+                        <p class="review-card__text">"Мы обратились впервые в агентство и не знали куда нам поехать. Зашли просто узнать, а вышли уже с путевкой! Все объяснили, все прошло как и обещали. Маршрут без опозданий и переноса рейсов. Спасибо девочкам, всегда были на связи. Обратимся еще снова!"</p>
                     </div>
 
                     <div class="review-card">
                         <div class="review-card__header">
                             <div class="review-card__avatar" style="background:#E3F2FD; color:#1976D2;">С</div>
                             <div>
-                                <h4 class="review-card__name">Сергій</h4>
+                                <h4 class="review-card__name">Сергей</h4>
                                 <div class="review-card__stars">★★★★★</div>
                             </div>
                         </div>
-                        <p class="review-card__text">"Замовляв тут тур до Італії. Відпочинком задоволений, головне що не було жодного обману, все що мені обіцяли, так і було. Персонал ввічливий, запропонували декілька варіантів. Наступну відпустку планую теж з Лимон Турів. Рекомендую!"</p>
+                        <p class="review-card__text">"Заказывал здесь тур в Италию. Отдыхом доволен, главное что не было ни одного подвоха, все что мне обещали, все было. Персонал вежлив, было предложено несколько вариантов, и я подобрал нужный для себя. Следующий отпуск буду планировать тоже с Лимон тур. Рекомендую!"</p>
                     </div>
 
                     <div class="review-card">
                         <div class="review-card__header">
-                            <div class="review-card__avatar" style="background:#FCE4EC; color:#1976D2;">К</div>
+                            <div class="review-card__avatar" style="background:#FCE4EC; color:#1976D2;">Е</div>
                             <div>
-                                <h4 class="review-card__name">Катерина</h4>
+                                <h4 class="review-card__name">Екатерина</h4>
                                 <div class="review-card__stars">★★★★★</div>
                             </div>
                         </div>
-                        <p class="review-card__text">"Купили путівку в Єгипет. Відпочинок дуже сподобався. Затримок не було, літак вилетів вчасно. Гід був завжди на зв'язку. Через Лимон турів літали і наші друзі, теж все було на висоті. Рекомендую всім знайомим!"</p>
+                        <p class="review-card__text">"Купили путевку в Египет. Отдых очень понравился. Задержек не было, самолет вылетел вовремя. Гид был всегда на связи. Через Лимон туров летали и наши друзья, тоже всё было на высоте, остались довольны. Всем своим знакомым рекомендую!"</p>
                     </div>
 
                     <div class="review-card">
@@ -336,7 +391,7 @@
                                 <div class="review-card__stars">★★★★★</div>
                             </div>
                         </div>
-                        <p class="review-card__text">"Дівчата з Лимон турів — найкращі!!! Фантастично привітні, професіонали своєї справи! Завжди швидко та якісно підберуть саме те, що треба кожному клієнту. Подорожі з вами — це завжди маса позитивних емоцій!"</p>
+                        <p class="review-card__text">"Девочки из Лимон туров - прекрасные, супер профессионалы. Всегда быстро и качественно подберут именно то, что надо каждому клиенту. Поэтому путешествия с Вами - это всегда масса позитивных эмоций и впечатлений! Спасибо!"</p>
                     </div>
 
                     <div class="review-card">
@@ -347,47 +402,45 @@
                                 <div class="review-card__stars">★★★★★</div>
                             </div>
                         </div>
-                        <p class="review-card__text">"Відпустка вдалася. Нам підібрали і порадили розкішний готель, це була наша перша поїздка. Якщо у нас виникали питання, ми зв'язувались з менеджером — жодних проблем. Дякую за теплу атмосферу!"</p>
+                        <p class="review-card__text">"Отпуск удался. Нам подобрали и посоветовали шикарный отель, это была наша первая поездка. Если у нас возникали вопросы в течении работы с нами, связывались с менеджером - никаких проблем. Спасибо за теплый прием!"</p>
                     </div>
 
                     <div class="review-card">
                         <div class="review-card__header">
                             <div class="review-card__avatar" style="background:#F3E5F5; color:#388E3C;">Н</div>
                             <div>
-                                <h4 class="review-card__name">Наталя</h4>
+                                <h4 class="review-card__name">Наталья</h4>
                                 <div class="review-card__stars">★★★★★</div>
                             </div>
                         </div>
-                        <p class="review-card__text">"Втретє користуюся послугами Лимон турів. Немає жодного зауваження до організації нашого відпочинку. Відпочинок пройшов на УРА. Жодних затримок та накладок. Дівчата, дякую вам велике, що врахували всі наші побажання!"</p>
+                        <p class="review-card__text">"Третий раз пользуюсь услугами Лимон туров. Нет ни одного замечания к организации нашего отдыха. Отдых прошел на УРА! Никаких задержек и накладок. Девочки, спасибо вам большое, что приняли во внимание все пожелания!"</p>
                     </div>
                 </div>
 
-                <div class="review-form-wrapper js-reveal">
-                    <div class="row" style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
+                <div class="leave-review-box js-reveal text-left" style="text-align: left;">
+                    <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
                         
-                        <div class="col-md-6" style="flex: 1 1 400px;">
-                            <img src="assets/about/review.png" alt="Залишити відгук" style="width: 100%; max-width: 400px; display: block; margin-bottom: 24px; border-radius: 12px;">
-                            <h3 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: 16px;">Ми вас просто обожнюємо!</h3>
-                            <p style="color: var(--color-text-muted); line-height: 1.6; margin-bottom: 24px;">Можливо ви хочете поділитися своїми враженнями про подорож? Або у вас є пропозиції щодо якості нашої роботи? Розкажіть іншим мандрівникам про свій досвід звернення в «Лимон Турів»!</p>
+                        <div style="flex: 1 1 300px;">
+                            <h3 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: 16px; color: #fff;">Ви можете залишити тут свій відгук/коментар!</h3>
+                            <p style="color: #CCC; margin-bottom: 24px;">Ми вас просто обожнюємо! Хочете подякувати за відмінну організацію Вашої відпустки? Розкажіть про це іншим подорожникам!</p>
                             
-                            <div class="social-review-btns">
-                                <a href="https://www.google.com/search?q=%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD+%D1%82%D1%83%D1%80%D0%BE%D0%B2" target="_blank" class="social-btn social-btn--google">
+                            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                                <a href="https://www.google.com/search?q=%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD+%D1%82%D1%83%D1%80%D0%BE%D0%B2" target="_blank" style="display: inline-flex; align-items: center; background: #fff; color: #333; padding: 10px 20px; border-radius: 50px; font-weight: 700; text-decoration: none;">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="#EA4335" style="margin-right: 8px;"><path d="M21.35 11.1H12.18V13.83H18.69C18.36 17.64 15.19 19.27 12.19 19.27C8.36 19.27 5 16.25 5 12C5 7.9 8.2 4.73 12.2 4.73C15.29 4.73 17.1 6.7 17.1 6.7L19 4.72S16.12 1.98 12.18 1.98C6.63 1.98 1.34 6.42 1.34 12C1.34 17.7 6.82 22 12.18 22C17.9 22 22.18 17.83 22.18 12.18C22.18 11.73 22.1 11.1 22.1 11.1H21.35Z"/></svg>
-                                    Залишити відгук у Google
+                                    Google Відгук
                                 </a>
-                                <a href="https://www.facebook.com/limon.turov/" target="_blank" class="social-btn social-btn--fb">
+                                <a href="https://www.facebook.com/limon.turov/" target="_blank" style="display: inline-flex; align-items: center; background: #1877F2; color: #fff; padding: 10px 20px; border-radius: 50px; font-weight: 700; text-decoration: none;">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
-                                    Залишити відгук у Facebook
+                                    Facebook Відгук
                                 </a>
                             </div>
                         </div>
-                        
-                        <div class="col-md-6" style="flex: 1 1 400px;">
-                            <h4 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 24px;">Написати коментар на сайті</h4>
-                            <form class="custom-form js-form" id="site-review-form">
+
+                        <div style="flex: 1 1 400px; background: rgba(255,255,255,0.05); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
+                            <form class="custom-form js-form" id="site-review-form" style="max-width: 100%;">
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 16px;">
-                                    <span style="color: var(--color-text-muted); font-weight: 600;">Ваша оцінка:</span>
+                                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 24px;">
+                                    <span style="color: #fff; font-weight: 600;">Ваша оцінка:</span>
                                     <div class="interactive-stars">
                                         <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
                                         <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
@@ -398,27 +451,25 @@
                                 </div>
 
                                 <div class="cf-group">
-                                    <input type="text" id="rv-name" class="cf-input" required placeholder=" " style="border-bottom-color: #ccc;">
-                                    <label for="rv-name" class="cf-label" style="color: #666;">Ваше ім'я *</label>
-                                    <span class="cf-line" style="background: var(--color-primary);"></span>
+                                    <input type="text" id="rv-name" class="cf-input" required placeholder=" " style="color: #fff !important; border-bottom-color: rgba(255,255,255,0.2) !important;">
+                                    <label for="rv-name" class="cf-label" style="color: #999 !important;">Ваше ім'я *</label>
+                                    <span class="cf-line" style="background: var(--color-primary) !important;"></span>
                                 </div>
-                                
                                 <div class="cf-group">
-                                    <input type="email" id="rv-email" class="cf-input" required placeholder=" " style="border-bottom-color: #ccc;">
-                                    <label for="rv-email" class="cf-label" style="color: #666;">Email (не публікується) *</label>
-                                    <span class="cf-line" style="background: var(--color-primary);"></span>
+                                    <input type="email" id="rv-email" class="cf-input" required placeholder=" " style="color: #fff !important; border-bottom-color: rgba(255,255,255,0.2) !important;">
+                                    <label for="rv-email" class="cf-label" style="color: #999 !important;">Email (не публікується) *</label>
+                                    <span class="cf-line" style="background: var(--color-primary) !important;"></span>
                                 </div>
 
                                 <div class="cf-group">
-                                    <textarea id="rv-text" class="cf-input cf-textarea" rows="4" required placeholder=" " style="border-bottom-color: #ccc;"></textarea>
-                                    <label for="rv-text" class="cf-label" style="color: #666;">Текст відгуку *</label>
-                                    <span class="cf-line" style="background: var(--color-primary);"></span>
+                                    <textarea id="rv-text" class="cf-input cf-textarea" rows="3" required placeholder=" " style="color: #fff !important; border-bottom-color: rgba(255,255,255,0.2) !important;"></textarea>
+                                    <label for="rv-text" class="cf-label" style="color: #999 !important;">Текст відгуку *</label>
+                                    <span class="cf-line" style="background: var(--color-primary) !important;"></span>
                                 </div>
                                 
-                                <button type="submit" class="btn btn--solid-yellow btn--full">ОПУБЛІКУВАТИ ВІДГУК</button>
+                                <button type="submit" class="btn btn--solid-yellow btn--full" style="height: 48px; border-radius: 8px;">Post Comment</button>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -427,24 +478,28 @@
         <section class="section bg-light" style="padding-bottom: 80px;">
             <div class="container text-center">
                 <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin-bottom: 8px;" class="js-reveal">Наші партнери</h3>
-                <p style="color: var(--color-text-muted); margin-bottom: 40px;" class="js-reveal">Ми співпрацюємо виключно з надійними та перевіреними туроператорами</p>
                 
-                <div class="partners-grid js-reveal">
-                    <img src="assets/about/TO_5-min.png" alt="TUI" loading="lazy">
-                    <img src="assets/about/TO_1-min.png" alt="Coral Travel" loading="lazy">
-                    <img src="assets/about/TO_2-min.png" alt="JoinUP" loading="lazy">
-                    <img src="assets/about/TO_3-min.png" alt="Anex Tour" loading="lazy">
-                    <img src="assets/about/TO_6-min.png" alt="Tez Tour" loading="lazy">
-                    <img src="assets/about/TO_4-min.png" alt="TPG" loading="lazy">
-                    <img src="assets/about/logo-en-black-and-coral-240-1.png" alt="Travelon" loading="lazy">
-                    <img src="assets/about/аккорд-тур1-min.png" alt="Accord Tour" loading="lazy">
-                    <img src="assets/about/adriatic_travel-min.png" alt="Adriatic Travel" loading="lazy">
-                    <img src="assets/about/E.Line-Tour-лого-траспарент-1.png" alt="E.Line Tour" loading="lazy">
-                    <img src="assets/about/logo-759-2-min.png" alt="ALF" loading="lazy">
-                    <img src="assets/about/logo-3336-min.png" alt="Feeria Mandriv" loading="lazy">
+                <div class="partners-colored-grid js-reveal">
+                    <img src="assets/about/TO_2-min.png" alt="Join UP" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/logo-en-black-and-coral-240-1.png" alt="TravelOn" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/logo-759-2-min.png" alt="Alf" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/TO_4-min.png" alt="TPG" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/E.Line-Tour-лого-траспарент-1.png" alt="Eline tour" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/adriatic_travel-min.png" alt="Adriatic travel" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/аккорд-тур1-min.png" alt="Accord tour" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/TO_1-min.png" alt="Coral travel" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://franchising.alliance.ua/_assets/media/8e7c42581a76cb3ac901498c2da6e45c.png" alt="Alliance" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://www.i-travel.com.ua/wp-content/uploads/2020/02/Itravel-New-Logo.png" alt="Itravel" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://www.trendwaytravel.com/Assets/img/logo.png" alt="Trendway" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://corp.unit.travel/static/photos/touroperatorssellers/orig/89/89/21381043006304c9c11a830.png" alt="Unittravel" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://s01.cdn-longitours.com/get/85/ce/03/301dedc7263fe12485ed81e0c22a33b38cc239b9d5c37adcd3732502b9/longitours-logo-l.png" alt="Longitours" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://toco-tour.com.ua/_nuxt/logo.DEUcCnyY.png" alt="Toco tour" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://kompastour.com/img/logo.svg" alt="Kompas" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://eurotrips.ua/wp-content/themes/eurotrips/assets/img/logo.svg" alt="Eurotrips" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer class="footer js-reveal" itemscope itemtype="https://schema.org/TravelAgency">
@@ -452,7 +507,7 @@
             <div class="footer__grid">
                 
                 <div class="footer__col footer__col--brand">
-                    <img src="assets/img/logo.png" alt="Лимон Турів" class="footer__logo" itemprop="image">
+                    <img src="assets/hero/logo1.png" alt="Лимон Турів" class="footer__logo" itemprop="image" onerror="this.src='assets/img/logo.png'">
                     <p class="footer__desc mt-4">
                         <span itemprop="name" style="display:none;">Лимон Турів</span>
                         <span itemprop="description">Ми створюємо ідеальні подорожі, враховуючи всі ваші побажання. Ваша відпустка буде огорнута турботою 24/7.</span>
@@ -475,7 +530,7 @@
                         <li><a href="about.html">Про компанію</a></li>
                         <li><a href="oferta.html">Договір оферти</a></li>
                         <li><a href="index.html#faq">Поширені питання</a></li>
-                        <li><a href="contacts.html">Контакти</a></li>
+                        <li><a href="index.html#blog">Блог</a></li>
                     </ul>
                 </div>
 
@@ -499,17 +554,17 @@
                     </ul>
                     
                     <div class="footer__socials mt-4">
-                        <a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
-                        <a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
-                        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
-                        <a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a>
+                        <a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
+                        <a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
+                        <a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a>
                     </div>
                 </div>
 
             </div>
 
             <div class="footer__bottom">
-                <p>&copy; <span id="current-year">2026</span> Лимон Турів. Всі права захищені. <a href="oferta.html" style="color: var(--color-text-muted); text-decoration: underline; margin-left: 10px;">Договір оферти</a></p>
+                <p>© <span id="current-year">2026</span> Лимон Турів. Всі права захищені. <a href="oferta.html" style="color: var(--color-text-muted); text-decoration: underline; margin-left: 10px;">Договір оферти</a></p>
                 <div class="footer__lang-switch">
                     <a href="#" class="active" aria-label="Українська мова">УКР</a>
                     <span style="margin: 0 8px; color: var(--color-dark-border);">|</span>
@@ -523,9 +578,10 @@
         <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Написати в Telegram">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
         </a>
+        
         <button class="fw-btn fw-btn--call js-binotel-trigger" aria-label="Замовити зворотній дзвінок">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-dark)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span class="fw-btn__tooltip">Замовити дзвінок</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="fw-btn__tooltip">Замовити дзвінок (Binotel)</span>
         </button>
     </div>
 
@@ -534,66 +590,80 @@
             <button class="modal-close js-modal-close" aria-label="Закрити вікно">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
+            
             <div class="modal-content">
                 <h3 class="modal-title" id="modal-title">Підібрати тур</h3>
-                <form class="custom-form js-form" id="modal-lead-form" style="max-width: 100%;">
+                
+                <form class="custom-form js-form" id="modal-lead-form" style="max-width: 100%;" action="mailto:Limonturov@gmail.com" method="post" enctype="text/plain">
                     <div class="form-row">
                         <div class="cf-group col-6">
-                            <input type="text" class="cf-input" id="modal-destination" required placeholder=" ">
+                            <input type="text" class="cf-input" id="modal-destination" name="Destination" required placeholder=" ">
                             <label for="modal-destination" class="cf-label">Куди (Країна, курорт)?</label>
-                            <span class="cf-line"></span>
+                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
                         </div>
                         <div class="col-6 flex-align-center counter-group">
-                            <label class="mr-2" style="color: var(--color-text-light);">Дорослі</label>
+                            <label class="mr-2" style="color: #666;">Дорослі</label>
                             <div class="ui-counter">
                                 <button type="button" class="js-count-minus" aria-label="Зменшити">-</button>
-                                <input type="number" value="2" min="1" max="10" readonly aria-label="Кількість дорослих">
+                                <input type="number" name="Adults" value="2" min="1" max="10" readonly aria-label="Кількість дорослих">
                                 <button type="button" class="js-count-plus" aria-label="Збільшити">+</button>
                             </div>
-                            <label class="mx-2" style="color: var(--color-text-light);">та діти</label>
+                            <label class="mx-2" style="color: #666;">та діти</label>
                             <div class="ui-counter">
                                 <button type="button" class="js-count-minus" aria-label="Зменшити">-</button>
-                                <input type="number" value="0" min="0" max="5" readonly aria-label="Кількість дітей">
+                                <input type="number" name="Children" value="0" min="0" max="5" readonly aria-label="Кількість дітей">
                                 <button type="button" class="js-count-plus" aria-label="Збільшити">+</button>
                             </div>
                         </div>
                     </div>
+
                     <div class="form-row mt-4">
                         <div class="cf-group col-6" style="position: relative;">
-                            <input type="text" class="cf-input js-date-mask" id="modal-date" placeholder=" " required>
+                            <input type="text" class="cf-input js-date-mask" id="modal-date" name="Date" placeholder=" " required>
                             <label for="modal-date" class="cf-label">Дата вильоту (дд.мм.рррр)</label>
-                            <span class="cf-line"></span>
+                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
                             <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                         </div>
                         <div class="col-6 flex-align-center">
                             <label class="ui-checkbox">
-                                <input type="checkbox" name="flex_dates" checked>
-                                <span class="checkmark"></span>Можливі інші дати (±3 дні)
+                                <input type="checkbox" name="flex_dates" checked value="Yes">
+                                <span class="checkmark"></span>
+                                Можливі інші дати (±3 дні)
                             </label>
                         </div>
                     </div>
+
                     <div class="cf-group mt-4">
-                        <input type="text" class="cf-input" id="modal-duration" placeholder=" " required>
+                        <input type="text" class="cf-input" id="modal-duration" name="Duration" placeholder=" " required>
                         <label for="modal-duration" class="cf-label">Тривалість (напр., 7-10 ночей)</label>
-                        <span class="cf-line"></span>
+                        <span class="cf-line" style="background-color: var(--color-dark);"></span>
                     </div>
+
                     <div class="form-row mt-4">
                         <div class="cf-group col-6">
-                            <input type="text" class="cf-input" id="modal-name" required placeholder=" ">
+                            <input type="text" class="cf-input" id="modal-name" name="Name" required placeholder=" ">
                             <label for="modal-name" class="cf-label">Ваше ім'я *</label>
-                            <span class="cf-line"></span>
+                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
                         </div>
                         <div class="cf-group col-6">
-                            <input type="tel" class="cf-input js-phone-mask" id="modal-phone" required placeholder=" ">
+                            <input type="tel" class="cf-input js-phone-mask" id="modal-phone" name="Phone" required placeholder=" ">
                             <label for="modal-phone" class="cf-label">Телефон *</label>
-                            <span class="cf-line"></span>
+                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
                         </div>
                     </div>
+
                     <div class="cf-group mt-4">
-                        <textarea class="cf-input cf-textarea" id="modal-details" rows="2" placeholder=" "></textarea>
-                        <label for="modal-details" class="cf-label">Побажання (категорія готелю, бюджет...)</label>
-                        <span class="cf-line"></span>
+                        <input type="email" class="cf-input" id="modal-email" name="Email" placeholder=" ">
+                        <label for="modal-email" class="cf-label">E-mail (необов'язково)</label>
+                        <span class="cf-line" style="background-color: var(--color-dark);"></span>
                     </div>
+
+                    <div class="cf-group mt-4">
+                        <textarea class="cf-input cf-textarea" id="modal-details" name="Details" rows="2" placeholder=" "></textarea>
+                        <label for="modal-details" class="cf-label">Побажання (категорія готелю, харчування, бюджет...)</label>
+                        <span class="cf-line" style="background-color: var(--color-dark);"></span>
+                    </div>
+
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn--solid-yellow btn--wide">Відправити запит</button>
                     </div>
@@ -602,55 +672,21 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        /* Перемикач мов */
-        document.addEventListener('DOMContentLoaded', () => {
-            const langSwitchers = document.querySelectorAll('.lang-switcher');
-            langSwitchers.forEach(switcher => {
-                const btns = switcher.querySelectorAll('.lang-btn');
-                btns.forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        if (this.classList.contains('is-active')) return;
-                        const selectedLang = this.textContent.trim().toLowerCase();
-                        let currentPath = window.location.pathname;
-                        let currentFile = currentPath.split('/').pop() || 'about.html'; 
-                        let newUrl = '';
-                        if (selectedLang === 'ru') {
-                            if (!currentFile.includes('-ru')) {
-                                newUrl = currentFile.replace('.html', '-ru.html');
-                                if(currentFile === '') newUrl = 'about-ru.html'; 
-                            }
-                        } else {
-                            if (currentFile.includes('-ru')) {
-                                newUrl = currentFile.replace('-ru.html', '.html');
-                            }
-                        }
-                        if (newUrl) window.location.href = newUrl;
-                    });
-                });
-            });
-        });
-    </script>
-    <!-- Бронебійний скрипт для лоадера -->
-<script>
-    function hideGlobalLoader() {
-        const loader = document.getElementById('global-loader');
-        if (loader && loader.style.display !== 'none') {
-            loader.style.opacity = '0';
-            loader.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => { loader.style.display = 'none'; }, 500);
+        /* Примусове приховання лоадера */
+        function hideGlobalLoader() {
+            const loader = document.getElementById('global-loader');
+            if (loader && loader.style.display !== 'none') {
+                loader.style.opacity = '0';
+                loader.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => { loader.style.display = 'none'; }, 500);
+            }
         }
-    }
-
-    // Варіант 1: Ховаємо, коли сторінка повністю завантажилась
-    window.addEventListener('load', hideGlobalLoader);
-
-    // Варіант 2: Запобіжник (ховаємо примусово через 3.5 секунди, якщо щось зламалося)
-    setTimeout(hideGlobalLoader, 3500);
-</script>
+        window.addEventListener('load', hideGlobalLoader);
+        setTimeout(hideGlobalLoader, 3500);
+    </script>
 </body>
 </html>

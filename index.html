@@ -8,154 +8,385 @@
     <meta name="keywords" content="тури, гарячі тури, путівки, турагентство, Лимон турів, відпочинок, море, екскурсії, круїзи">
     <meta name="author" content="Лимон Турів">
     
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://limon.turov.com.ua/">
-    <meta property="og:title" content="Лимон Турів | Ексклюзивний пошук турів">
-    <meta property="og:description" content="Найкращі пропозиції від перевірених партнерів зі знижками до 40%.">
-    
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon.ico">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Unbounded:wght@400;600;700;800&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
+    <!-- ВБУДОВАНІ СТИЛІ (УСІ ФІКСИ ТА ВАУ-ЕФЕКТИ 2026 РОКУ) -->
     <style>
-        .custom-bento-grid {
+        :root {
+            --color-primary: #FFEC00 !important;
+            --color-primary-hover: #E5D400 !important;
+        }
+
+        /* Хедер */
+        .header { background-color: #FFFFFF !important; padding: 12px 0 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important; border-bottom: none !important; }
+        .header__logo img { filter: none !important; height: 40px !important; }
+        .nav__link { color: #1A1A1A !important; font-size: 0.85rem !important; } 
+        .header__phone { color: #1A1A1A !important; }
+        .burger__line { background-color: #1A1A1A !important; }
+        .lang-switcher { background: #F7F9FC !important; }
+        .lang-btn { color: #666 !important; }
+        .lang-btn.is-active { color: #0A0A0A !important; background: #fff !important; box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;}
+
+        /* Герой */
+        .hero-screen__title { 
+            font-family: var(--font-primary) !important; 
+            font-size: clamp(2.5rem, 5vw, 4.5rem) !important; 
+            font-weight: 800 !important; 
+            letter-spacing: -0.5px !important; 
+            text-transform: none !important; 
+            color: #fff;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
+
+        /* ==========================================================================
+           БРОНЕБІЙНІ СТИЛІ МОДУЛЯ ПОШУКУ (OTPUSK) - ПЕРЕБИВАЄМО СИНІЙ КОЛІР
+           ========================================================================== */
+        #search-module {
+            margin-top: -120px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .search-widget-glass__wrapper {
+            background: rgba(30, 30, 30, 0.85) !important; /* Наш антрацит */
+            backdrop-filter: blur(24px) !important;
+            -webkit-backdrop-filter: blur(24px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 24px !important;
+            padding: 24px !important;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+        }
+
+        /* Жорстко перебиваємо дефолтні сині стилі модуля відпустки */
+        body div.os-container,
+        body div.os-container .os-search-panel,
+        body div.os-container .os-form-wrapper,
+        body div.os-container form {
+            background-color: transparent !important;
+            background-image: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        body div.os-container .os-search-panel input,
+        body div.os-container .os-search-panel select,
+        body div.os-container .os-dropdown {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            color: #fff !important;
+            border-radius: 12px !important;
+            height: 56px !important;
+            font-size: 1rem !important;
+            font-family: var(--font-primary) !important;
+            transition: all 0.3s ease !important;
+            padding-left: 16px !important;
+        }
+
+        body div.os-container .os-search-panel input:focus,
+        body div.os-container .os-search-panel select:focus {
+            background-color: rgba(255, 255, 255, 0.2) !important;
+            border-color: var(--color-primary) !important;
+            outline: none !important;
+            box-shadow: 0 0 15px rgba(255, 236, 0, 0.2) !important;
+        }
+
+        body div.os-container .os-form-button,
+        body div.os-container button.os-submit {
+            background-color: var(--color-primary) !important;
+            color: #0A0A0A !important;
+            border-radius: 50px !important; /* Закруглені кнопки */
+            height: 56px !important;
+            font-weight: 800 !important;
+            font-size: 1rem !important;
+            text-transform: uppercase !important;
+            border: none !important;
+            box-shadow: 0 10px 24px rgba(255, 236, 0, 0.3) !important;
+            transition: all 0.3s ease !important;
+            padding: 0 32px !important;
+            cursor: pointer !important;
+            background-image: none !important;
+        }
+
+        body div.os-container .os-form-button:hover,
+        body div.os-container button.os-submit:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 15px 30px rgba(255, 236, 0, 0.5) !important;
+            background-color: var(--color-primary-hover) !important;
+        }
+
+        /* Тексти всередині антрацитового блоку */
+        body div.os-container .os-title,
+        body div.os-container label,
+        body div.os-container .os-tab span,
+        body div.os-container a.os-adv-search-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-family: var(--font-primary) !important;
+            font-size: 0.9rem !important;
+            text-shadow: none !important;
+        }
+        
+        /* Щоб білий текст в інпутах не зливався з білим фоном випадаючого списку */
+        body div.os-container .ui-menu-item { color: #333 !important; }
+
+        /* Переваги */
+        .feature-card { text-align: center; }
+        .feature-card__icon-wrap { margin: 0 auto 24px !important; background-color: var(--color-primary); box-shadow: 0 0 24px rgba(255, 236, 0, 0.4); color: #0A0A0A; }
+        .feature-card:hover .feature-card__icon-wrap { transform: scale(1.1); }
+
+        /* Модалка */
+        .modal-dialog { background-color: #F7F9FC !important; }
+        .modal-title, .cf-label { color: #1A1A1A !important; }
+        .cf-input { color: #1A1A1A !important; border-bottom-color: #CCCCCC !important; }
+        .ui-checkbox { color: #1A1A1A !important; }
+        .ui-counter, .ui-counter button { border-color: #DDD !important; background-color: #FFF !important; color: #1A1A1A !important; }
+        .ui-counter input { color: #1A1A1A !important; }
+        .checkmark { border-color: #CCC !important; background-color: #FFF !important; }
+        .modal-close { background-color: rgba(0,0,0,0.05) !important; color: #1A1A1A !important; }
+        .modal-close:hover { background-color: var(--color-primary) !important; }
+
+        /* Lead Form (60/40) */
+        .lead-split { display: flex; flex-direction: row; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg); }
+        .lead-split__visual { flex: 0 0 60%; position: relative; overflow: hidden;}
+        .lead-split__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .lead-split__visual-content { position: relative; z-index: 1; padding: 60px; height: 100%; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); }
+        .lead-split__form-wrap { flex: 0 0 40%; background-color: #F7F9FC !important; padding: 60px 40px !important; display: flex; align-items: center; justify-content: center;}
+        #main-lead-form .cf-label { color: #666 !important; }
+        #main-lead-form .cf-input { color: #1A1A1A !important; border-bottom-color: #CCC !important; }
+        #main-lead-form h3 { color: #1A1A1A !important; }
+        .cf-input:focus ~ .cf-label, .cf-input:not(:placeholder-shown) ~ .cf-label { top: -12px; font-size: 0.75rem; color: var(--color-dark) !important; text-transform: uppercase; font-weight: 700; }
+        .cf-line { background-color: var(--color-dark) !important; }
+
+        /* ВАУ-ЕФЕКТ ДЛЯ НАГОРОД (13 ДИПЛОМІВ) */
+        .diplomas-wow-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(2, 280px);
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 24px;
+            grid-auto-flow: dense;
+            margin-top: 40px;
+        }
+        .diploma-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 1;
+            border: 1px solid #F0F0F0;
+        }
+        .diploma-card::after {
+            content: ''; position: absolute; inset: 0; border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(255, 236, 0, 0.3); opacity: 0; transition: opacity 0.5s ease; z-index: -1;
+        }
+        .diploma-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            z-index: 10;
+            border-color: var(--color-primary);
+        }
+        .diploma-card:hover::after { opacity: 1; }
+        .diploma-card img {
+            max-width: 100%; height: auto; max-height: 350px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .diploma-horizontal { grid-column: span 2; } 
+
+        /* ВІДГУКИ ТА ФОРМА ВІДГУКІВ */
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 24px;
             margin-top: 40px;
         }
-        .custom-bento-item {
-            position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 32px;
-            text-decoration: none;
-            color: #fff;
-            background-color: var(--color-dark);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        .review-card {
+            background: #fff; padding: 32px; border-radius: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #EAEAEA; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column;
         }
-        .custom-bento-img {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: 1;
-            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        .review-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--color-primary); }
+        .review-card__header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+        .review-card__avatar {
+            width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--color-primary-light); color: var(--color-dark);
         }
-        .custom-bento-item::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
-            z-index: 2;
-            transition: background 0.4s ease;
+        .review-card__stars { color: #FFB400; font-size: 1.25rem; letter-spacing: 2px; }
+        .review-card__text { color: var(--color-text-muted); font-size: 1rem; line-height: 1.6; font-style: italic; flex-grow: 1;}
+        
+        .leave-review-box {
+            background: var(--color-dark); color: #fff; border-radius: 24px; padding: 48px; margin-top: 60px;
+            box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
         }
-        .custom-bento-item:hover .custom-bento-img {
-            transform: scale(1.08);
+        .leave-review-box::before { content: ''; position: absolute; top: 0; left: 0; width: 8px; height: 100%; background: var(--color-primary); }
+        .interactive-stars { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 8px; }
+        .interactive-stars input { display: none; }
+        .interactive-stars label { cursor: pointer; width: 32px; height: 32px; background-image: url('assets/about/star_rate.png'); background-size: cover; filter: grayscale(100%) opacity(0.4); transition: filter 0.2s ease; }
+        .interactive-stars label:hover, .interactive-stars label:hover ~ label, .interactive-stars input:checked ~ label { filter: grayscale(0%) opacity(1); }
+
+        /* Блог */
+        .blog-tz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+        .blog-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+        .blog-card--large { grid-row: span 2; }
+        .blog-card__img { width: 100%; height: 200px; object-fit: cover; }
+        .blog-card--large .blog-card__img { height: 100%; min-height: 400px; }
+        .blog-card__content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
+        .blog-card__date { font-size: 0.75rem; color: #999; margin-bottom: 8px; }
+        .blog-card__title { font-size: 1.125rem; font-weight: 700; margin-bottom: 12px; font-family: var(--font-primary); color: var(--color-dark); }
+        .blog-card__btn { margin-top: auto; align-self: flex-start; background: var(--color-primary); padding: 8px 24px; border-radius: 50px; font-size: 0.875rem; font-weight: 700; color: #0A0A0A; }
+        .blog-card__btn:hover { background: var(--color-primary-hover); }
+        .blog-card--large .blog-card__content { position: absolute; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); width: 100%; color: #fff; }
+        .blog-card--large .blog-card__title { font-size: 1.5rem; color: #fff; }
+
+        /* ==========================================================================
+           РЕАЛІСТИЧНИЙ IPHONE ТА СВІТЛИЙ ФОН ДЛЯ ТЕЛЕГРАМ ПРОМО (2026 СТИЛЬ)
+           ========================================================================== */
+        .telegram-promo-fullscreen { 
+            background: #F7F9FC !important; /* Світлий фон */
+            min-height: auto;
+            padding: 100px 0 !important;
         }
-        .custom-bento-item:hover::after {
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);
+
+        .tg-promo-box { 
+            background: #FFFFFF !important; /* Біла карточка */
+            border: 1px solid #EAEAEA !important;
+            border-radius: 32px !important;
+            padding: 60px 5% !important; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 80px; 
+            align-items: center; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05) !important; /* М'яка тінь */
         }
-        .custom-bento-content {
-            position: relative;
-            z-index: 3;
-            transform: translateY(10px);
-            transition: transform 0.4s ease;
+
+        /* Реалістична рамка iPhone 15/16 Pro */
+        .iphone-frame { 
+            width: 320px; 
+            height: 650px; 
+            background-color: #f0f0f0; /* Колір корпусу */
+            border: 14px solid #1c1c1e; /* Товста чорна рамка */
+            border-radius: 50px; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15), inset 0 0 0 2px #555; 
+            position: relative; 
+            margin: 0 auto;
+            transform: perspective(1000px) rotateY(-10deg) rotateX(4deg) translateY(10px);
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .custom-bento-item:hover .custom-bento-content {
-            transform: translateY(0);
+        .tg-promo-box:hover .iphone-frame {
+            transform: perspective(1000px) rotateY(-2deg) rotateX(0deg) translateY(-5px);
         }
-        .custom-bento-title {
-            font-family: var(--font-display, 'Unbounded', sans-serif);
-            font-size: 1.75rem;
-            margin-bottom: 8px;
-            font-weight: 700;
-            color: #fff;
+        
+        /* Бічні кнопки (живлення і гучність) для реалізму */
+        .iphone-frame::before { 
+            content: ''; position: absolute; left: -18px; top: 120px; width: 4px; height: 30px; 
+            background: #1c1c1e; border-radius: 4px 0 0 4px; 
+        } 
+        .iphone-frame::after { 
+            content: ''; position: absolute; left: -18px; top: 170px; width: 4px; height: 50px; 
+            background: #1c1c1e; border-radius: 4px 0 0 4px; 
+        } 
+        .iphone-power { 
+            position: absolute; right: -18px; top: 140px; width: 4px; height: 60px; 
+            background: #1c1c1e; border-radius: 0 4px 4px 0; 
         }
-        .custom-bento-desc {
-            font-size: 1rem;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 0;
-            font-family: var(--font-primary, 'Manrope', sans-serif);
+
+        /* Dynamic Island 2026 */
+        .dynamic-island {
+            position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 100px; height: 30px;
+            background: #000; border-radius: 20px; z-index: 20; box-shadow: inset 0 -1px 2px rgba(255,255,255,0.2);
         }
+
+        /* Внутрішній екран */
+        .iphone-screen { 
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: #E4ECEF url('assets/hero/hero-cruises.webp') center/cover no-repeat;
+            border-radius: 34px; /* Менше закруглення для внутрішнього екрану */
+            overflow: hidden; padding: 70px 16px 16px; 
+            display: flex; flex-direction: column; gap: 16px;
+        }
+        .iphone-screen::before {
+            content: ''; position: absolute; inset: 0; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); z-index: 0;
+        }
+        
+        /* Повідомлення в стилі iOS */
+        .tg-message { 
+            position: relative; z-index: 10;
+            background: #ffffff; color: #1a1a1a;
+            padding: 16px; border-radius: 20px; border-bottom-left-radius: 4px; 
+            font-size: 0.95rem; box-shadow: 0 8px 20px rgba(0,0,0,0.06); 
+            transform: translateY(20px); opacity: 0; animation: messagePop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .tg-message:nth-child(2) { animation-delay: 0.4s; }
+        .tg-message:nth-child(3) { animation-delay: 0.8s; }
+        @keyframes messagePop { to { transform: translateY(0); opacity: 1; } }
+
+        /* Партнери (Кольорові) */
+        .partners-colored-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; margin-top: 40px; }
+        .partners-colored-grid img { max-width: 140px; height: auto; max-height: 60px; object-fit: contain; filter: none !important; opacity: 1 !important; transition: transform 0.3s ease; }
+        .partners-colored-grid img:hover { transform: scale(1.1); }
+
+        
+
+        /* Bento (Відкривайте світ) */
+        .custom-bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 280px); gap: 24px; margin-top: 40px; }
+        .custom-bento-item { position: relative; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; text-decoration: none; color: #fff; background-color: var(--color-dark); box-shadow: var(--shadow-sm); }
+        .custom-bento-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.7s ease; }
+        .custom-bento-item::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); z-index: 2; }
+        .custom-bento-item:hover .custom-bento-img { transform: scale(1.08); }
+        .custom-bento-content { position: relative; z-index: 3; }
+        .custom-bento-title { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 8px; font-weight: 700; color: #fff; }
         .c-bento-large { grid-column: span 2; grid-row: span 2; }
         .c-bento-wide { grid-column: span 2; grid-row: span 1; }
         .c-bento-standard { grid-column: span 1; grid-row: span 1; }
-        
-        .c-bento-btn {
-            display: inline-flex;
-            align-items: center;
-            margin-top: 20px;
-            padding: 10px 24px;
-            border: 1px solid rgba(255,255,255,0.4);
-            border-radius: 50px;
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.875rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-        .custom-bento-item:hover .c-bento-btn {
-            background: var(--color-primary, #F4B400);
-            border-color: var(--color-primary, #F4B400);
-            color: var(--color-dark, #131313);
-        }
 
+        /* Адаптив */
         @media (max-width: 1024px) {
-            .custom-bento-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
-            .c-bento-large { grid-column: span 2; grid-row: span 1; height: 400px; }
-            .c-bento-wide { grid-column: span 2; grid-row: span 1; height: 300px; }
-            .c-bento-standard { grid-column: span 1; grid-row: span 1; height: 300px; }
+            .lead-split { flex-direction: column; }
+            .lead-split__visual, .lead-split__form-wrap { flex: 1 1 100%; width: 100%; }
+            .lead-split__visual { height: 400px; }
+            .blog-tz-grid { grid-template-columns: repeat(2, 1fr); }
+            .blog-card--large { grid-column: span 2; grid-row: span 1; height: 300px; }
+            .tg-promo-box { padding: 40px !important; grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .iphone-frame { transform: rotate(0); margin-top: 40px; }
         }
-        @media (max-width: 600px) {
-            .custom-bento-grid { grid-template-columns: 1fr; }
-            .c-bento-large, .c-bento-wide, .c-bento-standard { grid-column: span 1; height: 320px;}
+        @media (max-width: 768px) {
+            .header__actions .btn, .header__phone { display: none; }
+            .hero-screen__title { font-size: 2.5rem !important; }
+            .hero-socials { display: none; } 
+            .custom-bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .c-bento-large, .c-bento-wide, .c-bento-standard { grid-column: span 1; height: 250px; }
+            .blog-tz-grid { grid-template-columns: 1fr; }
+            .blog-card--large { grid-column: span 1; }
+            .diploma-horizontal { grid-column: span 1; } 
+            .leave-review-box { padding: 32px 24px; }
         }
-
-        .faq-inner-list { padding-left: 20px; margin: 12px 0; }
-        .faq-inner-list li { margin-bottom: 8px; position: relative; }
-        .faq-inner-list li::before { content: "🔹"; position: absolute; left: -20px; }
-        
-        .awards-grid-full {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 20px;
-            align-items: center;
-            justify-items: center;
-        }
-        .awards-grid-full img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.3s ease;
-        }
-        .awards-grid-full img:hover {
-            transform: scale(1.05);
-        }
-        
-        .country-list {
-            column-count: 2;
-            column-gap: 20px;
-            color: var(--color-text-muted);
-            font-size: 0.95rem;
-            list-style-type: none;
-            padding-left: 0;
-            margin-top: 12px;
-        }
-        .country-list li {
-            margin-bottom: 4px;
-        }
-        @media (max-width: 600px) {
-            .country-list { column-count: 1; }
+        @media (max-width: 991px) {
+            .header__contacts, .header .btn--solid-yellow { display: none !important; }
+            .header__logo img { max-width: 120px !important; }
+            .header__actions { gap: 15px; }
+            .hero-screen { padding-top: 150px !important; }
+            .hero-screen__title { font-size: 2.2rem !important; }
+            .search-widget-glass { margin-top: -30px; }
+            .header__nav { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background-color: var(--color-white); z-index: 999; padding: 100px 20px 40px; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); overflow-y: auto; }
+            .header__nav.is-active { right: 0; }
+            .nav__list { flex-direction: column; align-items: center; gap: 24px; width: 100%; display: flex !important; }
+            .nav__link { color: var(--color-dark) !important; font-size: 1.25rem !important; font-weight: 700; }
+            .nav__chevron { display: none; }
+            .burger { position: relative; z-index: 1000; display: flex; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; }
+            .burger__line { width: 30px; height: 2px; background-color: var(--color-dark) !important; transition: all 0.3s ease; }
+            .burger.is-active .burger__line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .burger.is-active .burger__line:nth-child(2) { opacity: 0; }
+            .burger.is-active .burger__line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
     </style>
 </head>
@@ -163,110 +394,49 @@
 
     <div id="global-loader" class="loader" aria-hidden="true">
         <div class="loader__brand">
-            <img src="assets/img/logo.png" alt="Завантаження Лимон Турів" width="200" height="auto" class="loader__logo">
+            <img src="assets/hero/logo1.png" alt="Завантаження Лимон Турів" width="200" height="auto" class="loader__logo" onerror="this.src='assets/img/logo.png'">
             <div class="loader__spinner mt-3">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="2" x2="12" y2="6"></line>
-                    <line x1="12" y1="18" x2="12" y2="22"></line>
-                    <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
-                    <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
-                    <line x1="2" y1="12" x2="6" y2="12"></line>
-                    <line x1="18" y1="12" x2="22" y2="12"></line>
-                    <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
-                    <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;">
+                    <line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
                 </svg>
             </div>
             <span class="loader__text mt-2">Готуємо найкращі пропозиції...</span>
         </div>
     </div>
 
-    <div class="parallax-wrapper" aria-hidden="true">
-        <img src="assets/img/palm_1.png" alt="" class="parallax-el p-palm-1" data-speed="0.08" style="position: fixed; top: -5%; right: -5%; width: 450px; z-index: 10; pointer-events: none;">
-        <img src="assets/img/palm_2.png" alt="" class="parallax-el p-palm-2" data-speed="-0.05" style="position: fixed; bottom: -10%; left: -5%; width: 500px; z-index: 10; pointer-events: none;">
-    </div>
-
     <header class="header js-header" role="banner">
         <div class="container header__container">
             
             <a href="/" class="header__logo" aria-label="Головна сторінка Лимон Турів">
-                <img src="assets/img/logo.png" alt="Лимон Турів" width="180" height="auto" class="logo-img">
+                <img src="assets/hero/logo1.png" alt="Лимон Турів Турагенція" width="180" height="auto" class="logo-img" onerror="this.src='assets/img/logo.png'">
             </a>
 
             <nav class="header__nav nav" role="navigation" aria-label="Головне меню">
                 <ul class="nav__list">
-                    
                     <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="#tours" class="nav__link">
-                            Тури
-                            <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-                        </a>
-                        
+                        <a href="#tours" class="nav__link">Тури <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
                         <div class="mega-menu" role="menu">
                             <div class="mega-menu__inner container">
                                 <div class="mega-menu__col">
                                     <h4 class="mega-menu__title">Напрямки та пошук</h4>
                                     <ul class="mega-menu__list">
-                                        <li role="none">
-                                            <a href="#search-module" class="mega-menu__link" role="menuitem">
-                                                <div class="mega-menu__icon-box">
-                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                                </div>
-                                                <span>Пошук туру</span>
-                                            </a>
-                                        </li>
-                                        <li role="none">
-                                            <a href="hot-tours.html" class="mega-menu__link" role="menuitem">
-                                                <div class="mega-menu__icon-box">
-                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19C19.9853 19 22 16.9853 22 14.5C22 11.5 19 9 19 9C19 9 18 10.5 18 12C18 12 16 9 12 3C12 3 12 8 12 12C12 12 11.5 10 9 10C6.5 10 3 13.5 3 17C3 19.5 5 21.5 7.5 21.5C9.5 21.5 10.5 20 12 18.5C13.5 20 15.5 19 17.5 19Z"/></svg>
-                                                </div>
-                                                <span>Гарячі тури</span>
-                                            </a>
-                                        </li>
-                                        <li role="none">
-                                            <a href="excursions.html" class="mega-menu__link" role="menuitem">
-                                                <div class="mega-menu__icon-box">
-                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V16.4722C3 15.6991 3.44754 14.9928 4.14811 14.654L8.51468 12.6322C9.13098 12.3468 9.5 11.7249 9.5 11.0423C9.5 10.2312 8.92211 9.53127 8.12502 9.38183L6.20847 9.02248C5.02102 8.79983 4.21855 7.74797 4.29828 6.5417L4.47171 3.9168C4.54228 2.8488 5.42621 2 6.49622 2H17.5038C18.5738 2 19.4577 2.8488 19.5283 3.9168L19.7017 6.5417C19.7814 7.74797 18.979 8.79983 17.7915 9.02248L15.875 9.38183C15.0779 9.53127 14.5 10.2312 14.5 11.0423C14.5 11.7249 14.869 12.3468 15.4853 12.6322L19.8519 14.654C20.5525 14.9928 21 15.6991 21 16.4722V21"/></svg>
-                                                </div>
-                                                <span>Екскурсійні тури</span>
-                                            </a>
-                                        </li>
-                                        <li role="none">
-                                            <a href="cruises.html" class="mega-menu__link" role="menuitem">
-                                                <div class="mega-menu__icon-box">
-                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19C4 19 6 21 12 21C18 21 20 19 20 19M2 15L4 19L22 15M10 15V8H14V15M12 8V4M12 4H9M12 4H15"/></svg>
-                                                </div>
-                                                <span>Круїзи</span>
-                                            </a>
-                                        </li>
+                                        <li role="none"><a href="#search-module" class="mega-menu__link" role="menuitem"><span>Пошук туру</span></a></li>
+                                        <li role="none"><a href="hot-tours.html" class="mega-menu__link" role="menuitem"><span>Гарячі тури</span></a></li>
+                                        <li role="none"><a href="excursions.html" class="mega-menu__link" role="menuitem"><span>Екскурсійні тури</span></a></li>
+                                        <li role="none"><a href="cruises.html" class="mega-menu__link" role="menuitem"><span>Круїзи</span></a></li>
                                     </ul>
-                                </div>
-                                
-                                <div class="mega-menu__col mega-menu__col--promo">
-                                    <div class="menu-promo hover-zoom">
-                                        <img src="assets/img/68512519-cyprus-wall.jpg" alt="Раннє бронювання Кіпр" loading="lazy">
-                                        <div class="menu-promo__overlay">
-                                            <span class="badge badge--yellow">Спецпропозиція</span>
-                                            <h5>Раннє бронювання 2026: Кіпр від 15 000 ₴</h5>
-                                            <span class="link-arrow mt-2">Дізнатись більше →</span>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </li>
-
                     <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="#services" class="nav__link">
-                            Послуги
-                            <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                        </a>
+                        <a href="#services" class="nav__link">Послуги <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
                         <ul class="dropdown-simple" role="menu">
                             <li role="none"><a href="hotels.html" role="menuitem">Готелі</a></li>
                             <li role="none"><a href="flights.html" role="menuitem">Авіаквитки</a></li>
                             <li role="none"><a href="rent-car.html" role="menuitem">Оренда авто</a></li>
                         </ul>
                     </li>
-
                     <li class="nav__item"><a href="about.html" class="nav__link">Про компанію</a></li>
                     <li class="nav__item"><a href="#faq" class="nav__link">Поширені питання</a></li>
                     <li class="nav__item"><a href="contacts.html" class="nav__link">Контакти</a></li>
@@ -279,20 +449,15 @@
                     <span class="lang-sep"></span>
                     <button class="lang-btn" aria-pressed="false">RU</button>
                 </div>
-                
                 <div class="header__contacts">
-                    <span class="header__contacts-hint">Ми на зв'язку</span>
+                    <span class="header__contacts-hint" style="font-size: 0.75rem; color: #666;">Ми на зв'язку</span>
                     <a href="tel:+380995337227" class="header__phone">+38 (099) 533-72-27</a>
                 </div>
-
                 <button class="btn btn--solid-yellow js-open-modal" aria-label="Відкрити форму підбору туру">
                     <span>Підібрати тур</span>
                 </button>
-
                 <button class="burger js-burger" aria-label="Відкрити мобільне меню" aria-expanded="false">
-                    <span class="burger__line"></span>
-                    <span class="burger__line"></span>
-                    <span class="burger__line"></span>
+                    <span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span>
                 </button>
             </div>
         </div>
@@ -300,25 +465,22 @@
 
     <main id="main-content" role="main">
         <section class="hero-screen">
-            
             <div class="hero-screen__bg">
-                <img src="assets/img/luxfoncom_4278.jpg" alt="Мальдіви, ідеальний відпочинок" class="hero-screen__img js-parallax-bg" fetchpriority="high">
-                <div class="hero-screen__overlay"></div>
+                <img src="assets/hero/hero-main.webp" alt="Ідеальний відпочинок" class="hero-screen__img" fetchpriority="high" onerror="this.src='assets/img/luxfoncom_4278.jpg'">
+                <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.6) 100%);"></div>
             </div>
 
             <div class="container hero-screen__container">
                 <div class="hero-screen__content text-center" style="padding-bottom: 120px;">
-                    <span class="hero-screen__badge">Сезон 2026 відкрито</span>
                     <h1 class="hero-screen__title js-split-text">
                         Пошук турів по всім <br>
                         <span class="text-gradient">туроператорам</span>
                     </h1>
-                    <p class="hero-screen__subtitle">Відкривайте світ разом з нами. Ексклюзивні пропозиції від 50+ перевірених партнерів зі знижками до 40%.</p>
                 </div>
 
+                <!-- МОДУЛЬ ПОШУКУ (СИЛЬНИЙ ОВЕРРАЙД СИНЬОГО ФОНУ) -->
                 <div class="search-widget-glass" id="search-module">
-                    <div class="search-widget-glass__wrapper" style="padding: 20px;">
-                        
+                    <div class="search-widget-glass__wrapper">
                         <script>
                             var osGeo = ''; 
                             var osDefaultDeparture = 1831; 
@@ -344,111 +506,90 @@
                         <script src="https://api.otpusk.com/api/2.4/session?access_token=2c1f4-78bec-0741d-68154-053c8" defer></script>
                         <script src="https://export.otpusk.com/js/onsite/" defer></script>
                         <script src="https://export.otpusk.com/js/order" defer></script>
-
                     </div>
                 </div>
             </div>
             
             <ul class="hero-socials">
                 <li><a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a></li>
-                <li><a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a></li>
+                <li><a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a></li>
                 <li><a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a></li>
                 <li><a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a></li>
             </ul>
         </section>
 
+        <!-- ЧОМУ ОБИРАЮТЬ НАС -->
         <section class="section features" id="about">
             <div class="container">
                 <div class="section-header text-center js-reveal">
-                    <span class="badge badge--dark">Про компанію</span>
                     <h2 class="h2 mt-3">Чому обирають нас</h2>
                     <div class="divider"></div>
                 </div>
 
                 <div class="features-grid">
                     <div class="feature-card js-reveal" style="transition-delay: 0s">
-                        <div class="feature-card__icon-wrap bg-yellow-light">
-                            <img src="assets/img/hp-support.png" alt="Підтримка" width="36" height="36" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">
+                        <div class="feature-card__icon-wrap">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3 class="feature-card__title">13 років в ритмі туризму</h3>
+                        <p class="feature-card__desc">Знаємо туризм зсередини - ми самі інспектуємо готелі, тестуємо нові напрямки та завжди тримаємо руку на пульсі.</p>
+                    </div>
+
+                    <div class="feature-card js-reveal" style="transition-delay: 0.1s">
+                        <div class="feature-card__icon-wrap">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                         </div>
                         <h3 class="feature-card__title">Підтримка 24/7</h3>
                         <p class="feature-card__desc">Ми поруч у будь-який момент вашої подорожі та допоможемо в усьому, якщо виникнуть складнощі чи питання за кордоном.</p>
                     </div>
 
-                    <div class="feature-card js-reveal" style="transition-delay: 0.1s">
-                        <div class="feature-card__icon-wrap bg-blue-light">
-                            <img src="assets/img/privacy.png" alt="Офіційність" width="36" height="36" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">
+                    <div class="feature-card js-reveal" style="transition-delay: 0.2s">
+                        <div class="feature-card__icon-wrap">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                         </div>
                         <h3 class="feature-card__title">Офіційність та безпека</h3>
                         <p class="feature-card__desc">Працюємо в офісі та онлайн. Підписуємо офіційний договір та приймаємо оплату виключно на розрахункові рахунки компанії.</p>
                     </div>
 
-                    <div class="feature-card js-reveal" style="transition-delay: 0.2s">
-                        <div class="feature-card__icon-wrap bg-green-light">
-                            <img src="assets/img/Garantiiya_2.png" alt="Гарантія" width="40" height="40" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">
-                        </div>
-                        <h3 class="feature-card__title">Гарантія кращої ціни</h3>
-                        <p class="feature-card__desc">Співпрацюємо з усіма туроператорами напряму і знаємо секрет, де знайти ексклюзивні та найвигідніші умови для вас.</p>
-                    </div>
-
                     <div class="feature-card js-reveal" style="transition-delay: 0.3s">
                         <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        </div>
-                        <h3 class="feature-card__title">13 років в ритмі туризму</h3>
-                        <p class="feature-card__desc">Знаємо туризм зсередини - ми самі інспектуємо готелі, тестуємо нові напрямки та завжди тримаємо руку на пульсі.</p>
-                    </div>
-                    
-                    <div class="feature-card js-reveal" style="transition-delay: 0.4s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         </div>
                         <h3 class="feature-card__title">Індивідуальний підхід</h3>
                         <p class="feature-card__desc">Врахуємо всі найменші побажання, знайдемо компроміси та запропонуємо ідеальне рішення саме для вашої сім'ї.</p>
                     </div>
                     
-                    <div class="feature-card js-reveal" style="transition-delay: 0.5s">
+                    <div class="feature-card js-reveal" style="transition-delay: 0.4s">
                         <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
                         </div>
                         <h3 class="feature-card__title">Подарунки до бронювання</h3>
                         <p class="feature-card__desc">Подорож повинна починатись ідеально. Отримайте приємний бонус від нашої агенції до кожного вашого бронювання.</p>
+                    </div>
+
+                    <div class="feature-card js-reveal" style="transition-delay: 0.5s">
+                        <div class="feature-card__icon-wrap">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <h3 class="feature-card__title">Гарантія кращої ціни</h3>
+                        <p class="feature-card__desc">Співпрацюємо з усіма туроператорами напряму і знаємо секрет, де знайти ексклюзивні та найвигідніші умови для вас.</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- ГАРЯЧІ ТУРИ -->
         <section class="section bg-light" id="hot-tours" aria-labelledby="hot-tours-title">
             <div class="container">
-                <div class="section-header js-reveal d-flex justify-between align-end">
+                <div class="section-header js-reveal d-flex justify-between align-end" style="display: flex; justify-content: space-between; align-items: flex-end;">
                     <div>
-                        <span class="badge badge--dark">Оновлюється щохвилини</span>
                         <h2 class="h2 mt-2" id="hot-tours-title">Гарячі тури</h2>
                     </div>
-                    <a href="hot-tours.html" class="link-arrow">Всі гарячі пропозиції →</a>
+                    <a href="hot-tours.html" class="link-arrow" style="font-weight: 700; color: var(--color-dark); text-decoration: underline;">Всі гарячі пропозиції →</a>
                 </div>
 
                 <div class="module-placeholder js-reveal mt-5">
-                    
-                    <style>
-                        body .hot-block_tiles .hot-wrapper { margin-top: 0px; margin-left: 0px; margin-bottom: 0px; margin-right: -10px !important; }
-                        body .hot-block_tiles .hot-otp-form-wrap { margin-top: 10px; margin-right: 10px; border-radius: var(--radius-md, 16px); overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-                        body .hot-block_tiles .hot-otp-img, body .hot-block_tiles .hot-otp-tour-block { width: calc(25% - 10px) !important; min-width: 240px; }
-                        body .hot-block_tiles .hot-otp-tour-block { background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%); }
-                        body .hot-block_tiles .hot-otp-img:after { background: transparent; height: 0; }
-                        body .hot-block_tiles .hot-otp-form-wrap:hover .hot-otp-img { transform: scale(1.05); transition: transform 0.5s ease; opacity: 1; }
-                        body .hot-block_tiles .hot-otp-description { font-family: var(--font-display, sans-serif); font-size: 1.25rem; font-weight: 700; color: #fff !important; padding: 20px 20px 5px; }
-                        body .hot-block_tiles .hot-otp-place { font-family: var(--font-primary, sans-serif); font-size: 14px; font-weight: normal; color: rgba(255,255,255,0.8) !important; padding: 0 20px; }
-                        body .hot-block_tiles .hot-otp-tour-info { font-family: var(--font-primary, sans-serif); font-size: 13px; font-style: normal; color: #fff; left: 20px; bottom: 20px; width: 130px; }
-                        body .hot-block_tiles .hot-price-block { padding-right: 20px; padding-bottom: 20px; }
-                        body .hot-block_tiles .hot-otp-price-count, body .hot-block_tiles .hot-otp-price-count nobr { font-family: var(--font-primary, sans-serif); font-size: 12px; color: rgba(255,255,255,0.8) !important; }
-                        body .hot-block_tiles .hot-otp-price a { font-family: var(--font-display, sans-serif); font-size: 1.5rem; font-weight: 700; color: var(--color-primary, #F4B400) !important; }
-                        
-                        @media (max-width: 1024px) { body .hot-block_tiles .hot-otp-img, body .hot-block_tiles .hot-otp-tour-block { width: calc(33.33% - 10px) !important; } }
-                        @media (max-width: 768px) { body .hot-block_tiles .hot-otp-img, body .hot-block_tiles .hot-otp-tour-block { width: calc(50% - 10px) !important; } }
-                        @media (max-width: 480px) { body .hot-block_tiles .hot-otp-img, body .hot-block_tiles .hot-otp-tour-block { width: 100% !important; margin-right: 0 !important; } body .hot-block_tiles .hot-wrapper { margin-right: 0 !important; } }
-                    </style>
-
-                    <div class="hot-size-checker" id="otpusk_onsite_hot26865">
+                    <div class="hot-size-checker" id="otpusk_onsite_hot26865" style="min-height: 300px; display: flex; justify-content: center; align-items: center;">
                         <img src="https://export.otpusk.com/os/ajax-loader.gif" alt="loading"/><span></span>
                     </div>
                     <script>
@@ -468,115 +609,97 @@
                             }
                         }(document, "script"));
                     </script>
-
                 </div>
             </div>
         </section>
 
+        <!-- ВІДКРИВАЙТЕ СВІТ (Bento Grid) -->
         <section class="section" id="destinations">
             <div class="container">
-                <div class="section-header js-reveal">
-                    <span class="badge badge--dark">Натхнення</span>
-                    <h2 class="h2 mt-3">Відкривайте світ</h2>
+                <div class="section-header js-reveal text-center">
+                    <h2 class="h2 mt-3">Популярні тури</h2>
+                    <p style="color: var(--color-text-muted);">Подорожуй легко — ми підберемо найкращий варіант саме для вас!</p>
                 </div>
 
                 <div class="custom-bento-grid js-reveal">
-                    <a href="#search-module" class="custom-bento-item c-bento-large" aria-label="Знайти тури в Дубай">
-                        <img src="assets/img/5089.jpg" alt="Готель в Дубай ОАЕ" class="custom-bento-img" loading="lazy">
+                    <a href="#search-module" class="custom-bento-item c-bento-large" aria-label="Греція + Албанія">
+                        <img src="assets/hero/hero-hotels.webp" alt="Греція Албанія" class="custom-bento-img" loading="lazy" onerror="this.src='assets/img/5089.jpg'">
                         <div class="custom-bento-content">
-                            <h3 class="custom-bento-title">ОАЕ, Дубай</h3>
-                            <p class="custom-bento-desc">Розкішний відпочинок, хмарочоси та шопінг</p>
-                            <span class="c-bento-btn">Знайти тури →</span>
+                            <h3 class="custom-bento-title">Греція + Албанія</h3>
+                            <p class="custom-bento-desc">від 530 €</p>
                         </div>
                     </a>
                     
-                    <a href="#search-module" class="custom-bento-item c-bento-standard" aria-label="Тури в Туреччину">
-                        <img src="assets/img/Depositphotos_932218.jpg" alt="Туреччина Стамбул" class="custom-bento-img" loading="lazy">
+                    <a href="#search-module" class="custom-bento-item c-bento-wide" aria-label="Лазурне Літо">
+                        <img src="assets/hero/hero-cruises.webp" alt="Лазурне Літо" class="custom-bento-img" loading="lazy" onerror="this.src='assets/img/Depositphotos_932218.jpg'">
                         <div class="custom-bento-content">
-                            <h3 class="custom-bento-title">Туреччина</h3>
-                            <p class="custom-bento-desc">Колоритний Стамбул</p>
+                            <h3 class="custom-bento-title">Лазурне Літо</h3>
+                            <p class="custom-bento-desc">від 369 €</p>
                         </div>
                     </a>
                     
-                    <a href="#search-module" class="custom-bento-item c-bento-standard" aria-label="Тури в Єгипет">
-                        <img src="assets/img/Egypt_main.jpg" alt="Піраміди Єгипет" class="custom-bento-img" loading="lazy">
+                    <a href="#search-module" class="custom-bento-item c-bento-standard" aria-label="Греція">
+                        <img src="assets/hero/hero-flights.webp" alt="Греція" class="custom-bento-img" loading="lazy" onerror="this.src='assets/img/Egypt_main.jpg'">
                         <div class="custom-bento-content">
-                            <h3 class="custom-bento-title">Єгипет</h3>
-                            <p class="custom-bento-desc">Чарівне Червоне море</p>
+                            <h3 class="custom-bento-title">Греція</h3>
+                            <p class="custom-bento-desc">від 220 €</p>
                         </div>
                     </a>
                     
-                    <a href="excursions.html" class="custom-bento-item c-bento-wide" aria-label="Екскурсійні тури">
-                        <img src="assets/img/107837.jpg" alt="Гірський пейзаж" class="custom-bento-img" loading="lazy">
+                    <a href="excursions.html" class="custom-bento-item c-bento-standard" aria-label="Італійські канікули">
+                        <img src="assets/hero/hero-bus.webp" alt="Італія" class="custom-bento-img" loading="lazy" onerror="this.src='assets/img/107837.jpg'">
                         <div class="custom-bento-content">
-                            <h3 class="custom-bento-title">Екскурсійні тури</h3>
-                            <p class="custom-bento-desc">Насичені автобусні тури Європою без нічних переїздів</p>
-                            <span class="c-bento-btn">Усі маршрути →</span>
+                            <h3 class="custom-bento-title">Італійські канікули</h3>
+                            <p class="custom-bento-desc">від 260 €</p>
                         </div>
                     </a>
                 </div>
             </div>
         </section>
 
-        <section class="lead-section" id="lead-form-section">
-            <div class="lead-split">
+        <!-- LEAD FORM (60/40 Split, Світла форма) -->
+        <section class="lead-section" id="lead-form-section" style="background-color: var(--color-white);">
+            <div class="lead-split container" style="padding: 0; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg);">
                 
                 <div class="lead-split__visual">
-                    <img src="assets/img/50571182.jpg" alt="Лазурна вода у горах" class="lead-split__img" loading="lazy">
-                    <div class="lead-split__visual-content js-reveal">
-                        <h2 class="h1" style="line-height: 1.1;">Створимо<br><span class="text-primary">вашу казку</span></h2>
-                        <div class="contact-block mt-5">
-                            <p class="cb-row">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                                <a href="tel:+380995337227" aria-label="Зателефонувати +38 (099) 533-72-27">+38 (099) 533-72-27</a>
-                            </p>
-                            <p class="cb-row mt-3">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                                <a href="tel:+380995337447" aria-label="Зателефонувати +38 (099) 533-74-47">+38 (099) 533-74-47</a>
-                            </p>
+                    <img src="assets/hero/hero-cars.webp" alt="Відпочинок" class="lead-split__img" style="opacity: 1;" loading="lazy" onerror="this.src='assets/img/50571182.jpg'">
+                    <div class="lead-split__visual-content js-reveal" style="background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); padding: 60px;">
+                        <h2 class="h1" style="line-height: 1.1; color: #fff;">ОДИН КЛІК ДО ВАШОЇ МРІЇ<br><span style="color: var(--color-primary);">ЗАМОВЛЯЙТЕ ЗАРАЗ</span></h2>
+                        <div style="margin-top: 20px; color: #fff; font-family: var(--font-display); font-size: 1.25rem;">
+                            МІСЦЕ ПРИЗНАЧЕННЯ: МРІЙЛИВА ПОДОРОЖ<br>
+                            ІМ'Я ПАСАЖИРА: ЩАСЛИВИЙ МАНДРІВНИК
                         </div>
                     </div>
                 </div>
 
                 <div class="lead-split__form-wrap">
-                    <form class="custom-form js-form" id="main-lead-form" aria-label="Форма замовлення туру">
+                    <form class="custom-form js-form" id="main-lead-form" aria-label="Форма замовлення туру" action="mailto:Limonturov@gmail.com" method="post" enctype="text/plain">
                         <div class="js-reveal">
-                            <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-white); margin-bottom: 8px;">Залишити заявку</h3>
-                            <p style="color: var(--color-text-light); margin-bottom: 40px; font-size: 1.125rem;">Розкажіть про свої побажання, і ми знайдемо ідеальний тур.</p>
+                            <h3 style="font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 24px;">Залишити заявку</h3>
                         </div>
 
                         <div class="cf-group js-reveal">
-                            <input type="text" id="lf-name" class="cf-input" required placeholder=" " aria-required="true">
-                            <label for="lf-name" class="cf-label">Ваше ім'я</label>
-                            <span class="cf-line"></span>
+                            <input type="text" id="lf-name" name="Name" class="cf-input" required placeholder=" ">
+                            <label for="lf-name" class="cf-label">Ім'я</label>
+                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
                         </div>
                         
                         <div class="cf-group js-reveal" style="transition-delay: 0.1s">
-                            <input type="tel" id="lf-phone" class="cf-input js-phone-mask" required placeholder=" " aria-required="true">
-                            <label for="lf-phone" class="cf-label">Номер телефону</label>
-                            <span class="cf-line"></span>
+                            <input type="tel" id="lf-phone" name="Phone" class="cf-input js-phone-mask" required placeholder=" ">
+                            <label for="lf-phone" class="cf-label">Телефон</label>
+                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
                         </div>
                         
                         <div class="cf-group js-reveal" style="transition-delay: 0.2s">
-                            <textarea id="lf-details" class="cf-input cf-textarea" rows="2" placeholder=" "></textarea>
-                            <label for="lf-details" class="cf-label">Додаткова інформація (країна, бюджет)</label>
-                            <span class="cf-line"></span>
-                        </div>
-                        
-                        <div class="cf-captcha js-reveal" style="transition-delay: 0.3s; background: rgba(255,255,255,0.05); padding: 16px; border-radius: 8px; margin-bottom: 32px; border: 1px dashed rgba(255,255,255,0.2);">
-                            <div style="display: flex; align-items: center; gap: 12px;">
-                                <div style="width:24px; height:24px; border: 2px solid #ccc; border-radius: 4px;"></div>
-                                <span style="font-size: 14px; color: #ccc;">Я не робот (reCAPTCHA)</span>
-                            </div>
+                            <textarea id="lf-details" name="Details" class="cf-input cf-textarea" rows="2" placeholder=" "></textarea>
+                            <label for="lf-details" class="cf-label">Додаткова інформація</label>
+                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
                         </div>
 
-                        <div class="js-reveal" style="transition-delay: 0.4s">
-                            <button type="submit" class="btn btn--solid-yellow btn--full" style="height: 64px; font-size: 1.125rem;">
-                                ВІДПРАВИТИ ЗАЯВКУ
+                        <div class="js-reveal" style="transition-delay: 0.3s; margin-top: 32px;">
+                            <button type="submit" class="btn btn--solid-yellow btn--full">
+                                ВІДПРАВИТИ
                             </button>
-                            <p style="font-size: 0.75rem; color: #666; text-align: center; margin-top: 16px;">
-                                Натискаючи кнопку, ви погоджуєтесь з політикою конфіденційності.
-                            </p>
                         </div>
                     </form>
                 </div>
@@ -584,114 +707,277 @@
             </div>
         </section>
 
-        <section class="section bg-light text-center">
+        <!-- БЛОГ -->
+        <section class="section" id="blog">
             <div class="container">
-                <h2 class="h2 mb-5 js-reveal">Наші нагороди</h2>
-                
-                <div class="awards-grid-full js-reveal">
-                    <img src="assets/diplomas/0001-2-min.jpg" alt="Диплом" loading="lazy">
-                    <img src="assets/diplomas/0001-min.jpg" alt="Диплом" loading="lazy">
-                    <img src="assets/diplomas/IMG_0001-min.jpg" alt="Диплом" loading="lazy">
-                    <img src="assets/diplomas/IMG_0002-min.jpg" alt="Диплом" loading="lazy">
-                    <img src="assets/diplomas/IMG_0003-min-1.jpg" alt="Диплом" loading="lazy">
-                    <img src="assets/diplomas/IMG_0004-min-1.jpg" alt="Диплом" loading="lazy">
-                    <img src="assets/diplomas/IMG_0005-min.jpg" alt="Диплом" loading="lazy">
-                    <img src="assets/diplomas/IMG_0006-min-1.jpg" alt="Диплом" loading="lazy">
-                    <img src="assets/diplomas/kyFdVBkwAeQ-min.jpg" alt="Диплом" loading="lazy">
+                <div class="section-header text-center js-reveal">
+                    <h2 class="h2">Статті</h2>
                 </div>
 
-                <div class="reviews-section mt-5" style="padding-top: 60px;">
-                    <h2 class="h2 mb-5 js-reveal">Відгуки про нашу роботу</h2>
+                <div class="blog-tz-grid js-reveal">
                     
-                    <div class="reviews-grid js-reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; text-align: left;">
-                        
-                        <div class="review-card" style="background: var(--color-white); padding: 32px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
-                            <div style="display:flex; align-items:center; gap:16px; margin-bottom: 16px;">
-                                <img src="assets/img/378.jpg" alt="Клієнт" style="width:48px; height:48px; border-radius:50%; object-fit:cover;">
-                                <div>
-                                    <h4 style="font-size:1rem; margin:0;">Олексій В.</h4>
-                                    <div style="color:#F4B400;">★★★★★</div>
-                                </div>
+                    <div class="blog-card blog-card--large">
+                        <div style="position: relative; height: 100%;">
+                            <img src="assets/hero/hero-main.webp" alt="Барселона" class="blog-card__img" loading="lazy" onerror="this.src='assets/img/107837.jpg'">
+                            <div class="blog-card__content">
+                                <h3 class="blog-card__title" style="font-size: 2.5rem; background: #fff; color: #000; display: inline-block; padding: 4px 12px; margin-bottom: 0; width: max-content;">БАРСЕЛОНА</h3>
+                                <h3 class="blog-card__title" style="font-size: 1.5rem; background: #444; color: #fff; display: inline-block; padding: 4px 12px; width: max-content; margin-top: -5px;">за 2 дні</h3>
+                                <p style="margin-top: auto; margin-bottom: 0; font-weight: 600;">Барселона. Маршрут на 2 дні</p>
                             </div>
-                            <p style="color: var(--color-text-muted); font-size:0.9375rem;">"Дякую дівчатам за підбір туру в Дубай. Все пройшло ідеально, готель відповідав усім нашим побажанням. Рекомендую!"</p>
                         </div>
-
-                        <div class="review-card" style="background: var(--color-white); padding: 32px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
-                            <div style="display:flex; align-items:center; gap:16px; margin-bottom: 16px;">
-                                <img src="assets/img/depositphotos_552437.jpg" alt="Клієнтка" style="width:48px; height:48px; border-radius:50%; object-fit:cover;">
-                                <div>
-                                    <h4 style="font-size:1rem; margin:0;">Олена та Марійка</h4>
-                                    <div style="color:#F4B400;">★★★★★</div>
-                                </div>
-                            </div>
-                            <p style="color: var(--color-text-muted); font-size:0.9375rem;">"Шукали тур для відпочинку з дитиною. Запропонували чудовий варіант в Болгарії. Дуже задоволені ціною та сервісом агенції."</p>
-                        </div>
-
-                        <div class="review-card" style="background: var(--color-white); padding: 32px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
-                            <div style="display:flex; align-items:center; gap:16px; margin-bottom: 16px;">
-                                <img src="assets/img/depositphotos_696881.jpg" alt="Клієнтка" style="width:48px; height:48px; border-radius:50%; object-fit:cover;">
-                                <div>
-                                    <h4 style="font-size:1rem; margin:0;">Катерина С.</h4>
-                                    <div style="color:#F4B400;">★★★★★</div>
-                                </div>
-                            </div>
-                            <p style="color: var(--color-text-muted); font-size:0.9375rem;">"Вперше летіла до Єгипту, дуже хвилювалась. Менеджери Лимон Турів були на зв'язку 24/7. Відпустка пройшла на ура!"</p>
-                        </div>
-
                     </div>
-                    
-                    <div class="google-reviews-placeholder mt-5 js-reveal" style="background: var(--color-white); border-radius: 20px; padding: 32px; box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; border: 1px solid #EAEAEA;">
-                        <div style="display: flex; align-items: center; gap: 24px; text-align: left;">
-                            <div style="background: #f8f9fa; width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                                <svg width="36" height="36" viewBox="0 0 24 24" fill="#EA4335"><path d="M21.35 11.1H12.18V13.83H18.69C18.36 17.64 15.19 19.27 12.19 19.27C8.36 19.27 5 16.25 5 12C5 7.9 8.2 4.73 12.2 4.73C15.29 4.73 17.1 6.7 17.1 6.7L19 4.72S16.12 1.98 12.18 1.98C6.63 1.98 1.34 6.42 1.34 12C1.34 17.7 6.82 22 12.18 22C17.9 22 22.18 17.83 22.18 12.18C22.18 11.73 22.1 11.1 22.1 11.1H21.35Z"/></svg>
-                            </div>
-                            <div>
-                                <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Відгуки про нас на Google Maps</h3>
-                                <div style="display: flex; align-items: center; gap: 8px;">
-                                    <span style="font-weight: 800; font-size: 1.25rem;">5.0</span>
-                                    <div style="color: #F4B400; font-size: 1.25rem;">★★★★★</div>
-                                </div>
-                            </div>
+
+                    <div class="blog-card">
+                        <div style="padding: 24px; padding-bottom: 0;">
+                            <span class="blog-card__date">16.01.2026</span>
+                            <h3 class="blog-card__title">Мадрид. Маршрут на 2 дні</h3>
+                            <p style="color: #666; font-size: 0.9rem; margin-bottom: 16px;">Мадрид. Маршрут на 2 дні</p>
+                            <a href="#" class="blog-card__btn" style="text-decoration: none; display: inline-block; margin-bottom: 24px;">ДОКЛАДНІШЕ</a>
                         </div>
-                        <a href="https://www.google.com/search?q=%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD+%D1%82%D1%83%D1%80%D0%BE%D0%B2" target="_blank" class="btn btn--outline-dark" style="border-radius: 50px;">Читати всі відгуки</a>
                     </div>
+
+                    <div class="blog-card">
+                        <div style="padding: 24px; padding-bottom: 0;">
+                            <span class="blog-card__date">16.01.2026</span>
+                            <h3 class="blog-card__title">Обираємо регіон для відпочинку в Туреччині</h3>
+                            <p style="color: #666; font-size: 0.9rem; margin-bottom: 16px;">ЯК ОБРАТИ РЕГІОН ДЛЯ ВІДПОЧИНКУ В ТУРЕЧЧИНІ</p>
+                            <a href="#" class="blog-card__btn" style="text-decoration: none; display: inline-block; margin-bottom: 24px;">ДОКЛАДНІШЕ</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div style="padding: 24px; padding-bottom: 0;">
+                            <span class="blog-card__date">16.01.2026</span>
+                            <h3 class="blog-card__title">Навіщо брати свідоцтво про народження</h3>
+                            <p style="color: #666; font-size: 0.9rem; margin-bottom: 16px;">НАВІЩО БРАТИ СВІДОЦТВО ПРО НАРОДЖЕННЯ ДИТИНИ?</p>
+                            <a href="#" class="blog-card__btn" style="text-decoration: none; display: inline-block; margin-bottom: 24px;">ДОКЛАДНІШЕ</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div style="padding: 24px; padding-bottom: 0;">
+                            <span class="blog-card__date">16.01.2026</span>
+                            <h3 class="blog-card__title">Оренда авто по всьому світу</h3>
+                            <p style="color: #666; font-size: 0.9rem; margin-bottom: 16px;">Оренда авто - по всьому світу</p>
+                            <a href="rent-car.html" class="blog-card__btn" style="text-decoration: none; display: inline-block; margin-bottom: 24px;">ДОКЛАДНІШЕ</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <section class="section telegram-promo">
+        <!-- ==========================================
+             НОВИЙ БЛОК НАГОРОД (13 ДИПЛОМІВ З АНІМАЦІЄЮ ТА ВАУ-ЕФЕКТОМ)
+             ========================================== -->
+        <section class="section bg-light text-center">
             <div class="container">
+                <div class="section-header js-reveal">
+                    <h2 class="h2 mb-2">Наші нагороди</h2>
+                    <p style="color: var(--color-text-muted);">Відзнаки від світових туроператорів за лідерство у продажах та бездоганний сервіс.</p>
+                </div>
+                
+                <div class="diplomas-wow-grid js-reveal">
+                    <!-- Вертикальні -->
+                    <div class="diploma-card"><img src="assets/diplomas/cert-1.webp" alt="Диплом 1" loading="lazy" onerror="this.src='assets/diplomas/0001-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-2.webp" alt="Диплом 2" loading="lazy" onerror="this.src='assets/diplomas/IMG_0001-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-3.webp" alt="Диплом 3" loading="lazy" onerror="this.src='assets/diplomas/IMG_0002-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-4.webp" alt="Диплом 4" loading="lazy" onerror="this.src='assets/diplomas/IMG_0003-min-1.jpg'"></div>
+                    
+                    <!-- ГОРИЗОНТАЛЬНИЙ (Розтягується на 2 колонки) -->
+                    <div class="diploma-card diploma-horizontal"><img src="assets/diplomas/cert-5.webp" alt="Диплом Горизонтальний" loading="lazy" onerror="this.src='assets/diplomas/0001-2-min.jpg'"></div>
+                    
+                    <!-- Вертикальні -->
+                    <div class="diploma-card"><img src="assets/diplomas/cert-6.webp" alt="Диплом 6" loading="lazy" onerror="this.src='assets/diplomas/IMG_0004-min-1.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-7.webp" alt="Диплом 7" loading="lazy" onerror="this.src='assets/diplomas/IMG_0005-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-8.webp" alt="Диплом 8" loading="lazy" onerror="this.src='assets/diplomas/IMG_0006-min-1.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-9.webp" alt="Диплом 9" loading="lazy" onerror="this.src='assets/diplomas/kyFdVBkwAeQ-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-10.webp" alt="Диплом 10" loading="lazy" onerror="this.src='assets/diplomas/0001-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-11.webp" alt="Диплом 11" loading="lazy" onerror="this.src='assets/diplomas/IMG_0001-min.jpg'"></div>
+                    <div class="diploma-card"><img src="assets/diplomas/cert-12.webp" alt="Диплом 12" loading="lazy" onerror="this.src='assets/diplomas/IMG_0002-min.jpg'"></div>
+                    
+                    <!-- ГОРИЗОНТАЛЬНИЙ (Розтягується на 2 колонки) -->
+                    <div class="diploma-card diploma-horizontal"><img src="assets/diplomas/cert-13.webp" alt="Диплом Горизонтальний 2" loading="lazy" onerror="this.src='assets/diplomas/0001-2-min.jpg'"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             НОВИЙ БЛОК: ВІДГУКИ ТА ФОРМА ЗАЛИШИТИ ВІДГУК
+             ========================================== -->
+        <section class="section text-center" id="reviews">
+            <div class="container">
+                <div class="section-header js-reveal">
+                    <h2 class="h2 mb-2">Відгуки</h2>
+                    <p style="color: var(--color-text-muted);">Що про нас кажуть мандрівники.</p>
+                </div>
+
+                <!-- Сітка з текстовими відгуками -->
+                <div class="reviews-container js-reveal text-left" style="text-align: left;">
+                    
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__avatar">С</div>
+                            <div>
+                                <h4 class="review-card__name">Світлана</h4>
+                                <div class="review-card__stars">★★★★★</div>
+                            </div>
+                        </div>
+                        <p class="review-card__text">"Ми звернулися вперше в агентство і не знали куди нам поїхати. Зайшли просто дізнатися, а вийшли вже з путівкою! Все пояснили, все пройшло як і обіцяли. Маршрут без запізнень. Дякую дівчатам, завжди були на зв'язку. Звернемось ще!"</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__avatar" style="background:#E3F2FD; color:#1976D2;">С</div>
+                            <div>
+                                <h4 class="review-card__name">Сергій</h4>
+                                <div class="review-card__stars">★★★★★</div>
+                            </div>
+                        </div>
+                        <p class="review-card__text">"Замовляв тут тур до Італії. Відпочинком задоволений, головне що не було жодного обману, все що мені обіцяли, так і було. Персонал ввічливий, запропонували декілька варіантів. Наступну відпустку планую теж з Лимон Турів. Рекомендую!"</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__avatar" style="background:#FCE4EC; color:#1976D2;">К</div>
+                            <div>
+                                <h4 class="review-card__name">Катерина</h4>
+                                <div class="review-card__stars">★★★★★</div>
+                            </div>
+                        </div>
+                        <p class="review-card__text">"Купили путівку в Єгипет. Відпочинок дуже сподобався. Затримок не було, літак вилетів вчасно. Гід був завжди на зв'язку. Через Лимон турів літали і наші друзі, теж все було на висоті. Рекомендую всім знайомим!"</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__avatar" style="background:#FFF3E0; color:#C2185B;">М</div>
+                            <div>
+                                <h4 class="review-card__name">Марина</h4>
+                                <div class="review-card__stars">★★★★★</div>
+                            </div>
+                        </div>
+                        <p class="review-card__text">"Дівчата з Лимон турів — найкращі!!! Фантастично привітні, професіонали своєї справи! Завжди швидко та якісно підберуть саме те, що треба кожному клієнту. Подорожі з вами — це завжди маса позитивних емоцій!"</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__avatar" style="background:#E8F5E9; color:#E64A19;">О</div>
+                            <div>
+                                <h4 class="review-card__name">Олег</h4>
+                                <div class="review-card__stars">★★★★★</div>
+                            </div>
+                        </div>
+                        <p class="review-card__text">"Відпустка вдалася. Нам підібрали і порадили розкішний готель, це була наша перша поїздка. Якщо у нас виникали питання, ми зв'язувались з менеджером — жодних проблем. Дякую за теплу атмосферу!"</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__avatar" style="background:#F3E5F5; color:#388E3C;">Н</div>
+                            <div>
+                                <h4 class="review-card__name">Наталя</h4>
+                                <div class="review-card__stars">★★★★★</div>
+                            </div>
+                        </div>
+                        <p class="review-card__text">"Втретє користуюся послугами Лимон турів. Немає жодного зауваження до організації нашого відпочинку. Відпочинок пройшов на УРА. Жодних затримок та накладок. Дівчата, дякую вам велике, що врахували всі наші побажання!"</p>
+                    </div>
+                </div>
+
+                <!-- Форма залишення відгуку -->
+                <div class="leave-review-box js-reveal text-left" style="text-align: left;">
+                    <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
+                        
+                        <div style="flex: 1 1 300px;">
+                            <h3 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: 16px; color: #fff;">Залиште свій відгук</h3>
+                            <p style="color: #CCC; margin-bottom: 24px;">Ваша думка робить нас кращими! Розкажіть іншим мандрівникам про свій досвід з «Лимон Турів».</p>
+                            
+                            <!-- Соціальні кнопки -->
+                            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                                <a href="https://www.google.com/search?q=%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD+%D1%82%D1%83%D1%80%D0%BE%D0%B2" target="_blank" style="display: inline-flex; align-items: center; background: #fff; color: #333; padding: 10px 20px; border-radius: 50px; font-weight: 700; text-decoration: none;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#EA4335" style="margin-right: 8px;"><path d="M21.35 11.1H12.18V13.83H18.69C18.36 17.64 15.19 19.27 12.19 19.27C8.36 19.27 5 16.25 5 12C5 7.9 8.2 4.73 12.2 4.73C15.29 4.73 17.1 6.7 17.1 6.7L19 4.72S16.12 1.98 12.18 1.98C6.63 1.98 1.34 6.42 1.34 12C1.34 17.7 6.82 22 12.18 22C17.9 22 22.18 17.83 22.18 12.18C22.18 11.73 22.1 11.1 22.1 11.1H21.35Z"/></svg>
+                                    Google Відгук
+                                </a>
+                                <a href="https://www.facebook.com/limon.turov/" target="_blank" style="display: inline-flex; align-items: center; background: #1877F2; color: #fff; padding: 10px 20px; border-radius: 50px; font-weight: 700; text-decoration: none;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+                                    Facebook Відгук
+                                </a>
+                            </div>
+                        </div>
+
+                        <div style="flex: 1 1 400px; background: rgba(255,255,255,0.05); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
+                            <form class="custom-form js-form" id="site-review-form" style="max-width: 100%;">
+                                
+                                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 24px;">
+                                    <span style="color: #fff; font-weight: 600;">Ваша оцінка:</span>
+                                    <div class="interactive-stars">
+                                        <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+                                        <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+                                        <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+                                        <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+                                        <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+                                    </div>
+                                </div>
+
+                                <div class="cf-group">
+                                    <input type="text" id="rv-name" class="cf-input" required placeholder=" " style="color: #fff !important; border-bottom-color: rgba(255,255,255,0.2) !important;">
+                                    <label for="rv-name" class="cf-label" style="color: #999 !important;">Ваше ім'я *</label>
+                                    <span class="cf-line" style="background: var(--color-primary) !important;"></span>
+                                </div>
+
+                                <div class="cf-group">
+                                    <textarea id="rv-text" class="cf-input cf-textarea" rows="3" required placeholder=" " style="color: #fff !important; border-bottom-color: rgba(255,255,255,0.2) !important;"></textarea>
+                                    <label for="rv-text" class="cf-label" style="color: #999 !important;">Текст відгуку *</label>
+                                    <span class="cf-line" style="background: var(--color-primary) !important;"></span>
+                                </div>
+                                
+                                <button type="submit" class="btn btn--solid-yellow btn--full" style="height: 48px; border-radius: 8px;">Опублікувати</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================
+             СУПЕР-СТИЛІЗАЦІЯ ТЕЛЕГРАМ БЛОКУ (СВІТЛИЙ ФОН + IPHONE 2026)
+             ========================================== -->
+        <section class="section telegram-promo telegram-promo-fullscreen">
+            <div class="container" style="height: 100%;">
                 <div class="tg-promo-box js-reveal">
                     
                     <div class="tg-promo-box__content">
-                        <span class="badge badge--dark mb-3">Спільнота</span>
-                        <h2 style="font-family: var(--font-display); font-size: 2.5rem; line-height: 1.2; margin-bottom: 24px;">
+                        <h2 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 24px; color: #1A1A1A;">
                             Бажаєте отримувати кращі добірки турів кожен день?
                         </h2>
-                        <p style="font-size: 1.125rem; color: #4A4A4A; line-height: 1.6; margin-bottom: 32px;">
-                            Наші тревел-експерти щодня збирають найгарячіші пропозиції в Telegram каналі. Ніякого спаму — тільки найцікавіше: знижки, огляди готелів та корисні поради для мандрівників ✈️ 🌴 ⭐️.
+                        <p style="font-size: 1.25rem; color: #4A4A4A; line-height: 1.6; margin-bottom: 40px;">
+                            Наші тревел-експерти щодня збирають пропозиції в Telegram каналі. Нічого спаму — тільки найцікавіше! ✈️ 🌴 ⭐
                         </p>
                         
-                        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="btn btn--solid-blue" aria-label="Підписатись на Telegram канал">
+                        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="btn" style="background-color: #2AABEE; color: #fff; padding: 0 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(42, 171, 238, 0.3);">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                             Читати в Телеграм
                         </a>
                     </div>
                     
-                    <div class="tg-promo-box__phone">
+                    <!-- РЕАЛІСТИЧНИЙ IPHONE -->
+                    <div class="tg-promo-box__phone" style="display: flex; justify-content: center; align-items: center;">
                         <div class="iphone-frame" aria-hidden="true">
+                            <div class="dynamic-island"></div>
+                            
                             <div class="iphone-screen">
                                 <div class="tg-message mb-3">
                                     <strong>Лимон Турів 🍋</strong><br>
                                     Гарантований розрив сердечка 💔<br><br>
-                                    🌴 Єгипет, 08.09, 7 ночей<br>
-                                    Casa Cook 5* (BB)<br>
+                                    ✈️ Єгипет, 08.09, 7 ночей<br>
+                                    🌴 Casa Cook 5* (BB)<br>
                                     👉 34 632 грн за дабл
                                 </div>
                                 <div class="tg-message">
-                                    🇬🇷 Греція, 22.09, 7 ночей<br>
-                                    The Syntopia Hotel 4* (AI)<br>
-                                    👉 49 364 грн за дабл<br><br>
+                                    ✈️ Греція, 22.09, 7 ночей<br>
+                                    🌴 The Syntopia Hotel 4* (AI)<br>
+                                    👉 49 364 грн за дабл
+                                </div>
+                                <div class="tg-message">
                                     🔥 Розбирають дуже швидко! Пишіть менеджеру для бронювання.
                                 </div>
                             </div>
@@ -702,6 +988,7 @@
             </div>
         </section>
 
+        <!-- FAQ ЗБЕРЕЖЕНО НА 100% -->
         <section class="section faq-section bg-light" id="faq" aria-labelledby="faq-title">
             <div class="container max-w-800">
                 <div class="section-header text-center js-reveal">
@@ -710,7 +997,6 @@
                 </div>
                 
                 <div class="accordion js-accordion js-reveal mt-5">
-                    
                     <div class="accordion__item">
                         <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-1" id="faq-header-1">
                             <span class="accordion__title">✈️ Затримка або скасування рейсу та права пасажирів</span>
@@ -720,12 +1006,12 @@
                             <div class="accordion__inner">
                                 <p style="color: var(--color-text-muted); line-height: 1.6;">Регулярні та чартерні рейси в Україні регулюються Повітряним кодексом. Що належить пасажиру?</p>
                                 <h5 style="color: var(--color-dark); margin-top: 12px; margin-bottom: 8px;">Регулярні рейси:</h5>
-                                <ul class="faq-inner-list" style="color: var(--color-text-muted);">
-                                    <li><strong>Затримка на 2 години:</strong> прохолодні напої.</li>
-                                    <li><strong>Затримка на 4 години:</strong> перекус (бутерброд/сендвіч) та напої.</li>
-                                    <li><strong>Затримка на 6 годин:</strong> гаряче харчування.</li>
-                                    <li><strong>Затримка на ніч:</strong> готель, харчування та трансфер за рахунок авіакомпанії.</li>
-                                    <li><strong>Понад 5 годин:</strong> право на повернення повної вартості квитка або заміна маршруту. У разі відміни рейсу без попередження також передбачена фінансова компенсація (від 250 до 600 євро залежно від дальності).</li>
+                                <ul class="faq-inner-list" style="color: var(--color-text-muted); padding-left: 20px;">
+                                    <li style="margin-bottom: 8px;"><strong>Затримка на 2 години:</strong> прохолодні напої.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Затримка на 4 години:</strong> перекус (бутерброд/сендвіч) та напої.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Затримка на 6 годин:</strong> гаряче харчування.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Затримка на ніч:</strong> готель, харчування та трансфер за рахунок авіакомпанії.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Понад 5 годин:</strong> право на повернення повної вартості квитка або заміна маршруту. У разі відміни рейсу без попередження також передбачена фінансова компенсація (від 250 до 600 євро залежно від дальності).</li>
                                 </ul>
                                 <h5 style="color: var(--color-dark); margin-top: 16px; margin-bottom: 8px;">Чартерні рейси:</h5>
                                 <p style="color: var(--color-text-muted); line-height: 1.6;">Квитки на чартерні рейси передбачають обмежені права. Турист не може перенести або анулювати квиток. Замовник чартеру має право змінити час і дату вильоту такого рейсу.</p>
@@ -755,9 +1041,9 @@
                             <div class="accordion__inner">
                                 <p style="color: var(--color-text-muted); line-height: 1.6;">Тур можуть скасувати через неможливість авіаперевезення або скасування броні готелю. У такому разі туристу пропонують:</p>
                                 <ol style="color: var(--color-text-muted); line-height: 1.6; padding-left: 20px; margin-top: 12px;">
-                                    <li>Перенести тур з вихідними параметрами на іншу дату або інший аеропорт вильоту.</li>
-                                    <li>Перебронювати путівку на тур з новими параметрами (інша країна, готель).</li>
-                                    <li>Запросити можливість анулювати путівку без штрафу та повернути гроші.</li>
+                                    <li style="margin-bottom: 8px;">Перенести тур з вихідними параметрами на іншу дату або інший аеропорт вильоту.</li>
+                                    <li style="margin-bottom: 8px;">Перебронювати путівку на тур з новими параметрами (інша країна, готель).</li>
+                                    <li style="margin-bottom: 8px;">Запросити можливість анулювати путівку без штрафу та повернути гроші.</li>
                                 </ol>
                                 <p style="color: var(--color-text-muted); line-height: 1.6; margin-top: 12px;">Всі деталі узгоджуються індивідуально у вашому турагентстві.</p>
                             </div>
@@ -785,28 +1071,8 @@
                         <div class="accordion__content" id="faq-content-5" role="region" aria-labelledby="faq-header-5">
                             <div class="accordion__inner">
                                 <p style="color: var(--color-text-muted); line-height: 1.6;">Громадяни України з біометричним паспортом можуть подорожувати без візи до понад 190 країн світу, включаючи країни Шенгенської зони. Ось основний перелік країн Європи та популярних курортів:</p>
-                                <ul class="country-list">
-                                    <li>Австрія</li>
-                                    <li>Албанія</li>
-                                    <li>Бельгія</li>
-                                    <li>Болгарія</li>
-                                    <li>Греція</li>
-                                    <li>Грузія</li>
-                                    <li>Домініканська Республіка</li>
-                                    <li>Єгипет (по прибуттю)</li>
-                                    <li>Іспания</li>
-                                    <li>Італія</li>
-                                    <li>Кіпр</li>
-                                    <li>Мальдіви</li>
-                                    <li>Нідерланди</li>
-                                    <li>Німеччина</li>
-                                    <li>ОАЕ</li>
-                                    <li>Польща</li>
-                                    <li>Португалія</li>
-                                    <li>Туреччина</li>
-                                    <li>Франція</li>
-                                    <li>Хорватія</li>
-                                    <li>Чорногорія</li>
+                                <ul style="column-count: 2; column-gap: 20px; color: var(--color-text-muted); padding-left: 20px; margin-top: 12px; font-size: 0.95rem;">
+                                    <li>Австрія</li><li>Албанія</li><li>Бельгія</li><li>Болгарія</li><li>Греція</li><li>Грузія</li><li>Домініканська Республіка</li><li>Єгипет (по прибуттю)</li><li>Іспания</li><li>Італія</li><li>Кіпр</li><li>Мальдіви</li><li>Нідерланди</li><li>Німеччина</li><li>ОАЕ</li><li>Польща</li><li>Португалія</li><li>Туреччина</li><li>Франція</li><li>Хорватія</li><li>Чорногорія</li>
                                 </ul>
                                 <p style="color: var(--color-text-muted); line-height: 1.6; font-size: 0.85rem; margin-top: 12px;">*Детальні умови в'їзду можуть змінюватись, уточнюйте інформацію у менеджера перед поїздкою.</p>
                             </div>
@@ -821,12 +1087,12 @@
                         <div class="accordion__content" id="faq-content-6" role="region" aria-labelledby="faq-header-6">
                             <div class="accordion__inner">
                                 <p style="color: var(--color-text-muted); line-height: 1.6;">Деякі країни суворо забороняють ввезення дронів. Короткий гайд:</p>
-                                <ul class="faq-inner-list" style="color: var(--color-text-muted);">
-                                    <li><strong>Домінікана, Греція, Хорватія, Чорногорія, Болгарія:</strong> Можна.</li>
-                                    <li><strong>ОАЕ:</strong> Можна, але потрібна реєстрація. Літати лише у дозволених зонах (додаток UAE Drone Fly Zone).</li>
-                                    <li><strong>Єгипет, Туреччина, Ватикан:</strong> КАТЕГОРИЧНО НЕ МОЖНА.</li>
-                                    <li><strong>Таїланд:</strong> Можна, але необхідно зареєструвати у найближчій поліцейській дільниці після приїзду.</li>
-                                    <li><strong>Іспанія:</strong> Можна, але потрібна ліцензія AESA та страховка.</li>
+                                <ul class="faq-inner-list" style="color: var(--color-text-muted); padding-left: 20px;">
+                                    <li style="margin-bottom: 8px;"><strong>Домінікана, Греція, Хорватія, Чорногорія, Болгарія:</strong> Можна.</li>
+                                    <li style="margin-bottom: 8px;"><strong>ОАЕ:</strong> Можна, але потрібна реєстрація. Літати лише у дозволених зонах.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Єгипет, Туреччина, Ватикан:</strong> КАТЕГОРИЧНО НЕ МОЖНА.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Таїланд:</strong> Можна, але необхідно зареєструвати у поліції.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Іспанія:</strong> Можна, але потрібна ліцензія та страховка.</li>
                                 </ul>
                             </div>
                         </div>
@@ -840,7 +1106,7 @@
                         <div class="accordion__content" id="faq-content-7" role="region" aria-labelledby="faq-header-7">
                             <div class="accordion__inner">
                                 <p style="color: var(--color-text-muted); line-height: 1.6;">Туроператори за півроку до початку сезону відкривають «Раннє бронювання» зі знижками <strong>від 20% до 50%</strong> на проживання в готелі.</p>
-                                <p style="color: var(--color-text-muted); line-height: 1.6; margin-top: 12px;"><strong>Переваги:</strong><br>1. Найкращі готелі ще не «в стопі» (є вільні місця).<br>2. Економія становить у середньому 300-500 доларів на турі.<br>3. Оплата частинами: 25% відразу, а залишок ближче до дати вильоту.</p>
+                                <p style="color: var(--color-text-muted); line-height: 1.6; margin-top: 12px;"><strong>Переваги:</strong><br>1. Найкращі готелі ще не «в стопі».<br>2. Економія становить у середньому 300-500 доларів на турі.<br>3. Оплата частинами.</p>
                             </div>
                         </div>
                     </div>
@@ -865,10 +1131,10 @@
                         <div class="accordion__content" id="faq-content-9" role="region" aria-labelledby="faq-header-9">
                             <div class="accordion__inner">
                                 <p style="color: var(--color-text-muted); line-height: 1.6;">Ваучер — це документ, який підтверджує вашу бронь у готелі, трансфер та обраний тип харчування. Він видається у трьох екземплярах:</p>
-                                <ul class="faq-inner-list" style="color: var(--color-text-muted);">
-                                    <li>Один екземпляр ви віддаєте гіду в аеропорту (він відповідає за ваш трансфер до готелю).</li>
-                                    <li>Другий екземпляр ви віддаєте на рецепції готелю при заселенні.</li>
-                                    <li>Третій екземпляр (корінець) залишається у вас як підтвердження вашого статусу туриста протягом усієї поїздки.</li>
+                                <ul class="faq-inner-list" style="color: var(--color-text-muted); padding-left: 20px;">
+                                    <li style="margin-bottom: 8px;">Один екземпляр ви віддаєте гіду в аеропорту (він відповідає за ваш трансфер).</li>
+                                    <li style="margin-bottom: 8px;">Другий екземпляр ви віддаєте на рецепції готелю при заселенні.</li>
+                                    <li style="margin-bottom: 8px;">Третій екземпляр (корінець) залишається у вас.</li>
                                 </ul>
                             </div>
                         </div>
@@ -881,7 +1147,7 @@
                         </button>
                         <div class="accordion__content" id="faq-content-10" role="region" aria-labelledby="faq-header-10">
                             <div class="accordion__inner">
-                                <p style="color: var(--color-text-muted); line-height: 1.6;">Турагенти завжди перевіряють актуальність польотних даних і повідомляють вас про зміни. Проте ви можете самостійно відстежувати час вильоту на <strong>онлайн-табло сайту аеропорту</strong> або на сайті авіакомпанії за номером свого рейсу. Робити це краще менш ніж за добу до вильоту.</p>
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Турагенти завжди перевіряють актуальність польотних даних і повідомляють вас про зміни. Проте ви можете самостійно відстежувати час вильоту на <strong>онлайн-табло сайту аеропорту</strong> або на сайті авіакомпанії за номером свого рейсу.</p>
                             </div>
                         </div>
                     </div>
@@ -893,7 +1159,7 @@
                         </button>
                         <div class="accordion__content" id="faq-content-11" role="region" aria-labelledby="faq-header-11">
                             <div class="accordion__inner">
-                                <p style="color: var(--color-text-muted); line-height: 1.6;">Існує міф, що товари в Duty Free завжди дешевші. Дійсно, там немає податку на імпорт, але в їхню вартість закладена колосальна ціна оренди приміщень в аеропорту. Тому наш лайфхак: перед поїздкою порівняйте ціни з міськими торговими центрами. Купуйте з розумом і колекціонуйте емоції, а не речі!</p>
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Існує міф, що товари в Duty Free завжди дешевші. Дійсно, там немає податку на імпорт, але в їхню вартість закладена колосальна ціна оренди приміщень в аеропорту. Тому наш лайфхак: перед поїздкою порівняйте ціни з міськими торговими центрами.</p>
                             </div>
                         </div>
                     </div>
@@ -931,10 +1197,10 @@
                         <div class="accordion__content" id="faq-content-14" role="region" aria-labelledby="faq-header-14">
                             <div class="accordion__inner">
                                 <p style="color: var(--color-text-muted); line-height: 1.6;">Трансфер — це транспорт, який доставляє туристів з аеропорту до готелю та назад. Він буває:</p>
-                                <ul class="faq-inner-list" style="color: var(--color-text-muted);">
-                                    <li><strong>Груповий:</strong> зазвичай входить у вартість пакетного туру (великий автобус).</li>
-                                    <li><strong>Індивідуальний:</strong> за доплату (ви нікого не чекаєте і їдете прямо в готель).</li>
-                                    <li><strong>VIP:</strong> можливість обрати марку автомобіля преміум-класу.</li>
+                                <ul class="faq-inner-list" style="color: var(--color-text-muted); padding-left: 20px;">
+                                    <li style="margin-bottom: 8px;"><strong>Груповий:</strong> зазвичай входить у вартість пакетного туру (великий автобус).</li>
+                                    <li style="margin-bottom: 8px;"><strong>Індивідуальний:</strong> за доплату (ви нікого не чекаєте і їдете прямо в готель).</li>
+                                    <li style="margin-bottom: 8px;"><strong>VIP:</strong> можливість обрати марку автомобіля преміум-класу.</li>
                                 </ul>
                             </div>
                         </div>
@@ -955,14 +1221,42 @@
                 </div>
             </div>
         </section>
+
+        <!-- ПАРТНЕРИ (16 ВКАЗАНИХ, КОЛЬОРОВІ) -->
+        <section class="section bg-light" style="padding-bottom: 80px;">
+            <div class="container text-center">
+                <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin-bottom: 8px;" class="js-reveal">Наші партнери</h3>
+                
+                <div class="partners-colored-grid js-reveal">
+                    <img src="assets/about/TO_2-min.png" alt="Join UP" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/logo-en-black-and-coral-240-1.png" alt="TravelOn" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/logo-759-2-min.png" alt="Alf" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/TO_4-min.png" alt="TPG" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/E.Line-Tour-лого-траспарент-1.png" alt="Eline tour" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/adriatic_travel-min.png" alt="Adriatic travel" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/аккорд-тур1-min.png" alt="Accord tour" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="assets/about/TO_1-min.png" alt="Coral travel" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://franchising.alliance.ua/_assets/media/8e7c42581a76cb3ac901498c2da6e45c.png" alt="Alliance" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://www.i-travel.com.ua/wp-content/uploads/2020/02/Itravel-New-Logo.png" alt="Itravel" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://www.trendwaytravel.com/Assets/img/logo.png" alt="Trendway" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://corp.unit.travel/static/photos/touroperatorssellers/orig/89/89/21381043006304c9c11a830.png" alt="Unittravel" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://s01.cdn-longitours.com/get/85/ce/03/301dedc7263fe12485ed81e0c22a33b38cc239b9d5c37adcd3732502b9/longitours-logo-l.png" alt="Longitours" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://toco-tour.com.ua/_nuxt/logo.DEUcCnyY.png" alt="Toco tour" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://kompastour.com/img/logo.svg" alt="Kompas" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://eurotrips.ua/wp-content/themes/eurotrips/assets/img/logo.svg" alt="Eurotrips" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                </div>
+            </div>
+        </section>
+
     </main>
 
+    <!-- FOOTER -->
     <footer class="footer js-reveal" itemscope itemtype="https://schema.org/TravelAgency">
         <div class="container">
             <div class="footer__grid">
                 
                 <div class="footer__col footer__col--brand">
-                    <img src="assets/img/logo.png" alt="Лимон Турів" class="footer__logo" itemprop="image">
+                    <img src="assets/hero/logo1.png" alt="Лимон Турів" class="footer__logo" itemprop="image" onerror="this.src='assets/img/logo.png'">
                     <p class="footer__desc mt-4">
                         <span itemprop="name" style="display:none;">Лимон Турів</span>
                         <span itemprop="description">Ми створюємо ідеальні подорожі, враховуючи всі ваші побажання. Ваша відпустка буде огорнута турботою 24/7.</span>
@@ -1029,16 +1323,21 @@
         </div>
     </footer>
 
+    <!-- ПЛАВАЮЧІ ВІДЖЕТИ -->
     <div class="floating-widget" role="complementary" aria-label="Віджети зв'язку">
+        <!-- ТЕЛЕГРАМ -->
         <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Написати в Telegram">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
         </a>
+        
+        <!-- BINOTEL ЗВОРОТНІЙ ДЗВІНОК -->
         <button class="fw-btn fw-btn--call js-binotel-trigger" aria-label="Замовити зворотній дзвінок">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-dark)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span class="fw-btn__tooltip">Замовити дзвінок</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="fw-btn__tooltip">Замовити дзвінок (Binotel)</span>
         </button>
     </div>
 
+    <!-- МОДАЛЬНЕ ВІКНО -->
     <div class="modal-backdrop js-modal" id="modal-tour" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-dialog">
             <button class="modal-close js-modal-close" aria-label="Закрити вікно">
@@ -1048,24 +1347,24 @@
             <div class="modal-content">
                 <h3 class="modal-title" id="modal-title">Підібрати тур</h3>
                 
-                <form class="custom-form js-form" id="modal-lead-form" style="max-width: 100%;">
+                <form class="custom-form js-form" id="modal-lead-form" style="max-width: 100%;" action="mailto:Limonturov@gmail.com" method="post" enctype="text/plain">
                     <div class="form-row">
                         <div class="cf-group col-6">
-                            <input type="text" class="cf-input" id="modal-destination" required placeholder=" ">
+                            <input type="text" class="cf-input" id="modal-destination" name="Destination" required placeholder=" ">
                             <label for="modal-destination" class="cf-label">Куди (Країна, курорт)?</label>
-                            <span class="cf-line"></span>
+                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
                         </div>
                         <div class="col-6 flex-align-center counter-group">
-                            <label class="mr-2" style="color: var(--color-text-light);">Дорослі</label>
+                            <label class="mr-2" style="color: #666;">Дорослі</label>
                             <div class="ui-counter">
                                 <button type="button" class="js-count-minus" aria-label="Зменшити">-</button>
-                                <input type="number" value="2" min="1" max="10" readonly aria-label="Кількість дорослих">
+                                <input type="number" name="Adults" value="2" min="1" max="10" readonly aria-label="Кількість дорослих">
                                 <button type="button" class="js-count-plus" aria-label="Збільшити">+</button>
                             </div>
-                            <label class="mx-2" style="color: var(--color-text-light);">та діти</label>
+                            <label class="mx-2" style="color: #666;">та діти</label>
                             <div class="ui-counter">
                                 <button type="button" class="js-count-minus" aria-label="Зменшити">-</button>
-                                <input type="number" value="0" min="0" max="5" readonly aria-label="Кількість дітей">
+                                <input type="number" name="Children" value="0" min="0" max="5" readonly aria-label="Кількість дітей">
                                 <button type="button" class="js-count-plus" aria-label="Збільшити">+</button>
                             </div>
                         </div>
@@ -1073,14 +1372,14 @@
 
                     <div class="form-row mt-4">
                         <div class="cf-group col-6" style="position: relative;">
-                            <input type="text" class="cf-input js-date-mask" id="modal-date" placeholder=" " required>
+                            <input type="text" class="cf-input js-date-mask" id="modal-date" name="Date" placeholder=" " required>
                             <label for="modal-date" class="cf-label">Дата вильоту (дд.мм.рррр)</label>
-                            <span class="cf-line"></span>
+                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
                             <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                         </div>
                         <div class="col-6 flex-align-center">
                             <label class="ui-checkbox">
-                                <input type="checkbox" name="flex_dates" checked>
+                                <input type="checkbox" name="flex_dates" checked value="Yes">
                                 <span class="checkmark"></span>
                                 Можливі інші дати (±3 дні)
                             </label>
@@ -1088,38 +1387,34 @@
                     </div>
 
                     <div class="cf-group mt-4">
-                        <input type="text" class="cf-input" id="modal-duration" placeholder=" " required>
+                        <input type="text" class="cf-input" id="modal-duration" name="Duration" placeholder=" " required>
                         <label for="modal-duration" class="cf-label">Тривалість (напр., 7-10 ночей)</label>
-                        <span class="cf-line"></span>
+                        <span class="cf-line" style="background-color: var(--color-dark);"></span>
                     </div>
 
                     <div class="form-row mt-4">
                         <div class="cf-group col-6">
-                            <input type="text" class="cf-input" id="modal-name" required placeholder=" ">
+                            <input type="text" class="cf-input" id="modal-name" name="Name" required placeholder=" ">
                             <label for="modal-name" class="cf-label">Ваше ім'я *</label>
-                            <span class="cf-line"></span>
+                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
                         </div>
                         <div class="cf-group col-6">
-                            <input type="tel" class="cf-input js-phone-mask" id="modal-phone" required placeholder=" ">
+                            <input type="tel" class="cf-input js-phone-mask" id="modal-phone" name="Phone" required placeholder=" ">
                             <label for="modal-phone" class="cf-label">Телефон *</label>
-                            <span class="cf-line"></span>
+                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
                         </div>
                     </div>
 
                     <div class="cf-group mt-4">
-                        <input type="email" class="cf-input" id="modal-email" placeholder=" ">
+                        <input type="email" class="cf-input" id="modal-email" name="Email" placeholder=" ">
                         <label for="modal-email" class="cf-label">E-mail (необов'язково)</label>
-                        <span class="cf-line"></span>
+                        <span class="cf-line" style="background-color: var(--color-dark);"></span>
                     </div>
 
                     <div class="cf-group mt-4">
-                        <textarea class="cf-input cf-textarea" id="modal-details" rows="2" placeholder=" "></textarea>
+                        <textarea class="cf-input cf-textarea" id="modal-details" name="Details" rows="2" placeholder=" "></textarea>
                         <label for="modal-details" class="cf-label">Побажання (категорія готелю, харчування, бюджет...)</label>
-                        <span class="cf-line"></span>
-                    </div>
-
-                    <div class="cf-captcha mt-4 text-center">
-                        <p style="font-size: 12px; color: #666;">Форма захищена reCAPTCHA</p>
+                        <span class="cf-line" style="background-color: var(--color-dark);"></span>
                     </div>
 
                     <div class="text-center mt-4">
@@ -1130,30 +1425,23 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        /* ==========================================
-           ПЕРЕМИКАЧ МОВ (STATIC HTML)
-           ========================================== */
+        /* Перемикач мов */
         document.addEventListener('DOMContentLoaded', () => {
             const langSwitchers = document.querySelectorAll('.lang-switcher');
-            
             langSwitchers.forEach(switcher => {
                 const btns = switcher.querySelectorAll('.lang-btn');
-                
                 btns.forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.preventDefault();
                         if (this.classList.contains('is-active')) return;
-
                         const selectedLang = this.textContent.trim().toLowerCase();
                         let currentPath = window.location.pathname;
                         let currentFile = currentPath.split('/').pop() || 'index.html'; 
-                        
                         let newUrl = '';
-
                         if (selectedLang === 'ru') {
                             if (!currentFile.includes('-ru')) {
                                 newUrl = currentFile.replace('.html', '-ru.html');
@@ -1164,31 +1452,23 @@
                                 newUrl = currentFile.replace('-ru.html', '.html');
                             }
                         }
-
-                        if (newUrl) {
-                            window.location.href = newUrl;
-                        }
+                        if (newUrl) window.location.href = newUrl;
                     });
                 });
             });
         });
-    </script>
-    <!-- Бронебійний скрипт для лоадера -->
-<script>
-    function hideGlobalLoader() {
-        const loader = document.getElementById('global-loader');
-        if (loader && loader.style.display !== 'none') {
-            loader.style.opacity = '0';
-            loader.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => { loader.style.display = 'none'; }, 500);
+
+        /* Примусове приховання лоадера */
+        function hideGlobalLoader() {
+            const loader = document.getElementById('global-loader');
+            if (loader && loader.style.display !== 'none') {
+                loader.style.opacity = '0';
+                loader.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => { loader.style.display = 'none'; }, 500);
+            }
         }
-    }
-
-    // Варіант 1: Ховаємо, коли сторінка повністю завантажилась
-    window.addEventListener('load', hideGlobalLoader);
-
-    // Варіант 2: Запобіжник (ховаємо примусово через 3.5 секунди, якщо щось зламалося)
-    setTimeout(hideGlobalLoader, 3500);
-</script>
+        window.addEventListener('load', hideGlobalLoader);
+        setTimeout(hideGlobalLoader, 3500);
+    </script>
 </body>
 </html>
