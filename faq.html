@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Контакти | Лимон Турів</title>
-    <meta name="description" content="Зв'яжіться з нами. Турагентство Лимон Турів у Павлограді та Ірпені. Підбір турів, консультації, підтримка 24/7.">
+    <title>Поширені питання (FAQ) | Лимон Турів</title>
+    <meta name="description" content="Відповіді на найпоширеніші запитання про бронювання турів, документи, оплату та послуги турагенції Лимон Турів.">
     
     <link rel="icon" type="image/x-icon" href="assets/about/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/about/favicon.ico">
@@ -15,6 +15,7 @@
     
     <link rel="stylesheet" href="assets/css/style.css">
     
+    <!-- ВБУДОВАНІ СТИЛІ (УСІ ФІКСИ ТА ВАУ-ЕФЕКТИ) -->
     <style>
         :root {
             --color-primary: #FFEC00 !important;
@@ -33,16 +34,19 @@
 
         .hero-screen__title { font-family: var(--font-primary) !important; font-size: clamp(2.5rem, 5vw, 4.5rem) !important; font-weight: 800 !important; letter-spacing: -0.5px !important; text-transform: none !important; color: #fff; text-shadow: 0 10px 30px rgba(0,0,0,0.6); }
         .hero-screen--inner { min-height: 40vh; padding-bottom: 20px; }
-        
-        /* Блок контактів */
-        .contacts-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: start; }
-        .contact-info-card { background: var(--color-white); padding: 40px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #EAEAEA; }
-        .contact-info-card h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 32px; color: var(--color-dark); }
-        .contact-row { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
-        .contact-row svg { stroke: var(--color-primary); flex-shrink: 0; margin-top: 4px; }
-        .contact-row a, .contact-row address { font-size: 1.125rem; font-weight: 600; color: var(--color-dark); font-style: normal; line-height: 1.5; transition: var(--transition-fast); }
-        .contact-row a:hover { color: var(--color-primary-hover); }
-        .map-container { width: 100%; height: 600px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+
+        /* Стилі FAQ 아кордеона */
+        .faq-section { padding: 80px 0; background-color: var(--color-light-bg); }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: var(--color-white); border: 1px solid #EAEAEA; border-radius: 16px; margin-bottom: 16px; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .faq-item[open] { border-color: var(--color-primary); box-shadow: 0 10px 30px rgba(255,236,0,0.15); }
+        .faq-summary { padding: 24px; font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--color-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; outline: none; transition: color 0.3s; }
+        .faq-summary:hover { color: #C2B300; }
+        .faq-summary::-webkit-details-marker { display: none; }
+        .faq-summary::after { content: '+'; font-size: 1.8rem; font-weight: 400; color: var(--color-primary); transition: transform 0.3s ease, color 0.3s ease; line-height: 1; }
+        .faq-item[open] .faq-summary::after { content: '−'; transform: rotate(180deg); color: var(--color-dark); }
+        .faq-content { padding: 0 24px 24px; color: var(--color-text-muted); line-height: 1.7; font-size: 1.125rem; animation: fade-in 0.4s ease-in-out; }
+        @keyframes fade-in { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
         
         /* Lead Form (60/40) */
         .lead-split { display: flex; flex-direction: row; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg); }
@@ -50,9 +54,9 @@
         .lead-split__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
         .lead-split__visual-content { position: relative; z-index: 1; padding: 60px; height: 100%; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); }
         .lead-split__form-wrap { flex: 0 0 40%; background-color: #F7F9FC !important; padding: 60px 40px !important; display: flex; align-items: center; justify-content: center;}
-        #main-lead-form .cf-label { color: #666 !important; }
-        #main-lead-form .cf-input { color: #1A1A1A !important; border-bottom-color: #CCC !important; }
-        #main-lead-form h3 { color: #1A1A1A !important; }
+        #faq-lead-form .cf-label { color: #666 !important; }
+        #faq-lead-form .cf-input { color: #1A1A1A !important; border-bottom-color: #CCC !important; }
+        #faq-lead-form h3 { color: #1A1A1A !important; }
         .cf-input:focus ~ .cf-label, .cf-input:not(:placeholder-shown) ~ .cf-label { top: -12px; font-size: 0.75rem; color: var(--color-dark) !important; text-transform: uppercase; font-weight: 700; }
         .cf-line { background-color: var(--color-dark) !important; }
 
@@ -68,8 +72,6 @@
         .modal-close:hover { background-color: var(--color-primary) !important; }
 
         @media (max-width: 1024px) {
-            .contacts-grid { grid-template-columns: 1fr; } 
-            .map-container { height: 400px; }
             .lead-split { flex-direction: column; }
             .lead-split__visual, .lead-split__form-wrap { flex: 1 1 100%; width: 100%; }
             .lead-split__visual { height: 400px; }
@@ -103,7 +105,6 @@
                     <line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
                 </svg>
             </div>
-            <span class="loader__text mt-2">Завантаження...</span>
         </div>
     </div>
 
@@ -144,8 +145,8 @@
                         </ul>
                     </li>
                     <li class="nav__item"><a href="about.html" class="nav__link">Про компанію</a></li>
-                    <li class="nav__item"><a href="faq.html" class="nav__link">Поширені питання</a></li>
-                    <li class="nav__item"><a href="contacts.html" class="nav__link" style="color: var(--color-primary) !important; font-weight: 800;">Контакти</a></li>
+                    <li class="nav__item"><a href="faq.html" class="nav__link" style="color: var(--color-primary) !important; font-weight: 800;">Поширені питання</a></li>
+                    <li class="nav__item"><a href="contacts.html" class="nav__link">Контакти</a></li>
                 </ul>
             </nav>
             <div class="header__actions">
@@ -168,70 +169,65 @@
         
         <section class="hero-screen hero-screen--inner">
             <div class="hero-screen__bg">
-                <!-- ОНОВЛЕНЕ ФОТО ДЛЯ КОНТАКТІВ -->
-                <img src="assets/hero/hero-main.webp" alt="Зв'язатися з нами" class="hero-screen__img" style="object-position: center;" fetchpriority="high" onerror="this.src='assets/img/50571182.jpg'">
+                <img src="assets/hero/hero-main.webp" alt="Поширені питання" class="hero-screen__img" style="object-position: center;" fetchpriority="high" onerror="this.src='assets/img/50571182.jpg'">
                 <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);"></div>
             </div>
 
             <div class="container hero-screen__container">
                 <div class="hero-screen__content text-center" style="margin-bottom: 0;">
                     <h1 class="hero-screen__title js-split-text">
-                        <span class="text-gradient">КОНТАКТИ</span>
+                        ПОШИРЕНІ <span class="text-gradient">ПИТАННЯ</span>
                     </h1>
                 </div>
             </div>
         </section>
 
-        <!-- ІНФОРМАЦІЯ ПРО ОФІСИ ТА КАРТА -->
-        <section class="section bg-light" style="position: relative; z-index: 100; padding-top: 80px;">
+        <!-- АКОРДЕОН FAQ -->
+        <section class="faq-section js-reveal">
             <div class="container">
-                <div class="contacts-grid">
+                <div class="faq-container">
                     
-                    <div class="contact-info-card js-reveal">
-                        <h3>Зв'яжіться з нами</h3>
-                        
-                        <div class="contact-row">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            <div>
-                                <a href="tel:+380995337227" style="display:block;">+38 (099) 533-72-27</a>
-                                <a href="tel:+380995337447" style="display:block; margin-top:8px;">+38 (099) 533-74-47</a>
-                            </div>
+                    <details class="faq-item" open>
+                        <summary class="faq-summary">Як забронювати тур онлайн?</summary>
+                        <div class="faq-content">
+                            <p>Ви можете самостійно знайти ідеальний тур у розділі «Пошук туру» або звернутися до наших експертів. Після вибору туру вам потрібно надати паспортні дані (або відправити фото/сканкопії менеджеру), після чого ми підписуємо офіційний договір. Оплата здійснюється на офіційний розрахунковий рахунок агенції. Після підтвердження туроператором, ви отримаєте всі документи (квитки, ваучер, страховку) на вашу електронну пошту.</p>
                         </div>
+                    </details>
 
-                        <div class="contact-row">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            <address>
-                                м. Павлоград<br>
-                                м. Ірпінь / Буча / Гостомель / Ворзель
-                            </address>
+                    <details class="faq-item">
+                        <summary class="faq-summary">Що таке гарячі тури та коли їх краще купувати?</summary>
+                        <div class="faq-content">
+                            <p>Гарячий тур — це пропозиція зі значною знижкою, яка з'являється за кілька днів до вильоту через наявність непроданих місць у літаку або готелі. Найбільше шансів "спіймати" гарячий тур у міжсезоння. У розпал свят (Новий Рік, Травневі свята, канікули) гарячих турів зазвичай не буває, тому на ці дати ми рекомендуємо користуватися акцією "Раннє бронювання".</p>
                         </div>
+                    </details>
 
-                        <div class="contact-row">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                            <a href="mailto:Limonturov@gmail.com">Limonturov@gmail.com</a>
+                    <details class="faq-item">
+                        <summary class="faq-summary">Які документи потрібні для поїздки за кордон?</summary>
+                        <div class="faq-content">
+                            <p>Основним документом є діючий біометричний закордонний паспорт. Також для подорожі потрібні туристичний ваучер (надає агенція), авіаквитки та медичне страхування. Якщо ви подорожуєте з дитиною без одного з батьків, може знадобитися нотаріально завірений дозвіл на виїзд дитини (залежить від актуального законодавства України).</p>
                         </div>
+                    </details>
 
-                        <h3 style="margin-top: 48px; margin-bottom: 24px;">Ми у соцмережах</h3>
-                        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                            <a href="https://www.facebook.com/limon.turov/" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; border: 1px solid #EAEAEA; color: var(--color-dark); transition: all 0.3s ease;" onmouseover="this.style.background='#FFEC00'; this.style.borderColor='#FFEC00';" onmouseout="this.style.background='transparent'; this.style.borderColor='#EAEAEA';">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
-                            </a>
-                            <a href="https://www.instagram.com/limon.turiv" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; border: 1px solid #EAEAEA; color: var(--color-dark); transition: all 0.3s ease;" onmouseover="this.style.background='#FFEC00'; this.style.borderColor='#FFEC00';" onmouseout="this.style.background='transparent'; this.style.borderColor='#EAEAEA';">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>
-                            </a>
-                            <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; border: 1px solid #EAEAEA; color: var(--color-dark); transition: all 0.3s ease;" onmouseover="this.style.background='#FFEC00'; this.style.borderColor='#FFEC00';" onmouseout="this.style.background='transparent'; this.style.borderColor='#EAEAEA';">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                            </a>
-                            <a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; border: 1px solid #EAEAEA; color: var(--color-dark); transition: all 0.3s ease;" onmouseover="this.style.background='#FFEC00'; this.style.borderColor='#FFEC00';" onmouseout="this.style.background='transparent'; this.style.borderColor='#EAEAEA';">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg>
-                            </a>
+                    <details class="faq-item">
+                        <summary class="faq-summary">Чи є можливість оплати частинами?</summary>
+                        <div class="faq-content">
+                            <p>Так, зазвичай при ранньому бронюванні ви можете сплатити частину вартості (наприклад, 20-30%) для фіксації ціни та гарантії місця. Залишок суми сплачується за кілька тижнів до вильоту згідно з договором. При покупці гарячого туру (виліт за кілька днів) оплата здійснюється у розмірі 100%.</p>
                         </div>
-                    </div>
+                    </details>
 
-                    <!-- Мапа -->
-                    <div class="map-container js-reveal" style="transition-delay: 0.2s">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d168536.87786481745!2d35.74836696569106!3d48.52924041764669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d99b7dfb5f9227%3A0xc3b8b60f27426177!2z0J_QsNCy0LvQvtCz0YDQsNC0LCDQlNC90ZbQv9GA0L7Qv9C10YLRgNC-0LLRgdGM0LrQsCDQvtCx0LvQsNGB0YLRjCwgNTE0MDA!5e0!3m2!1suk!2sua!4v1717200000000!5m2!1suk!2sua" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" aria-label="Карта з адресою"></iframe>
-                    </div>
+                    <details class="faq-item">
+                        <summary class="faq-summary">Які штрафи передбачені за скасування туру?</summary>
+                        <div class="faq-content">
+                            <p>Умови ануляції залежать від туроператора та кількості днів до вильоту. Зазвичай, чим ближче дата вильоту, тим більший штраф. Наприклад, за відмову менш ніж за 14 днів штраф може становити 100% вартості. Детальні умови ануляції завжди прописуються в Договорі на туристичне обслуговування.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-summary">Як ви підтримуєте туристів під час відпочинку?</summary>
+                        <div class="faq-content">
+                            <p>Ваш спокій — наш пріоритет. Наші менеджери залишаються з вами на зв'язку у месенджерах 24/7 протягом усієї вашої подорожі. Якщо у вас виникнуть питання в аеропорту, під час заселення в готель або під час відпочинку, ви завжди можете написати нам, і ми оперативно допоможемо.</p>
+                        </div>
+                    </details>
 
                 </div>
             </div>
@@ -243,15 +239,15 @@
                 <div class="lead-split__visual">
                     <img src="assets/hero/hero-bus.webp" alt="Зворотній зв'язок" class="lead-split__img" loading="lazy" onerror="this.src='assets/img/50571182.jpg'">
                     <div class="lead-split__visual-content js-reveal" style="background: linear-gradient(to right, rgba(0,0,0,0.7), transparent);">
-                        <h2 class="h1" style="line-height: 1.1; color: #fff;">Напишіть<br><span class="text-primary">нам</span></h2>
+                        <h2 class="h1" style="line-height: 1.1; color: #fff;">Залишилися<br><span class="text-primary">питання?</span></h2>
                     </div>
                 </div>
 
                 <div class="lead-split__form-wrap">
-                    <form class="custom-form js-form" id="main-lead-form">
+                    <form class="custom-form js-form" id="faq-lead-form">
                         <div class="js-reveal">
-                            <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin-bottom: 8px;">Форма зворотнього зв'язку</h3>
-                            <p style="color: #666; margin-bottom: 40px; font-size: 1.125rem;">Залиште свої контакти і ми зателефонуємо вам найближчим часом.</p>
+                            <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin-bottom: 8px;">Напишіть нам</h3>
+                            <p style="color: #666; margin-bottom: 40px; font-size: 1.125rem;">Якщо ви не знайшли відповіді на своє питання, заповніть форму, і ми вас проконсультуємо.</p>
                         </div>
 
                         <div class="cf-group js-reveal">
@@ -267,14 +263,14 @@
                         </div>
                         
                         <div class="cf-group js-reveal" style="transition-delay: 0.2s">
-                            <textarea id="lf-details" name="Message" class="cf-input cf-textarea" rows="3" placeholder=" "></textarea>
-                            <label for="lf-details" class="cf-label">Ваше повідомлення або запитання</label>
+                            <textarea id="lf-details" name="Message" class="cf-input cf-textarea" rows="3" placeholder=" " required></textarea>
+                            <label for="lf-details" class="cf-label">Ваше запитання</label>
                             <span class="cf-line"></span>
                         </div>
 
                         <div class="js-reveal" style="transition-delay: 0.4s; margin-top: 32px;">
                             <button type="submit" class="btn btn--solid-yellow btn--full">
-                                ВІДПРАВИТИ ПОВІДОМЛЕННЯ
+                                ВІДПРАВИТИ ЗАПИТАННЯ
                             </button>
                         </div>
                     </form>
@@ -312,8 +308,8 @@
                     <ul class="footer__nav" role="navigation">
                         <li><a href="about.html">Про компанію</a></li>
                         <li><a href="oferta.html">Договір оферти</a></li>
-                        <li><a href="index.html#services">Послуги</a></li>
-                        <li><a href="faq.html">Поширені питання</a></li>
+                        <li><a href="faq.html" style="color: var(--color-primary);">Поширені питання</a></li>
+                        <li><a href="index.html#blog">Блог</a></li>
                     </ul>
                 </div>
 
@@ -408,7 +404,8 @@
                         <div class="col-6 flex-align-center">
                             <label class="ui-checkbox">
                                 <input type="checkbox" name="flex_dates" checked value="Yes">
-                                <span class="checkmark"></span>Можливі інші дати (±3 дні)
+                                <span class="checkmark"></span>
+                                Можливі інші дати (±3 дні)
                             </label>
                         </div>
                     </div>
@@ -462,12 +459,12 @@
                         if (this.classList.contains('is-active')) return;
                         const selectedLang = this.textContent.trim().toLowerCase();
                         let currentPath = window.location.pathname;
-                        let currentFile = currentPath.split('/').pop() || 'contacts.html'; 
+                        let currentFile = currentPath.split('/').pop() || 'faq.html'; 
                         let newUrl = '';
                         if (selectedLang === 'ru') {
                             if (!currentFile.includes('-ru')) {
                                 newUrl = currentFile.replace('.html', '-ru.html');
-                                if(currentFile === '') newUrl = 'contacts-ru.html'; 
+                                if(currentFile === '') newUrl = 'faq-ru.html'; 
                             }
                         } else {
                             if (currentFile.includes('-ru')) {

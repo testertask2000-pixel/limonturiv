@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="uk" class="no-js">
+<html lang="ru" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Круїзи | Лимон Турів</title>
-    <meta name="description" content="Забронювати круїз. Найкращі лайнери, захоплюючі маршрути по всьому світу від турагентства Лимон Турів.">
+    <title>Морские и речные круизы | Лимон Туров</title>
+    <meta name="description" content="Забронировать морской или речной круиз. Лучшие лайнеры, захватывающие маршруты по всему миру от турагентства Лимон Туров.">
     
     <link rel="icon" type="image/x-icon" href="assets/about/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/about/favicon.ico">
@@ -40,10 +40,47 @@
         .seo-text-block h2 { font-size: 2rem; margin-bottom: 24px; font-family: var(--font-display); }
         .seo-text-block p { margin-bottom: 16px; color: var(--color-text-muted); font-size: 1.125rem; line-height: 1.7; }
 
-        /* Модуль MVOYAGE (Світле матове скло) */
+        /* Модуль MVOYAGE (Светлое матовое стекло) */
         #search-module { position: relative; z-index: 10; margin-top: -80px; }
         .search-widget-glass__wrapper { background: rgba(255, 255, 255, 0.95) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; border: 1px solid rgba(255, 255, 255, 0.5) !important; border-radius: 24px !important; padding: 24px !important; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important; }
         
+        /* =========================================================
+           ФИКС ДЛЯ КНОПКИ MVOYAGE (ДЕЛАТЬ НА ВСЮ ШИРИНУ)
+           ========================================================= */
+        #search_mvoyage_all button, 
+        #search_mvoyage_all input[type="submit"],
+        #search_mvoyage_all input[type="button"] {
+            width: 100% !important;
+            background: var(--color-primary) !important;
+            color: #0A0A0A !important;
+            border-radius: 50px !important;
+            height: 56px !important;
+            font-weight: 800 !important;
+            font-family: var(--font-primary) !important;
+            font-size: 1rem !important;
+            text-transform: uppercase !important;
+            border: none !important;
+            box-shadow: 0 10px 24px rgba(255, 236, 0, 0.3) !important;
+            transition: all 0.3s ease !important;
+            margin: 20px 0 0 0 !important;
+            display: block !important;
+            cursor: pointer !important;
+        }
+        #search_mvoyage_all button:hover, 
+        #search_mvoyage_all input[type="submit"]:hover,
+        #search_mvoyage_all input[type="button"]:hover {
+            background: var(--color-primary-hover) !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 15px 30px rgba(255, 236, 0, 0.5) !important;
+        }
+        /* Убиваем встроенное центрирование виджета */
+        #search_mvoyage_all center,
+        #search_mvoyage_all .text-center {
+            text-align: left !important;
+            display: block !important;
+            width: 100% !important;
+        }
+
         /* Lead Form (60/40) */
         .lead-split { display: flex; flex-direction: row; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg); }
         .lead-split__visual { flex: 0 0 60%; position: relative; overflow: hidden;}
@@ -56,7 +93,7 @@
         .cf-input:focus ~ .cf-label, .cf-input:not(:placeholder-shown) ~ .cf-label { top: -12px; font-size: 0.75rem; color: var(--color-dark) !important; text-transform: uppercase; font-weight: 700; }
         .cf-line { background-color: var(--color-dark) !important; }
 
-        /* Партнери (Кольорові) */
+        /* Партнеры (Цветные) */
         .partners-colored-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; margin-top: 40px; }
         .partners-colored-grid img { max-width: 140px; height: auto; max-height: 60px; object-fit: contain; filter: none !important; opacity: 1 !important; transition: transform 0.3s ease; }
         .partners-colored-grid img:hover { transform: scale(1.1); }
@@ -105,16 +142,16 @@
 </head>
 <body class="theme-premium">
 
-    <!-- ГЛОБАЛЬНИЙ LOADER -->
+    <!-- ГЛОБАЛЬНЫЙ LOADER -->
     <div id="global-loader" class="loader" aria-hidden="true">
         <div class="loader__brand">
-            <img src="assets/hero/logo1.png" alt="Завантаження Лимон Турів" width="200" height="auto" class="loader__logo" onerror="this.src='assets/img/logo.png'">
+            <img src="assets/hero/logo1.png" alt="Загрузка Лимон Туров" width="200" height="auto" class="loader__logo" onerror="this.src='assets/img/logo.png'">
             <div class="loader__spinner mt-3">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;">
                     <line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
                 </svg>
             </div>
-            <span class="loader__text mt-2">Завантаження круїзів...</span>
+            <span class="loader__text mt-2">Загрузка круизов...</span>
         </div>
     </div>
 
@@ -122,56 +159,56 @@
     <header class="header js-header" role="banner">
         <div class="container header__container">
             
-            <a href="/" class="header__logo" aria-label="Головна сторінка Лимон Турів">
-                <img src="assets/hero/logo1.png" alt="Лимон Турів Турагенція" width="180" height="auto" class="logo-img" onerror="this.src='assets/img/logo.png'">
+            <a href="index-ru.html" class="header__logo" aria-label="Главная страница Лимон Туров">
+                <img src="assets/hero/logo1.png" alt="Лимон Туров Турагентство" width="180" height="auto" class="logo-img" onerror="this.src='assets/img/logo.png'">
             </a>
 
-            <nav class="header__nav nav" role="navigation" aria-label="Головне меню">
+            <nav class="header__nav nav" role="navigation" aria-label="Главное меню">
                 <ul class="nav__list">
                     
                     <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="search-tour.html" class="nav__link" style="color: var(--color-primary) !important;">
-                            Тури
+                        <a href="search-tour-ru.html" class="nav__link" style="color: var(--color-primary) !important;">
+                            Туры
                             <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
                         </a>
                         
                         <div class="mega-menu" role="menu">
                             <div class="mega-menu__inner container">
                                 <div class="mega-menu__col">
-                                    <h4 class="mega-menu__title">Напрямки та пошук</h4>
+                                    <h4 class="mega-menu__title">Направления и поиск</h4>
                                     <ul class="mega-menu__list">
                                         <li role="none">
-                                            <a href="search-tour.html" class="mega-menu__link" role="menuitem">
+                                            <a href="search-tour-ru.html" class="mega-menu__link" role="menuitem">
                                                 <div class="mega-menu__icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
-                                                <span>Пошук туру</span>
+                                                <span>Поиск тура</span>
                                             </a>
                                         </li>
                                         <li role="none">
-                                            <a href="hot-tours.html" class="mega-menu__link" role="menuitem">
-                                                <div class="mega-menu__icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19C19.9853 19 22 16.9853 22 14.5C22 11.5 19 9 19 9C19 9 18 10.5 18 12C18 12 16 9 12 3C12 3 12 8 12 12C12 12 11.5 10 9 10C6.5 10 3 13.5 3 17C3 19.5 5 21.5 7.5 21.5C9.5 21.5 10.5 20 12 18.5C13.5 20 15.5 19 17.5 19Z"/></svg></div>
-                                                <span>Гарячі тури</span>
+                                            <a href="hot-tours-ru.html" class="mega-menu__link" role="menuitem">
+                                                <div class="mega-menu__icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19C19.9853 19 22 16.9853 22 14.5C22 11.5 19 9 19 9C19 9 18 10.5 18 12C18 12 16 9 12 3C12 3 8 12 12 12C12 12 11.5 10 9 10C6.5 10 3 13.5 3 17C3 19.5 5 21.5 7.5 21.5C9.5 21.5 10.5 20 12 18.5C13.5 20 15.5 19 17.5 19Z"/></svg></div>
+                                                <span>Горящие туры</span>
                                             </a>
                                         </li>
                                         <li role="none">
-                                            <a href="excursions.html" class="mega-menu__link" role="menuitem">
+                                            <a href="excursions-ru.html" class="mega-menu__link" role="menuitem">
                                                 <div class="mega-menu__icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                                                <span>Екскурсійні тури</span>
+                                                <span>Экскурсионные туры</span>
                                             </a>
                                         </li>
                                         <li role="none">
-                                            <a href="cruises.html" class="mega-menu__link" role="menuitem" style="background-color: var(--color-dark); color: var(--color-white);">
+                                            <a href="cruises-ru.html" class="mega-menu__link" role="menuitem" style="background-color: var(--color-dark); color: var(--color-white);">
                                                 <div class="mega-menu__icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M2 12h20l-2 8H4z"/><path d="M12 12v-8"/><path d="M8 8h8"/></svg></div>
-                                                <span>Круїзи</span>
+                                                <span>Круизы</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="mega-menu__col mega-menu__col--promo">
                                     <div class="menu-promo hover-zoom">
-                                        <img src="assets/hero/hero-hotels.webp" alt="Раннє бронювання Кіпр" loading="lazy" onerror="this.src='assets/img/68512519-cyprus-wall.jpg'">
+                                        <img src="assets/hero/hero-hotels.webp" alt="Раннее бронирование Кипр" loading="lazy" onerror="this.src='assets/img/68512519-cyprus-wall.jpg'">
                                         <div class="menu-promo__overlay">
-                                            <span class="badge badge--yellow">Спецпропозиція</span>
-                                            <h5>Раннє бронювання 2026: Кіпр від 15 000 ₴</h5>
+                                            <span class="badge badge--yellow">Спецпредложение</span>
+                                            <h5>Раннее бронирование 2026: Кипр от 15 000 ₴</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -180,37 +217,37 @@
                     </li>
 
                     <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="#services" class="nav__link">
-                            Послуги
+                        <a href="index-ru.html#services" class="nav__link">
+                            Услуги
                             <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                         </a>
                         <ul class="dropdown-simple" role="menu">
-                            <li role="none"><a href="hotels.html" role="menuitem">Готелі</a></li>
-                            <li role="none"><a href="flights.html" role="menuitem">Авіаквитки</a></li>
-                            <li role="none"><a href="rent-car.html" role="menuitem">Оренда авто</a></li>
+                            <li role="none"><a href="hotels-ru.html" role="menuitem">Отели</a></li>
+                            <li role="none"><a href="flights-ru.html" role="menuitem">Авиабилеты</a></li>
+                            <li role="none"><a href="rent-car-ru.html" role="menuitem">Аренда авто</a></li>
                         </ul>
                     </li>
 
-                    <li class="nav__item"><a href="about.html" class="nav__link">Про компанію</a></li>
-                    <li class="nav__item"><a href="faq.html" class="nav__link">Поширені питання</a></li>
-                    <li class="nav__item"><a href="contacts.html" class="nav__link">Контакти</a></li>
+                    <li class="nav__item"><a href="about-ru.html" class="nav__link">О компании</a></li>
+                    <li class="nav__item"><a href="faq-ru.html" class="nav__link">Частые вопросы</a></li>
+                    <li class="nav__item"><a href="contacts-ru.html" class="nav__link">Контакты</a></li>
                 </ul>
             </nav>
 
             <div class="header__actions">
-                <div class="lang-switcher" aria-label="Перемикач мов">
-                    <button class="lang-btn is-active" aria-pressed="true">UA</button>
+                <div class="lang-switcher" aria-label="Переключатель языков">
+                    <button class="lang-btn" aria-pressed="false">UA</button>
                     <span class="lang-sep"></span>
-                    <button class="lang-btn" aria-pressed="false">RU</button>
+                    <button class="lang-btn is-active" aria-pressed="true">RU</button>
                 </div>
                 <div class="header__contacts">
-                    <span class="header__contacts-hint" style="font-size: 0.75rem; color: #666;">Ми на зв'язку</span>
+                    <span class="header__contacts-hint" style="font-size: 0.75rem; color: #666;">Мы на связи</span>
                     <a href="tel:+380995337227" class="header__phone">+38 (099) 533-72-27</a>
                 </div>
-                <button class="btn btn--solid-yellow js-open-modal" aria-label="Відкрити форму підбору туру">
-                    <span>Підібрати тур</span>
+                <button class="btn btn--solid-yellow js-open-modal" aria-label="Открыть форму подбора тура">
+                    <span>Подобрать тур</span>
                 </button>
-                <button class="burger js-burger" aria-label="Відкрити мобільне меню" aria-expanded="false">
+                <button class="burger js-burger" aria-label="Открыть мобильное меню" aria-expanded="false">
                     <span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span>
                 </button>
             </div>
@@ -221,14 +258,14 @@
         
         <section class="hero-screen hero-screen--inner">
             <div class="hero-screen__bg">
-                <img src="assets/hero/hero-cruises.webp" alt="Круїзи" class="hero-screen__img js-parallax-bg" style="object-position: center;" fetchpriority="high" onerror="this.src='assets/img/gre.jpg'">
+                <img src="assets/hero/hero-cruises.webp" alt="Морские круизы" class="hero-screen__img js-parallax-bg" style="object-position: center;" fetchpriority="high" onerror="this.src='assets/img/gre.jpg'">
                 <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);"></div>
             </div>
 
             <div class="container hero-screen__container">
                 <div class="hero-screen__content text-center" style="margin-bottom: 0;">
                     <h1 class="hero-screen__title js-split-text" style="font-size: clamp(3rem, 7vw, 6rem);">
-                        <br><span class="text-gradient">КРУЇЗИ</span>
+                        МОРСКИЕ И РЕЧНЫЕ <br><span class="text-gradient">КРУИЗЫ</span>
                     </h1>
                 </div>
             </div>
@@ -241,20 +278,20 @@
             </ul>
         </section>
 
-        <!-- ВІДЖЕТ MVOYAGE (Круїзи) -->
+        <!-- ВИДЖЕТ MVOYAGE (Круизы) -->
         <section class="section bg-light" style="padding-top: 60px; position: relative; z-index: 100;">
             <div class="container">
                 <div class="search-widget-glass" id="search-module">
                     <div class="search-widget-glass__wrapper">
                         
-                        <!-- ІНТЕГРАЦІЯ МОДУЛЯ MVOYAGE.COM.UA -->
+                        <!-- ИНТЕГРАЦИЯ МОДУЛЯ MVOYAGE.COM.UA -->
                         <div id="search_mvoyage_all" style="width: 100%;"></div>
 
                         <script>
                             var AGENTID = 'abd815286ba1007abfbb8415b83ae2cf';
                             var FIRST_MODULE = 'cruises';
                             var DEF_VALUTA = 'NAT';
-                            var LOCALE = 'ua'; /* ДОДАНО ДЛЯ УКРАЇНСЬКОЇ МОВИ ВІДЖЕТУ */
+                            var LOCALE = 'ru'; /* РУССКИЙ ЯЗЫК */
                         </script>
                         <script src="https://mvoyage.com.ua/search_agent/js/search_agent.js"></script>                
                         
@@ -263,13 +300,13 @@
             </div>
         </section>
 
-        <!-- ТЕКСТОВЕ ПОЛЕ (SEO) -->
+        <!-- ТЕКСТОВОЕ ПОЛЕ (SEO) -->
         <section class="section bg-light" style="padding-top: 0; position: relative; z-index: 100;">
             <div class="container">
                 <div class="seo-text-block js-reveal">
-                    <h2>Круїзи — це преміальний відпочинок на воді</h2>
-                    <p>Круїзи — це унікальна можливість відвідати кілька країн або міст за одну подорож, щоранку прокидаючись з новим приголомшливим видом за вікном. Сучасні лайнери — це справжні плавучі міста-курорти рівня 5 зірок, де є все необхідне: від басейнів та аквапарків до театрів, казино та ресторанів високої кухні.</p>
-                    <p>Наше турагентство допоможе підібрати ідеальний маршрут по Середземномор'ю, Карибам, Перській затоці або Північній Європі. Ми співпрацюємо з провідними світовими круїзними компаніями (MSC Cruises, Costa Cruises, Royal Caribbean) та забезпечуємо повний супровід: від бронювання каюти до організації перельотів та трансферів до порту відправлення.</p>
+                    <h2>Круизы — это премиальный отдых на воде</h2>
+                    <p>Морские и речные круизы — это уникальная возможность посетить несколько стран или городов за одно путешествие, каждое утро просыпаясь с новым потрясающим видом за окном. Современные лайнери — это настоящие плавучие города-курорты уровня 5 звезд, где есть все необходимое: от бассейнов и аквапарков до театров, казино и ресторанов высокой кухни.</p>
+                    <p>Наше турагентство поможет подобрать идеальный маршрут по Средиземноморью, Карибам, Персидскому заливу или Северной Европе. Мы сотрудничаем с ведущими мировыми круизными компаниями (MSC Cruises, Costa Cruises, Royal Caribbean) и обеспечиваем полное сопровождение: от бронирования каюты до организации перелетов и трансферов до порта отправления.</p>
                 </div>
             </div>
         </section>
@@ -278,9 +315,9 @@
         <section class="lead-section" id="contacts" style="background-color: var(--color-white); padding-bottom: 60px;">
             <div class="lead-split container" style="padding: 0;">
                 <div class="lead-split__visual">
-                    <img src="assets/hero/hero-cruises.webp" alt="Лайнер у морі" class="lead-split__img" loading="lazy" onerror="this.src='assets/img/50571182.jpg'">
+                    <img src="assets/hero/hero-cruises.webp" alt="Лайнер в море" class="lead-split__img" loading="lazy" onerror="this.src='assets/img/50571182.jpg'">
                     <div class="lead-split__visual-content js-reveal">
-                        <h2 class="h1" style="line-height: 1.1; color: #fff;">Підберемо<br><span class="text-primary">круїз мрії</span></h2>
+                        <h2 class="h1" style="line-height: 1.1; color: #fff;">Подберем<br><span class="text-primary">круиз мечты</span></h2>
                         <div class="contact-block mt-5">
                             <p class="cb-row"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:+380995337227">+38 (099) 533-72-27</a></p>
                             <p class="cb-row mt-3"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:+380995337447">+38 (099) 533-74-47</a></p>
@@ -291,31 +328,31 @@
                 <div class="lead-split__form-wrap">
                     <form class="custom-form js-form" id="cruise-lead-form">
                         <div class="js-reveal">
-                            <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin-bottom: 8px;">Залишити заявку</h3>
-                            <p style="color: #666; margin-bottom: 40px; font-size: 1.125rem;">Отримайте безкоштовну консультацію з підбору круїзу.</p>
+                            <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin-bottom: 8px;">Оставить заявку</h3>
+                            <p style="color: #666; margin-bottom: 40px; font-size: 1.125rem;">Получите бесплатную консультацию по подбору круиза.</p>
                         </div>
 
                         <div class="cf-group js-reveal">
                             <input type="text" id="lf-name" name="Name" class="cf-input" required placeholder=" ">
-                            <label for="lf-name" class="cf-label">Ваше ім'я</label>
+                            <label for="lf-name" class="cf-label">Ваше имя</label>
                             <span class="cf-line"></span>
                         </div>
                         
                         <div class="cf-group js-reveal" style="transition-delay: 0.1s">
                             <input type="tel" id="lf-phone" name="Phone" class="cf-input js-phone-mask" required placeholder=" ">
-                            <label for="lf-phone" class="cf-label">Номер телефону</label>
+                            <label for="lf-phone" class="cf-label">Номер телефона</label>
                             <span class="cf-line"></span>
                         </div>
                         
                         <div class="cf-group js-reveal" style="transition-delay: 0.2s">
                             <textarea id="lf-details" name="Details" class="cf-input cf-textarea" rows="2" placeholder=" "></textarea>
-                            <label for="lf-details" class="cf-label">Бажаний регіон плавання</label>
+                            <label for="lf-details" class="cf-label">Желаемый регион плавания</label>
                             <span class="cf-line"></span>
                         </div>
 
                         <div class="js-reveal" style="transition-delay: 0.4s; margin-top: 32px;">
                             <button type="submit" class="btn btn--solid-yellow btn--full">
-                                ВІДПРАВИТИ ЗАЯВКУ
+                                ОТПРАВИТЬ ЗАЯВКУ
                             </button>
                         </div>
                     </form>
@@ -323,10 +360,10 @@
             </div>
         </section>
 
-        <!-- ПАРТНЕРИ (16 ВКАЗАНИХ, КОЛЬОРОВІ) -->
+        <!-- ПАРТНЕРЫ -->
         <section class="section bg-light" style="padding-bottom: 80px;">
             <div class="container text-center">
-                <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin-bottom: 8px;" class="js-reveal">Наші партнери</h3>
+                <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin-bottom: 8px;" class="js-reveal">Наши партнеры</h3>
                 
                 <div class="partners-colored-grid js-reveal">
                     <img src="https://franchising.alliance.ua/_assets/media/8e7c42581a76cb3ac901498c2da6e45c.png" alt="Alliance" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
@@ -356,120 +393,83 @@
     <footer class="footer js-reveal" itemscope itemtype="https://schema.org/TravelAgency" style="position: relative; z-index: 100; background-color: var(--color-dark);">
         <div class="container">
             <div class="footer__grid">
-                
                 <div class="footer__col footer__col--brand">
-                    <img src="assets/hero/logo1.png" alt="Лимон Турів" class="footer__logo" itemprop="image" onerror="this.src='assets/img/logo.png'">
-                    <p class="footer__desc mt-4">
-                        <span itemprop="name" style="display:none;">Лимон Турів</span>
-                        <span itemprop="description">Ми створюємо ідеальні подорожі, враховуючи всі ваші побажання. Ваша відпустка буде огорнута турботою 24/7.</span>
-                    </p>
+                    <img src="assets/hero/logo1.png" alt="Лимон Туров" class="footer__logo" itemprop="image" onerror="this.src='assets/img/logo.png'">
+                    <p class="footer__desc mt-4"><span itemprop="name" style="display:none;">Лимон Туров</span><span itemprop="description">Мы создаем идеальные путешествия, учитывая все ваши пожелания. Ваш отпуск будет окутан заботой 24/7.</span></p>
                 </div>
-
                 <div class="footer__col">
-                    <h4 class="footer__title">Тури</h4>
+                    <h4 class="footer__title">Туры</h4>
                     <ul class="footer__nav" role="navigation">
-                        <li><a href="search-tour.html">Пошук туру</a></li>
-                        <li><a href="hot-tours.html">Гарячі тури</a></li>
-                        <li><a href="excursions.html">Екскурсійні тури</a></li>
-                        <li><a href="cruises.html">Круїзи</a></li>
+                        <li><a href="search-tour-ru.html">Поиск тура</a></li>
+                        <li><a href="hot-tours-ru.html">Горящие туры</a></li>
+                        <li><a href="excursions-ru.html">Экскурсионные туры</a></li>
+                        <li><a href="cruises-ru.html">Круизы</a></li>
                     </ul>
                 </div>
-
                 <div class="footer__col">
-                    <h4 class="footer__title">Інформація</h4>
+                    <h4 class="footer__title">Информация</h4>
                     <ul class="footer__nav" role="navigation">
-                        <li><a href="about.html">Про компанію</a></li>
-                        <li><a href="oferta.html">Договір оферти</a></li>
-                        <li><a href="faq.html">Поширені питання</a></li>
-                        <li><a href="index.html#blog">Блог</a></li>
+                        <li><a href="about-ru.html">О компании</a></li>
+                        <li><a href="oferta-ru.html">Договор оферты</a></li>
+                        <li><a href="faq-ru.html">Частые вопросы</a></li>
+                        <li><a href="index-ru.html#blog">Блог</a></li>
                     </ul>
                 </div>
-
                 <div class="footer__col footer__col--contacts">
-                    <h4 class="footer__title">Контакти</h4>
+                    <h4 class="footer__title">Контакты</h4>
                     <ul class="footer__contact-list">
-                        <li>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            <div class="phones">
-                                <a href="tel:+380995337227" itemprop="telephone">+38-099-533-7227</a>
-                                <a href="tel:+380995337447" itemprop="telephone">+38-099-533-7447</a>
-                            </div>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <div class="phones"><a href="tel:+380995337227" itemprop="telephone">+38-099-533-7227</a><a href="tel:+380995337447" itemprop="telephone">+38-099-533-7447</a></div>
                         </li>
-                        <li>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" style="font-style: normal; line-height: 1.6;">
-                                <span itemprop="addressLocality">м. Павлоград</span><br>
-                                <span>м. Ірпінь / Буча / Гостомель / Ворзель</span>
-                            </address>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" style="font-style: normal; line-height: 1.6;"><span itemprop="addressLocality">г. Павлоград</span><br><span>г. Ирпень / Буча / Гостомель / Ворзель</span></address>
                         </li>
                     </ul>
-                    
-                    <div class="footer__socials mt-4">
-                        <a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
-                        <a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
-                        <a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a>
-                    </div>
                 </div>
-
             </div>
-
             <div class="footer__bottom">
-                <p>© <span id="current-year-cruises">2026</span> Лимон Турів. Всі права захищені. <a href="oferta.html" style="color: var(--color-text-muted); text-decoration: underline; margin-left: 10px;">Договір оферти</a></p>
+                <p>© <span id="current-year-cruises">2026</span> Лимон Туров. Все права защищены. <a href="oferta-ru.html" style="color: var(--color-text-muted); text-decoration: underline; margin-left: 10px;">Договор оферты</a></p>
                 <div class="footer__lang-switch">
-                    <a href="#" class="active" aria-label="Українська мова">УКР</a>
+                    <a href="#" aria-label="Украинский язык">UA</a>
                     <span style="margin: 0 8px; color: var(--color-dark-border);">|</span>
-                    <a href="#" aria-label="Русский язык">РУС</a>
+                    <a href="#" class="active" aria-label="Русский язык">RU</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- ПЛАВАЮЧІ ВІДЖЕТИ -->
-    <div class="floating-widget" role="complementary" aria-label="Віджети зв'язку">
-        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Написати в Telegram">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-        </a>
-        <button class="fw-btn fw-btn--call js-binotel-trigger" aria-label="Замовити зворотній дзвінок">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span class="fw-btn__tooltip">Замовити дзвінок (Binotel)</span>
-        </button>
+    <!-- ПЛАВАЮЩИЕ ВИДЖЕТЫ -->
+    <div class="floating-widget" role="complementary" aria-label="Виджеты связи">
+        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Написать в Telegram"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
+        <button class="fw-btn fw-btn--call js-binotel-trigger" aria-label="Заказать обратный звонок"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="fw-btn__tooltip">Заказать звонок (Binotel)</span></button>
     </div>
 
-    <!-- МОДАЛЬНЕ ВІКНО -->
+    <!-- МОДАЛЬНОЕ ОКНО -->
     <div class="modal-backdrop js-modal" id="modal-tour" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-dialog">
-            <button class="modal-close js-modal-close" aria-label="Закрити вікно">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
+            <button class="modal-close js-modal-close" aria-label="Закрыть окно"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             <div class="modal-content">
-                <h3 class="modal-title" id="modal-title">Підібрати тур</h3>
+                <h3 class="modal-title" id="modal-title">Подобрать тур</h3>
                 <form class="custom-form js-form" id="modal-lead-form">
                     <div class="form-row">
-                        <div class="cf-group col-6">
-                            <input type="text" class="cf-input" id="modal-destination" name="Destination" required placeholder=" ">
-                            <label for="modal-destination" class="cf-label">Куди (Країна, курорт)?</label>
-                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
-                        </div>
+                        <div class="cf-group col-6"><input type="text" class="cf-input" id="modal-destination" name="Destination" required placeholder=" "><label for="modal-destination" class="cf-label">Куда (Страна, курорт)?</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
                         <div class="col-6 flex-align-center counter-group">
-                            <label class="mr-2" style="color: #666;">Дорослі</label>
+                            <label class="mr-2" style="color: #666;">Взрослые</label>
                             <div class="ui-counter"><button type="button" class="js-count-minus">-</button><input type="number" name="Adults" value="2" min="1" max="10" readonly><button type="button" class="js-count-plus">+</button></div>
-                            <label class="mx-2" style="color: #666;">та діти</label>
+                            <label class="mx-2" style="color: #666;">и дети</label>
                             <div class="ui-counter"><button type="button" class="js-count-minus">-</button><input type="number" name="Children" value="0" min="0" max="5" readonly><button type="button" class="js-count-plus">+</button></div>
                         </div>
                     </div>
                     <div class="form-row mt-4">
-                        <div class="cf-group col-6" style="position: relative;"><input type="text" class="cf-input js-date-mask" id="modal-date" name="Date" placeholder=" " required><label for="modal-date" class="cf-label">Дата вильоту (дд.мм.рррр)</label><span class="cf-line" style="background-color: var(--color-dark);"></span><svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-                        <div class="col-6 flex-align-center"><label class="ui-checkbox"><input type="checkbox" name="flex_dates" checked value="Yes"><span class="checkmark"></span>Можливі інші дати (±3 дні)</label></div>
+                        <div class="cf-group col-6" style="position: relative;"><input type="text" class="cf-input js-date-mask" id="modal-date" name="Date" placeholder=" " required><label for="modal-date" class="cf-label">Дата вылета (дд.мм.гггг)</label><span class="cf-line" style="background-color: var(--color-dark);"></span><svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                        <div class="col-6 flex-align-center"><label class="ui-checkbox"><input type="checkbox" name="flex_dates" checked value="Yes"><span class="checkmark"></span>Возможны другие даты (±3 дня)</label></div>
                     </div>
-                    <div class="cf-group mt-4"><input type="text" class="cf-input" id="modal-duration" name="Duration" placeholder=" " required><label for="modal-duration" class="cf-label">Тривалість (напр., 7-10 ночей)</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
+                    <div class="cf-group mt-4"><input type="text" class="cf-input" id="modal-duration" name="Duration" placeholder=" " required><label for="modal-duration" class="cf-label">Продолжительность (напр., 7-10 ночей)</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
                     <div class="form-row mt-4">
-                        <div class="cf-group col-6"><input type="text" class="cf-input" id="modal-name" name="Name" required placeholder=" "><label for="modal-name" class="cf-label">Ваше ім'я *</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
+                        <div class="cf-group col-6"><input type="text" class="cf-input" id="modal-name" name="Name" required placeholder=" "><label for="modal-name" class="cf-label">Ваше имя *</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
                         <div class="cf-group col-6"><input type="tel" class="cf-input js-phone-mask" id="modal-phone" name="Phone" required placeholder=" "><label for="modal-phone" class="cf-label">Телефон *</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
                     </div>
-                    <div class="cf-group mt-4"><input type="email" class="cf-input" id="modal-email" name="Email" placeholder=" "><label for="modal-email" class="cf-label">E-mail (необов'язково)</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
-                    <div class="cf-group mt-4"><textarea class="cf-input cf-textarea" id="modal-details" name="Details" rows="2" placeholder=" "></textarea><label for="modal-details" class="cf-label">Побажання (категорія готелю, харчування, бюджет...)</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
-                    <div class="text-center mt-4"><button type="submit" class="btn btn--solid-yellow btn--wide">Відправити запит</button></div>
+                    <div class="text-center mt-4"><button type="submit" class="btn btn--solid-yellow btn--wide">Отправить запрос</button></div>
                 </form>
             </div>
         </div>
@@ -478,6 +478,36 @@
     <script src="assets/js/script.js"></script>
     <script>
         document.getElementById('current-year-cruises').textContent = new Date().getFullYear();
+        
+        /* Переключатель языков */
+        document.addEventListener('DOMContentLoaded', () => {
+            const langSwitchers = document.querySelectorAll('.lang-switcher');
+            langSwitchers.forEach(switcher => {
+                const btns = switcher.querySelectorAll('.lang-btn');
+                btns.forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (this.classList.contains('is-active')) return;
+                        const selectedLang = this.textContent.trim().toLowerCase();
+                        let currentPath = window.location.pathname;
+                        let currentFile = currentPath.split('/').pop() || 'cruises-ru.html'; 
+                        let newUrl = '';
+                        if (selectedLang === 'ru') {
+                            if (!currentFile.includes('-ru')) {
+                                newUrl = currentFile.replace('.html', '-ru.html');
+                                if(currentFile === '') newUrl = 'cruises-ru.html'; 
+                            }
+                        } else {
+                            if (currentFile.includes('-ru')) {
+                                newUrl = currentFile.replace('-ru.html', '.html');
+                            }
+                        }
+                        if (newUrl) window.location.href = newUrl;
+                    });
+                });
+            });
+        });
+
         function hideGlobalLoader() { const loader = document.getElementById('global-loader'); if (loader && loader.style.display !== 'none') { loader.style.opacity = '0'; loader.style.transition = 'opacity 0.5s ease'; setTimeout(() => { loader.style.display = 'none'; }, 500); } }
         window.addEventListener('load', hideGlobalLoader); setTimeout(hideGlobalLoader, 3500);
     </script>

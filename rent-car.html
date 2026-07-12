@@ -6,8 +6,8 @@
     <title>Оренда авто по всьому світу | Лимон Турів</title>
     <meta name="description" content="Бронювання автомобілів для подорожей. Широкий вибір авто від економ до преміум класу. Надійно та вигідно з Лимон Турів.">
     
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="assets/about/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/about/favicon.ico">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +43,7 @@
 
         /* Модуль пошуку UNIT.TRAVEL (Антрацит) */
         #search-module { position: relative; z-index: 10; margin-top: -80px; }
-        .search-widget-glass__wrapper { background: rgba(30, 30, 30, 0.85) !important; backdrop-filter: blur(24px) !important; -webkit-backdrop-filter: blur(24px) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; border-radius: 24px !important; padding: 24px !important; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important; }
+        .search-widget-glass__wrapper { background: rgba(255, 255, 255, 0.95) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; border: 1px solid rgba(255, 255, 255, 0.5) !important; border-radius: 24px !important; padding: 24px !important; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important; }
         
         body .unit-widget-container button { border-radius: 50px !important; background-color: var(--color-primary) !important; color: #0A0A0A !important; font-family: var(--font-primary) !important; font-weight: 700 !important; transition: all 0.3s ease !important; }
         body .unit-widget-container button:hover { background-color: var(--color-primary-hover) !important; transform: translateY(-2px); }
@@ -118,13 +118,13 @@
             <nav class="header__nav nav" role="navigation" aria-label="Головне меню">
                 <ul class="nav__list">
                     <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="index.html#tours" class="nav__link">Тури <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+                        <a href="search-tour.html" class="nav__link">Тури <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
                         <div class="mega-menu" role="menu">
                             <div class="mega-menu__inner container">
                                 <div class="mega-menu__col">
                                     <h4 class="mega-menu__title">Напрямки та пошук</h4>
                                     <ul class="mega-menu__list">
-                                        <li role="none"><a href="index.html#search-module" class="mega-menu__link" role="menuitem"><span>Пошук туру</span></a></li>
+                                        <li role="none"><a href="search-tour.html" class="mega-menu__link" role="menuitem"><span>Пошук туру</span></a></li>
                                         <li role="none"><a href="hot-tours.html" class="mega-menu__link" role="menuitem"><span>Гарячі тури</span></a></li>
                                         <li role="none"><a href="excursions.html" class="mega-menu__link" role="menuitem"><span>Екскурсійні тури</span></a></li>
                                         <li role="none"><a href="cruises.html" class="mega-menu__link" role="menuitem"><span>Круїзи</span></a></li>
@@ -134,7 +134,7 @@
                         </div>
                     </li>
                     <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="index.html#services" class="nav__link" style="color: var(--color-primary) !important;">Послуги <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+                        <a href="#services" class="nav__link" style="color: var(--color-primary) !important;">Послуги <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
                         <ul class="dropdown-simple" role="menu">
                             <li role="none"><a href="hotels.html" role="menuitem">Готелі</a></li>
                             <li role="none"><a href="flights.html" role="menuitem">Авіаквитки</a></li>
@@ -142,7 +142,7 @@
                         </ul>
                     </li>
                     <li class="nav__item"><a href="about.html" class="nav__link">Про компанію</a></li>
-                    <li class="nav__item"><a href="index.html#faq" class="nav__link">Поширені питання</a></li>
+                    <li class="nav__item"><a href="faq.html" class="nav__link">Поширені питання</a></li>
                     <li class="nav__item"><a href="contacts.html" class="nav__link">Контакти</a></li>
                 </ul>
             </nav>
@@ -152,7 +152,17 @@
                 </div>
                 <div class="header__contacts">
                     <span class="header__contacts-hint" style="font-size: 0.75rem; color: #666;">Ми на зв'язку</span>
-                    <a href="tel:+380995337227" class="header__phone">+38 (099) 533-72-27</a>
+                    <div class="header__phone-wrapper">
+                        <div class="header__phone-main">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            +38 (099) 533-72-27
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                        </div>
+                        <div class="phone-dropdown">
+                            <a href="tel:+380995337227">+38 (099) 533-72-27</a>
+                            <a href="tel:+380995337447">+38 (099) 533-74-47</a>
+                        </div>
+                    </div>
                 </div>
                 <button class="btn btn--solid-yellow js-open-modal"><span>Підібрати тур</span></button>
                 <button class="burger js-burger"><span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span></button>
@@ -173,7 +183,7 @@
             </div>
         </section>
 
-        <!-- ВІДЖЕТ UNIT.TRAVEL (Оренда авто)[cite: 4] -->
+        <!-- ВІДЖЕТ UNIT.TRAVEL (Оренда авто) -->
         <section class="section bg-light" style="padding-top: 60px; position: relative; z-index: 100;">
             <div class="container">
                 <div class="search-widget-glass" id="search-module">
@@ -184,7 +194,28 @@
                                 var script = document.createElement('script');
                                 script.src = '//limonturov.unit.travel/static/form-widget/js/proxy/base.js';
                                 document.head.append(script);
-                                script.onload = function() {EmbeddedFormWidget.build({"containerId":"06cc1f57-d8ab-4804-a2cd-4ad483422412","domain":"limonturov.unit.travel","config":{"refmid":"162403","products":"hotel,flight,rfp","lang":"ua","currency":"UAH","searchmode":"default","bookmode":"offer","form":{"view":"horizontal","bg":"default","tabtxtcl":"#3E3E3E","tabunderlinecl":"#0064CE","btnbg":"#0064CE","btntxtcl":"#ffffff"},"search":{"hotel":{"adl":"2"},"flight":{"dep":"21389","adl":"1"}}}});};
+                                script.onload = function() {
+                                    EmbeddedFormWidget.build({
+                                        "containerId":"06cc1f57-d8ab-4804-a2cd-4ad483422412",
+                                        "domain":"limonturov.unit.travel",
+                                        "config":{
+                                            "refmid":"162403",
+                                            "products":"car", 
+                                            "lang":"ua",
+                                            "currency":"UAH",
+                                            "searchmode":"default",
+                                            "bookmode":"offer",
+                                            "form":{
+                                                "view":"horizontal",
+                                                "bg":"default",
+                                                "tabtxtcl":"#3E3E3E",
+                                                "tabunderlinecl":"#0064CE",
+                                                "btnbg":"#0064CE",
+                                                "btntxtcl":"#ffffff"
+                                            }
+                                        }
+                                    });
+                                };
                             </script>
                         </div>
                     </div>
@@ -192,18 +223,24 @@
             </div>
         </section>
 
-        <!-- ТЕКСТОВЕ ПОЛЕ (SEO)[cite: 4] -->
+        <!-- ТЕКСТОВЕ ПОЛЕ (SEO) -->
         <section class="section bg-light" style="padding-top: 0; position: relative; z-index: 100;">
-            <div class="container">
+            <div class="container text-left">
                 <div class="seo-text-block js-reveal">
-                    <h2>Свобода пересування у вашій подорожі</h2>
-                    <p>Бажаєте дослідити курорт за межами готелю? Оренда автомобіля — це найкращий спосіб побачити приховані пляжі, автентичні гірські містечка та визначні пам'ятки у власному темпі. Турагентство "Лимон Турів" надає можливість забронювати авто преміум, комфорт або економ-класу від провідних світових прокатних компаній (Hertz, Avis, Europcar, Sixt та ін.).</p>
-                    <p>Бронюючи авто через наш сервіс, ви отримуєте прозорі умови страхування, відсутність прихованих платежів та гарантію підтримки у разі форс-мажорів на дорозі. Забирайте авто безпосередньо в аеропорту після прильоту або замовляйте подачу до вашого готелю.</p>
+                    <h2 style="font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 24px;">Оренда авто за кордоном — дешево, швидко та безпечно</h2>
+                    <div class="content-text" style="color: #4A4A4A; line-height: 1.7; font-size: 1.125rem;">
+                        <p class="mb-3">Плануєте подорож і шукаєте, де дешево орендувати авто за кордоном? На сайті Limon.turov.com.ua ви можете швидко знайти та забронювати автомобіль онлайн у будь-якій країні світу. Ми пропонуємо вигідні ціни на оренду авто в Туреччині, Єгипті, Болгарії, Греції, Іспанії, Хорватії, Чорногорії, Албанії, Франції, Італії, Польщі, Таїланді, ОАЕ, Португалії, Німеччині, Чехії та десятках інших популярних туристичних напрямків.</p>
+                        <p class="mb-3">На сайті Limon.turov.com.ua оформити прокат автомобіля за кордоном можна всього за кілька хвилин. Просто оберіть країну, місто або аеропорт отримання автомобіля, вкажіть дати оренди — і система автоматично покаже пропозиції від провідних міжнародних компаній з прокату авто. Ви зможете легко порівняти ціни, умови оренди, класи автомобілів та вибрати найкращий варіант саме для своєї подорожі.</p>
+                        <p class="mb-3">На Limon.turov.com.ua доступна онлайн оренда авто економ-, комфорт-, бізнес- та преміум-класу, а також мінівенів, позашляховиків і сімейних автомобілів. Ви можете орендувати авто без застави, без депозиту та без прихованих комісій. Ми співпрацюємо лише з перевіреними міжнародними прокатними компаніями, у яких прозорі умови оренди. Ви можете взяти автомобіль в оренду безпосередньо в аеропортах Варшави, Анталії, Барселони, Дубая, Парижа, Рима, Стамбула, Афін, Тивата, Спліта та багатьох інших аеропортів і міст по всьому світу. За потреби доступна доставка автомобіля до готелю, вокзалу або іншої зручної для вас адреси.</p>
+                        <p class="mb-3">На сайті ви знайдете детальну інформацію про умови оренди автомобіля за кордоном: які документи необхідні, чи потрібна кредитна картка, коли потрібне міжнародне посвідчення водія, яке страхування входить у вартість та як правильно оформити прокат автомобіля. Також ми підготували корисні рекомендації для тих, хто вперше планує орендувати авто за кордоном.</p>
+                        <p class="mb-3">Ви можете обрати автомобіль із механічною або автоматичною коробкою передач, замовити дитяче крісло та орендувати авто з повною страховкою. Для багатьох напрямків доступні пропозиції без кредитної картки та з безкоштовним скасуванням бронювання.</p>
+                        <p class="mb-0">Оренда автомобіля — це свобода пересування, можливість побачити більше визначних місць і подорожувати у власному темпі. З турагенцією Limon.turov.com.ua ви легко знайдете автомобіль за найкращою ціною та зможете легко подорожувати Європою, Азією, Близьким Сходом, Африкою чи будь-якою іншою країною світу.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- LEAD FORM (SPLIT SCREEN 60/40)[cite: 4] -->
+        <!-- LEAD FORM (SPLIT SCREEN 60/40) -->
         <section class="lead-section" id="contacts" style="background-color: var(--color-light-bg); padding-bottom: 60px;">
             <div class="lead-split container" style="padding: 0;">
                 <div class="lead-split__visual">
@@ -217,7 +254,7 @@
                     </div>
                 </div>
                 <div class="lead-split__form-wrap">
-                    <form class="custom-form js-form" id="car-lead-form" action="mailto:Limonturov@gmail.com" method="post" enctype="text/plain">
+                    <form class="custom-form js-form" id="car-lead-form">
                         <div class="js-reveal">
                             <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin-bottom: 8px;">Індивідуальний запит</h3>
                             <p style="color: #666; margin-bottom: 40px; font-size: 1.125rem;">Заповніть форму, і ми знайдемо для вас найкращий варіант оренди без переплат.</p>
@@ -243,7 +280,7 @@
                 <div class="footer__col">
                     <h4 class="footer__title">Тури</h4>
                     <ul class="footer__nav" role="navigation">
-                        <li><a href="index.html#search-module">Пошук туру</a></li>
+                        <li><a href="search-tour.html">Пошук туру</a></li>
                         <li><a href="hot-tours.html">Гарячі тури</a></li>
                         <li><a href="excursions.html">Екскурсійні тури</a></li>
                         <li><a href="cruises.html">Круїзи</a></li>
@@ -254,7 +291,7 @@
                     <ul class="footer__nav" role="navigation">
                         <li><a href="about.html">Про компанію</a></li>
                         <li><a href="oferta.html">Договір оферти</a></li>
-                        <li><a href="index.html#faq">Поширені питання</a></li>
+                        <li><a href="faq.html">Поширені питання</a></li>
                         <li><a href="index.html#blog">Блог</a></li>
                     </ul>
                 </div>
@@ -294,7 +331,7 @@
             <button class="modal-close js-modal-close" aria-label="Закрити вікно"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             <div class="modal-content">
                 <h3 class="modal-title" id="modal-title">Підібрати тур</h3>
-                <form class="custom-form js-form" id="modal-lead-form" style="max-width: 100%;" action="mailto:Limonturov@gmail.com" method="post" enctype="text/plain">
+                <form class="custom-form js-form" id="modal-lead-form" style="max-width: 100%;">
                     <div class="form-row">
                         <div class="cf-group col-6"><input type="text" class="cf-input" id="modal-destination" name="Destination" required placeholder=" "><label for="modal-destination" class="cf-label">Куди (Країна, курорт)?</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
                         <div class="col-6 flex-align-center counter-group">
