@@ -89,6 +89,15 @@
             .hero-socials-vertical { display: none; } 
             #search-module-wrapper { margin-top: -80px; }
         }
+
+        /* ===== ТОТАЛЬНЫЙ ФИКС ИКОНОК (ПРИБИВАЕМ К ОКНУ) ===== */
+        body .hero-socials, 
+        body .hero-socials-vertical {
+            right: 15px !important; /* Всегда 15px от видимого края твоего монитора */
+            top: 30% !important; /* Смещаем ниже (было 50%) */
+            z-index: 90 !important; /* Оставляем под белой шапкой */
+            margin: 0 !important;
+        }
     </style>
 </head>
 <body class="theme-premium">

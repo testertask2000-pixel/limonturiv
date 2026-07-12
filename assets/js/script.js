@@ -382,32 +382,66 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ========================================================================
-    // 13. MOBILE BURGER MENU
+    // 13. MOBILE BURGER MENU (БРОНЕБОЙНАЯ ВЕРСИЯ)
     // ========================================================================
-    const burger = document.querySelector('.js-burger');
-    const nav = document.querySelector('.header__nav');
+    const initGlobalBurger = () => {
+        const burger = document.querySelector('.js-burger') || document.querySelector('.burger');
+        const nav = document.querySelector('.header__nav') || document.querySelector('.nav');
 
-    if (burger && nav) {
-        burger.addEventListener('click', function() {
-            this.classList.toggle('is-active');
-            nav.classList.toggle('is-active');
-            
-            if(nav.classList.contains('is-active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-        });
+        if (burger && nav) {
+            const newBurger = burger.cloneNode(true);
+            burger.parentNode.replaceChild(newBurger, burger);
 
-        nav.querySelectorAll('.nav__link').forEach(link => {
-            link.addEventListener('click', () => {
-                if(window.innerWidth <= 1150 && !link.parentElement.classList.contains('has-dropdown')) {
-                    burger.classList.remove('is-active');
-                    nav.classList.remove('is-active');
+            newBurger.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.classList.toggle('is-active');
+                nav.classList.toggle('is-active');
+                
+                if (nav.classList.contains('is-active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
                     document.body.style.overflow = '';
                 }
             });
-        });
-    }
 
-});
+            nav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    newBurger.classList.remove('is-active');
+                    nav.classList.remove('is-active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+    };
+    
+    initGlobalBurger();
+    setTimeout(initGlobalBurger, 500);
+
+}); 
+
+// ========================================================================
+    // ИНТЕГРАЦИЯ BINOTEL (Привязка желтой кнопки)
+    // ========================================================================
+    const initBinotelTrigger = () => {
+        const triggers = document.querySelectorAll('.js-binotel-trigger');
+        
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Пробуем открыть окно официальной командой Бинотела (самый надежный способ)
+                if (typeof bingc !== 'undefined' && typeof bingc.showActive === 'function') {
+                    bingc.showActive();
+                } else {
+                    // Резервный метод: пробуем кликнуть по внутреннему контейнеру Бинотела
+                    // Он теперь находится точно под нашей кнопкой
+                    const binotelPassive = document.getElementById('bingc-passive');
+                    if (binotelPassive) binotelPassive.click();
+                }
+            });
+        });
+    };
+    
+    // Запускаем с небольшой задержкой, чтобы Бинотел успел подгрузиться
+    setTimeout(initBinotelTrigger, 2500);

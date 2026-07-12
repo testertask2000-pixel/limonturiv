@@ -1520,3 +1520,228 @@ body .unit-widget-container button {
     background-color: var(--color-primary) !important; 
     color: #000 !important; 
 }
+
+/* ==========================================================================
+   ФИКС БУРГЕРА И РАСКРЫТИЕ ПОДМЕНЮ НА МОБИЛЬНЫХ 
+   (ВСТАВИТЬ В САМЫЙ КОНЕЦ ФАЙЛА STYLE.CSS)
+   ========================================================================== */
+@media screen and (max-width: 1150px) {
+    /* 1. Жестко возвращаем бургер на место */
+    .burger, .js-burger {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        z-index: 1000 !important;
+    }
+
+    /* 2. Раскрываем списки (Туры, Услуги) внутри меню */
+    .has-dropdown {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+    
+    .mega-menu, 
+    .dropdown-simple {
+        position: static !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 15px 0 0 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .mega-menu__inner {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        width: 100% !important;
+    }
+    
+    .mega-menu__list {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 15px !important;
+    }
+    
+    /* 3. Прячем лишние элементы (картинки, стрелочки) в мобильном виде */
+    .mega-menu__title, 
+    .menu-promo,
+    .mega-menu__icon-box,
+    .nav__chevron {
+        display: none !important; 
+    }
+    
+    /* 4. Стилизуем внутренние ссылки, чтобы они выглядели аккуратно */
+    .mega-menu__link, 
+    .dropdown-simple a {
+        font-size: 1.05rem !important;
+        font-weight: 500 !important;
+        color: var(--color-text-muted) !important;
+        padding: 5px !important;
+        background: transparent !important;
+        justify-content: center !important;
+        box-shadow: none !important;
+        text-transform: none !important;
+    }
+    
+    .mega-menu__link:hover, 
+    .dropdown-simple a:hover {
+        color: var(--color-primary-hover) !important;
+        background: transparent !important;
+    }
+}
+
+/* ==========================================================================
+   ПОЛНЫЙ И ОКОНЧАТЕЛЬНЫЙ ФИКС ШАПКИ И ИКОНОК
+   ========================================================================== */
+
+/* 1. Умная шапка (чтобы текст не обрезался и не переносился) */
+.header__container {
+    gap: 15px !important;
+    flex-wrap: nowrap !important;
+}
+.header__nav {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+.nav__list {
+    display: flex !important;
+    /* Умные отступы: плавно уменьшаются на небольших экранах */
+    gap: clamp(10px, 1.5vw, 24px) !important; 
+    flex-wrap: nowrap !important;
+}
+.nav__link {
+    white-space: nowrap !important;
+    /* Умный шрифт: чуть сжимается, чтобы всё влезло в 1 строку */
+    font-size: clamp(0.7rem, 1vw, 0.85rem) !important; 
+}
+
+/* 2. Иконки соцсетей (спасаем от обрезки краем экрана) */
+body .hero-socials { 
+    right: 40px !important; /* Отодвигаем далеко от края */
+    z-index: 90 !important; 
+}
+
+/* 3. Кнопка в шапке (Таблетка) */
+body .header__actions .btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 48px !important; 
+    padding: 0 20px !important;
+    border-radius: 100px !important; 
+    background-color: var(--color-primary) !important;
+    color: #0A0A0A !important;
+    border: none !important;
+    font-weight: 700 !important; 
+    font-family: var(--font-primary) !important;
+    font-size: 0.9rem !important;
+    white-space: nowrap !important; 
+    flex-shrink: 0 !important; /* Запрещаем кнопке сплющиваться */
+}
+body .header__actions .btn span { 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    line-height: normal !important; 
+}
+
+/* 4. Телефон в шапке */
+body .header__phone,
+body .header__phone-main {
+    white-space: nowrap !important;
+    font-size: clamp(0.85rem, 1.2vw, 1rem) !important; 
+}
+
+/* 5. Кнопка ПОИСК (MVoyage) */
+body #search_mvoyage_all input[type="button"],
+body #search_mvoyage_all input[type="submit"],
+body #search_mvoyage_all button,
+body #search_mvoyage_all .btn_search {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 56px !important;
+    width: 100% !important; 
+    padding: 0 32px !important;
+    border-radius: 100px !important; 
+    background-color: var(--color-primary) !important;
+    color: #0A0A0A !important;
+    font-weight: 700 !important;
+    font-family: var(--font-primary) !important;
+    font-size: 1rem !important;
+    text-transform: uppercase !important;
+    border: none !important;
+    cursor: pointer !important;
+    -webkit-appearance: none !important; 
+    margin-top: 15px !important;
+    line-height: normal !important;
+}
+
+/* ==========================================================================
+   СПАСАЕМ ИКОНКИ СОЦСЕТЕЙ (ЖЕСТКАЯ БЛОКИРОВКА ШИРИНЫ ЭКРАНА)
+   ========================================================================== */
+
+html, body {
+    width: 100% !important;
+    max-width: 100% !important; /* Запрещаем странице растягиваться шире видимой части экрана */
+    overflow-x: hidden !important; 
+}
+
+.hero-screen {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+body .hero-socials { 
+    right: 30px !important; /* Принудительно отталкиваем на 30px от края */
+    z-index: 90 !important; 
+}
+/* ==========================================================================
+   ПОДГОТОВКА BINOTEL: Размещаем его под желтой кнопкой
+   ========================================================================= */
+/* Скрываем сам кружок с трубкой и текст (display:none не ломает модалку здесь) */
+#bingc-phone-button,
+#bingc-passive-get-phone-form {
+    display: none !important;
+}
+
+/* Убираем фоны, тени и смещаем родительский блок Бинотела ТОЧНО под желтую кнопку */
+#bingc-passive {
+    background: transparent !important;
+    box-shadow: none !important;
+    
+    position: fixed !important;
+    right: 30px !important; /* Соответствует отступу hero-socials */
+    bottom: 40px !important; /* Соответствует bottom floating-widget */
+    
+    /* Делаем его размер точно как у нашей желтой трубки */
+    width: 64px !important;
+    height: 64px !important;
+    
+    margin: 0 !important;
+    padding: 0 !important;
+    
+    /* Скрываем его от глаз (делаем прозрачным), но оставляем функциональным для скрипта */
+    opacity: 0 !important; 
+    z-index: 100 !important; /* Меньше, чем у нашей желтой кнопки */
+}
+
+/* Убедимся, что наша желтая кнопка сверху */
+.floating-widget .fw-btn--call {
+    z-index: 201 !important;
+}

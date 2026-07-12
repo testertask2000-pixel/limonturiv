@@ -101,6 +101,40 @@
             .burger.is-active .burger__line:nth-child(2) { opacity: 0; }
             .burger.is-active .burger__line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
+        /* ===== ТОТАЛЬНЫЙ ФИКС ИКОНОК (ПРИБИВАЕМ К ОКНУ) ===== */
+        body .hero-socials, 
+        body .hero-socials-vertical {
+            position: fixed !important; /* Отвязываем от страницы, привязываем к экрану */
+            right: 15px !important; /* Всегда 15px от видимого края твоего монитора */
+            top: 30% !important; /* Смещаем ниже (было 50%) */
+            transform: translateY(-50%) scale(0.85) !important; /* Уменьшаем их размер на 15% */
+            z-index: 90 !important; /* Оставляем под белой шапкой */
+            margin: 0 !important;
+        }
+        /* Центрируем текст кнопки и убиваем кривую тень виджета */
+        body #search_mvoyage_all input[type="button"],
+        body #search_mvoyage_all input[type="submit"],
+        body #search_mvoyage_all button,
+        body #search_mvoyage_all .btn_search,
+        body div.os-container .os-form-button,
+        body div.os-container button.os-submit,
+        body .unit-widget-container button,
+        body #searchbut {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            height: 56px !important;
+            padding: 0 !important;
+            line-height: normal !important; /* Сброс кривого интервала */
+            color: #0A0A0A !important; /* Делаем текст черным, как в шапке */
+            text-shadow: none !important; /* УБИВАЕМ белую тень, которая косит текст */
+            font-weight: 800 !important;
+            font-size: 1rem !important;
+            border-radius: 100px !important; 
+            -webkit-appearance: none !important;
+            background: var(--color-primary) !important;
+            text-transform: uppercase !important;
+        }
     </style>
 </head>
 <body class="theme-premium">
