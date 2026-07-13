@@ -445,3 +445,84 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Запускаем с небольшой задержкой, чтобы Бинотел успел подгрузиться
     setTimeout(initBinotelTrigger, 2500);
+
+    /* ==========================================================================
+   ГЛОБАЛЬНА ВІДПРАВКА ВСІХ ФОРМ ЧЕРЕЗ FORMSPREE
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', function() {
+    // ЄДИНИЙ ключ для всього сайту
+    const formspreeEndpoint = 'https://formspree.io/f/mnjkeezq'; 
+
+    // Знаходимо всі форми на сайті, у яких є клас js-form
+    const forms = document.querySelectorAll('form.js-form'); 
+    
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Зупиняємо стандартну відправку (щоб сторінка не стрибала)
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            
+            // Показуємо, що йде відправка
+            submitBtn.innerText = 'Відправка...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+
+            fetch(formspreeEndpoint, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Дякуємо! Ваша заявка успішно відправлена.');
+                    form.reset(); // Очищуємо поля
+                    
+                    // Якщо форма була в модалці - автоматично закриваємо її
+                    const modal = form.closest('.js-modal');
+                    if(modal) {
+                        modal.classList.remove('is-open');
+                        document.body.classList.remove('modal-open-lock');
+                    }
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            alert('Помилка: ' + data.errors.map(error => error.message).join(', '));
+                        } else {
+                            alert('Упс! Виникла помилка при відправці.');
+                        }
+                    })
+                }
+            })
+            .catch(error => {
+                alert('Помилка з\'єднання. Перевірте інтернет та спробуйте ще раз.');
+            })
+            .finally(() => {
+                // Повертаємо кнопку в нормальний стан
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            });
+        });
+    });
+});
+
+/* ==========================================================================
+   ПЕРЕХОД НА ГЛАВНУЮ ПРИ КЛИКЕ НА ЛОГО (ВЕРХ / НИЗ)
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', function() {
+    // Находим верхний и нижний логотипы по их классам
+    const logos = document.querySelectorAll('.header__logo, .footer__logo');
+    
+    logos.forEach(logo => {
+        // Делаем так, чтобы при наведении на нижний логотип появлялся пальчик (как у ссылки)
+        logo.style.cursor = 'pointer';
+        
+        logo.addEventListener('click', function(e) {
+            e.preventDefault(); // Отменяем дефолтный переход, если это была кривая ссылка
+            window.location.href = 'index.html'; // Жестко перенаправляем на главную
+        });
+    });
+});

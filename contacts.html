@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Контакти | Лимон Турів</title>
-    <meta name="description" content="Зв'яжіться з нами. Турагентство Лимон Турів у Павлограді та Ірпені. Підбір турів, консультації, підтримка 24/7.">
+    <meta name="description" content="Зв'яжіться з нами. Контакти турагентства Лимон Турів: телефони, адреса, email, соцмережі. Заповніть форму зворотного зв'язку.">
     
     <link rel="icon" type="image/x-icon" href="assets/about/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/about/favicon.ico">
@@ -14,87 +14,233 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Unbounded:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="assets/css/style.css">
-    
+
+    <!-- СПЕЦИФІЧНІ СТИЛІ ДЛЯ СТОРІНКИ КОНТАКТІВ (Відповідно до макету) -->
     <style>
         :root {
             --color-primary: #FFEC00 !important;
             --color-primary-hover: #E5D400 !important;
+            --color-dark: #1A1A1A;
+            --color-border: #E4E4E4;
+            --color-bg-light: #F7F9FC;
         }
 
-        /* Хедер */
-        .header { background-color: #FFFFFF !important; padding: 12px 0 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important; border-bottom: none !important; }
-        .header__logo img { filter: none !important; height: 40px !important; }
-        .nav__link { color: #1A1A1A !important; font-size: 0.85rem !important; } 
-        .header__phone { color: #1A1A1A !important; }
-        .burger__line { background-color: #1A1A1A !important; }
-        .lang-switcher { background: #F7F9FC !important; }
-        .lang-btn { color: #666 !important; }
-        .lang-btn.is-active { color: #0A0A0A !important; background: #fff !important; box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;}
-
+        /* Герой */
         .hero-screen__title { font-family: var(--font-primary) !important; font-size: clamp(2.5rem, 5vw, 4.5rem) !important; font-weight: 800 !important; letter-spacing: -0.5px !important; text-transform: none !important; color: #fff; text-shadow: 0 10px 30px rgba(0,0,0,0.6); }
-        .hero-screen--inner { min-height: 40vh; padding-bottom: 20px; }
-        
-        /* Блок контактів */
-        .contacts-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: start; }
-        .contact-info-card { background: var(--color-white); padding: 40px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #EAEAEA; }
-        .contact-info-card h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 32px; color: var(--color-dark); }
-        .contact-row { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
-        .contact-row svg { stroke: var(--color-primary); flex-shrink: 0; margin-top: 4px; }
-        .contact-row a, .contact-row address { font-size: 1.125rem; font-weight: 600; color: var(--color-dark); font-style: normal; line-height: 1.5; transition: var(--transition-fast); }
-        .contact-row a:hover { color: var(--color-primary-hover); }
-        .map-container { width: 100%; height: 600px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
-        
-        /* Lead Form (60/40) */
-        .lead-split { display: flex; flex-direction: row; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg); }
-        .lead-split__visual { flex: 0 0 60%; position: relative; overflow: hidden;}
-        .lead-split__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-        .lead-split__visual-content { position: relative; z-index: 1; padding: 60px; height: 100%; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); }
-        .lead-split__form-wrap { flex: 0 0 40%; background-color: #F7F9FC !important; padding: 60px 40px !important; display: flex; align-items: center; justify-content: center;}
-        #main-lead-form .cf-label { color: #666 !important; }
-        #main-lead-form .cf-input { color: #1A1A1A !important; border-bottom-color: #CCC !important; }
-        #main-lead-form h3 { color: #1A1A1A !important; }
-        .cf-input:focus ~ .cf-label, .cf-input:not(:placeholder-shown) ~ .cf-label { top: -12px; font-size: 0.75rem; color: var(--color-dark) !important; text-transform: uppercase; font-weight: 700; }
-        .cf-line { background-color: var(--color-dark) !important; }
+        .hero-screen--inner { min-height: 40vh; padding-bottom: 40px; }
 
-        /* Модалка */
-        .modal-dialog { background-color: #F7F9FC !important; }
-        .modal-title, .cf-label { color: #1A1A1A !important; }
-        .cf-input { color: #1A1A1A !important; border-bottom-color: #CCCCCC !important; }
-        .ui-checkbox { color: #1A1A1A !important; }
-        .ui-counter, .ui-counter button { border-color: #DDD !important; background-color: #FFF !important; color: #1A1A1A !important; }
-        .ui-counter input { color: #1A1A1A !important; }
-        .checkmark { border-color: #CCC !important; background-color: #FFF !important; }
-        .modal-close { background-color: rgba(0,0,0,0.05) !important; color: #1A1A1A !important; }
-        .modal-close:hover { background-color: var(--color-primary) !important; }
-
-        @media (max-width: 1024px) {
-            .contacts-grid { grid-template-columns: 1fr; } 
-            .map-container { height: 400px; }
-            .lead-split { flex-direction: column; }
-            .lead-split__visual, .lead-split__form-wrap { flex: 1 1 100%; width: 100%; }
-            .lead-split__visual { height: 400px; }
+        /* Контакти Grid */
+        .contacts-page-wrapper {
+            padding: 80px 0;
+            background-color: var(--color-bg-light);
         }
-        @media (max-width: 991px) {
-            .header__contacts, .header .btn--solid-yellow { display: none !important; }
-            .header__logo img { max-width: 120px !important; }
-            .header__actions { gap: 15px; }
-            .hero-screen { padding-top: 150px !important; }
-            .hero-screen__title { font-size: 2.2rem !important; }
-            .header__nav { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background-color: var(--color-white); z-index: 999; padding: 100px 20px 40px; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); overflow-y: auto; }
-            .header__nav.is-active { right: 0; }
-            .nav__list { flex-direction: column; align-items: center; gap: 24px; width: 100%; display: flex !important; }
-            .nav__link { color: var(--color-dark) !important; font-size: 1.25rem !important; font-weight: 700; }
-            .nav__chevron { display: none; }
-            .burger { position: relative; z-index: 1000; display: flex; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; }
-            .burger__line { width: 30px; height: 2px; background-color: var(--color-dark) !important; transition: all 0.3s ease; }
-            .burger.is-active .burger__line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .burger.is-active .burger__line:nth-child(2) { opacity: 0; }
-            .burger.is-active .burger__line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        .contacts-grid-top {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        /* Ліва панель (Інфо) */
+        .contacts-info-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid var(--color-border);
+        }
+
+        .contact-group { margin-bottom: 24px; }
+        .contact-group:last-child { margin-bottom: 0; }
+        
+        .contact-group h4 {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin-bottom: 12px;
+        }
+
+        .contact-group p {
+            font-size: 0.95rem;
+            color: #4A4A4A;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--color-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover { color: var(--color-primary-hover); }
+        .contact-link svg { stroke: #666; transition: stroke 0.3s ease; }
+        .contact-link:hover svg { stroke: var(--color-primary-hover); }
+
+        .ci-divider {
+            border: none;
+            border-top: 1px solid var(--color-border);
+            margin: 24px 0;
+        }
+
+        /* Соцмережі */
+        .social-row { display: flex; gap: 12px; }
+        .social-circle {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        .social-circle:hover { transform: translateY(-3px); }
+        .bg-fb { background: #1877F2; }
+        .bg-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .bg-tg { background: #2AABEE; }
+        .bg-vb { background: #7360F2; }
+
+        /* Права панель (Форма) */
+        .contacts-form-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid var(--color-border);
+        }
+
+        .contacts-form-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin-bottom: 24px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .form-full { grid-column: span 2; }
+
+        .input-wrap { position: relative; }
+        .input-box {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            background: #FAFAFA;
+            font-size: 1rem;
+            color: var(--color-dark);
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+        .input-box:focus {
+            background: #fff;
+            border-color: var(--color-primary);
+            outline: none;
+        }
+        .textarea-box {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Лейбли як плейсхолдери (анімація) */
+        .input-label {
+            position: absolute;
+            left: 16px;
+            top: 14px;
+            color: #999;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+        .input-box:focus ~ .input-label,
+        .input-box:not(:placeholder-shown) ~ .input-label {
+            top: -10px;
+            left: 12px;
+            font-size: 0.75rem;
+            background: #fff;
+            padding: 0 4px;
+            color: var(--color-dark);
+            font-weight: 700;
+        }
+
+        .btn-submit-form {
+            background: var(--color-primary);
+            color: var(--color-dark);
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 32px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            margin-top: 12px;
+            font-family: var(--font-primary);
+        }
+        .btn-submit-form:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Карта */
+        .map-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            height: 400px;
+        }
+        /* Карта */
+        .map-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            height: 400px;
+            position: relative;
+        }
+        
+        /* Жорстко перебиваємо глобальний height: auto для iframe */
+        .map-container iframe {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            min-height: 400px !important;
+        }
+
+        /* Адаптивність */
+        @media (max-width: 992px) {
+            .contacts-grid-top { grid-template-columns: 1fr; }
+            .contacts-info-card { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+            .ci-divider { display: none; }
+        }
+        @media (max-width: 600px) {
+            .contacts-info-card { grid-template-columns: 1fr; }
+            .ci-divider { display: block; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-full { grid-column: span 1; }
+            .contacts-form-card { padding: 24px; }
         }
     </style>
 </head>
 <body class="theme-premium">
 
+    <!-- GLOBAL LOADER -->
     <div id="global-loader" class="loader" aria-hidden="true">
         <div class="loader__brand">
             <img src="assets/hero/logo1.png" alt="Завантаження Лимон Турів" width="200" height="auto" class="loader__logo" onerror="this.src='assets/img/logo.png'">
@@ -110,7 +256,7 @@
     <!-- HEADER -->
     <header class="header js-header" role="banner">
         <div class="container header__container">
-            <a href="/" class="header__logo" aria-label="Головна сторінка Лимон Турів">
+            <a href="index.html" class="header__logo" aria-label="Головна сторінка Лимон Турів">
                 <img src="assets/hero/logo1.png" alt="Лимон Турів" width="180" height="auto" class="logo-img" onerror="this.src='assets/img/logo.png'">
             </a>
             <nav class="header__nav nav" role="navigation" aria-label="Головне меню">
@@ -134,18 +280,17 @@
                         </div>
                     </li>
                     <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="#services" class="nav__link">Послуги
+                        <a href="index.html#services" class="nav__link">Послуги
                             <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                         </a>
                         <ul class="dropdown-simple" role="menu">
                             <li role="none"><a href="hotels.html" role="menuitem">Готелі</a></li>
                             <li role="none"><a href="flights.html" role="menuitem">Авіаквитки</a></li>
-                            
                         </ul>
                     </li>
                     <li class="nav__item"><a href="about.html" class="nav__link">Про компанію</a></li>
                     <li class="nav__item"><a href="faq.html" class="nav__link">Поширені питання</a></li>
-                    <li class="nav__item"><a href="contacts.html" class="nav__link" style="color: var(--color-primary) !important; font-weight: 800;">Контакти</a></li>
+                    <li class="nav__item"><a href="contacts.html" class="nav__link" style="color: var(--color-primary) !important;">Контакти</a></li>
                 </ul>
             </nav>
             <div class="header__actions">
@@ -166,137 +311,122 @@
 
     <main id="main-content" role="main">
         
+        <!-- HERO -->
         <section class="hero-screen hero-screen--inner">
             <div class="hero-screen__bg">
-                <!-- ОНОВЛЕНЕ ФОТО ДЛЯ КОНТАКТІВ -->
-                <img src="assets/hero/hero-main.webp" alt="Зв'язатися з нами" class="hero-screen__img" style="object-position: center;" fetchpriority="high" onerror="this.src='assets/img/50571182.jpg'">
-                <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);"></div>
+                <img src="assets/hero/hero-main.webp" alt="Контакти Лимон Турів" class="hero-screen__img" style="object-position: center;" fetchpriority="high" onerror="this.src='assets/img/Egypt_main.jpg'">
+                <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%);"></div>
             </div>
-
             <div class="container hero-screen__container">
                 <div class="hero-screen__content text-center" style="margin-bottom: 0;">
                     <h1 class="hero-screen__title js-split-text">
-                        <span class="text-gradient">КОНТАКТИ</span>
+                        НАШІ <span class="text-gradient">КОНТАКТИ</span>
                     </h1>
                 </div>
             </div>
         </section>
 
-        <!-- ІНФОРМАЦІЯ ПРО ОФІСИ ТА КАРТА -->
-        <section class="section bg-light" style="position: relative; z-index: 100; padding-top: 80px;">
+        <!-- CONTACTS SECTION (Відповідно до макету) -->
+        <section class="contacts-page-wrapper">
             <div class="container">
-                <div class="contacts-grid">
+                
+                <div class="contacts-grid-top js-reveal">
                     
-                    <div class="contact-info-card js-reveal">
-                        <h3>Зв'яжіться з нами</h3>
+                    <!-- ЛІВА ПАНЕЛЬ (Інформація) -->
+                    <div class="contacts-info-card">
                         
-                        <div class="contact-row">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            <div>
-                                <a href="tel:+380995337227" style="display:block;">+38 (099) 533-72-27</a>
-                                <a href="tel:+380995337447" style="display:block; margin-top:8px;">+38 (099) 533-74-47</a>
+                        <div class="contact-group">
+                            <h4>Адреса</h4>
+                            <p>м. Павлоград<br>м. Ірпінь / Буча / Гостомель / Ворзель</p>
+                        </div>
+                        
+                        <div class="contact-group">
+                            <h4>Зв'язок</h4>
+                            <div class="contact-links">
+                                <a href="tel:+380995337227" class="contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    +38 (099) 533-72-27
+                                </a>
+                                <a href="tel:+380995337447" class="contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    +38 (099) 533-74-47
+                                </a>
+                                <a href="mailto:info@limonturov.com" class="contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    info@limonturov.com
+                                </a>
                             </div>
                         </div>
 
-                        <div class="contact-row">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            <address>
-                                м. Павлоград<br>
-                                м. Ірпінь / Буча / Гостомель / Ворзель
-                            </address>
+                        <hr class="ci-divider">
+
+                        <div class="contact-group">
+                            <h4>Соцмережі</h4>
+                            <div class="social-row">
+                                <a href="https://www.facebook.com/limon.turov/" target="_blank" class="social-circle bg-fb" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
+                                <a href="https://www.instagram.com/limon.turiv" target="_blank" class="social-circle bg-ig" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                                <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="social-circle bg-tg" aria-label="Telegram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
+                                <a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" class="social-circle bg-vb" aria-label="Viber"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a>
+                            </div>
                         </div>
 
-                        <div class="contact-row">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                            <a href="mailto:Limonturov@gmail.com">Limonturov@gmail.com</a>
-                        </div>
-
-                        <h3 style="margin-top: 48px; margin-bottom: 24px;">Ми у соцмережах</h3>
-                        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                            <a href="https://www.facebook.com/limon.turov/" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; border: 1px solid #EAEAEA; color: var(--color-dark); transition: all 0.3s ease;" onmouseover="this.style.background='#FFEC00'; this.style.borderColor='#FFEC00';" onmouseout="this.style.background='transparent'; this.style.borderColor='#EAEAEA';">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
-                            </a>
-                            <a href="https://www.instagram.com/limon.turiv" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; border: 1px solid #EAEAEA; color: var(--color-dark); transition: all 0.3s ease;" onmouseover="this.style.background='#FFEC00'; this.style.borderColor='#FFEC00';" onmouseout="this.style.background='transparent'; this.style.borderColor='#EAEAEA';">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>
-                            </a>
-                            <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; border: 1px solid #EAEAEA; color: var(--color-dark); transition: all 0.3s ease;" onmouseover="this.style.background='#FFEC00'; this.style.borderColor='#FFEC00';" onmouseout="this.style.background='transparent'; this.style.borderColor='#EAEAEA';">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                            </a>
-                            <a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; border: 1px solid #EAEAEA; color: var(--color-dark); transition: all 0.3s ease;" onmouseover="this.style.background='#FFEC00'; this.style.borderColor='#FFEC00';" onmouseout="this.style.background='transparent'; this.style.borderColor='#EAEAEA';">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg>
-                            </a>
-                        </div>
                     </div>
 
-                    <!-- Мапа -->
-                    <div class="map-container js-reveal" style="transition-delay: 0.2s">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d168536.87786481745!2d35.74836696569106!3d48.52924041764669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d99b7dfb5f9227%3A0xc3b8b60f27426177!2z0J_QsNCy0LvQvtCz0YDQsNC0LCDQlNC90ZbQv9GA0L7Qv9C10YLRgNC-0LLRgdGM0LrQsCDQvtCx0LvQsNGB0YLRjCwgNTE0MDA!5e0!3m2!1suk!2sua!4v1717200000000!5m2!1suk!2sua" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" aria-label="Карта з адресою"></iframe>
+                    <!-- ПРАВА ПАНЕЛЬ (Форма) -->
+                    <div class="contacts-form-card">
+                        <h4>Зворотній зв'язок</h4>
+                        <form id="contact-form-main" action="mailto:info@limonturov.com" method="post" enctype="text/plain">
+                            
+                            <div class="form-grid">
+                                <div class="input-wrap">
+                                    <input type="text" id="fc-name" name="Name" class="input-box" required placeholder=" ">
+                                    <label for="fc-name" class="input-label">Ім'я*</label>
+                                </div>
+                                <div class="input-wrap">
+                                    <input type="email" id="fc-email" name="Email" class="input-box" required placeholder=" ">
+                                    <label for="fc-email" class="input-label">Email*</label>
+                                </div>
+                                <div class="input-wrap">
+                                    <!-- js-phone-mask залишається для вашого скрипта маски -->
+                                    <input type="tel" id="fc-phone" name="Phone" class="input-box js-phone-mask" required placeholder=" ">
+                                    <label for="fc-phone" class="input-label">Телефон*</label>
+                                </div>
+                                <div class="input-wrap">
+                                    <input type="text" id="fc-theme" name="Theme" class="input-box" placeholder=" ">
+                                    <label for="fc-theme" class="input-label">Тема</label>
+                                </div>
+                                <div class="input-wrap form-full">
+                                    <textarea id="fc-message" name="Message" class="input-box textarea-box" required placeholder=" "></textarea>
+                                    <label for="fc-message" class="input-label">Повідомлення*</label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-submit-form">Відправити</button>
+
+                        </form>
                     </div>
 
                 </div>
-            </div>
-        </section>
 
-        <!-- LEAD FORM ЗВОРОТНІЙ ЗВ'ЯЗОК -->
-        <section class="lead-section" id="lead-form-contacts" style="background-color: var(--color-light-bg); padding-bottom: 80px;">
-            <div class="lead-split container" style="padding: 0;">
-                <div class="lead-split__visual">
-                    <img src="assets/hero/hero-bus.webp" alt="Зворотній зв'язок" class="lead-split__img" loading="lazy" onerror="this.src='assets/img/50571182.jpg'">
-                    <div class="lead-split__visual-content js-reveal" style="background: linear-gradient(to right, rgba(0,0,0,0.7), transparent);">
-                        <h2 class="h1" style="line-height: 1.1; color: #fff;">Напишіть<br><span class="text-primary">нам</span></h2>
-                    </div>
+                <!-- КАРТА (На всю ширину під сіткою) -->
+                <!-- КАРТА (На всю ширину під сіткою, нормальний масштаб) -->
+                <div class="map-container js-reveal">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2645.719782500854!2d35.867204!3d48.514682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dfac315fbbbbbb%3A0x1111111111111111!2z0LLRg9C70LjRhtGPINCd0LXQt9Cw0LvQtdC20L3QvtGB0YLRliwgMTY2LCDQn9Cw0LLQu9C-0LPRgNCw0LQsINCU0L3RltC_0YDQvtC_0LXRgtGA0L7QstGB0YzQutCwINC-0LHQu9Cw0YHRgtGMLCA1MTQwMA!5e0!3m2!1suk!2sua!4v1700000000000!5m2!1suk!2sua" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
-                <div class="lead-split__form-wrap">
-                    <form class="custom-form js-form" id="main-lead-form">
-                        <div class="js-reveal">
-                            <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin-bottom: 8px;">Форма зворотнього зв'язку</h3>
-                            <p style="color: #666; margin-bottom: 40px; font-size: 1.125rem;">Залиште свої контакти і ми зателефонуємо вам найближчим часом.</p>
-                        </div>
-
-                        <div class="cf-group js-reveal">
-                            <input type="text" id="lf-name" name="Name" class="cf-input" required placeholder=" ">
-                            <label for="lf-name" class="cf-label">Ваше ім'я</label>
-                            <span class="cf-line"></span>
-                        </div>
-                        
-                        <div class="cf-group js-reveal" style="transition-delay: 0.1s">
-                            <input type="tel" id="lf-phone" name="Phone" class="cf-input js-phone-mask" required placeholder=" ">
-                            <label for="lf-phone" class="cf-label">Номер телефону</label>
-                            <span class="cf-line"></span>
-                        </div>
-                        
-                        <div class="cf-group js-reveal" style="transition-delay: 0.2s">
-                            <textarea id="lf-details" name="Message" class="cf-input cf-textarea" rows="3" placeholder=" "></textarea>
-                            <label for="lf-details" class="cf-label">Ваше повідомлення або запитання</label>
-                            <span class="cf-line"></span>
-                        </div>
-
-                        <div class="js-reveal" style="transition-delay: 0.4s; margin-top: 32px;">
-                            <button type="submit" class="btn btn--solid-yellow btn--full">
-                                ВІДПРАВИТИ ПОВІДОМЛЕННЯ
-                            </button>
-                        </div>
-                    </form>
-                </div>
             </div>
         </section>
 
     </main>
 
     <!-- FOOTER -->
-    <footer class="footer js-reveal" itemscope itemtype="https://schema.org/TravelAgency" style="position: relative; z-index: 10; background-color: var(--color-dark);">
+    <footer class="footer js-reveal" itemscope itemtype="https://schema.org/TravelAgency" style="position: relative; z-index: 100; background-color: var(--color-dark);">
         <div class="container">
             <div class="footer__grid">
-                
                 <div class="footer__col footer__col--brand">
                     <img src="assets/hero/logo1.png" alt="Лимон Турів" class="footer__logo" itemprop="image" onerror="this.src='assets/img/logo.png'">
-                    <p class="footer__desc mt-4">
-                        <span itemprop="name" style="display:none;">Лимон Турів</span>
-                        <span itemprop="description">Ми створюємо ідеальні подорожі, враховуючи всі ваші побажання. Ваша відпустка буде огорнута турботою 24/7.</span>
-                    </p>
+                    <p class="footer__desc mt-4"><span itemprop="name" style="display:none;">Лимон Турів</span><span itemprop="description">Ми створюємо ідеальні подорожі, враховуючи всі ваші побажання. Ваша відпустка буде огорнута турботою 24/7.</span></p>
                 </div>
-
                 <div class="footer__col">
                     <h4 class="footer__title">Тури</h4>
                     <ul class="footer__nav" role="navigation">
@@ -306,142 +436,72 @@
                         <li><a href="cruises.html">Круїзи</a></li>
                     </ul>
                 </div>
-
                 <div class="footer__col">
                     <h4 class="footer__title">Інформація</h4>
                     <ul class="footer__nav" role="navigation">
                         <li><a href="about.html">Про компанію</a></li>
                         <li><a href="oferta.html">Договір оферти</a></li>
-                        <li><a href="index.html#services">Послуги</a></li>
                         <li><a href="faq.html">Поширені питання</a></li>
+                        <li><a href="index.html#blog">Блог</a></li>
                     </ul>
                 </div>
-
                 <div class="footer__col footer__col--contacts">
                     <h4 class="footer__title">Контакти</h4>
                     <ul class="footer__contact-list">
-                        <li>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            <div class="phones">
-                                <a href="tel:+380995337227" itemprop="telephone">+38-099-533-7227</a>
-                                <a href="tel:+380995337447" itemprop="telephone">+38-099-533-7447</a>
-                            </div>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <div class="phones"><a href="tel:+380995337227" itemprop="telephone">+38-099-533-7227</a><a href="tel:+380995337447" itemprop="telephone">+38-099-533-7447</a></div>
                         </li>
-                        <li>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" style="font-style: normal; line-height: 1.6;">
-                                <span itemprop="addressLocality">м. Павлоград</span><br>
-                                <span>м. Ірпінь / Буча / Гостомель / Ворзель</span>
-                            </address>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" style="font-style: normal; line-height: 1.6;"><span itemprop="addressLocality">м. Павлоград</span><br><span>м. Ірпінь / Буча / Гостомель / Ворзель</span></address>
                         </li>
                     </ul>
-                    
                     <div class="footer__socials mt-4">
-                        <a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
-                        <a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
-                        <a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a>
+                        <a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
+                        <a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
+                        <a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a>
                     </div>
                 </div>
-
             </div>
-
             <div class="footer__bottom">
-                <p>© <span id="current-year">2026</span> Лимон Турів. Всі права захищені. <a href="oferta.html" style="color: var(--color-text-muted); text-decoration: underline; margin-left: 10px;">Договір оферти</a></p>
-                <div class="footer__lang-switch">
-                    <a href="#" class="active" aria-label="Українська мова">УКР</a>
-                    <span style="margin: 0 8px; color: var(--color-dark-border);">|</span>
-                    <a href="#" aria-label="Русский язык">РУС</a>
-                </div>
+                <p>© <span id="current-year-contacts">2026</span> Лимон Турів. Всі права захищені. <a href="oferta.html" style="color: var(--color-text-muted); text-decoration: underline; margin-left: 10px;">Договір оферти</a></p>
+                <div class="footer__lang-switch"><a href="#" class="active">УКР</a><span style="margin: 0 8px; color: var(--color-dark-border);">|</span><a href="#">РУС</a></div>
             </div>
         </div>
     </footer>
 
     <!-- ПЛАВАЮЧІ ВІДЖЕТИ -->
     <div class="floating-widget" role="complementary" aria-label="Віджети зв'язку">
-        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Написати в Telegram">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-        </a>
-        <button class="fw-btn fw-btn--call js-binotel-trigger" aria-label="Замовити зворотній дзвінок">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span class="fw-btn__tooltip">Замовити дзвінок (Binotel)</span>
-        </button>
+        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Написати в Telegram"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
+        <button class="fw-btn fw-btn--call js-binotel-trigger" aria-label="Замовити зворотній дзвінок"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="fw-btn__tooltip">Замовити дзвінок (Binotel)</span></button>
     </div>
 
     <!-- МОДАЛЬНЕ ВІКНО -->
     <div class="modal-backdrop js-modal" id="modal-tour" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-dialog">
-            <button class="modal-close js-modal-close" aria-label="Закрити вікно">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
+            <button class="modal-close js-modal-close" aria-label="Закрити вікно"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             <div class="modal-content">
                 <h3 class="modal-title" id="modal-title">Підібрати тур</h3>
-                <form class="custom-form js-form" id="modal-lead-form">
+                <form class="custom-form js-form" id="modal-lead-form" style="max-width: 100%;">
                     <div class="form-row">
-                        <div class="cf-group col-6">
-                            <input type="text" class="cf-input" id="modal-destination" name="Destination" required placeholder=" ">
-                            <label for="modal-destination" class="cf-label">Куди (Країна, курорт)?</label>
-                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
-                        </div>
+                        <div class="cf-group col-6"><input type="text" class="cf-input" id="modal-destination" name="Destination" required placeholder=" "><label for="modal-destination" class="cf-label">Куди (Країна, курорт)?</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
                         <div class="col-6 flex-align-center counter-group">
                             <label class="mr-2" style="color: #666;">Дорослі</label>
-                            <div class="ui-counter">
-                                <button type="button" class="js-count-minus" aria-label="Зменшити">-</button>
-                                <input type="number" name="Adults" value="2" min="1" max="10" readonly aria-label="Кількість дорослих">
-                                <button type="button" class="js-count-plus" aria-label="Збільшити">+</button>
-                            </div>
+                            <div class="ui-counter"><button type="button" class="js-count-minus">-</button><input type="number" name="Adults" value="2" min="1" max="10" readonly><button type="button" class="js-count-plus">+</button></div>
                             <label class="mx-2" style="color: #666;">та діти</label>
-                            <div class="ui-counter">
-                                <button type="button" class="js-count-minus" aria-label="Зменшити">-</button>
-                                <input type="number" name="Children" value="0" min="0" max="5" readonly aria-label="Кількість дітей">
-                                <button type="button" class="js-count-plus" aria-label="Збільшити">+</button>
-                            </div>
+                            <div class="ui-counter"><button type="button" class="js-count-minus">-</button><input type="number" name="Children" value="0" min="0" max="5" readonly><button type="button" class="js-count-plus">+</button></div>
                         </div>
                     </div>
                     <div class="form-row mt-4">
-                        <div class="cf-group col-6" style="position: relative;">
-                            <input type="text" class="cf-input js-date-mask" id="modal-date" name="Date" placeholder=" " required>
-                            <label for="modal-date" class="cf-label">Дата вильоту (дд.мм.рррр)</label>
-                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
-                            <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        </div>
-                        <div class="col-6 flex-align-center">
-                            <label class="ui-checkbox">
-                                <input type="checkbox" name="flex_dates" checked value="Yes">
-                                <span class="checkmark"></span>Можливі інші дати (±3 дні)
-                            </label>
-                        </div>
+                        <div class="cf-group col-6" style="position: relative;"><input type="text" class="cf-input js-date-mask" id="modal-date" name="Date" placeholder=" " required><label for="modal-date" class="cf-label">Дата вильоту (дд.мм.рррр)</label><span class="cf-line" style="background-color: var(--color-dark);"></span><svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                        <div class="col-6 flex-align-center"><label class="ui-checkbox"><input type="checkbox" name="flex_dates" checked value="Yes"><span class="checkmark"></span>Можливі інші дати (±3 дні)</label></div>
                     </div>
-                    <div class="cf-group mt-4">
-                        <input type="text" class="cf-input" id="modal-duration" name="Duration" placeholder=" " required>
-                        <label for="modal-duration" class="cf-label">Тривалість (напр., 7-10 ночей)</label>
-                        <span class="cf-line" style="background-color: var(--color-dark);"></span>
-                    </div>
+                    <div class="cf-group mt-4"><input type="text" class="cf-input" id="modal-duration" name="Duration" placeholder=" " required><label for="modal-duration" class="cf-label">Тривалість (напр., 7-10 ночей)</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
                     <div class="form-row mt-4">
-                        <div class="cf-group col-6">
-                            <input type="text" class="cf-input" id="modal-name" name="Name" required placeholder=" ">
-                            <label for="modal-name" class="cf-label">Ваше ім'я *</label>
-                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
-                        </div>
-                        <div class="cf-group col-6">
-                            <input type="tel" class="cf-input js-phone-mask" id="modal-phone" name="Phone" required placeholder=" ">
-                            <label for="modal-phone" class="cf-label">Телефон *</label>
-                            <span class="cf-line" style="background-color: var(--color-dark);"></span>
-                        </div>
+                        <div class="cf-group col-6"><input type="text" class="cf-input" id="modal-name" name="Name" required placeholder=" "><label for="modal-name" class="cf-label">Ваше ім'я *</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
+                        <div class="cf-group col-6"><input type="tel" class="cf-input js-phone-mask" id="modal-phone" name="Phone" required placeholder=" "><label for="modal-phone" class="cf-label">Телефон *</label><span class="cf-line" style="background-color: var(--color-dark);"></span></div>
                     </div>
-                    <div class="cf-group mt-4">
-                        <input type="email" class="cf-input" id="modal-email" name="Email" placeholder=" ">
-                        <label for="modal-email" class="cf-label">E-mail (необов'язково)</label>
-                        <span class="cf-line" style="background-color: var(--color-dark);"></span>
-                    </div>
-                    <div class="cf-group mt-4">
-                        <textarea class="cf-input cf-textarea" id="modal-details" name="Details" rows="2" placeholder=" "></textarea>
-                        <label for="modal-details" class="cf-label">Побажання (категорія готелю, бюджет...)</label>
-                        <span class="cf-line" style="background-color: var(--color-dark);"></span>
-                    </div>
-                    <div class="text-center mt-4">
-                        <button type="submit" class="btn btn--solid-yellow btn--wide">Відправити запит</button>
-                    </div>
+                    <div class="text-center mt-4"><button type="submit" class="btn btn--solid-yellow btn--wide">Відправити запит</button></div>
                 </form>
             </div>
         </div>
@@ -449,48 +509,9 @@
 
     <script src="assets/js/script.js"></script>
     <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        /* Перемикач мов */
-        document.addEventListener('DOMContentLoaded', () => {
-            const langSwitchers = document.querySelectorAll('.lang-switcher');
-            langSwitchers.forEach(switcher => {
-                const btns = switcher.querySelectorAll('.lang-btn');
-                btns.forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        if (this.classList.contains('is-active')) return;
-                        const selectedLang = this.textContent.trim().toLowerCase();
-                        let currentPath = window.location.pathname;
-                        let currentFile = currentPath.split('/').pop() || 'contacts.html'; 
-                        let newUrl = '';
-                        if (selectedLang === 'ru') {
-                            if (!currentFile.includes('-ru')) {
-                                newUrl = currentFile.replace('.html', '-ru.html');
-                                if(currentFile === '') newUrl = 'contacts-ru.html'; 
-                            }
-                        } else {
-                            if (currentFile.includes('-ru')) {
-                                newUrl = currentFile.replace('-ru.html', '.html');
-                            }
-                        }
-                        if (newUrl) window.location.href = newUrl;
-                    });
-                });
-            });
-        });
-
-        /* Примусове приховання лоадера */
-        function hideGlobalLoader() {
-            const loader = document.getElementById('global-loader');
-            if (loader && loader.style.display !== 'none') {
-                loader.style.opacity = '0';
-                loader.style.transition = 'opacity 0.5s ease';
-                setTimeout(() => { loader.style.display = 'none'; }, 500);
-            }
-        }
-        window.addEventListener('load', hideGlobalLoader);
-        setTimeout(hideGlobalLoader, 3500);
+        document.getElementById('current-year-contacts').textContent = new Date().getFullYear();
+        function hideGlobalLoader() { const loader = document.getElementById('global-loader'); if (loader && loader.style.display !== 'none') { loader.style.opacity = '0'; loader.style.transition = 'opacity 0.5s ease'; setTimeout(() => { loader.style.display = 'none'; }, 500); } }
+        window.addEventListener('load', hideGlobalLoader); setTimeout(hideGlobalLoader, 3500);
     </script>
 </body>
 </html>

@@ -249,14 +249,11 @@
 
     <main id="main-content" role="main">
         
-        <section class="hero-screen hero-screen--inner">
-            <div class="hero-screen__bg">
-                <img src="assets/hero/hero-bus.webp" alt="Про Лимон Турів" class="hero-screen__img" style="object-position: center;" fetchpriority="high" onerror="this.src='assets/img/Egypt_main.jpg'">
-                <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%);"></div>
-            </div>
+        <!-- Замінено банер з фото на акуратний темний блок -->
+        <section class="hero-screen hero-screen--inner" style="background: var(--color-dark); min-height: auto; padding: 160px 0 80px;">
             <div class="container hero-screen__container">
                 <div class="hero-screen__content text-center" style="margin-bottom: 0;">
-                    <h1 class="hero-screen__title js-split-text">
+                    <h1 class="hero-screen__title js-split-text" style="color: #fff; margin: 0; text-shadow: none;">
                         ПРО <span class="text-gradient">КОМПАНІЮ</span>
                     </h1>
                 </div>
@@ -289,11 +286,14 @@
             <div class="container">
                 <div class="section-header text-center js-reveal">
                     <span class="badge badge--dark">Обличчя компанії</span>
-                    <h2 class="h2 mt-3">Керівник та головний тревел-експерт</h2>
+                    <h2 class="h2 mt-3">Співробітники компанії</h2>
                     <div class="divider"></div>
                 </div>
                 
-                <div class="team-grid" style="display: flex; justify-content: center;">
+                <!-- Виправлена сітка з двома співробітниками -->
+                <div class="team-grid" style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                    
+                    <!-- Перший менеджер (Директор) -->
                     <div class="member-card js-reveal" style="max-width: 380px; width: 100%;">
                         <div class="member-card__img-wrap">
                             <img src="assets/about/photo_2025-01-24_09-56-24.jpg" class="member-card__img" alt="Надія Дубовська" onerror="this.src='assets/about/ж-min.jpg'">
@@ -307,6 +307,24 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Другий менеджер (Тревел менеджер - з місцем для фото) -->
+                    <div class="member-card js-reveal" style="max-width: 380px; width: 100%;">
+                        <div class="member-card__img-wrap" style="background-color: #F0F0F0; display: flex; align-items: center; justify-content: center;">
+                            <!-- Вставте фото менеджера сюди (видаліть style="display: none;") -->
+                            <img src="" class="member-card__img" alt="Менеджер" style="display: none;">
+                            <span style="color: #A0A0A0; font-weight: 600; font-size: 0.95rem;">Місце для фото</span>
+                        </div>
+                        <div class="member-card__info">
+                            <h3 class="member-card__name">Ім'я Менеджера</h3>
+                            <span class="member-card__role">Тревел менеджер</span>
+                            <div style="margin-top: 16px; font-size: 0.95rem;">
+                                <a href="tel:+380995337227" style="color: var(--color-text-muted); display: block; margin-bottom: 4px; font-weight: 700;">+38 099 533 7227</a>
+                                <a href="tel:+380995337447" style="color: var(--color-text-muted); display: block; font-weight: 700;">+38 099 533 7447</a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -348,7 +366,7 @@
                     <p style="color: var(--color-text-muted);">Що про нас кажуть мандрівники.</p>
                 </div>
 
-                                <div class="reviews-container js-reveal text-left" style="text-align: left;">
+                <div class="reviews-container js-reveal text-left" style="text-align: left;">
     
                                 <div class="review-card">
                                     <div class="review-card__header">
@@ -464,7 +482,6 @@
                             </form>
                         </div>
                     </div>
-                </div>
             </div>
         </section>
 
