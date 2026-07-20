@@ -17,7 +17,6 @@
     
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- ВБУДОВАНІ СТИЛІ (УСІ ФІКСИ ТА ВАУ-ЕФЕКТИ 2026 РОКУ) -->
     <style>
         :root {
             --color-primary: #FFEC00 !important;
@@ -45,17 +44,10 @@
             text-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
 
-        /* ==========================================================================
-           БРОНЕБІЙНІ СТИЛІ МОДУЛЯ ПОШУКУ (OTPUSK) - ПЕРЕБИВАЄМО СИНІЙ КОЛІР
-           ========================================================================== */
-        #search-module {
-            margin-top: -120px;
-            position: relative;
-            z-index: 10;
-        }
-        
+        /* БРОНЕБІЙНІ СТИЛІ МОДУЛЯ ПОШУКУ (OTPUSK) */
+        #search-module { margin-top: -120px; position: relative; z-index: 10; }
         .search-widget-glass__wrapper {
-            background: rgba(30, 30, 30, 0.85) !important; /* Наш антрацит */
+            background: rgba(30, 30, 30, 0.85) !important; 
             backdrop-filter: blur(24px) !important;
             -webkit-backdrop-filter: blur(24px) !important;
             border: 1px solid rgba(255, 255, 255, 0.15) !important;
@@ -63,78 +55,24 @@
             padding: 24px !important;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
         }
-
-        /* Жорстко перебиваємо дефолтні сині стилі модуля відпустки */
-        body div.os-container,
-        body div.os-container .os-search-panel,
-        body div.os-container .os-form-wrapper,
-        body div.os-container form {
-            background-color: transparent !important;
-            background-image: none !important;
-            border: none !important;
-            box-shadow: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
+        body div.os-container, body div.os-container .os-search-panel, body div.os-container .os-form-wrapper, body div.os-container form {
+            background-color: transparent !important; background-image: none !important; border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important;
         }
-
-        body div.os-container .os-search-panel input,
-        body div.os-container .os-search-panel select,
-        body div.os-container .os-dropdown {
-            background-color: rgba(255, 255, 255, 0.1) !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            color: #fff !important;
-            border-radius: 12px !important;
-            height: 56px !important;
-            font-size: 1rem !important;
-            font-family: var(--font-primary) !important;
-            transition: all 0.3s ease !important;
-            padding-left: 16px !important;
+        body div.os-container .os-search-panel input, body div.os-container .os-search-panel select, body div.os-container .os-dropdown {
+            background-color: rgba(255, 255, 255, 0.1) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; color: #fff !important; border-radius: 12px !important; height: 56px !important; font-size: 1rem !important; font-family: var(--font-primary) !important; transition: all 0.3s ease !important; padding-left: 16px !important;
         }
-
-        body div.os-container .os-search-panel input:focus,
-        body div.os-container .os-search-panel select:focus {
-            background-color: rgba(255, 255, 255, 0.2) !important;
-            border-color: var(--color-primary) !important;
-            outline: none !important;
-            box-shadow: 0 0 15px rgba(255, 236, 0, 0.2) !important;
+        body div.os-container .os-search-panel input:focus, body div.os-container .os-search-panel select:focus {
+            background-color: rgba(255, 255, 255, 0.2) !important; border-color: var(--color-primary) !important; outline: none !important; box-shadow: 0 0 15px rgba(255, 236, 0, 0.2) !important;
         }
-
-        body div.os-container .os-form-button,
-        body div.os-container button.os-submit {
-            background-color: var(--color-primary) !important;
-            color: #0A0A0A !important;
-            border-radius: 50px !important; /* Закруглені кнопки */
-            height: 56px !important;
-            font-weight: 800 !important;
-            font-size: 1rem !important;
-            text-transform: uppercase !important;
-            border: none !important;
-            box-shadow: 0 10px 24px rgba(255, 236, 0, 0.3) !important;
-            transition: all 0.3s ease !important;
-            padding: 0 32px !important;
-            cursor: pointer !important;
-            background-image: none !important;
+        body div.os-container .os-form-button, body div.os-container button.os-submit {
+            background-color: var(--color-primary) !important; color: #0A0A0A !important; border-radius: 50px !important; height: 56px !important; font-weight: 800 !important; font-size: 1rem !important; text-transform: uppercase !important; border: none !important; box-shadow: 0 10px 24px rgba(255, 236, 0, 0.3) !important; transition: all 0.3s ease !important; padding: 0 32px !important; cursor: pointer !important; background-image: none !important;
         }
-
-        body div.os-container .os-form-button:hover,
-        body div.os-container button.os-submit:hover {
-            transform: translateY(-3px) !important;
-            box-shadow: 0 15px 30px rgba(255, 236, 0, 0.5) !important;
-            background-color: var(--color-primary-hover) !important;
+        body div.os-container .os-form-button:hover, body div.os-container button.os-submit:hover {
+            transform: translateY(-3px) !important; box-shadow: 0 15px 30px rgba(255, 236, 0, 0.5) !important; background-color: var(--color-primary-hover) !important;
         }
-
-        /* Тексти всередині антрацитового блоку */
-        body div.os-container .os-title,
-        body div.os-container label,
-        body div.os-container .os-tab span,
-        body div.os-container a.os-adv-search-link {
-            color: rgba(255, 255, 255, 0.9) !important;
-            font-family: var(--font-primary) !important;
-            font-size: 0.9rem !important;
-            text-shadow: none !important;
+        body div.os-container .os-title, body div.os-container label, body div.os-container .os-tab span, body div.os-container a.os-adv-search-link {
+            color: rgba(255, 255, 255, 0.9) !important; font-family: var(--font-primary) !important; font-size: 0.9rem !important; text-shadow: none !important;
         }
-        
-        /* Щоб білий текст в інпутах не зливався з білим фоном випадаючого списку */
         body div.os-container .ui-menu-item { color: #333 !important; }
 
         /* Переваги */
@@ -142,7 +80,145 @@
         .feature-card__icon-wrap { margin: 0 auto 24px !important; background-color: var(--color-primary); box-shadow: 0 0 24px rgba(255, 236, 0, 0.4); color: #0A0A0A; }
         .feature-card:hover .feature-card__icon-wrap { transform: scale(1.1); }
 
-        /* Модалка */
+        /* ==========================================================================
+           СТАТИЧНА СІТКА ГАРЯЧИХ ТУРІВ (ІДЕАЛЬНИЙ КЛОН З ПРАВИЛЬНИМ ВИРІВНЮВАННЯМ)
+           ========================================================================== */
+        .static-hot-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .hot-card {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: 280px; 
+            display: block;
+            background: #e0e0e0;
+            text-decoration: none !important;
+        }
+        .hot-card:hover {
+            transform: translateY(-5px);
+        }
+        .hot-card__bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+        .hot-card:hover .hot-card__bg {
+            transform: scale(1.05);
+        }
+        
+        /* Шапка з градієнтом */
+        .hot-card__header {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            z-index: 10;
+            text-align: left;
+            box-sizing: border-box;
+        }
+        .hot-card__country {
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
+            font-family: var(--font-display), sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+        .hot-card__hotel {
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
+            font-family: var(--font-display), sans-serif;
+            font-size: 13px;
+            line-height: 1.2;
+        }
+        .hot-card__hotel strong {
+            font-weight: 700;
+        }
+
+        /* Жорсткий темний підвал */
+        .hot-card__bottom {
+            background: rgba(15, 15, 15, 0.85); 
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 12px 15px;
+            z-index: 10;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center; /* Вирівнювання тексту і ціни по нижньому краю */
+            gap: 15px; /* ГАРАНТОВАНИЙ відступ між текстом і ціною, щоб ніколи не налізало */
+            box-sizing: border-box;
+            min-height: 75px;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        /* Інфо зліва */
+        .hot-card__info {
+            flex: 1; /* Забирає тільки залишковий вільний простір */
+            min-width: 0; /* Дозволяє тексту обрізатися, якщо місця мало */
+            font-size: 12px;
+            line-height: 1.3;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Не більше 3 рядків */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-family: var(--font-primary), sans-serif;
+            text-align: left;
+            margin-bottom: 0; /* Легка корекція для ідеальної базової лінії з ціною */
+        }
+        
+        /* Ціна справа */
+        .hot-card__price-box {
+            flex-shrink: 0; /* Забороняємо стискати цей блок, ціна завжди повністю видна */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-end;
+            text-align: right;
+        }
+        .hot-card__price-val {
+            color: #FFEC00;
+            font-size: 24px;
+            font-weight: 800;
+            font-family: var(--font-display), sans-serif;
+            line-height: 1;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            white-space: nowrap; /* Валюта ніколи не переноситься на новий рядок */
+        }
+        .hot-card__price-hint {
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 400;
+            font-family: var(--font-primary), sans-serif;
+            text-transform: lowercase;
+            letter-spacing: 0.5px;
+            margin-top: 5px;
+            width: 100%;
+            text-align: right;
+        }
+
+        /* Адаптив сітки */
+        @media (max-width: 1200px) { .static-hot-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 900px) { .static-hot-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .static-hot-grid { grid-template-columns: 1fr; } }
+
+
+        /* Інші секції */
         .modal-dialog { background-color: #F7F9FC !important; }
         .modal-title, .cf-label { color: #1A1A1A !important; }
         .cf-input { color: #1A1A1A !important; border-bottom-color: #CCCCCC !important; }
@@ -153,7 +229,6 @@
         .modal-close { background-color: rgba(0,0,0,0.05) !important; color: #1A1A1A !important; }
         .modal-close:hover { background-color: var(--color-primary) !important; }
 
-        /* Lead Form (60/40) */
         .lead-split { display: flex; flex-direction: row; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg); }
         .lead-split__visual { flex: 0 0 60%; position: relative; overflow: hidden;}
         .lead-split__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -165,75 +240,29 @@
         .cf-input:focus ~ .cf-label, .cf-input:not(:placeholder-shown) ~ .cf-label { top: -12px; font-size: 0.75rem; color: var(--color-dark) !important; text-transform: uppercase; font-weight: 700; }
         .cf-line { background-color: var(--color-dark) !important; }
 
-        /* ВАУ-ЕФЕКТ ДЛЯ НАГОРОД (13 ДИПЛОМІВ) */
-        .diplomas-wow-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 24px;
-            grid-auto-flow: dense;
-            margin-top: 40px;
-        }
-        .diploma-card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            z-index: 1;
-            border: 1px solid #F0F0F0;
-        }
-        .diploma-card::after {
-            content: ''; position: absolute; inset: 0; border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(255, 236, 0, 0.3); opacity: 0; transition: opacity 0.5s ease; z-index: -1;
-        }
-        .diploma-card:hover {
-            transform: scale(1.05) translateY(-10px);
-            z-index: 10;
-            border-color: var(--color-primary);
-        }
+        .diplomas-wow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; grid-auto-flow: dense; margin-top: 40px; }
+        .diploma-card { background: #fff; border-radius: 16px; padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; z-index: 1; border: 1px solid #F0F0F0; }
+        .diploma-card::after { content: ''; position: absolute; inset: 0; border-radius: 16px; box-shadow: 0 20px 50px rgba(255, 236, 0, 0.3); opacity: 0; transition: opacity 0.5s ease; z-index: -1; }
+        .diploma-card:hover { transform: scale(1.05) translateY(-10px); z-index: 10; border-color: var(--color-primary); }
         .diploma-card:hover::after { opacity: 1; }
-        .diploma-card img {
-            max-width: 100%; height: auto; max-height: 350px;
-            object-fit: contain;
-            border-radius: 4px;
-        }
+        .diploma-card img { max-width: 100%; height: auto; max-height: 350px; object-fit: contain; border-radius: 4px; }
         .diploma-horizontal { grid-column: span 2; } 
 
-        /* ВІДГУКИ ТА ФОРМА ВІДГУКІВ */
-        .reviews-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-            margin-top: 40px;
-        }
-        .review-card {
-            background: #fff; padding: 32px; border-radius: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #EAEAEA; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column;
-        }
+        .reviews-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin-top: 40px; }
+        .review-card { background: #fff; padding: 32px; border-radius: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #EAEAEA; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; }
         .review-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--color-primary); }
         .review-card__header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-        .review-card__avatar {
-            width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--color-primary-light); color: var(--color-dark);
-        }
+        .review-card__avatar { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--color-primary-light); color: var(--color-dark); }
         .review-card__stars { color: #FFB400; font-size: 1.25rem; letter-spacing: 2px; }
         .review-card__text { color: var(--color-text-muted); font-size: 1rem; line-height: 1.6; font-style: italic; flex-grow: 1;}
         
-        .leave-review-box {
-            background: var(--color-dark); color: #fff; border-radius: 24px; padding: 48px; margin-top: 60px;
-            box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
-        }
+        .leave-review-box { background: var(--color-dark); color: #fff; border-radius: 24px; padding: 48px; margin-top: 60px; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
         .leave-review-box::before { content: ''; position: absolute; top: 0; left: 0; width: 8px; height: 100%; background: var(--color-primary); }
         .interactive-stars { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 8px; }
         .interactive-stars input { display: none; }
         .interactive-stars label { cursor: pointer; width: 32px; height: 32px; background-image: url('assets/about/star_rate.png'); background-size: cover; filter: grayscale(100%) opacity(0.4); transition: filter 0.2s ease; }
         .interactive-stars label:hover, .interactive-stars label:hover ~ label, .interactive-stars input:checked ~ label { filter: grayscale(0%) opacity(1); }
 
-        /* Блог */
         .blog-tz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
         .blog-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .blog-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
@@ -248,94 +277,26 @@
         .blog-card--large .blog-card__content { position: absolute; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); width: 100%; color: #fff; }
         .blog-card--large .blog-card__title { font-size: 1.5rem; color: #fff; }
 
-        /* ==========================================================================
-           РЕАЛІСТИЧНИЙ IPHONE ТА СВІТЛИЙ ФОН ДЛЯ ТЕЛЕГРАМ ПРОМО (2026 СТИЛЬ)
-           ========================================================================== */
-        .telegram-promo-fullscreen { 
-            background: #F7F9FC !important; /* Світлий фон */
-            min-height: auto;
-            padding: 100px 0 !important;
-        }
-
-        .tg-promo-box { 
-            background: #FFFFFF !important; /* Біла карточка */
-            border: 1px solid #EAEAEA !important;
-            border-radius: 32px !important;
-            padding: 60px 5% !important; 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 80px; 
-            align-items: center; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05) !important; /* М'яка тінь */
-        }
-
-        /* Реалістична рамка iPhone 15/16 Pro */
-        .iphone-frame { 
-            width: 320px; 
-            height: 650px; 
-            background-color: #f0f0f0; /* Колір корпусу */
-            border: 14px solid #1c1c1e; /* Товста чорна рамка */
-            border-radius: 50px; 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.15), inset 0 0 0 2px #555; 
-            position: relative; 
-            margin: 0 auto;
-            transform: perspective(1000px) rotateY(-10deg) rotateX(4deg) translateY(10px);
-            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .tg-promo-box:hover .iphone-frame {
-            transform: perspective(1000px) rotateY(-2deg) rotateX(0deg) translateY(-5px);
-        }
+        .telegram-promo-fullscreen { background: #F7F9FC !important; min-height: auto; padding: 100px 0 !important; }
+        .tg-promo-box { background: #FFFFFF !important; border: 1px solid #EAEAEA !important; border-radius: 32px !important; padding: 60px 5% !important; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; box-shadow: 0 20px 50px rgba(0,0,0,0.05) !important; }
+        .iphone-frame { width: 320px; height: 650px; background-color: #f0f0f0; border: 14px solid #1c1c1e; border-radius: 50px; box-shadow: 0 30px 60px rgba(0,0,0,0.15), inset 0 0 0 2px #555; position: relative; margin: 0 auto; transform: perspective(1000px) rotateY(-10deg) rotateX(4deg) translateY(10px); transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .tg-promo-box:hover .iphone-frame { transform: perspective(1000px) rotateY(-2deg) rotateX(0deg) translateY(-5px); }
+        .iphone-frame::before { content: ''; position: absolute; left: -18px; top: 120px; width: 4px; height: 30px; background: #1c1c1e; border-radius: 4px 0 0 4px; } 
+        .iphone-frame::after { content: ''; position: absolute; left: -18px; top: 170px; width: 4px; height: 50px; background: #1c1c1e; border-radius: 4px 0 0 4px; } 
+        .iphone-power { position: absolute; right: -18px; top: 140px; width: 4px; height: 60px; background: #1c1c1e; border-radius: 0 4px 4px 0; }
+        .dynamic-island { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 100px; height: 30px; background: #000; border-radius: 20px; z-index: 20; box-shadow: inset 0 -1px 2px rgba(255,255,255,0.2); }
+        .iphone-screen { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #E4ECEF url('assets/hero/hero-cruises.webp') center/cover no-repeat; border-radius: 34px; overflow: hidden; padding: 70px 16px 16px; display: flex; flex-direction: column; gap: 16px; }
+        .iphone-screen::before { content: ''; position: absolute; inset: 0; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); z-index: 0; }
         
-        /* Бічні кнопки (живлення і гучність) для реалізму */
-        .iphone-frame::before { 
-            content: ''; position: absolute; left: -18px; top: 120px; width: 4px; height: 30px; 
-            background: #1c1c1e; border-radius: 4px 0 0 4px; 
-        } 
-        .iphone-frame::after { 
-            content: ''; position: absolute; left: -18px; top: 170px; width: 4px; height: 50px; 
-            background: #1c1c1e; border-radius: 4px 0 0 4px; 
-        } 
-        .iphone-power { 
-            position: absolute; right: -18px; top: 140px; width: 4px; height: 60px; 
-            background: #1c1c1e; border-radius: 0 4px 4px 0; 
-        }
-
-        /* Dynamic Island 2026 */
-        .dynamic-island {
-            position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 100px; height: 30px;
-            background: #000; border-radius: 20px; z-index: 20; box-shadow: inset 0 -1px 2px rgba(255,255,255,0.2);
-        }
-
-        /* Внутрішній екран */
-        .iphone-screen { 
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: #E4ECEF url('assets/hero/hero-cruises.webp') center/cover no-repeat;
-            border-radius: 34px; /* Менше закруглення для внутрішнього екрану */
-            overflow: hidden; padding: 70px 16px 16px; 
-            display: flex; flex-direction: column; gap: 16px;
-        }
-        .iphone-screen::before {
-            content: ''; position: absolute; inset: 0; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); z-index: 0;
-        }
-        
-        /* Повідомлення в стилі iOS */
-        .tg-message { 
-            position: relative; z-index: 10;
-            background: #ffffff; color: #1a1a1a;
-            padding: 16px; border-radius: 20px; border-bottom-left-radius: 4px; 
-            font-size: 0.95rem; box-shadow: 0 8px 20px rgba(0,0,0,0.06); 
-            transform: translateY(20px); opacity: 0; animation: messagePop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+        .tg-message { position: relative; z-index: 10; background: #ffffff; color: #1a1a1a; padding: 16px; border-radius: 20px; border-bottom-left-radius: 4px; font-size: 0.95rem; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transform: translateY(20px); opacity: 0; animation: messagePop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .tg-message:nth-child(2) { animation-delay: 0.4s; }
         .tg-message:nth-child(3) { animation-delay: 0.8s; }
         @keyframes messagePop { to { transform: translateY(0); opacity: 1; } }
 
-        /* Партнери (Кольорові) */
         .partners-colored-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; margin-top: 40px; }
         .partners-colored-grid img { max-width: 140px; height: auto; max-height: 60px; object-fit: contain; filter: none !important; opacity: 1 !important; transition: transform 0.3s ease; }
         .partners-colored-grid img:hover { transform: scale(1.1); }
 
-        /* Bento (Відкривайте світ) */
         .custom-bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 280px); gap: 24px; margin-top: 40px; }
         .custom-bento-item { position: relative; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; text-decoration: none; color: #fff; background-color: var(--color-dark); box-shadow: var(--shadow-sm); }
         .custom-bento-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.7s ease; }
@@ -347,7 +308,6 @@
         .c-bento-wide { grid-column: span 2; grid-row: span 1; }
         .c-bento-standard { grid-column: span 1; grid-row: span 1; }
 
-        /* Адаптив */
         @media (max-width: 1024px) {
             .lead-split { flex-direction: column; }
             .lead-split__visual, .lead-split__form-wrap { flex: 1 1 100%; width: 100%; }
@@ -411,7 +371,6 @@
 
         <nav class="header__nav nav" role="navigation" aria-label="Головне меню">
             <ul class="nav__list">
-                <!-- ОНОВЛЕНИЙ ПУНКТ ТУРИ -->
                 <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
                     <a href="search-tour.html" class="nav__link">Тури <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
                     <div class="mega-menu" role="menu">
@@ -439,7 +398,6 @@
                 </li>
                 
                 <li class="nav__item"><a href="about.html" class="nav__link">Про компанію</a></li>
-                <!-- ОНОВЛЕНИЙ ПУНКТ FAQ -->
                 <li class="nav__item"><a href="faq.html" class="nav__link">Поширені питання</a></li>
                 <li class="nav__item"><a href="contacts.html" class="nav__link">Контакти</a></li>
             </ul>
@@ -490,7 +448,7 @@
                     </h1>
                 </div>
 
-                <!-- МОДУЛЬ ПОШУКУ (СИЛЬНИЙ ОВЕРРАЙД СИНЬОГО ФОНУ) -->
+                <!-- МОДУЛЬ ПОШУКУ -->
                 <div class="search-widget-glass" id="search-module">
                     <div class="search-widget-glass__wrapper">
                         <script>
@@ -539,51 +497,33 @@
                 </div>
 
                 <div class="features-grid">
-                    <!-- 1 -->
                     <div class="feature-card js-reveal" style="transition-delay: 0s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        </div>
+                        <div class="feature-card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                         <h3 class="feature-card__title">13 років у світі туризму</h3>
                         <p class="feature-card__desc">Особисто інспектуємо готелі, тестуємо нові напрямки та постійно відстежуємо зміни в туристичній галузі.</p>
                     </div>
-                    <!-- 2 -->
                     <div class="feature-card js-reveal" style="transition-delay: 0.1s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                        </div>
+                        <div class="feature-card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
                         <h3 class="feature-card__title">Підтримка 24/7</h3>
                         <p class="feature-card__desc">Ми завжди на зв’язку, щоб допомогти вам у будь-якій ситуації — до, під час і після подорожі.</p>
                     </div>
-                    <!-- 3 -->
                     <div class="feature-card js-reveal" style="transition-delay: 0.2s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                        </div>
+                        <div class="feature-card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
                         <h3 class="feature-card__title">Гарантія кращої ціни</h3>
                         <p class="feature-card__desc">Співпрацюємо з усіма туроператорами напряму і знаємо секрет, де знайти ексклюзивні та найвигідніші умови для вас.</p>
                     </div>
-                    <!-- 4 -->
                     <div class="feature-card js-reveal" style="transition-delay: 0.3s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                        </div>
+                        <div class="feature-card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
                         <h3 class="feature-card__title">Офіційність та безпека</h3>
                         <p class="feature-card__desc">Працюємо в офісі та онлайн. Підписуємо офіційний договір та приймаємо оплату виключно на розрахункові рахунки компанії.</p>
                     </div>
-                    <!-- 5 -->
                     <div class="feature-card js-reveal" style="transition-delay: 0.4s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        </div>
+                        <div class="feature-card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
                         <h3 class="feature-card__title">Індивідуальний підхід</h3>
                         <p class="feature-card__desc">Жодних шаблонних рішень — лише тури, підібрані відповідно до ваших потреб, бюджету та побажань.</p>
                     </div>
-                    <!-- 6 -->
                     <div class="feature-card js-reveal" style="transition-delay: 0.5s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                        </div>
+                        <div class="feature-card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
                         <h3 class="feature-card__title">Нам довіряють</h3>
                         <p class="feature-card__desc">Нашу агенцію обирають з року в рік, бо ми щедро ділимося з клієнтами увагою, досвідом, емоціями та знаннями.</p>
                     </div>
@@ -591,7 +531,7 @@
             </div>
         </section>
 
-        <!-- ГАРЯЧІ ТУРИ -->
+        <!-- СТАТИЧНІ ГАРЯЧІ ТУРИ (ІДЕАЛЬНИЙ ДИЗАЙН 1 В 1) -->
         <section class="section bg-light" id="hot-tours" aria-labelledby="hot-tours-title">
             <div class="container">
                 <div class="section-header js-reveal d-flex justify-between align-end" style="display: flex; justify-content: space-between; align-items: flex-end;">
@@ -601,27 +541,200 @@
                     <a href="hot-tours.html" class="link-arrow" style="font-weight: 700; color: var(--color-dark); text-decoration: underline;">Всі гарячі пропозиції →</a>
                 </div>
 
-                <div class="module-placeholder js-reveal mt-5">
-                    <div class="hot-size-checker" id="otpusk_onsite_hot26865" style="min-height: 300px; display: flex; justify-content: center; align-items: center;">
-                        <img src="https://export.otpusk.com/os/ajax-loader.gif" alt="loading"/><span></span>
-                    </div>
-                    <script>
-                        var osTarget26865 = ""; 
-                        var osLang = "ua"; 
-                        var osCurrency = "converted"; 
-                        var osTargetBlank26865 = true; 
+                <div class="static-hot-grid js-reveal">
+                    
+                    <!-- 1. Туреччина -->
+                    <a href="hot-tours.html" class="hot-card">
+                        <img src="https://newimg.otpusk.com/2/320x240/00/03/53/21/3532131.webp" alt="Туреччина" class="hot-card__bg">
+                        <div class="hot-card__header">
+                            <div class="hot-card__country">Туреччина</div>
+                            <div class="hot-card__hotel">Ozkaymak Marina Hotel 5*, <strong>Кемер</strong></div>
+                        </div>
+                        <div class="hot-card__bottom">
+                            <div class="hot-card__info">31 лип. на 9 ночей / 10 днів, автобус Київ, ультра все включено</div>
+                            <div class="hot-card__price-box">
+                                <div class="hot-card__price-val">103 228 ₴</div>
+                                <div class="hot-card__price-hint">за двох</div>
+                            </div>
+                        </div>
+                    </a>
 
-                        (function (d, s) {
-                            function loadScript(src, id, callback) {if (d.getElementById(id)) {if (typeof callback === "function") callback();return;}var js = d.createElement(s);js.id = id;js.src = src;js.defer = true;js.onload = function () {if (typeof callback === "function") callback();};d.head.appendChild(js);}
-                            if (!window._otpuskApiLoaded) {window._otpuskApiLoaded = true;
-                                loadScript("https://export.otpusk.com/api/session?access_token=2c1f4-78bec-0741d-68154-053c8", "OShotApi26865", function () {
-                                    loadScript("https://export.otpusk.com/js/view?id=26865", "OShotGetData26865");
-                                });
-                            } else {
-                                loadScript("https://export.otpusk.com/js/view?id=26865", "OShotGetData26865");
-                            }
-                        }(document, "script"));
-                    </script>
+                    <!-- 2. Єгипет -->
+                    <a href="hot-tours.html" class="hot-card">
+                        <img src="https://newimg.otpusk.com/2/320x240/00/04/32/82/4328294.webp" alt="Єгипет" class="hot-card__bg">
+                        <div class="hot-card__header">
+                            <div class="hot-card__country">Єгипет</div>
+                            <div class="hot-card__hotel">KaiSol Romance Resort Sahl Hasheesh 5*, <strong>Сахл Хашиш</strong></div>
+                        </div>
+                        <div class="hot-card__bottom">
+                            <div class="hot-card__info">30 лип. на 7 ночей / 8 днів, авіа Варшава, все включено</div>
+                            <div class="hot-card__price-box">
+                                <div class="hot-card__price-val">183 250 ₴</div>
+                                <div class="hot-card__price-hint">за двох</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 3. Болгарія -->
+                    <a href="hot-tours.html" class="hot-card">
+                        <img src="https://newimg.otpusk.com/2/320x240/00/00/78/60/786047.webp" alt="Болгарія" class="hot-card__bg">
+                        <div class="hot-card__header">
+                            <div class="hot-card__country">Болгарія</div>
+                            <div class="hot-card__hotel">Sol Nessebar Palace Hotel 5*, <strong>Несебр</strong></div>
+                        </div>
+                        <div class="hot-card__bottom">
+                            <div class="hot-card__info">25 лип. на 8 ночей / 9 днів, автобус Київ, все включено</div>
+                            <div class="hot-card__price-box">
+                                <div class="hot-card__price-val">142 239 ₴</div>
+                                <div class="hot-card__price-hint">за двох</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 4. Албанія -->
+                    <a href="hot-tours.html" class="hot-card">
+                        <img src="https://newimg.otpusk.com/2/320x240/00/04/26/07/4260704.webp" alt="Албанія" class="hot-card__bg">
+                        <div class="hot-card__header">
+                            <div class="hot-card__country">Албанія</div>
+                            <div class="hot-card__hotel">Edina 3*, <strong>Саранда</strong></div>
+                        </div>
+                        <div class="hot-card__bottom">
+                            <div class="hot-card__info">31 лип. на 12 ночей / 13 днів, автобус Київ, сніданки</div>
+                            <div class="hot-card__price-box">
+                                <div class="hot-card__price-val">60 425 ₴</div>
+                                <div class="hot-card__price-hint">за двох</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 5. Греція -->
+                    <a href="hot-tours.html" class="hot-card">
+                        <img src="https://newimg.otpusk.com/2/320x240/00/04/69/17/4691761.webp" alt="Греція" class="hot-card__bg">
+                        <div class="hot-card__header">
+                            <div class="hot-card__country">Греція</div>
+                            <div class="hot-card__hotel">Yria Beach Hotel 4*, <strong>о. Крит – Іракліон</strong></div>
+                        </div>
+                        <div class="hot-card__bottom">
+                            <div class="hot-card__info">22 лип. на 6 ночей / 7 днів, авіа Кишинів, сніданки</div>
+                            <div class="hot-card__price-box">
+                                <div class="hot-card__price-val">35 332 ₴</div>
+                                <div class="hot-card__price-hint">за одного</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 6. Кіпр -->
+                    <a href="hot-tours.html" class="hot-card">
+                        <img src="https://newimg.otpusk.com/2/320x240/00/00/29/25/292503.webp" alt="Кіпр" class="hot-card__bg">
+                        <div class="hot-card__header">
+                            <div class="hot-card__country">Кіпр</div>
+                            <div class="hot-card__hotel">Radisson Beach Resort 4*, <strong>Ларнака</strong></div>
+                        </div>
+                        <div class="hot-card__bottom">
+                            <div class="hot-card__info">27 лип. на 6 ночей / 7 днів, авіа Кишинів, сніданки</div>
+                            <div class="hot-card__price-box">
+                                <div class="hot-card__price-val">73 987 ₴</div>
+                                <div class="hot-card__price-hint">за двох</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 7. Чорногорія -->
+                    <a href="hot-tours.html" class="hot-card">
+                        <img src="https://newimg.otpusk.com/2/320x240/00/05/07/71/5077107.webp" alt="Чорногорія" class="hot-card__bg">
+                        <div class="hot-card__header">
+                            <div class="hot-card__country">Чорногорія</div>
+                            <div class="hot-card__hotel">Radisson Resort Ruza Vjetrova 4*, <strong>Бар</strong></div>
+                        </div>
+                        <div class="hot-card__bottom">
+                            <div class="hot-card__info">4 серп. на 6 ночей / 7 днів, авіа Варшава, сніданки</div>
+                            <div class="hot-card__price-box">
+                                <div class="hot-card__price-val">134 879 ₴</div>
+                                <div class="hot-card__price-hint">за двох</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 8. Болгарія (Дубль) -->
+                    <a href="hot-tours.html" class="hot-card">
+                        <img src="https://newimg.otpusk.com/2/320x240/00/00/78/60/786047.webp" alt="Болгарія" class="hot-card__bg">
+                        <div class="hot-card__header">
+                            <div class="hot-card__country">Болгарія</div>
+                            <div class="hot-card__hotel">MPM Astoria 4*, <strong>Сонячний Берег</strong></div>
+                        </div>
+                        <div class="hot-card__bottom">
+                            <div class="hot-card__info">28 лип. на 7 ночей / 8 днів, автобус Одеса, все включено</div>
+                            <div class="hot-card__price-box">
+                                <div class="hot-card__price-val">38 500 ₴</div>
+                                <div class="hot-card__price-hint">за двох</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 9. Туреччина (Дубль) -->
+                    <a href="hot-tours.html" class="hot-card">
+                        <img src="https://newimg.otpusk.com/2/320x240/00/03/53/21/3532131.webp" alt="Туреччина" class="hot-card__bg">
+                        <div class="hot-card__header">
+                            <div class="hot-card__country">Туреччина</div>
+                            <div class="hot-card__hotel">Lonicera World 4*, <strong>Аланія</strong></div>
+                        </div>
+                        <div class="hot-card__bottom">
+                            <div class="hot-card__info">5 серп. на 7 ночей / 8 днів, авіа Кишинів, ультра все включено</div>
+                            <div class="hot-card__price-box">
+                                <div class="hot-card__price-val">65 300 ₴</div>
+                                <div class="hot-card__price-hint">за двох</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 10. Єгипет (Дубль) -->
+                    <a href="hot-tours.html" class="hot-card">
+                        <img src="https://newimg.otpusk.com/2/320x240/00/04/32/82/4328294.webp" alt="Єгипет" class="hot-card__bg">
+                        <div class="hot-card__header">
+                            <div class="hot-card__country">Єгипет</div>
+                            <div class="hot-card__hotel">Albatros Aqua Park 5*, <strong>Хургада</strong></div>
+                        </div>
+                        <div class="hot-card__bottom">
+                            <div class="hot-card__info">2 серп. на 7 ночей / 8 днів, авіа Жешув, все включено</div>
+                            <div class="hot-card__price-box">
+                                <div class="hot-card__price-val">72 100 ₴</div>
+                                <div class="hot-card__price-hint">за двох</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 11. Греція (Дубль) -->
+                    <a href="hot-tours.html" class="hot-card">
+                        <img src="https://newimg.otpusk.com/2/320x240/00/04/69/17/4691761.webp" alt="Греція" class="hot-card__bg">
+                        <div class="hot-card__header">
+                            <div class="hot-card__country">Греція</div>
+                            <div class="hot-card__hotel">Bomo Rethymno Beach 4*, <strong>о. Крит</strong></div>
+                        </div>
+                        <div class="hot-card__bottom">
+                            <div class="hot-card__info">10 серп. на 7 ночей / 8 днів, авіа Бухарест, сніданки</div>
+                            <div class="hot-card__price-box">
+                                <div class="hot-card__price-val">55 400 ₴</div>
+                                <div class="hot-card__price-hint">за двох</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 12. Чорногорія (Дубль) -->
+                    <a href="hot-tours.html" class="hot-card">
+                        <img src="https://newimg.otpusk.com/2/320x240/00/05/07/71/5077107.webp" alt="Чорногорія" class="hot-card__bg">
+                        <div class="hot-card__header">
+                            <div class="hot-card__country">Чорногорія</div>
+                            <div class="hot-card__hotel">Slovenska Plaza 3*, <strong>Будва</strong></div>
+                        </div>
+                        <div class="hot-card__bottom">
+                            <div class="hot-card__info">12 серп. на 7 ночей / 8 днів, автобус Львів, сніданки</div>
+                            <div class="hot-card__price-box">
+                                <div class="hot-card__price-val">32 800 ₴</div>
+                                <div class="hot-card__price-hint">за двох</div>
+                            </div>
+                        </div>
+                    </a>
+
                 </div>
             </div>
         </section>
@@ -635,7 +748,7 @@
                 </div>
 
                 <div class="custom-bento-grid js-reveal">
-                    <a href="#search-module" class="custom-bento-item c-bento-large" aria-label="Греція + Албанія">
+                    <a href="hot-tours.html" class="custom-bento-item c-bento-large" aria-label="Греція + Албанія">
                         <img src="assets/hero/hero-hotels.webp" alt="Греція Албанія" class="custom-bento-img" loading="lazy" onerror="this.src='assets/img/5089.jpg'">
                         <div class="custom-bento-content">
                             <h3 class="custom-bento-title">Греція + Албанія</h3>
@@ -643,7 +756,7 @@
                         </div>
                     </a>
                     
-                    <a href="#search-module" class="custom-bento-item c-bento-wide" aria-label="Лазурне Літо">
+                    <a href="cruises.html" class="custom-bento-item c-bento-wide" aria-label="Лазурне Літо">
                         <img src="assets/hero/hero-cruises.webp" alt="Лазурне Літо" class="custom-bento-img" loading="lazy" onerror="this.src='assets/img/Depositphotos_932218.jpg'">
                         <div class="custom-bento-content">
                             <h3 class="custom-bento-title">Лазурне Літо</h3>
@@ -651,7 +764,7 @@
                         </div>
                     </a>
                     
-                    <a href="#search-module" class="custom-bento-item c-bento-standard" aria-label="Греція">
+                    <a href="hot-tours.html" class="custom-bento-item c-bento-standard" aria-label="Греція">
                         <img src="assets/hero/hero-flights.webp" alt="Греція" class="custom-bento-img" loading="lazy" onerror="this.src='assets/img/Egypt_main.jpg'">
                         <div class="custom-bento-content">
                             <h3 class="custom-bento-title">Греція</h3>

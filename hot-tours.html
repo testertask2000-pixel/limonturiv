@@ -32,42 +32,197 @@
         .lang-btn.is-active { color: #0A0A0A !important; background: #fff !important; box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;}
 
         /* Герой */
-        .hero-screen__title { font-family: var(--font-primary) !important; font-size: clamp(2.5rem, 5vw, 4.5rem) !important; font-weight: 800 !important; letter-spacing: -0.5px !important; text-transform: none !important; color: #fff; text-shadow: 0 10px 30px rgba(0,0,0,0.6); }
-        .hero-screen--inner { min-height: 50vh; padding-bottom: 40px; }
+        .hero-screen { position: relative; min-height: 60vh; display: flex; align-items: center; padding-top: 100px; padding-bottom: 60px; overflow: hidden; }
+        .hero-screen__title { font-family: var(--font-primary) !important; font-size: clamp(3rem, 7vw, 5.5rem) !important; font-weight: 800 !important; letter-spacing: -0.5px !important; text-transform: uppercase !important; color: #fff; text-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+        .hero-screen__badge { background: #E81C2E; color: white; display: inline-block; padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 1rem; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(232, 28, 46, 0.4); text-transform: uppercase; }
+
+        /* ==========================================================================
+           ЖОРСТКІ СТИЛІ ДЛЯ ВІТРИН ТУРІВ (DASHTOURS)
+           ========================================================================== */
+        div[data-type="dashtours-container"] {
+            margin-top: 20px;
+        }
         
+        /* 1. Сітка строго 4 в ряд */
+        div[data-type="dashtours-container"] > div > div > div:not(.koala-loader),
+        div[data-type="dashtours-container"] .kt-grid {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 20px !important;
+        }
+
+        /* 2. Фіксуємо висоту картки і робимо relative */
+        div[data-type="dashtours-container"] [class*="card"] {
+            border-radius: 12px !important;
+            overflow: hidden !important;
+            position: relative !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+            transition: transform 0.3s ease !important;
+            height: 280px !important; 
+            display: block !important;
+            background: #e0e0e0 !important;
+        }
+        div[data-type="dashtours-container"] [class*="card"]:hover {
+            transform: translateY(-5px) !important;
+        }
+
+        /* 3. Картинка готелю */
+        div[data-type="dashtours-container"] [class*="card"] > img,
+        div[data-type="dashtours-container"] [class*="card"] .kt-card__img {
+            position: absolute !important;
+            top: 0 !important; left: 0 !important;
+            width: 100% !important; height: 100% !important;
+            object-fit: cover !important;
+            z-index: 1 !important;
+        }
+
+        /* 4. Назви готелю зверху */
+        div[data-type="dashtours-container"] [class*="header"],
+        div[data-type="dashtours-container"] [class*="title-wrap"] {
+            position: absolute !important;
+            top: 0 !important; left: 0 !important;
+            width: 100% !important;
+            padding: 15px !important;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%) !important;
+            z-index: 10 !important;
+            text-align: left !important;
+        }
+        
+        div[data-type="dashtours-container"] [class*="header"] *,
+        div[data-type="dashtours-container"] [class*="title-wrap"] * {
+            color: #fff !important;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.9) !important;
+            font-family: var(--font-display) !important;
+            text-align: left !important;
+            line-height: 1.2 !important;
+        }
+
+        /* 5. ЧОРНА АКУРАТНА СМУГА ЗНИЗУ */
+        div[data-type="dashtours-container"] [class*="footer"],
+        div[data-type="dashtours-container"] [class*="bottom"] {
+            background: rgba(15, 15, 15, 0.85) !important; 
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            padding: 12px 16px !important;
+            z-index: 10 !important;
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: flex-end !important;
+            box-sizing: border-box !important;
+            min-height: 75px !important;
+            border-radius: 0 0 12px 12px !important;
+        }
+
+        /* 6. Лівий блок тексту (Дати, харчування) */
+        div[data-type="dashtours-container"] [class*="footer"] > div:first-child,
+        div[data-type="dashtours-container"] [class*="bottom"] > div:first-child {
+            width: 55% !important;
+            font-size: 12px !important;
+            line-height: 1.3 !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-style: italic !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 4 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            padding-right: 10px !important;
+            font-family: var(--font-primary) !important;
+            text-align: left !important;
+        }
+
+        /* =========================================================
+           7. ПРАВИЙ БЛОК (ЦІНА) - ТОЧНЕ НАЛАШТУВАННЯ
+           ========================================================= */
+        
+        /* Контейнер ціни */
+        div[data-type="dashtours-container"] [class*="footer"] > div:last-child,
+        div[data-type="dashtours-container"] [class*="bottom"] > div:last-child {
+            width: 45% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-end !important;
+            justify-content: flex-end !important;
+            text-align: right !important;
+            /* Базовий колір для "голих" текстових вузлів, якщо модуль їх генерує */
+            color: #FFEC00 !important;
+            font-size: 24px !important;
+            font-weight: 800 !important;
+            font-family: var(--font-display), sans-serif !important;
+            line-height: 1 !important;
+        }
+
+        /* ВЕЛИКІ ЖОВТІ ЦИФРИ (Знаходимо саме класи, що відповідають за значення ціни та валюту) */
+        div[data-type="dashtours-container"] [class*="price-value"],
+        div[data-type="dashtours-container"] [class*="price-value"] *,
+        div[data-type="dashtours-container"] [class*="value"],
+        div[data-type="dashtours-container"] .currency {
+            color: #FFEC00 !important;
+            font-size: 24px !important;
+            font-weight: 800 !important;
+            font-family: var(--font-display), sans-serif !important;
+            line-height: 1 !important;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important;
+            display: inline-block !important;
+            text-transform: none !important;
+        }
+
+        /* БІЛА ДРІБНА ПРИПИСКА "ЗА ДВОХ" (Примусово перефарбовуємо всі інші теги у правому блоці, які НЕ є ціною) */
+        div[data-type="dashtours-container"] [class*="footer"] > div:last-child > *:not([class*="value"]):not([class*="currency"]),
+        div[data-type="dashtours-container"] [class*="bottom"] > div:last-child > *:not([class*="value"]):not([class*="currency"]),
+        div[data-type="dashtours-container"] [class*="price-type"],
+        div[data-type="dashtours-container"] [class*="note"] {
+            color: #FFFFFF !important;
+            font-size: 11px !important;
+            font-weight: 400 !important;
+            font-family: var(--font-primary), sans-serif !important;
+            text-transform: lowercase !important; /* Перетворюємо "ЗА ДВОХ" на "за двох" */
+            letter-spacing: 0.5px !important;
+            text-shadow: none !important;
+            display: block !important; /* Відштовхуємо на новий рядок */
+            width: 100% !important;
+            margin-top: 4px !important;
+        }
+
+        /* Прибираємо дублікати цін (наприклад, ціну в іншій валюті, якщо вона є) */
+        div[data-type="dashtours-container"] [class*="footer"] > div:last-child > [class*="value"]:nth-child(n+2),
+        div[data-type="dashtours-container"] [class*="bottom"] > div:last-child > [class*="value"]:nth-child(n+2) {
+            display: none !important;
+        }
+
+        /* Адаптив для карток */
+        @media (max-width: 1200px) {
+            div[data-type="dashtours-container"] > div > div > div:not(.koala-loader), div[data-type="dashtours-container"] .kt-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+        @media (max-width: 900px) {
+            div[data-type="dashtours-container"] > div > div > div:not(.koala-loader), div[data-type="dashtours-container"] .kt-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        @media (max-width: 600px) {
+            div[data-type="dashtours-container"] > div > div > div:not(.koala-loader), div[data-type="dashtours-container"] .kt-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        /* ========================================================================== */
+
         /* SEO Блок */
         .seo-text-block { background: var(--color-white); padding: 60px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #EAEAEA; }
         .seo-text-block h2 { font-size: 2rem; margin-bottom: 24px; font-family: var(--font-display); }
         .seo-text-block p { margin-bottom: 16px; color: var(--color-text-muted); font-size: 1.125rem; line-height: 1.7; }
 
-        /* Модуль пошуку OTPUSK */
-        #search-module { position: relative; z-index: 10; margin-top: -80px; }
-        .search-widget-glass__wrapper { background: rgba(30, 30, 30, 0.85) !important; backdrop-filter: blur(24px) !important; -webkit-backdrop-filter: blur(24px) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; border-radius: 24px !important; padding: 24px !important; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important; }
-        
-        /* ФІНАЛЬНІ КАРТКИ ГАРЯЧИХ ТУРІВ */
-        body .hot-block_tiles .hot-wrapper { margin: 0 -10px 0 0 !important; display: flex !important; flex-wrap: wrap !important; }
-        body .hot-block_tiles .hot-otp-form-wrap { width: calc(25% - 10px) !important; min-width: 240px; margin: 0 10px 10px 0 !important; border-radius: 16px !important; overflow: hidden !important; box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important; position: relative !important; height: 300px !important; }
-        body .hot-block_tiles .hot-otp-img { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; }
-        body .hot-block_tiles .hot-otp-img:after { display: none !important; }
-        body .hot-block_tiles .hot-otp-form-wrap:hover .hot-otp-img { transform: scale(1.05); transition: transform 0.5s ease; opacity: 1; }
-        body .hot-block_tiles .hot-otp-tour-block { position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; height: 100% !important; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 100%) !important; padding: 0 !important; margin: 0 !important; display: block !important; z-index: 2 !important; }
-        body .hot-block_tiles .hot-otp-tour-info { position: absolute !important; left: 15px !important; bottom: 55px !important; width: calc(100% - 30px) !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important; background: transparent !important; }
-        body .hot-block_tiles .hot-otp-description { font-family: var(--font-display) !important; font-size: 1.1rem !important; line-height: 1.2 !important; color: #fff !important; font-weight: 700 !important; margin-bottom: 4px !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; white-space: normal !important; text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important; }
-        body .hot-block_tiles .hot-otp-place { font-family: var(--font-primary) !important; font-size: 0.85rem !important; color: rgba(255,255,255,0.9) !important; display: block !important; white-space: normal !important; text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important; }
-        body .hot-block_tiles .hot-price-block { position: absolute !important; left: 15px !important; right: 15px !important; bottom: 15px !important; height: 35px !important; display: flex !important; align-items: flex-end !important; justify-content: space-between !important; padding: 0 !important; margin: 0 !important; background: transparent !important; }
-        body .hot-block_tiles .hot-otp-price-count { font-family: var(--font-primary) !important; font-size: 11px !important; color: rgba(255,255,255,0.8) !important; line-height: 1.1 !important; max-width: 40% !important; white-space: normal !important; text-align: left !important; }
-        body .hot-block_tiles .hot-otp-price-count nobr { white-space: normal !important; }
-        body .hot-block_tiles .hot-otp-price { text-align: right !important; flex: 1 !important; display: flex !important; justify-content: flex-end !important; }
-        body .hot-block_tiles .hot-otp-price a { font-family: var(--font-display) !important; font-size: 1.35rem !important; font-weight: 800 !important; color: var(--color-primary) !important; text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important; white-space: nowrap !important; display: inline-block !important; line-height: 1 !important; }
+        /* Стилі для заголовків вітрин */
+        .hot-tour-direction { padding-top: 20px; }
+        .hot-tour-direction h2 { color: var(--color-dark); font-size: 2.2rem; font-weight: 800; text-transform: uppercase; }
 
         /* Модалка */
         .modal-dialog { background-color: #F7F9FC !important; }
         .modal-title, .cf-label { color: #1A1A1A !important; }
         .cf-input { color: #1A1A1A !important; border-bottom-color: #CCCCCC !important; }
-        .ui-checkbox { color: #1A1A1A !important; }
-        .ui-counter, .ui-counter button { border-color: #DDD !important; background-color: #FFF !important; color: #1A1A1A !important; }
-        .ui-counter input { color: #1A1A1A !important; }
-        .checkmark { border-color: #CCC !important; background-color: #FFF !important; }
         .modal-close { background-color: rgba(0,0,0,0.05) !important; color: #1A1A1A !important; }
         .modal-close:hover { background-color: var(--color-primary) !important; }
 
@@ -84,7 +239,6 @@
         .cf-line { background-color: var(--color-dark) !important; }
 
         @media (max-width: 1024px) {
-            body .hot-block_tiles .hot-otp-form-wrap { width: calc(33.333% - 10px) !important; }
             .lead-split { flex-direction: column; }
             .lead-split__visual, .lead-split__form-wrap { flex: 1 1 100%; width: 100%; }
             .lead-split__visual { height: 400px; }
@@ -105,13 +259,22 @@
             .burger.is-active .burger__line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
         @media (max-width: 768px) {
-            body .hot-block_tiles .hot-otp-form-wrap { width: calc(50% - 10px) !important; }
             .hero-screen__title { font-size: 2.5rem !important; }
             .hero-socials { display: none; } 
         }
-        @media (max-width: 480px) {
-            body .hot-block_tiles .hot-otp-form-wrap { width: 100% !important; margin-right: 0 !important; }
-            body .hot-block_tiles .hot-wrapper { margin-right: 0 !important; }
+        
+        /* ПРИМУСОВА СІТКА 4 В РЯД (Додаткові правила) */
+        div[data-type="dashtours-container"] .kt-grid,
+        div[data-type="dashtours-container"] .hot-wrapper {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 20px !important;
+        }
+
+        /* ОБМЕЖЕННЯ КІЛЬКОСТІ (Показуємо тільки перші 12) */
+        div[data-type="dashtours-container"] .kt-card:nth-child(n+13),
+        div[data-type="dashtours-container"] .hot-otp-form-wrap:nth-child(n+13) {
+            display: none !important;
         }
     </style>
 </head>
@@ -155,7 +318,6 @@
                         <ul class="dropdown-simple" role="menu">
                             <li role="none"><a href="hotels.html" role="menuitem">Готелі</a></li>
                             <li role="none"><a href="flights.html" role="menuitem">Авіаквитки</a></li>
-                            
                         </ul>
                     </li>
                     <li class="nav__item"><a href="about.html" class="nav__link">Про компанію</a></li>
@@ -178,50 +340,194 @@
     </header>
 
     <main id="main-content" role="main">
-        <section class="hero-screen hero-screen--inner">
+        <section class="hero-screen">
             <div class="hero-screen__bg">
                 <img src="assets/hero/hero-hotels.webp" alt="Гарячі тури" class="hero-screen__img js-parallax-bg" style="object-position: center;" fetchpriority="high" onerror="this.src='assets/img/Egypt_main.jpg'">
                 <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);"></div>
             </div>
+            
             <div class="container hero-screen__container">
                 <div class="hero-screen__content text-center" style="margin-bottom: 0;">
-                    <span class="hero-screen__badge" style="background: #E81C2E; color: white; display: inline-block; padding: 8px 16px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; margin-bottom: 16px;">Знижки до -40%</span>
-                    <h1 class="hero-screen__title js-split-text" style="font-size: clamp(3rem, 7vw, 6rem);">ГАРЯЧІ <span class="text-gradient">ТУРИ</span></h1>
+                    <span class="hero-screen__badge">Знижки до -40%</span>
+                    <h1 class="hero-screen__title js-split-text">ГАРЯЧІ <span class="text-gradient">ТУРИ</span></h1>
                 </div>
             </div>
+            
+            <ul class="hero-socials">
+                <li><a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a></li>
+                <li><a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a></li>
+                <li><a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a></li>
+                <li><a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a></li>
+            </ul>
         </section>
 
-        <!-- ВІТРИНА ГАРЯЧИХ ТУРІВ -->
         <section class="section bg-light" id="hot-tours" style="padding-top: 60px; position: relative; z-index: 100;">
             <div class="container">
-                <div class="search-widget-glass" id="search-module">
-                    <div class="search-widget-glass__wrapper">
-                        <div class="hot-size-checker" id="otpusk_onsite_hot26865" style="min-height: 400px; display: flex; justify-content: center; align-items: center;">
-                            <img src="https://export.otpusk.com/os/ajax-loader.gif" alt="Завантаження гарячих турів"/><span></span>
-                        </div>
-                        <script>
-                            var osTarget26865 = "search-tour.html";
-                            var osLang = "ua"; 
-                            var osCurrency = "converted"; 
-                            var osTargetBlank26865 = true; 
-
-                            (function (d, s) {
-                                function loadScript(src, id, callback) {if (d.getElementById(id)) {if (typeof callback === "function") callback();return;}var js = d.createElement(s);js.id = id;js.src = src;js.defer = true;js.onload = function () {if (typeof callback === "function") callback();};d.head.appendChild(js);}
-                                if (!window._otpuskApiLoaded) {window._otpuskApiLoaded = true;
-                                    loadScript("https://export.otpusk.com/api/session?access_token=2c1f4-78bec-0741d-68154-053c8", "OShotApi26865", function () {
-                                        loadScript("https://export.otpusk.com/js/view?id=26865", "OShotGetData26865");
-                                    });
-                                } else {
-                                    loadScript("https://export.otpusk.com/js/view?id=26865", "OShotGetData26865");
-                                }
-                            }(document, "script"));
-                        </script>
+                
+                <!-- 1. АЛБАНІЯ -->
+                <div class="hot-tour-direction mb-5 pb-4">
+                    <h2 class="h2 mb-4" style="font-family: var(--font-display); text-align: left;">Гарячі тури в Албанію</h2>
+                    <div data-group-id="733" data-type="dashtours-container">
+                        <img style="margin: 15px auto; display: block;" src="https://export.otpusk.com/os/ajax-loader.gif"/>
                     </div>
+                    <script>
+                        (function () {
+                            const SETTINGS = {
+                                'search-page-url': 'https://limon.turov.com.ua/search/',
+                                'action-type': 'details',
+                                'access-token': '2c1f4-78bec-0741d-68154-053c8',
+                            }
+                            var render = function () { window.__DASHTOURS__.renderGroup(733, SETTINGS); };
+                            if (typeof window.__DASHTOURS__ === 'undefined') {
+                                var el = document.createElement('script');
+                                el.setAttribute('src', 'https://dashtours.otpusk.com/static/koala/dist/koala.bundle.js');
+                                el.onload = render; document.body.append(el);
+                            } else { render(); }
+                        })();
+                    </script>
                 </div>
+
+                <!-- 2. КІПР -->
+                <div class="hot-tour-direction mb-5 pb-4">
+                    <h2 class="h2 mb-4" style="font-family: var(--font-display); text-align: left;">Гарячі тури на Кіпр</h2>
+                    <div data-group-id="732" data-type="dashtours-container">
+                        <img style="margin: 15px auto; display: block;" src="https://export.otpusk.com/os/ajax-loader.gif"/>
+                    </div>
+                    <script>
+                        (function () {
+                            const SETTINGS = {
+                                'search-page-url': 'https://limon.turov.com.ua/search/',
+                                'action-type': 'details',
+                                'access-token': '2c1f4-78bec-0741d-68154-053c8',
+                            }
+                            var render = function () { window.__DASHTOURS__.renderGroup(732, SETTINGS); };
+                            if (typeof window.__DASHTOURS__ === 'undefined') {
+                                var el = document.createElement('script');
+                                el.setAttribute('src', 'https://dashtours.otpusk.com/static/koala/dist/koala.bundle.js');
+                                el.onload = render; document.body.append(el);
+                            } else { render(); }
+                        })();
+                    </script>
+                </div>
+
+                <!-- 3. БОЛГАРІЯ -->
+                <div class="hot-tour-direction mb-5 pb-4">
+                    <h2 class="h2 mb-4" style="font-family: var(--font-display); text-align: left;">Гарячі тури в Болгарію</h2>
+                    <div data-group-id="731" data-type="dashtours-container">
+                        <img style="margin: 15px auto; display: block;" src="https://export.otpusk.com/os/ajax-loader.gif"/>
+                    </div>
+                    <script>
+                        (function () {
+                            const SETTINGS = {
+                                'search-page-url': 'https://limon.turov.com.ua/search/',
+                                'action-type': 'details',
+                                'access-token': '2c1f4-78bec-0741d-68154-053c8',
+                            }
+                            var render = function () { window.__DASHTOURS__.renderGroup(731, SETTINGS); };
+                            if (typeof window.__DASHTOURS__ === 'undefined') {
+                                var el = document.createElement('script');
+                                el.setAttribute('src', 'https://dashtours.otpusk.com/static/koala/dist/koala.bundle.js');
+                                el.onload = render; document.body.append(el);
+                            } else { render(); }
+                        })();
+                    </script>
+                </div>
+
+                <!-- 4. ЧОРНОГОРІЯ -->
+                <div class="hot-tour-direction mb-5 pb-4">
+                    <h2 class="h2 mb-4" style="font-family: var(--font-display); text-align: left;">Гарячі тури в Чорногорію</h2>
+                    <div data-group-id="730" data-type="dashtours-container">
+                        <img style="margin: 15px auto; display: block;" src="https://export.otpusk.com/os/ajax-loader.gif"/>
+                    </div>
+                    <script>
+                        (function () {
+                            const SETTINGS = {
+                                'search-page-url': 'https://limon.turov.com.ua/search/',
+                                'action-type': 'details',
+                                'access-token': '2c1f4-78bec-0741d-68154-053c8',
+                            }
+                            var render = function () { window.__DASHTOURS__.renderGroup(730, SETTINGS); };
+                            if (typeof window.__DASHTOURS__ === 'undefined') {
+                                var el = document.createElement('script');
+                                el.setAttribute('src', 'https://dashtours.otpusk.com/static/koala/dist/koala.bundle.js');
+                                el.onload = render; document.body.append(el);
+                            } else { render(); }
+                        })();
+                    </script>
+                </div>
+
+                <!-- 5. ТУРЕЧЧИНА -->
+                <div class="hot-tour-direction mb-5 pb-4">
+                    <h2 class="h2 mb-4" style="font-family: var(--font-display); text-align: left;">Гарячі тури в Туреччину</h2>
+                    <div data-group-id="729" data-type="dashtours-container">
+                        <img style="margin: 15px auto; display: block;" src="https://export.otpusk.com/os/ajax-loader.gif"/>
+                    </div>
+                    <script>
+                        (function () {
+                            const SETTINGS = {
+                                'search-page-url': 'https://limon.turov.com.ua/search/',
+                                'action-type': 'details',
+                                'access-token': '2c1f4-78bec-0741d-68154-053c8',
+                            }
+                            var render = function () { window.__DASHTOURS__.renderGroup(729, SETTINGS); };
+                            if (typeof window.__DASHTOURS__ === 'undefined') {
+                                var el = document.createElement('script');
+                                el.setAttribute('src', 'https://dashtours.otpusk.com/static/koala/dist/koala.bundle.js');
+                                el.onload = render; document.body.append(el);
+                            } else { render(); }
+                        })();
+                    </script>
+                </div>
+
+                <!-- 6. ГРЕЦІЯ -->
+                <div class="hot-tour-direction mb-5 pb-4">
+                    <h2 class="h2 mb-4" style="font-family: var(--font-display); text-align: left;">Гарячі тури в Грецію</h2>
+                    <div data-group-id="408" data-type="dashtours-container">
+                        <img style="margin: 15px auto; display: block;" src="https://export.otpusk.com/os/ajax-loader.gif"/>
+                    </div>
+                    <script>
+                        (function () {
+                            const SETTINGS = {
+                                'search-page-url': 'https://limon.turov.com.ua/search/',
+                                'action-type': 'details',
+                                'access-token': '2c1f4-78bec-0741d-68154-053c8',
+                            }
+                            var render = function () { window.__DASHTOURS__.renderGroup(408, SETTINGS); };
+                            if (typeof window.__DASHTOURS__ === 'undefined') {
+                                var el = document.createElement('script');
+                                el.setAttribute('src', 'https://dashtours.otpusk.com/static/koala/dist/koala.bundle.js');
+                                el.onload = render; document.body.append(el);
+                            } else { render(); }
+                        })();
+                    </script>
+                </div>
+
+                <!-- 7. ЄГИПЕТ -->
+                <div class="hot-tour-direction mb-5 pb-4">
+                    <h2 class="h2 mb-4" style="font-family: var(--font-display); text-align: left;">Гарячі тури в Єгипет</h2>
+                    <div data-group-id="583" data-type="dashtours-container">
+                        <img style="margin: 15px auto; display: block;" src="https://export.otpusk.com/os/ajax-loader.gif"/>
+                    </div>
+                    <script>
+                        (function () {
+                            const SETTINGS = {
+                                'search-page-url': '',
+                                'action-type': 'order',
+                                'access-token': '2c1f4-78bec-0741d-68154-053c8',
+                            }
+                            var render = function () { window.__DASHTOURS__.renderGroup(583, SETTINGS); };
+                            if (typeof window.__DASHTOURS__ === 'undefined') {
+                                var el = document.createElement('script');
+                                el.setAttribute('src', 'https://dashtours.otpusk.com/static/koala/dist/koala.bundle.js');
+                                el.onload = render; document.body.append(el);
+                            } else { render(); }
+                        })();
+                    </script>
+                </div>
+
             </div>
         </section>
 
-        <!-- ТЕКСТОВЕ ПОЛЕ (SEO) -->
         <section class="section seo-content bg-light" style="padding: 60px 0;">
             <div class="container text-left">
                 <h2 style="font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 24px;">Що потрібно знати про гарячі тури</h2>
@@ -242,7 +548,6 @@
             </div>
         </section>
 
-        <!-- LEAD FORM (SPLIT SCREEN 60/40) -->
         <section class="lead-section" id="contacts" style="background-color: var(--color-light-bg); padding-bottom: 60px;">
             <div class="lead-split container" style="padding: 0;">
                 <div class="lead-split__visual">
@@ -271,7 +576,6 @@
         </section>
     </main>
 
-    <!-- FOOTER -->
     <footer class="footer js-reveal" itemscope itemtype="https://schema.org/TravelAgency" style="position: relative; z-index: 100; background-color: var(--color-dark);">
         <div class="container">
             <div class="footer__grid">
@@ -321,13 +625,11 @@
         </div>
     </footer>
 
-    <!-- ПЛАВАЮЧІ ВІДЖЕТИ -->
     <div class="floating-widget" role="complementary" aria-label="Віджети зв'язку">
         <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Написати в Telegram"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
         <button class="fw-btn fw-btn--call js-binotel-trigger" aria-label="Замовити зворотній дзвінок"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="fw-btn__tooltip">Замовити дзвінок (Binotel)</span></button>
     </div>
 
-    <!-- МОДАЛЬНЕ ВІКНО -->
     <div class="modal-backdrop js-modal" id="modal-tour" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-dialog">
             <button class="modal-close js-modal-close" aria-label="Закрити вікно"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -363,6 +665,122 @@
         document.getElementById('current-year-hottours').textContent = new Date().getFullYear();
         function hideGlobalLoader() { const loader = document.getElementById('global-loader'); if (loader && loader.style.display !== 'none') { loader.style.opacity = '0'; loader.style.transition = 'opacity 0.5s ease'; setTimeout(() => { loader.style.display = 'none'; }, 500); } }
         window.addEventListener('load', hideGlobalLoader); setTimeout(hideGlobalLoader, 3500);
+    </script>
+    <!-- ЯДЕРНИЙ СКРИПТ: ПРИМУСОВИЙ ЖОВТИЙ КОЛІР І 4 В РЯД (ІЗ ШАПКОЮ ТА СМУГОЮ) -->
+    <script>
+        setInterval(function() {
+            const containers = document.querySelectorAll('div[data-type="dashtours-container"]');
+            
+            containers.forEach(container => {
+                const root = container.shadowRoot || container;
+                
+                // 1. ВИПРАВЛЯЄМО СІТКУ НА 4 В РЯД (Якщо скрипт поставив 5)
+                const grids = root.querySelectorAll('div');
+                grids.forEach(div => {
+                    if (div.children.length > 5 && (div.className.includes('grid') || div.className.includes('wrapper') || div.style.display === 'flex' || div.style.flexWrap === 'wrap')) {
+                        div.style.setProperty('display', 'grid', 'important');
+                        let cols = 'repeat(4, 1fr)';
+                        if (window.innerWidth <= 600) cols = '1fr';
+                        else if (window.innerWidth <= 900) cols = 'repeat(2, 1fr)';
+                        else if (window.innerWidth <= 1200) cols = 'repeat(3, 1fr)';
+                        div.style.setProperty('grid-template-columns', cols, 'important');
+                        div.style.setProperty('gap', '20px', 'important');
+                        
+                        Array.from(div.children).forEach((card, idx) => {
+                            if (idx >= 12 || card.innerHTML.includes('loader')) {
+                                card.style.setProperty('display', 'none', 'important');
+                            } else {
+                                card.style.setProperty('width', '100%', 'important');
+                                card.style.setProperty('max-width', '100%', 'important');
+                                card.style.setProperty('flex', 'none', 'important');
+                                card.style.setProperty('position', 'relative', 'important');
+                                card.style.setProperty('height', '280px', 'important');
+                                card.style.setProperty('border-radius', '12px', 'important');
+                                card.style.setProperty('overflow', 'hidden', 'important');
+                                card.style.setProperty('display', 'block', 'important');
+                                card.style.setProperty('margin', '0', 'important');
+                            }
+                        });
+                    }
+                });
+
+                // 2. ПОВЕРТАЄМО ШАПКУ (Назва готелю) ТА ЧОРНУ СМУГУ ЗНИЗУ
+                root.querySelectorAll('.hot-otp-header, .koala-card__header, .kt-card__header, [class*="header"], [class*="title-wrap"]').forEach(h => {
+                    h.style.setProperty('position', 'absolute', 'important');
+                    h.style.setProperty('top', '0', 'important');
+                    h.style.setProperty('left', '0', 'important');
+                    h.style.setProperty('right', '0', 'important');
+                    h.style.setProperty('padding', '15px', 'important');
+                    h.style.setProperty('background', 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%)', 'important');
+                    h.style.setProperty('z-index', '10', 'important');
+                    h.style.setProperty('display', 'block', 'important');
+                    h.querySelectorAll('*').forEach(ht => {
+                        ht.style.setProperty('color', '#FFFFFF', 'important');
+                        ht.style.setProperty('text-shadow', '1px 1px 4px rgba(0,0,0,0.9)', 'important');
+                        ht.style.setProperty('text-align', 'left', 'important');
+                    });
+                });
+
+                root.querySelectorAll('.hot-otp-tour-block, .koala-card__bottom, .kt-card__bottom, [class*="bottom"], [class*="footer"]').forEach(b => {
+                    b.style.setProperty('position', 'absolute', 'important');
+                    b.style.setProperty('bottom', '0', 'important');
+                    b.style.setProperty('left', '0', 'important');
+                    b.style.setProperty('right', '0', 'important');
+                    b.style.setProperty('background', 'rgba(15,15,15,0.85)', 'important');
+                    b.style.setProperty('padding', '12px 15px', 'important');
+                    b.style.setProperty('z-index', '10', 'important');
+                    b.style.setProperty('display', 'flex', 'important');
+                    b.style.setProperty('justify-content', 'space-between', 'important');
+                    b.style.setProperty('align-items', 'flex-end', 'important');
+                    b.style.setProperty('min-height', '75px', 'important');
+                    b.style.setProperty('box-sizing', 'border-box', 'important');
+                });
+
+                root.querySelectorAll('.koala-card__info, .kt-card__info, .hot-otp-tour-info, [class*="info"]').forEach(i => {
+                    i.style.setProperty('width', '55%', 'important');
+                    i.style.setProperty('color', '#FFFFFF', 'important');
+                    i.style.setProperty('font-size', '11px', 'important');
+                    i.style.setProperty('font-style', 'italic', 'important');
+                    i.style.setProperty('text-align', 'left', 'important');
+                });
+
+                root.querySelectorAll('.koala-card__price-wrap, .kt-card__price-wrap, .hot-price-block, [class*="price-wrap"]').forEach(p => {
+                    p.style.setProperty('width', '45%', 'important');
+                    p.style.setProperty('display', 'flex', 'important');
+                    p.style.setProperty('flex-direction', 'column', 'important');
+                    p.style.setProperty('align-items', 'flex-end', 'important');
+                });
+
+                // 3. ПРИМУСОВО ФАРБУЄМО ЦІНИ У ЖОВТИЙ, А ТЕКСТ У БІЛИЙ
+                root.querySelectorAll('*').forEach(el => {
+                    if (el.children.length === 0 && el.textContent) {
+                        let text = el.textContent.trim().toLowerCase();
+                        
+                        // Стара ціна (закреслена)
+                        if (el.tagName === 'S' || el.tagName === 'STRIKE' || el.closest('s') || el.closest('strike')) {
+                            el.style.setProperty('color', '#FFFFFF', 'important');
+                            el.style.setProperty('text-decoration', 'line-through', 'important');
+                            el.style.setProperty('font-size', '13px', 'important');
+                        } 
+                        // Актуальна ціна (цифри і валюта)
+                        else if (text.includes('₴') || text.includes('€') || text.includes('$') || /^[0-9\s]{4,}$/.test(text)) {
+                            el.style.setProperty('color', '#FFEC00', 'important');
+                            el.style.setProperty('font-weight', '800', 'important');
+                            el.style.setProperty('font-size', '24px', 'important');
+                            if(el.parentElement && el.parentElement.tagName !== 'S') {
+                                el.parentElement.style.setProperty('color', '#FFEC00', 'important');
+                            }
+                        } 
+                        // Напис "за двоих" / "за одного"
+                        else if (text.includes('за дво') || text.includes('чел') || text.includes('осіб') || text.includes('одн')) {
+                            el.style.setProperty('color', '#FFFFFF', 'important');
+                            el.style.setProperty('font-size', '11px', 'important');
+                            el.style.setProperty('font-weight', '500', 'important');
+                        }
+                    }
+                });
+            });
+        }, 50); // Відпрацьовує кожні 50 мілісекунд
     </script>
 </body>
 </html>
