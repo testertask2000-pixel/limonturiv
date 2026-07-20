@@ -81,16 +81,13 @@
     padding: 0;
 }
 
-/* ФИКС: Всегда показываем полосу прокрутки. 
-Это навсегда убивает баг с зависшим скроллом при возврате на главную */
 html {
     scroll-behavior: smooth;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-    overflow-y: scroll !important; 
-    overflow-x: hidden !important; 
+    /* Повністю видалили overflow-x: hidden, щоб не було подвійного скролу */
 }
 
 body {
@@ -101,17 +98,10 @@ body {
     position: relative;
     width: 100%;
     min-height: 100vh;
-    overflow-y: visible !important; 
-    overflow-x: hidden !important; 
+    /* Використовуємо сучасний clip замість hidden — це вирішує баг подвійного скролу */
+    overflow-x: clip !important; 
 }
 
-/* Ядерное оружие против старых скриптов блокировки */
-html.is-locked, 
-body.is-locked, 
-html[style*="overflow"], 
-body[style*="overflow"] {
-    overflow-y: scroll !important;
-}
 
 /* Единственное исключение — открытая модалка нового дизайна */
 body.modal-open-lock {
@@ -1695,6 +1685,10 @@ body #search_mvoyage_all .btn_search {
    СПАСАЕМ ИКОНКИ СОЦСЕТЕЙ (ЖЕСТКАЯ БЛОКИРОВКА ШИРИНЫ ЭКРАНА)
    ========================================================================== */
 
+/* ==========================================================================
+   СПАСАЕМ ИКОНКИ СОЦСЕТЕЙ (ЖЕСТКАЯ БЛОКИРОВКА ШИРИНЫ ЭКРАНА)
+   ========================================================================== */
+
 html, body {
     width: 100% !important;
     max-width: 100% !important; /* Запрещаем странице растягиваться шире видимой части экрана */
@@ -1748,3 +1742,23 @@ body .hero-socials {
 
 
 
+/* ==========================================================================
+   АБСОЛЮТНИЙ ФІКС ПОДВІЙНОГО СКРОЛУ (ПЕРЕБИВАЄ СТОРОННІ СКРИПТИ)
+   ========================================================================== */
+html {
+    /* Дозволяємо головний скрол тільки на рівні html */
+    overflow-y: auto !important; 
+    overflow-x: hidden !important;
+}
+
+body {
+    /* Жорстко забороняємо body мати власну вертикальну прокрутку */
+    overflow-y: visible !important; 
+    
+    /* Сучасний метод обрізки горизонталі без створення вертикального скролу */
+    overflow-x: clip !important;    
+    
+    /* Скидаємо можливі 100% висоти від скриптів, які створюють хибне вікно */
+    height: auto !important;        
+    position: relative !important;
+}
