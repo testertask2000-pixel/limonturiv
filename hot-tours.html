@@ -36,6 +36,179 @@
         .hero-screen__title { font-family: var(--font-primary) !important; font-size: clamp(3rem, 7vw, 5.5rem) !important; font-weight: 800 !important; letter-spacing: -0.5px !important; text-transform: uppercase !important; color: #fff; text-shadow: 0 10px 30px rgba(0,0,0,0.6); }
         .hero-screen__badge { background: #E81C2E; color: white; display: inline-block; padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 1rem; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(232, 28, 46, 0.4); text-transform: uppercase; }
 
+
+        .hero-screen--inner { 
+            position: relative !important;
+            width: 100% !important;
+            height: 520px !important; /* Увеличили высоту баннера */
+            min-height: 460px !important; 
+            padding-top: 80px !important; 
+            padding-bottom: 60px !important; 
+            background-color: #1A1A1A !important; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-screen__img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important; /* Растягивает сочно на всю ширину */
+            object-position: center !important;
+        }
+
+        /* Стили для выпадашки телефонов */
+        .phone-dropdown {
+            position: absolute !important;
+            top: 100% !important;
+            left: 0 !important;
+            background: #FFFFFF !important;
+            border-radius: 12px !important;
+            padding: 10px 14px !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12) !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 8px !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transform: translateY(10px) !important;
+            transition: all 0.25s ease !important;
+            z-index: 120 !important;
+            min-width: 200px !important;
+        }
+
+        .header__phone-wrapper:hover .phone-dropdown {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(4px) !important;
+        }
+
+        .phone-dropdown a {
+            font-family: 'Unbounded', 'Manrope', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 0.92rem !important;
+            color: #1A1A1A !important;
+            text-decoration: none !important;
+            transition: color 0.2s ease !important;
+        }
+
+        .phone-dropdown a:hover {
+            color: #D4C000 !important;
+        }
+
+        /* ==========================================
+        СТИЛИ ТЕЛЕФОНА И СТРЕЛОЧКИ
+        ========================================== */
+        .header__phone-main {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-family: 'Unbounded', sans-serif !important;
+            font-weight: 800 !important;
+            font-size: 1.05rem !important;
+            color: #000000 !important;
+            letter-spacing: -0.3px !important;
+        }
+
+        .header__phone-icon {
+            width: 20px !important;
+            height: 20px !important;
+            flex-shrink: 0 !important;
+            fill: none !important;
+            stroke: #000000 !important;
+            stroke-width: 2.2 !important;
+            stroke-linecap: round !important;
+            stroke-linejoin: round !important;
+        }
+
+        .header__phone-chevron {
+            width: 12px !important;
+            height: 12px !important;
+            margin-left: 2px !important;
+            stroke: #000000 !important;
+            transition: transform 0.25s ease !important;
+        }
+
+        /* Переворачиваем стрелочку при наведении */
+        .header__phone-wrapper:hover .header__phone-chevron {
+            transform: rotate(180deg) !important;
+        }
+
+        /* ==========================================
+        ПРИБЛИЖЕНИЕ КАРТИНКИ (ZOOM БАННЕРА)
+        ========================================== */
+        .hero-screen--inner { 
+            position: relative !important;
+            width: 100vw !important; /* Растягивается на всю ширину экрана */
+            left: 50% !important;
+            right: 50% !important;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            height: 520px !important; 
+            min-height: 460px !important; 
+            overflow: hidden !important;
+        }
+
+        .hero-screen__img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important; 
+            object-position: center !important;
+            transform: scale(1.18) !important; /* Приближает картинку ближе/крупнее */
+            transition: transform 0.5s ease !important;
+        }
+
+
+        /* ==========================================================================
+   ЖЕСТКИЙ ФИКС ВЫСОТЫ И ЗУМА HERO БАННЕРА
+   ========================================================================== */
+        /* 1. Увеличиваем высоту самого блока-контейнера */
+        section.hero-screen,
+        section.hero-screen--inner,
+        html body section.hero-screen {
+            height: 650px !important;      /* Задай нужную высоту (например, 650px) */
+            min-height: 650px !important;
+            max-height: 650px !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        /* 2. Растягиваем обертку картинки */
+        html body .hero-screen__bg {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: 1 !important;
+        }
+
+        /* 3. Масштабируем саму картинку (делаем ее крупнее/ближе) */
+        html body .hero-screen__img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center !important;
+            transform: scale(1.25) !important; /* Увеличивает внутренний масштаб картинки (зум) */
+            transform-origin: center center !important;
+        }
+
+        /* 4. Фикс для мобилок, чтобы баннер смотрелся гармонично */
+        @media (max-width: 768px) {
+            section.hero-screen,
+            section.hero-screen--inner,
+            html body section.hero-screen {
+                height: 420px !important;
+                min-height: 420px !important;
+            }
+        }
         /* ==========================================================================
            ЖОРСТКІ СТИЛІ ДЛЯ ВІТРИН ТУРІВ (DASHTOURS)
            ========================================================================== */
@@ -329,9 +502,30 @@
                 <div class="lang-switcher">
                     <button class="lang-btn is-active">UA</button><span class="lang-sep"></span><button class="lang-btn">RU</button>
                 </div>
+                <!-- БЛОК ТЕЛЕФОНУ З ІКОНКОЮ ТА СТРІЛОЧКОЮ -->
                 <div class="header__contacts">
-                    <span class="header__contacts-hint" style="font-size: 0.75rem; color: #666;">Ми на зв'язку</span>
-                    <a href="tel:+380995337227" class="header__phone">+38 (099) 533-72-27</a>
+                    <span class="header__contacts-hint">Ми на зв'язку</span>
+                    <div class="header__phone-wrapper">
+                        <div class="header__phone-main">
+                            <!-- Иконка трубки (как на скрине) -->
+                            <svg class="header__phone-icon" viewBox="0 0 24 24">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                            
+                            <span>+38 (099) 533-72-27</span>
+                            
+                            <!-- Маленькая стрелочка галочка (как на скрине) -->
+                            <svg class="header__phone-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </div>
+
+                        <!-- Выпадающее меню при наведении -->
+                        <div class="phone-dropdown">
+                            <a href="tel:+380995337227">+38 (099) 533-72-27</a>
+                            <a href="tel:+380995337447">+38 (099) 533-74-47</a>
+                        </div>
+                    </div>
                 </div>
                 <button class="btn btn--solid-yellow js-open-modal"><span>Підібрати тур</span></button>
                 <button class="burger js-burger"><span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span></button>

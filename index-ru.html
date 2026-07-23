@@ -45,18 +45,144 @@
             text-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
 
-        /* ==========================================================================
-           БРОНЕБОЙНЫЕ СТИЛИ МОДУЛЯ ПОИСКА (OTPUSK) - ПЕРЕБИВАЕМ СИНИЙ ЦВЕТ
-           ========================================================================== */
-        #search-module { margin-top: -120px; position: relative; z-index: 10; }
-        .search-widget-glass__wrapper { background: rgba(30, 30, 30, 0.85) !important; backdrop-filter: blur(24px) !important; -webkit-backdrop-filter: blur(24px) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; border-radius: 24px !important; padding: 24px !important; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important; }
-        body div.os-container, body div.os-container .os-search-panel, body div.os-container .os-form-wrapper, body div.os-container form { background-color: transparent !important; background-image: none !important; border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
-        body div.os-container .os-search-panel input, body div.os-container .os-search-panel select, body div.os-container .os-dropdown { background-color: rgba(255, 255, 255, 0.1) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; color: #fff !important; border-radius: 12px !important; height: 56px !important; font-size: 1rem !important; font-family: var(--font-primary) !important; transition: all 0.3s ease !important; padding-left: 16px !important; }
-        body div.os-container .os-search-panel input:focus, body div.os-container .os-search-panel select:focus { background-color: rgba(255, 255, 255, 0.2) !important; border-color: var(--color-primary) !important; outline: none !important; box-shadow: 0 0 15px rgba(255, 236, 0, 0.2) !important; }
-        body div.os-container .os-form-button, body div.os-container button.os-submit { background-color: var(--color-primary) !important; color: #0A0A0A !important; border-radius: 50px !important; height: 56px !important; font-weight: 800 !important; font-size: 1rem !important; text-transform: uppercase !important; border: none !important; box-shadow: 0 10px 24px rgba(255, 236, 0, 0.3) !important; transition: all 0.3s ease !important; padding: 0 32px !important; cursor: pointer !important; background-image: none !important; }
-        body div.os-container .os-form-button:hover, body div.os-container button.os-submit:hover { transform: translateY(-3px) !important; box-shadow: 0 15px 30px rgba(255, 236, 0, 0.5) !important; background-color: var(--color-primary-hover) !important; }
-        body div.os-container .os-title, body div.os-container label, body div.os-container .os-tab span, body div.os-container a.os-adv-search-link { color: rgba(255, 255, 255, 0.9) !important; font-family: var(--font-primary) !important; font-size: 0.9rem !important; text-shadow: none !important; }
-        body div.os-container .ui-menu-item { color: #333 !important; }
+/* ==========================================================================
+   HERO 630px И ПОЛНАЯ СИНХРОНИЗАЦИЯ ПОИСКА (РУССКАЯ ВЕРСИЯ)
+   ========================================================================== */
+
+/* Геро-блок с высотой 630px */
+.hero-search { 
+    position: relative; 
+    width: 100%; 
+    height: 560px !important; 
+    min-height: 56px !important;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    overflow: hidden; 
+    padding-top: 80px; 
+    padding-bottom: 0; 
+}
+.hero-search__bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+.hero-search__bg img { width: 100%; height: 100%; object-fit: cover !important; object-position: top center !important; }
+.hero-search__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%); }
+
+.hero-search__content { 
+    width: 100%; 
+    max-width: 900px; 
+    text-align: center !important; 
+    position: relative; 
+    z-index: 2; 
+    margin: 0 auto !important; 
+    padding-bottom: 40px;
+}
+.hero-search__title { 
+    font-family: var(--font-primary) !important; 
+    font-size: clamp(2.5rem, 5vw, 4.5rem); 
+    font-weight: 800; 
+    color: #fff; 
+    line-height: 1.1; 
+    text-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+    text-align: center !important; 
+    margin: 0 !important; 
+}
+
+/* Соцсети справа */
+.hero-socials-vertical { 
+    position: absolute !important; 
+    right: 30px !important; 
+    top: 50% !important; 
+    transform: translateY(-50%) !important; 
+    display: flex !important; 
+    flex-direction: column; 
+    gap: 12px; 
+    z-index: 90 !important; 
+}
+.hero-socials-vertical a { 
+    width: 48px !important; 
+    height: 48px !important; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #fff; 
+    background: rgba(15, 15, 15, 0.7) !important; 
+    backdrop-filter: blur(5px);
+    border-radius: 50% !important;
+    transition: all 0.3s ease; 
+}
+.hero-socials-vertical a:hover { color: #FFEC00; transform: scale(1.1); background: rgba(0, 0, 0, 0.9) !important; }
+
+/* Нахлёст модуля поиска */
+#search-module-wrapper { position: relative; z-index: 10; margin-top: -100px !important; padding-bottom: 80px; }
+
+body .new_f-container { 
+    background: rgba(0, 0, 0, 0.5) !important; 
+    backdrop-filter: blur(8px) !important; 
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-radius: 15px !important; 
+    position: relative; 
+    z-index: 20 !important; 
+    max-width: 940px !important; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); 
+    margin: 0 auto !important; 
+}
+
+body .new_f-wrapper-bg-imgs, body .new_f-title, body .new_f-tip-active { display: none !important; }
+body .new_f-form { padding-top: 30px !important; }
+
+/* Кнопка Найти */
+body .new_f-form .new_f-form-submit,
+body .new_os .new_f-form-submit { 
+    background: #000000 !important; 
+    color: #ffffff !important; 
+    border-radius: 0 15px 15px 0 !important; 
+    transition: background .3s ease !important; 
+}
+body .new_f-form .new_f-form-submit:hover { 
+    background: #FFEC00 !important; 
+    color: #000000 !important; 
+}
+
+/* Расширенный поиск */
+body .new_f-ext-container {
+    background: #555555 !important;
+    border-radius: 0 0 12px 12px !important;
+    padding: 25px 25px 85px 25px !important;
+    position: relative !important;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4) !important;
+    z-index: 15 !important;
+}
+body .new_f-ext-container *, body .new_f-ext-bl label { color: #ffffff !important; }
+body .new_f-label-name, body .new_f-ext-col-serv .new_weight-bold { color: #4da5ff !important; }
+
+/* Разводка кнопок «Сбросить» (слева) и «Применить» (справа) */
+body .new_f-ext-container .new_f-dropdown-body-bottom, body .new_f-ext-body-bottom {
+    position: absolute !important;
+    bottom: 20px !important;
+    left: 25px !important;
+    right: 25px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 45px !important;
+}
+
+body .new_f-ext-clear-btn { position: static !important; color: #4da5ff !important; text-decoration: underline !important; font-size: 14px; order: 1 !important; }
+body .new_f-container .new_f-dropdown-btn-apply { position: static !important; background: #FFEC00 !important; color: #1A1A1A !important; border-radius: 10px !important; padding: 0 32px !important; height: 44px !important; font-weight: 800 !important; order: 2 !important; }
+
+/* Фильтры и Валюта (Замена оранжевого на Жёлтый) */
+body .new_r-filter-value, body .new_r-filter .new_r-filter-val {
+    color: #1A1A1A !important; background: #FFEC00 !important; padding: 2px 8px !important; border-radius: 6px !important; font-weight: 700 !important;
+}
+body [class*="-cur"] span.active, body [class*="-currency"] .active, body .new_f-cur label.active, body .new_r-currency-switch label input:checked + span {
+    background: #FFEC00 !important; color: #1A1A1A !important; font-weight: 800 !important;
+}
+
+/* Карточки выдачи и Овальная кнопка */
+body .new_r-item-wrap, body .new_r-item { border-radius: 16px !important; background: #fff !important; box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important; margin-bottom: 20px !important; overflow: hidden !important; }
+body .new_r-more-wrap a, body .new_r-show-more-results, body .new_r-more, body .new_r-show-more {
+    display: inline-flex !important; background: #FFEC00 !important; color: #1A1A1A !important; border-radius: 50px !important; padding: 16px 42px !important; font-size: 16px !important; font-weight: 700 !important; border: none !important; margin: 0 auto 15px auto !important; float: none !important;
+}
 
         /* Преимущества */
         .feature-card { text-align: center; }
@@ -226,6 +352,136 @@
             width: 100%;
             text-align: right;
         }
+        /* ==========================================================================
+   ФИКС КНОПКИ ПОИСКА (ЖЕЛТАЯ) И ВЕРТИКАЛЬНЫХ СОЦСЕТЕЙ
+   ========================================================================== */
+
+/* Жёлтая кнопка "Найти" */
+body .new_f-form .new_f-form-submit,
+body .new_os .new_f-form-submit,
+body #search-module .new_f-form-submit { 
+    background: #FFEC00 !important; 
+    color: #1A1A1A !important; 
+    border-radius: 0 15px 15px 0 !important; 
+    box-shadow: none !important; 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    width: 107px !important; 
+    font-weight: 800 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transition: background .3s ease !important; 
+}
+
+body .new_f-form .new_f-form-submit:hover,
+body .new_os .new_f-form-submit:hover { 
+    background: #E5D400 !important; 
+    color: #000000 !important; 
+}
+
+/* Вертикальные круглые иконки соцсетей справа */
+.hero-socials-vertical { 
+    position: absolute !important; 
+    right: 30px !important; 
+    top: 50% !important; 
+    transform: translateY(-50%) !important; 
+    display: flex !important; 
+    flex-direction: column !important; 
+    gap: 12px !important; 
+    z-index: 90 !important; 
+    background: transparent !important; 
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    list-style: none !important;
+}
+
+.hero-socials-vertical a { 
+    width: 48px !important; 
+    height: 48px !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important; 
+    color: #ffffff !important; 
+    background: rgba(15, 15, 15, 0.7) !important; 
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease !important; 
+    text-decoration: none !important;
+}
+
+.hero-socials-vertical a svg { 
+    width: 22px !important; 
+    height: 22px !important; 
+}
+
+.hero-socials-vertical a:hover { 
+    color: #1A1A1A !important; 
+    background: #FFEC00 !important; 
+    transform: scale(1.1) !important; 
+}
+        /* ==========================================================================
+   1. ЖЁЛТЫЕ КАРТОЧКИ ВЫДАЧИ
+   ========================================================================== */
+body .new_r-item-price, 
+body .new_t-bl-price, 
+body .new_t-price,
+body .os-price-btn,
+body .new_price-btn {
+    background: #FFEC00 !important;          /* Ярко-жёлтый фон */
+    color: #1A1A1A !important;               /* Тёмный чёткий текст */
+    border-radius: 8px !important;
+    border: none !important;
+    padding: 10px 15px !important;
+    box-shadow: 0 4px 10px rgba(255, 236, 0, 0.3) !important;
+}
+
+body .new_r-item-price *, 
+body .new_t-bl-price *,
+body .new_price-value,
+body .new_price-desc { 
+    color: #1A1A1A !important;               /* Весь внутренний текст тёмный */
+}
+
+body .new_r-item-price:hover, 
+body .os-price-btn:hover { 
+    background: #E5D400 !important;          /* Эффект наведения */
+}
+/* ==========================================================================
+   ЖЁСТКОЕ УМЕНЬШЕНИЕ ВЫСОТЫ БАННЕРА (И КАРТИНКИ)
+   ========================================================================== */
+
+/* 1. Сжимаем контейнер секции */
+.hero-screen {
+    height: 630px !important;        /* Поставь 400px или 450px, если нужно еще ниже */
+    min-height: 630px !important;
+    max-height: 630px !important;
+    padding-top: 100px !important;   /* Уменьшаем верхний отступ под хедером */
+    padding-bottom: 0 !important;
+    overflow: hidden !important;
+}
+
+/* 2. Сжимаем саму фоновую картинку */
+.hero-screen__bg,
+.hero-screen__img {
+    height: 100% !important;
+    max-height: 630px !important;
+    object-fit: cover !important;
+    object-position: center center !important; /* Центрирует пляж по вертикали */
+}
+
+/* 3. Уменьшаем отступ над заголовком */
+.hero-screen__content {
+    padding-bottom: 20px !important;
+    margin-bottom: 0 !important;
+}
+
+/* 4. Подтягиваем модуль поиска выше к картинке */
+#search-module-wrapper {
+    margin-top: -60px !important;   /* Регулирует нахлёст поиска на картинку */
+}
 
         /* Адаптив сетки */
         @media (max-width: 1200px) { .static-hot-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -418,59 +674,61 @@
 </header>
 
     <main id="main-content" role="main">
-        <section class="hero-screen">
-            <div class="hero-screen__bg">
-                <img src="assets/hero/hero-main.webp" alt="Идеальный отдых" class="hero-screen__img" fetchpriority="high" onerror="this.src='assets/img/luxfoncom_4278.jpg'">
-                <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.6) 100%);"></div>
-            </div>
+        <!-- HERO-БЛОК (630px) -->
+<section class="hero-screen">
+    <div class="hero-screen__bg">
+        <img src="assets/hero/hero-main.webp" alt="Идеальный отдых" class="hero-screen__img" fetchpriority="high" onerror="this.src='assets/img/luxfoncom_4278.jpg'">
+        <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.6) 100%);"></div>
+    </div>
 
-            <div class="container hero-screen__container">
-                <div class="hero-screen__content text-center" style="padding-bottom: 120px;">
-                    <h1 class="hero-screen__title js-split-text">
-                        Поиск туров по всем <br>
-                        <span class="text-gradient">туроператорам</span>
-                    </h1>
-                </div>
-
-                <!-- МОДУЛЬ ПОИСКА OTPUSK -->
-                <div class="search-widget-glass" id="search-module">
-                    <div class="search-widget-glass__wrapper">
-                        <script>
-                            var osGeo = ''; 
-                            var osDefaultDeparture = 1831; 
-                            var osDefaultDuration = ''; 
-                            var osDateFrom = ''; 
-                            var osDateTo = ''; 
-                            var osHotelCategory = ''; 
-                            var osFood = ''; 
-                            var osTransport = ''; 
-                            var osTarget = ''; 
-                            var osContainer = null; 
-                            var osTourContainer = null; 
-                            var osLang = 'ru'; 
-                            var osTourTargetBlank = true; 
-                            var osOrderUrl = null; 
-                            var osCurrency = 'converted'; 
-                            var osAutoStart = false; 
-                        </script>
-                        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=cyrillic" rel="stylesheet">
-                        <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/form.css" type="text/css" defer />
-                        <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/result.css" type="text/css" defer/>
-                        <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/tour.css" type="text/css" defer/>
-                        <script src="https://api.otpusk.com/api/2.4/session?access_token=2c1f4-78bec-0741d-68154-053c8" defer></script>
-                        <script src="https://export.otpusk.com/js/onsite/" defer></script>
-                        <script src="https://export.otpusk.com/js/order" defer></script>
-                    </div>
-                </div>
-            </div>
-            
-            <ul class="hero-socials">
+    <div class="container hero-screen__container">
+        <div class="hero-screen__content text-center">
+            <h1 class="hero-screen__title js-split-text">
+                Поиск туров по всем <br>
+                <span class="text-gradient">туроператорам</span>
+            </h1>
+        </div>
+    </div>
+    
+    <ul class="hero-socials">
                 <li><a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a></li>
                 <li><a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a></li>
                 <li><a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a></li>
                 <li><a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a></li>
             </ul>
-        </section>
+</section>
+
+<!-- ПЛАВАЮЩИЙ МОДУЛЬ ПОИСКА OTPUSK -->
+<section id="search-module-wrapper">
+    <div class="container">
+        <script>
+            var osGeo = ''; 
+            var osDefaultDeparture = 1831; 
+            var osDefaultDuration = ''; 
+            var osDateFrom = ''; 
+            var osDateTo = ''; 
+            var osHotelCategory = ''; 
+            var osFood = ''; 
+            var osTransport = ''; 
+            var osTarget = ''; 
+            var osContainer = null; 
+            var osTourContainer = null; 
+            var osLang = 'ru'; /* Русский язык интерфейса */
+            var osTourTargetBlank = true; 
+            var osOrderUrl = null; 
+            var osCurrencies = ['uah', 'eur']; 
+            var osDefaultCurrency = 'uah'; 
+            var osAutoStart = false; 
+        </script>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=cyrillic" rel="stylesheet">
+        <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/form.css" type="text/css" />
+        <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/result.css" type="text/css" />
+        <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/tour.css" type="text/css" />
+        <script src="https://api.otpusk.com/api/2.4/session?access_token=2c1f4-78bec-0741d-68154-053c8"></script>
+        <script src="https://export.otpusk.com/js/onsite/"></script>
+        <script src="https://export.otpusk.com/js/order"></script>
+    </div>
+</section>
 
         <!-- ПОЧЕМУ ВЫБИРАЮТ НАС -->
         <section class="section features" id="about">

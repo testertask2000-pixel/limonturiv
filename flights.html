@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk" class="no-js">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -15,11 +15,21 @@
     
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- ВБУДОВАНІ СТИЛІ (УСІ ФІКСИ ТА ВАУ-ЕФЕКТИ 2026 РОКУ) -->
     <style>
+        *, *::before, *::after {
+            box-sizing: border-box !important;
+        }
+
         :root {
             --color-primary: #FFEC00 !important;
             --color-primary-hover: #E5D400 !important;
+        }
+
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            background-color: #F7F9FC !important;
         }
 
         /* Хедер */
@@ -31,35 +41,160 @@
         .lang-switcher { background: #F7F9FC !important; }
         .lang-btn { color: #666 !important; }
         .lang-btn.is-active { color: #0A0A0A !important; background: #fff !important; box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;}
+        /* Секція HERO (Баннер) */
+        .hero-screen { 
+            position: relative !important; 
+            min-height: 580px !important; 
+            height: 580px !important;
+            display: flex !important; 
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding-top: 120px !important; 
+            padding-bottom: 80px !important; 
+            background-color: #1A1A1A !important;
+            width: 100% !important;
+        }
 
-        /* Герой */
-        .hero-screen__title { font-family: var(--font-primary) !important; font-size: clamp(2.5rem, 5vw, 4.5rem) !important; font-weight: 800 !important; letter-spacing: -0.5px !important; text-transform: none !important; color: #fff; text-shadow: 0 10px 30px rgba(0,0,0,0.6); }
-        .hero-screen--inner { min-height: 50vh; padding-bottom: 40px; }
+        .hero-screen__bg {
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: 1 !important;
+        }
+
+        .hero-screen__img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            transform: scale(1.25) !important;
+            object-position: center !important;
+        }
+
+        .hero-screen__container {
+            position: relative !important;
+            z-index: 5 !important;
+            width: 100% !important;
+        }
+
+        .hero-screen__title { 
+            font-family: var(--font-primary) !important; 
+            font-size: clamp(2rem, 4.5vw, 4rem) !important; 
+            font-weight: 800 !important; 
+            letter-spacing: -0.5px !important; 
+            text-transform: none !important; 
+            color: #fff !important; 
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8) !important; 
+            margin: 0 auto !important;
+            text-align: center !important;
+        }
+
+        /* Соцмережі праворуч на банері */
+        .hero-socials-vertical {
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 20;
+        }
+
+        .hero-social-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(20, 20, 20, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .hero-social-icon:hover {
+            background: var(--color-primary);
+            color: #1A1A1A;
+            transform: scale(1.1);
+        }
+
+        /* ==========================================================================
+           МОДУЛЬ ПОШУКУ
+           ========================================================================== */
+        .search-module-section {
+            position: relative;
+            z-index: 40;
+            width: 100%;
+            margin-top: -55px !important; 
+            margin-bottom: 30px !important;
+            padding: 0 15px !important;
+        }
+
+        #search-module { 
+            position: relative !important; 
+            z-index: 40 !important; 
+            margin: 0 auto !important;
+            width: 100% !important;
+            max-width: 1140px !important;
+        }
         
-        /* SEO Блок */
-        .seo-text-block { background: var(--color-white); padding: 60px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #EAEAEA; }
-        .seo-text-block h2 { font-size: 2rem; margin-bottom: 24px; font-family: var(--font-display); }
-        .seo-text-block p { margin-bottom: 16px; color: var(--color-text-muted); font-size: 1.125rem; line-height: 1.7; }
+        /* Зовнішня підкладка */
+        .search-widget-glass__wrapper { 
+            background: rgba(20, 24, 28, 0.65) !important; 
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border-radius: 18px !important; 
+            padding: 10px 14px !important; 
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25) !important; 
+            width: 100% !important;
+        }
 
-        /* Модуль пошуку UNIT.TRAVEL (Антрацит) */
-        #search-module { position: relative; z-index: 10; margin-top: -80px; }
-        .search-widget-glass__wrapper { background: rgba(255, 255, 255, 0.95) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; border: 1px solid rgba(255, 255, 255, 0.5) !important; border-radius: 24px !important; padding: 24px !important; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important; }
-        
-        body .unit-widget-container button { border-radius: 50px !important; background-color: var(--color-primary) !important; color: #0A0A0A !important; font-family: var(--font-primary) !important; font-weight: 700 !important; transition: all 0.3s ease !important; }
-        body .unit-widget-container button:hover { background-color: var(--color-primary-hover) !important; transform: translateY(-2px); }
+        /* Внутрішній віджет */
+        .unit-widget-container {
+            background: rgba(240, 243, 246, 0.96) !important;
+            border-radius: 12px !important;
+            padding: 4px !important; 
+            position: relative !important;
+            z-index: 50 !important;
+        }
 
-        /* Модалка */
-        .modal-dialog { background-color: #F7F9FC !important; }
-        .modal-title, .cf-label { color: #1A1A1A !important; }
-        .cf-input { color: #1A1A1A !important; border-bottom-color: #CCCCCC !important; }
-        .ui-checkbox { color: #1A1A1A !important; }
-        .ui-counter, .ui-counter button { border-color: #DDD !important; background-color: #FFF !important; color: #1A1A1A !important; }
-        .ui-counter input { color: #1A1A1A !important; }
-        .checkmark { border-color: #CCC !important; background-color: #FFF !important; }
-        .modal-close { background-color: rgba(0,0,0,0.05) !important; color: #1A1A1A !important; }
-        .modal-close:hover { background-color: var(--color-primary) !important; }
+        .unit-widget-container > div,
+        .unit-widget-container iframe {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+            border: none !important;
+        }
 
-        /* Lead Form 60/40 */
+        /* ==========================================================================
+           СЕКЦІЯ ТЕКСТУ
+           ========================================================================== */
+        .seo-section-main {
+            padding-top: 20px !important;
+            padding-bottom: 60px !important;
+            background-color: #F7F9FC !important;
+            position: relative;
+            z-index: 10;
+        }
+
+        .seo-text-block { 
+            background: #FFFFFF !important; 
+            padding: 45px !important; 
+            border-radius: var(--radius-lg); 
+            box-shadow: var(--shadow-sm); 
+            border: 1px solid #EAEAEA; 
+        }
+        .seo-text-block h2 { font-size: 1.8rem; margin-bottom: 20px; font-family: var(--font-display); }
+        .seo-text-block p { margin-bottom: 16px; color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.7; }
+
+        /* Lead Form */
         .lead-split { display: flex; flex-direction: row; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg); }
         .lead-split__visual { flex: 0 0 60%; position: relative; overflow: hidden;}
         .lead-split__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -71,11 +206,21 @@
         .cf-input:focus ~ .cf-label, .cf-input:not(:placeholder-shown) ~ .cf-label { top: -12px; font-size: 0.75rem; color: var(--color-dark) !important; text-transform: uppercase; font-weight: 700; }
         .cf-line { background-color: var(--color-dark) !important; }
 
+        /* Плаваючі віджети */
+        .floating-widget {
+            z-index: 9999 !important;
+        }
+
+        /* ==========================================================================
+           АДАПТИВНІСТЬ
+           ========================================================================== */
         @media (max-width: 1024px) {
             .lead-split { flex-direction: column; }
             .lead-split__visual, .lead-split__form-wrap { flex: 1 1 100%; width: 100%; }
-            .lead-split__visual { height: 400px; }
+            .lead-split__visual { height: 350px; }
+            .hero-socials-vertical { display: none !important; }
         }
+
         @media (max-width: 991px) {
             .header__contacts, .header .btn--solid-yellow { display: none !important; }
             .header__logo img { max-width: 120px !important; }
@@ -91,10 +236,41 @@
             .burger.is-active .burger__line:nth-child(2) { opacity: 0; }
             .burger.is-active .burger__line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
+
         @media (max-width: 768px) {
-            .header__actions .btn, .header__phone { display: none; }
-            .hero-screen__title { font-size: 2.5rem !important; }
-            .hero-socials { display: none; } 
+            .hero-screen { 
+                min-height: 320px !important; 
+                padding-top: 100px !important;
+                padding-bottom: 50px !important;
+            }
+            .hero-screen__title { 
+                font-size: 1.75rem !important; 
+            }
+            
+            .search-module-section {
+                margin-top: -35px !important;
+                padding: 0 10px !important;
+            }
+
+            .search-widget-glass__wrapper {
+                padding: 6px !important;
+                border-radius: 14px !important;
+            }
+
+            .seo-section-main { 
+                padding-top: 15px !important; 
+                padding-bottom: 40px !important;
+            }
+
+            .seo-text-block { 
+                padding: 24px 16px !important; 
+            }
+
+            .floating-widget {
+                bottom: 12px !important;
+                right: 12px !important;
+                transform: scale(0.85);
+            }
         }
     </style>
 </head>
@@ -138,7 +314,6 @@
                         <ul class="dropdown-simple" role="menu">
                             <li role="none"><a href="hotels.html" role="menuitem">Готелі</a></li>
                             <li role="none"><a href="flights.html" role="menuitem" style="background-color: var(--color-dark); color: var(--color-white);">Авіаквитки</a></li>
-                            
                         </ul>
                     </li>
                     <li class="nav__item"><a href="about.html" class="nav__link">Про компанію</a></li>
@@ -148,11 +323,21 @@
             </nav>
             <div class="header__actions">
                 <div class="lang-switcher">
-                    <button class="lang-btn is-active">UA</button><span class="lang-sep"></span><button class="lang-btn">RU</button>
+                    <a href="flights.html" class="lang-btn is-active">UA</a><span class="lang-sep"></span><a href="flights-ru.html" class="lang-btn">RU</a>
                 </div>
                 <div class="header__contacts">
                     <span class="header__contacts-hint" style="font-size: 0.75rem; color: #666;">Ми на зв'язку</span>
-                    <a href="tel:+380995337227" class="header__phone">+38 (099) 533-72-27</a>
+                    <div class="header__phone-wrapper">
+                        <div class="header__phone-main">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            +38 (099) 533-72-27
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                        </div>
+                        <div class="phone-dropdown">
+                            <a href="tel:+380995337227">+38 (099) 533-72-27</a>
+                            <a href="tel:+380995337447">+38 (099) 533-74-47</a>
+                        </div>
+                    </div>
                 </div>
                 <button class="btn btn--solid-yellow js-open-modal"><span>Підібрати тур</span></button>
                 <button class="burger js-burger"><span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span></button>
@@ -161,30 +346,66 @@
     </header>
 
     <main id="main-content" role="main">
-        <section class="hero-screen hero-screen--inner">
+        <!-- БАННЕР -->
+        <section class="hero-screen">
             <div class="hero-screen__bg">
-                <img src="assets/hero/hero-flights.webp" alt="Авіаквитки онлайн" class="hero-screen__img js-parallax-bg" style="object-position: center;" fetchpriority="high" onerror="this.src='assets/img/___1920x1280(1).jpg'">
-                <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);"></div>
+                <img src="assets/hero/hero-flights.webp" alt="Авіаквитки онлайн" class="hero-screen__img" fetchpriority="high" onerror="this.src='assets/img/___1920x1280(1).jpg'">
+                <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.5) 100%);"></div>
             </div>
+            
             <div class="container hero-screen__container">
-                <div class="hero-screen__content text-center" style="margin-bottom: 0;">
+                <div class="hero-screen__content text-center">
                     <h1 class="hero-screen__title js-split-text">АВІАКВИТКИ <span class="text-gradient">ОНЛАЙН</span></h1>
                 </div>
             </div>
+
+            <div class="hero-socials-vertical">
+                <a href="https://www.facebook.com/limon.turov/" target="_blank" class="hero-social-icon" aria-label="Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+                </a>
+                <a href="https://www.instagram.com/limon.turiv" target="_blank" class="hero-social-icon" aria-label="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="hero-social-icon" aria-label="Telegram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </a>
+                <a href="viber://chat?number=%2B380995337227" class="hero-social-icon" aria-label="Viber">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                </a>
+            </div>
         </section>
 
-        <!-- ВІДЖЕТ UNIT.TRAVEL (Авіаквитки) -->
-        <section class="section bg-light" style="padding-top: 60px; position: relative; z-index: 100;">
+        <!-- МОДУЛЬ ПОШУКУ (УКРАЇНСЬКА ВЕРСІЯ) -->
+        <section class="search-module-section">
             <div class="container">
                 <div class="search-widget-glass" id="search-module">
                     <div class="search-widget-glass__wrapper">
-                        <div class="unit-widget-container" style="padding: 20px;">
+                        <div class="unit-widget-container">
                             <div id="06cc1f57-d8ab-4804-a2cd-4ad483422412"></div>
                             <script>
                                 var script = document.createElement('script');
                                 script.src = '//limonturov.unit.travel/static/form-widget/js/proxy/base.js';
                                 document.head.append(script);
-                                script.onload = function() {EmbeddedFormWidget.build({"containerId":"06cc1f57-d8ab-4804-a2cd-4ad483422412","domain":"limonturov.unit.travel","config":{"refmid":"162403","products":"flight","lang":"ua","currency":"UAH","searchmode":"default","bookmode":"offer","form":{"view":"horizontal","bg":"default","tabtxtcl":"#3E3E3E","tabunderlinecl":"#FFEC00","btnbg":"#FFEC00","btntxtcl":"#1A1A1A"}}});};
+                                script.onload = function() {
+                                    EmbeddedFormWidget.build({
+                                        "containerId": "06cc1f57-d8ab-4804-a2cd-4ad483422412",
+                                        "domain": "limonturov.unit.travel",
+                                        "config": {
+                                            "refmid": "162403",
+                                            "products": "flight",
+                                            "lang": "ua",
+                                            "currency": "UAH",
+                                            "searchmode": "default",
+                                            "bookmode": "offer",
+                                            "form": {
+                                                "view": "horizontal",
+                                                "bg": "transparent",
+                                                "btnbg": "#FFEC00",
+                                                "btntxtcl": "#1A1A1A"
+                                            }
+                                        }
+                                    });
+                                };
                             </script>
                         </div>
                     </div>
@@ -192,25 +413,25 @@
             </div>
         </section>
 
-        <!-- ТЕКСТОВЕ ПОЛЕ (SEO) -->
-        <section class="section bg-light" style="padding-top: 0; position: relative; z-index: 100;">
+        <!-- ТЕКСТОВИЙ БЛОК (SEO) -->
+        <section class="seo-section-main">
             <div class="container text-left">
                 <div class="seo-text-block js-reveal">
                     <h2 style="font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 24px;">Дешеві авіаквитки онлайн — швидкий пошук та миттєве бронювання</h2>
                     <div class="content-text" style="color: #4A4A4A; line-height: 1.7; font-size: 1.125rem;">
                         <p class="mb-3">Плануєте подорож Україною чи за кордон? Шукаєте де купити авіаквитки недорого? На сайті Limon.turov.com.ua ви можете швидко знайти та забронювати авіаквитки за вигідними цінами. Ми пропонуємо квитки на регулярні, чартерні та лоукост-рейси провідних авіакомпаній світу, допомагаючи обрати найкращий варіант за маршрутом, вартістю та часом вильоту.</p>
-                        <p class="mb-3">Завдяки прямій інтеграції з міжнародними системами бронювання (GDS), базами лоукост-перевізників та чартерними рейсами, на нашому сайті відображаються актуальні ціни на авіаквитки без прихованих комісій і переплат. У багатьох випадках вартість квитків є вигіднішою, ніж на популярних сайтах-агрегаторах.</p>
-                        <p class="mb-3">Усього за кілька хвилин ви можете знайти дешеві авіаквитки в будь-яку країну світу: Туреччину, Єгипет, Болгарію, Польщу, Грузію, ОАЕ, Катар, Мальдіви, США, Таїланд, В’єтнам, на Балі, в Португалію, Чехію, Австрію, Угорщину, Німеччину, Францію, Італію, Швейцарію та інші країни, порівняти доступні рейси, обрати зручний час вильоту, тариф, авіакомпанію та оформити бронювання онлайн. Після підтвердження замовлення електронний квиток надходить на вашу електронну пошту, а оплату можна здійснити безпечним способом у кілька кліків.</p>
-                        <p class="mb-3">Окрім бронювання авіаквитків, наші тревел-експерти проконсультують щодо правил перевезення багажу, допоможуть додати зареєстрований або ручний багаж, обрати комфортні місця в салоні літака, замовити спеціальне харчування (за наявності у перевізника) та зорієнтують щодо умов зміни або повернення квитків.</p>
-                        <p class="mb-3">Ми залишаємося на зв'язку 24/7, тому у разі перенесення рейсу, зміни розкладу чи виникнення будь-яких питань ви завжди можете розраховувати на оперативну допомогу наших спеціалістів. Додатково забронюємо вам трансфер з аеропорту в готель і назад, оформимо медичне страхування для перетину кордону або Зелену картку на авто.</p>
+                        <p class="mb-3">Завдяки прямій інтеграції з міжнародними системами бронювання (GDS), базами лоукост-перевізників та чартерними рейсами, на нашому сайті відображаються актуальні ціни на авіаквитки без прихованих комісій та переплат. У багатьох випадках вартість квитків виявляється вигіднішою, ніж на популярних сайтах-агрегаторах.</p>
+                        <p class="mb-3">Всього за кілька хвилин ви можете знайти дешеві авіаквитки в будь-яку країну світу: Туреччину, Єгипет, Болгарію, Польщу, Грузію, ОАЕ, Катар, Мальдіви, США, Таїланд, В'єтнам, на Балі, в Португалію, Чехію, Австрію, Угорщину, Німеччину, Францію, Італію, Швейцарію та інші країни, порівняти доступні рейси, обрати зручний час вильоту, тариф, авіакомпанію та оформити бронювання онлайн. Після підтвердження замовлення електронний квиток надходить на вашу електронну пошту, а оплату можна здійснити безпечним способом у кілька кліків.</p>
+                        <p class="mb-3">Окрім бронювання авіаквитків, наші тревел-експерти проконсультують щодо правил перевезення багажу, допоможуть додати зареєстрований або ручний багаж, обрати комфортні місця в салоні літака, замовити спеціальне харчування (за наявності у перевізника) та зорієнтують щодо умов обміну чи повернення квитків.</p>
+                        <p class="mb-3">Ми залишаємося на зв'язку 24/7, тому у разі переносу рейсу, зміни розкладу чи виникнення будь-яких питань ви завжди можете розраховувати на оперативну допомогу наших фахівців. Додатково забронюємо для вас трансфер з аеропорту до готелю і назад, оформимо медичне страхування для перетину кордону або Зелену карту на авто.</p>
                         <p class="mb-0"><strong>Limon.turov.com.ua</strong> — це не лише сервіс бронювання авіаквитків, а й надійний туристичний партнер. Купуйте авіаквитки онлайн швидко, безпечно та за вигідною ціною, отримуючи професійний супровід, офіційне оформлення та якісний сервіс на кожному етапі вашої подорожі.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- LEAD FORM (SPLIT SCREEN 60/40) -->
-        <section class="lead-section" id="contacts" style="background-color: var(--color-light-bg); padding-bottom: 60px;">
+        <!-- LEAD FORM -->
+        <section class="lead-section" id="contacts" style="background-color: #F7F9FC; padding-bottom: 60px;">
             <div class="lead-split container" style="padding: 0;">
                 <div class="lead-split__visual">
                     <img src="assets/hero/hero-flights.webp" alt="Подорожі літаком" class="lead-split__img" loading="lazy" onerror="this.src='assets/img/50571182.jpg'">
@@ -283,7 +504,7 @@
             </div>
             <div class="footer__bottom">
                 <p>© <span id="current-year-flights">2026</span> Лимон Турів. Всі права захищені. <a href="oferta.html" style="color: var(--color-text-muted); text-decoration: underline; margin-left: 10px;">Договір оферти</a></p>
-                <div class="footer__lang-switch"><a href="#" class="active">УКР</a><span style="margin: 0 8px; color: var(--color-dark-border);">|</span><a href="#">РУС</a></div>
+                <div class="footer__lang-switch"><a href="flights.html" class="active">УКР</a><span style="margin: 0 8px; color: var(--color-dark-border);">|</span><a href="flights-ru.html">РУС</a></div>
             </div>
         </div>
     </footer>
@@ -330,8 +551,16 @@
     <script src="assets/js/script.js"></script>
     <script>
         document.getElementById('current-year-flights').textContent = new Date().getFullYear();
-        function hideGlobalLoader() { const loader = document.getElementById('global-loader'); if (loader && loader.style.display !== 'none') { loader.style.opacity = '0'; loader.style.transition = 'opacity 0.5s ease'; setTimeout(() => { loader.style.display = 'none'; }, 500); } }
-        window.addEventListener('load', hideGlobalLoader); setTimeout(hideGlobalLoader, 3500);
+        function hideGlobalLoader() { 
+            const loader = document.getElementById('global-loader'); 
+            if (loader && loader.style.display !== 'none') { 
+                loader.style.opacity = '0'; 
+                loader.style.transition = 'opacity 0.5s ease'; 
+                setTimeout(() => { loader.style.display = 'none'; }, 500); 
+            } 
+        }
+        window.addEventListener('load', hideGlobalLoader); 
+        setTimeout(hideGlobalLoader, 3500);
     </script>
 </body>
 </html>

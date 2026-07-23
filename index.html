@@ -44,36 +44,421 @@
             text-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
 
-        /* БРОНЕБІЙНІ СТИЛІ МОДУЛЯ ПОШУКУ (OTPUSK) */
-        #search-module { margin-top: -120px; position: relative; z-index: 10; }
-        .search-widget-glass__wrapper {
-            background: rgba(30, 30, 30, 0.85) !important; 
-            backdrop-filter: blur(24px) !important;
-            -webkit-backdrop-filter: blur(24px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            border-radius: 24px !important;
-            padding: 24px !important;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-        }
-        body div.os-container, body div.os-container .os-search-panel, body div.os-container .os-form-wrapper, body div.os-container form {
-            background-color: transparent !important; background-image: none !important; border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important;
-        }
-        body div.os-container .os-search-panel input, body div.os-container .os-search-panel select, body div.os-container .os-dropdown {
-            background-color: rgba(255, 255, 255, 0.1) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; color: #fff !important; border-radius: 12px !important; height: 56px !important; font-size: 1rem !important; font-family: var(--font-primary) !important; transition: all 0.3s ease !important; padding-left: 16px !important;
-        }
-        body div.os-container .os-search-panel input:focus, body div.os-container .os-search-panel select:focus {
-            background-color: rgba(255, 255, 255, 0.2) !important; border-color: var(--color-primary) !important; outline: none !important; box-shadow: 0 0 15px rgba(255, 236, 0, 0.2) !important;
-        }
-        body div.os-container .os-form-button, body div.os-container button.os-submit {
-            background-color: var(--color-primary) !important; color: #0A0A0A !important; border-radius: 50px !important; height: 56px !important; font-weight: 800 !important; font-size: 1rem !important; text-transform: uppercase !important; border: none !important; box-shadow: 0 10px 24px rgba(255, 236, 0, 0.3) !important; transition: all 0.3s ease !important; padding: 0 32px !important; cursor: pointer !important; background-image: none !important;
-        }
-        body div.os-container .os-form-button:hover, body div.os-container button.os-submit:hover {
-            transform: translateY(-3px) !important; box-shadow: 0 15px 30px rgba(255, 236, 0, 0.5) !important; background-color: var(--color-primary-hover) !important;
-        }
-        body div.os-container .os-title, body div.os-container label, body div.os-container .os-tab span, body div.os-container a.os-adv-search-link {
-            color: rgba(255, 255, 255, 0.9) !important; font-family: var(--font-primary) !important; font-size: 0.9rem !important; text-shadow: none !important;
-        }
-        body div.os-container .ui-menu-item { color: #333 !important; }
+/* ==========================================================================
+   ИДЕАЛЬНОЕ СВИСАНИЕ МОДУЛЯ ПОШУКУ (1 В 1 С SEARCH-TOUR)
+   ========================================================================== */
+
+/* 1. Жестко фиксируем границу банера без вылетов картинки */
+.hero-screen {
+    position: relative !important;
+    height: 630px !important;
+    min-height: 630px !important;
+    max-height: 630px !important;
+    overflow: hidden !important; /* Обрезает зум-картинку ровно по этой линии */
+    padding-bottom: 0 !important;
+}
+
+.hero-screen__bg,
+.hero-screen__img {
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.hero-screen__content {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* 2. Позиционируем контейнер ровно на шве (50% на пляже, 50% на белом фоне) */
+#search-module-wrapper { 
+    position: relative !important; 
+    z-index: 99 !important; 
+    margin-top: -70px !important; /* Поднимает модуль ровно на половину высоты */
+    margin-bottom: 40px !important; /* Отталкивает следующий блок */
+    padding-bottom: 0 !important; 
+    transform: none !important; /* Убираем любые сбивающие трансформы */
+}
+
+#search-module { 
+    position: relative !important; 
+    z-index: 99 !important; 
+    width: 100% !important;
+    max-width: 940px !important;
+    margin: 0 auto !important;
+}
+
+/* 3. Сам матовый полупрозрачный модуль */
+body .new_f-container { 
+    background: rgba(0, 0, 0, 0.55) !important; 
+    backdrop-filter: blur(8px) !important; 
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-radius: 15px !important; 
+    position: relative !important; 
+    z-index: 20 !important; 
+    max-width: 940px !important; 
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25) !important; 
+    margin: 0 auto !important; 
+}
+
+body .new_f-wrapper-bg-imgs, body .new_f-title, body .new_f-tip-active { 
+    display: none !important; 
+}
+
+body .new_f-form { 
+    padding-top: 30px !important; 
+}
+
+body .new_f-dates-container#new_f-dates-container * { 
+    box-shadow: none !important; 
+    font-family: var(--font-primary), sans-serif !important; 
+}
+
+/* Стрелочки и выпадающие списки */
+body .new_f-dropdown-btn .cnt::after, body .new_f-dropdown-btn::after { 
+    content: ''; 
+    position: absolute; 
+    top: 17px; 
+    right: 8px; 
+    pointer-events: none; 
+    border-style: solid; 
+    border-width: 6px 4px 0; 
+    border-color: #000 transparent transparent !important; 
+}
+
+body .new_f-datepicker-wrap button { 
+    height: 30px; 
+    width: 100%; 
+    border-radius: 10px; 
+    display: block; 
+    padding: 0 0 1px 6px !important; 
+    font-size: 14px; 
+    background: #E1E7EF; 
+    border: none; 
+    cursor: text; 
+    text-align: left !important; 
+    outline: 0 none; 
+    color: #666 !important; 
+    font-weight: 400 !important; 
+    margin: 0; 
+}
+
+body .new_f-search-dates-wrap svg { 
+    position: absolute; 
+    width: 17px; 
+    top: 10px; 
+    left: 7px; 
+    fill: #000 !important; 
+}
+
+body .new_f-form-field.to { 
+    width: 204px; 
+    border-left-color: #D4D4D4; 
+    border-radius: 15px 0 0 15px !important; 
+}
+
+/* ЖЕЛТАЯ КНОПКА "ЗНАЙТИ" */
+body .new_f-form .new_f-form-submit,
+body .new_os .new_f-form-submit { 
+    background: #FFEC00 !important; 
+    color: #1A1A1A !important; 
+    border-radius: 0 15px 15px 0 !important; 
+    box-shadow: none !important; 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    width: 107px !important; 
+    font-weight: 800 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transition: background .3s ease !important; 
+}
+
+body .new_f-form .new_f-form-submit:hover { 
+    background: #E5D400 !important; 
+    color: #000000 !important; 
+}
+
+/* ==========================================================================
+   ПОЛНЫЙ ВОЗВРАТ И ВЫРАВНИВАНИЕ КНОПОК ("ОЧИСТИТИ" СЛЕВА, "ЗАСТОСУВАТИ" СПРАВА)
+   ========================================================================== */
+
+/* 1. Даем блоку достаточно места снизу, чтобы кнопки не срезались */
+body .new_f-ext-container {
+    background: #555555 !important;
+    border-radius: 0 0 12px 12px !important;
+    padding: 25px 25px 85px 25px !important; /* Увеличили внутренний отступ снизу */
+    position: relative !important;
+    border: none !important;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4) !important;
+    z-index: 15 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+body .new_f-ext-container *,
+body .new_f-ext-bl label { 
+    color: #ffffff !important; 
+}
+
+body .new_f-label-name,
+body .new_f-ext-col-serv .new_weight-bold {
+    color: #4da5ff !important;
+}
+
+/* 2. Жестко позиционируем нижнюю плашку на всю ширину формы */
+body .new_f-ext-container .new_f-dropdown-body-bottom,
+body .new_f-ext-body-bottom,
+body .new_f-ext-footer {
+    position: absolute !important;
+    bottom: 20px !important;
+    left: 25px !important;
+    right: 25px !important;
+    top: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important; /* Разносит элементы по краям */
+    padding: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    height: 45px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 30 !important;
+}
+
+/* 3. "Очистити фільтри" — сидит СЛЕВА */
+body .new_f-ext-clear-btn,
+body .new_f-ext-container .new_f-ext-clear-btn {
+    position: static !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #4da5ff !important;
+    text-decoration: underline !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    order: 1 !important;
+}
+
+body .new_f-ext-clear-btn:hover,
+body .new_f-ext-container .new_f-ext-clear-btn:hover {
+    color: #72b8ff !important;
+}
+
+/* 4. Жёлтая кнопка "Застосувати" — сидит СПРАВА */
+body .new_f-container .new_f-dropdown-btn-apply,
+body .new_f-ext-container .new_f-dropdown-btn-apply {
+    position: static !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: #FFEC00 !important;
+    color: #1A1A1A !important;
+    border-radius: 10px !important;
+    padding: 0 32px !important;
+    height: 44px !important;
+    line-height: 44px !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    border: none !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    order: 2 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    transition: background .3s ease !important;
+}
+
+body .new_f-container .new_f-dropdown-btn-apply:hover,
+body .new_f-ext-container .new_f-dropdown-btn-apply:hover {
+    background: #E5D400 !important;
+    color: #000000 !important;
+}
+/* ==========================================================================
+   ИДЕАЛЬНЫЕ КАРТОЧКИ И КНОПКИ ВЫДАЧИ (СВЕРХУ И СНИЗУ)
+   ========================================================================== */
+
+/* 1. Карточки отелей (Чистый внешний вид как на скрине) */
+body .new_r-item-wrap,
+body .new_r-item {
+    border-radius: 16px !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid #f0f0f0 !important;
+    margin-bottom: 20px !important;
+    overflow: hidden !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+body .new_r-item-wrap:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Картинка отеля */
+body .new_r-item-img {
+    border-radius: 16px 0 0 16px !important;
+    object-fit: cover !important;
+}
+
+/* Жёлтая кнопка цены на карточке */
+body .new_r-item-price, 
+body .new_t-bl-price, 
+body .os-price-btn {
+    background: #FFEC00 !important;
+    color: #1a1a1a !important;
+    border-radius: 12px !important;
+    border: none !important;
+    padding: 12px 20px !important;
+    box-shadow: 0 4px 12px rgba(255, 236, 0, 0.3) !important;
+    font-weight: 800 !important;
+    transition: background 0.2s ease !important;
+}
+
+body .new_r-item-price:hover, 
+body .os-price-btn:hover {
+    background: #E5D400 !important;
+}
+
+
+/* 2. КНОПКА "Знайти і показати ще..." (Зарубаем ВСЕ стили плагина Otpusk) */
+body .new_r-more-wrap,
+body .new_result-info,
+body .new_r-show-more-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 40px 0 !important;
+    clear: both !important;
+    float: none !important;
+    position: relative !important;
+}
+
+/* Жёлтая овальная кнопка */
+body .new_r-more-wrap a,
+body .new_r-show-more-results,
+body .new_r-more,
+body .new_r-show-more {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #FFEC00 !important;
+    color: #1A1A1A !important;
+    border-radius: 50px !important;            /* Полностью овальная форма */
+    padding: 16px 42px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(255, 236, 0, 0.3) !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    margin: 0 auto 15px auto !important;
+    float: none !important;
+    transition: all 0.3s ease !important;
+}
+
+body .new_r-more-wrap a:hover,
+body .new_r-show-more-results:hover,
+body .new_r-more:hover {
+    background: #E5D400 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 236, 0, 0.4) !important;
+}
+
+/* Текст "Знайдено 66 цін та 20 нових готелів" */
+body .new_r-more-wrap > div,
+body .new_result-info-text,
+body .new_result-info span {
+    color: #2D3748 !important;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    display: block !important;
+    float: none !important;
+}
+/* ==========================================================================
+   ЗАМЕНА ОРАНЖЕВОГО НА ЖЕЛТЫЙ В ФИЛЬТРАХ И ВАЛЮТАХ
+   ========================================================================== */
+
+/* 1. Активное значение фильтра (было оранжевым) */
+body .new_r-filter-value,
+body .new_r-filter .new_r-filter-val {
+    color: #1A1A1A !important;             /* Делаем текст темным и чётким */
+    background: #FFEC00 !important;          /* Жёлтый фон под текст */
+    padding: 2px 8px !important;
+    border-radius: 6px !important;
+    font-weight: 700 !important;
+}
+
+/* 2. Переключатель валют (грн / €) - активный пункт */
+body [class*="-cur"] span.active, 
+body [class*="-currency"] .active, 
+body .new_f-cur label.active, 
+body .new_r-currency-switch label input:checked + span,
+body .new_r-currency-switch label.active span,
+body .new_r-currency-switch label.active {
+    background: #FFEC00 !important;          /* Жёлтая переключалка */
+    color: #1A1A1A !important;             /* Тёмный текст поверх жёлтого */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
+    font-weight: 800 !important;
+}
+/* ==========================================================================
+   ТОЧНОЕ СВИСАНИЕ МОДУЛЯ НА ГРАНИЦЕ КАРТИНКИ И БЕЛОГО ФОНА
+   ========================================================================== */
+
+/* 1. Делаем Hero-секцию относительно позиционированной */
+.hero-screen {
+    position: relative !important;
+    overflow: visible !important; /* Разрешаем элементам вылезать за пределы картинки */
+    height: 580px !important;
+}
+
+/* 2. Обёртка модуля позиционируется прямо по нижнему краю Hero-секции */
+#search-module-wrapper { 
+    position: relative !important; 
+    z-index: 99 !important; 
+    /* Увеличиваем процент сдвига вниз, чтобы достать до белого фона */
+    transform: translateY(45px) !important; 
+    margin-top: -120px !important;   /* Поднимаем модуль ровно на половину его высоты */
+    margin-bottom: 60px !important;  /* Отталкиваем контент снизу */
+}
+
+#search-module { 
+    position: relative !important; 
+    z-index: 99 !important; 
+    width: 100% !important;
+    max-width: 940px !important;
+    margin: 0 auto !important;
+}
+
+/* 3. Сам стеклянный модуль Otpusk */
+body .new_f-container { 
+    background: rgba(0, 0, 0, 0.55) !important; 
+    backdrop-filter: blur(8px) !important; 
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-radius: 15px !important; 
+    position: relative !important; 
+    z-index: 20 !important; 
+    max-width: 940px !important; 
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important; 
+    margin: 0 auto !important; 
+}
+
 
         /* Переваги */
         .feature-card { text-align: center; }
@@ -434,6 +819,7 @@
 </header>
 
     <main id="main-content" role="main">
+        <!-- HERO СЕКЦИЯ -->
         <section class="hero-screen">
             <div class="hero-screen__bg">
                 <img src="assets/hero/hero-main.webp" alt="Ідеальний відпочинок" class="hero-screen__img" fetchpriority="high" onerror="this.src='assets/img/luxfoncom_4278.jpg'">
@@ -441,42 +827,11 @@
             </div>
 
             <div class="container hero-screen__container">
-                <div class="hero-screen__content text-center" style="padding-bottom: 120px;">
+                <div class="hero-screen__content text-center">
                     <h1 class="hero-screen__title js-split-text">
                         Пошук турів по всім <br>
                         <span class="text-gradient">туроператорам</span>
                     </h1>
-                </div>
-
-                <!-- МОДУЛЬ ПОШУКУ -->
-                <div class="search-widget-glass" id="search-module">
-                    <div class="search-widget-glass__wrapper">
-                        <script>
-                            var osGeo = ''; 
-                            var osDefaultDeparture = 1831; 
-                            var osDefaultDuration = ''; 
-                            var osDateFrom = ''; 
-                            var osDateTo = ''; 
-                            var osHotelCategory = ''; 
-                            var osFood = ''; 
-                            var osTransport = ''; 
-                            var osTarget = ''; 
-                            var osContainer = null; 
-                            var osTourContainer = null; 
-                            var osLang = 'ua'; 
-                            var osTourTargetBlank = true; 
-                            var osOrderUrl = null; 
-                            var osCurrency = 'converted'; 
-                            var osAutoStart = false; 
-                        </script>
-                        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=cyrillic" rel="stylesheet">
-                        <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/form.css" type="text/css" defer />
-                        <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/result.css" type="text/css" defer/>
-                        <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/tour.css" type="text/css" defer/>
-                        <script src="https://api.otpusk.com/api/2.4/session?access_token=2c1f4-78bec-0741d-68154-053c8" defer></script>
-                        <script src="https://export.otpusk.com/js/onsite/" defer></script>
-                        <script src="https://export.otpusk.com/js/order" defer></script>
-                    </div>
                 </div>
             </div>
             
@@ -486,6 +841,40 @@
                 <li><a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a></li>
                 <li><a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a></li>
             </ul>
+        </section> <!-- ТЕПЕРЬ СЕКЦИЯ ЗАКРЫВАЕТСЯ ЗДЕСЬ -->
+
+        <!-- МОДУЛЬ ПОШУКУ (ОТДЕЛЬНАЯ СЕКЦИЯ, СВИСАЮЩАЯ НА БЕЛЫЙ ФОН) -->
+        <section id="search-module-wrapper">
+            <div class="container">
+                <div class="search-widget-glass" id="search-module">
+                    <script>
+                        var osGeo = ''; 
+                        var osDefaultDeparture = 1831; 
+                        var osDefaultDuration = ''; 
+                        var osDateFrom = ''; 
+                        var osDateTo = ''; 
+                        var osHotelCategory = ''; 
+                        var osFood = ''; 
+                        var osTransport = ''; 
+                        var osTarget = ''; 
+                        var osContainer = null; 
+                        var osTourContainer = null; 
+                        var osLang = 'ua'; 
+                        var osTourTargetBlank = true; 
+                        var osOrderUrl = null; 
+                        var osCurrencies = ['uah', 'eur']; 
+                        var osDefaultCurrency = 'uah'; 
+                        var osAutoStart = false; 
+                    </script>
+                    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=cyrillic" rel="stylesheet">
+                    <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/form.css" type="text/css" />
+                    <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/result.css" type="text/css" />
+                    <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/tour.css" type="text/css" />
+                    <script src="https://api.otpusk.com/api/2.4/session?access_token=2c1f4-78bec-0741d-68154-053c8"></script>
+                    <script src="https://export.otpusk.com/js/onsite/"></script>
+                    <script src="https://export.otpusk.com/js/order"></script>
+                </div>
+            </div>
         </section>
 
         <!-- ЧОМУ ОБИРАЮТЬ НАС -->
