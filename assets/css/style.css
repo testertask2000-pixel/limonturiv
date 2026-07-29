@@ -87,7 +87,8 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-    /* Повністю видалили overflow-x: hidden, щоб не було подвійного скролу */
+    overflow-y: auto !important; 
+    overflow-x: hidden !important;
 }
 
 body {
@@ -95,15 +96,15 @@ body {
     color: var(--color-text-main);
     background-color: var(--color-white);
     line-height: 1.5;
-    position: relative;
-    width: 100%;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
     min-height: 100vh;
-    /* Використовуємо сучасний clip замість hidden — це вирішує баг подвійного скролу */
+    height: auto !important;
+    overflow-y: visible !important; 
     overflow-x: clip !important; 
 }
 
-
-/* Единственное исключение — открытая модалка нового дизайна */
 body.modal-open-lock {
     overflow: hidden !important;
 }
@@ -165,7 +166,7 @@ small { font-size: 0.875rem; }
 .font-weight-normal { font-weight: 400 !important; }
 
 /* ==========================================================================
-   4. LAYOUT & GRID SYSTEM (Полная сетка для обратной совместимости)
+   4. LAYOUT & GRID SYSTEM
    ========================================================================== */
 .container {
     width: 100%;
@@ -225,7 +226,7 @@ small { font-size: 0.875rem; }
 .align-items-stretch { align-items: stretch !important; }
 
 /* ==========================================================================
-   5. SPACING UTILITIES (Марджины и Паддинги)
+   5. SPACING UTILITIES
    ========================================================================== */
 .m-0 { margin: 0 !important; }
 .mt-0 { margin-top: 0 !important; }
@@ -395,7 +396,6 @@ small { font-size: 0.875rem; }
 .btn--full { width: 100%; }
 .btn--wide { min-width: 240px; }
 
-/* Custom Form Base */
 .custom-form { width: 100%; max-width: 500px; }
 .custom-form h3 { color: var(--color-dark) !important; margin-bottom: 8px; }
 .form-row { display: flex; gap: 24px; }
@@ -428,6 +428,8 @@ small { font-size: 0.875rem; }
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px !important;
+    flex-wrap: nowrap !important;
 }
 
 .header__logo img {
@@ -437,14 +439,21 @@ small { font-size: 0.875rem; }
     filter: none !important;
 }
 
+.header__nav {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
 .nav__list {
-    display: flex;
+    display: flex !important;
     align-items: center;
-    gap: 24px;
+    gap: clamp(10px, 1.5vw, 24px) !important; 
+    flex-wrap: nowrap !important;
 }
 
 .nav__link {
-    font-size: 0.85rem !important; 
+    font-size: clamp(0.7rem, 1vw, 0.85rem) !important; 
     font-weight: 700;
     color: var(--color-text-main) !important;
     display: flex;
@@ -453,6 +462,7 @@ small { font-size: 0.875rem; }
     padding: 10px 0;
     position: relative;
     text-transform: uppercase;
+    white-space: nowrap !important;
 }
 
 .nav__chevron {
@@ -513,9 +523,9 @@ small { font-size: 0.875rem; }
 }
 
 .dropdown-simple a:hover {
-    background-color: var(--color-light-bg);
-    color: var(--color-dark);
-    padding-left: 30px;
+    background-color: #2B2B2D !important;
+    color: var(--color-white) !important;
+    border-bottom: 2px solid var(--color-primary);
 }
 
 .mega-menu {
@@ -578,8 +588,9 @@ small { font-size: 0.875rem; }
 }
 
 .mega-menu__link:hover {
-    background-color: var(--color-dark);
-    color: var(--color-white);
+    background-color: #2B2B2D !important;
+    color: var(--color-white) !important;
+    border-bottom: 2px solid var(--color-primary);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
@@ -644,6 +655,29 @@ small { font-size: 0.875rem; }
     gap: 16px;
 }
 
+body .header__actions .btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 48px !important; 
+    padding: 0 20px !important;
+    border-radius: 100px !important; 
+    background-color: var(--color-primary) !important;
+    color: #0A0A0A !important;
+    border: none !important;
+    font-weight: 700 !important; 
+    font-family: var(--font-primary) !important;
+    font-size: 0.9rem !important;
+    white-space: nowrap !important; 
+    flex-shrink: 0 !important; 
+}
+
+body .header__actions .btn span { 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    line-height: normal !important; 
+}
+
 .lang-switcher {
     display: flex;
     align-items: center;
@@ -684,11 +718,70 @@ small { font-size: 0.875rem; }
     color: var(--color-text-muted);
 }
 
-.header__phone {
+body .header__phone,
+body .header__phone-main {
+    white-space: nowrap !important;
+    font-size: clamp(0.85rem, 1.2vw, 1rem) !important; 
     font-family: var(--font-display);
-    font-size: 1rem;
     font-weight: 700;
     color: var(--color-dark) !important;
+}
+
+.header__phone-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+    margin-bottom: -10px;
+}
+
+.header__phone-main {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.header__phone-main svg { transition: transform 0.3s ease; }
+.header__phone-wrapper:hover .header__phone-main svg { transform: rotate(180deg); }
+
+.phone-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: #fff;
+    box-shadow: var(--shadow-md);
+    border-radius: 12px;
+    padding: 8px 0;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid #EAEAEA;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.header__phone-wrapper:hover .phone-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.phone-dropdown a {
+    display: block !important;
+    padding: 10px 20px;
+    color: var(--color-dark);
+    font-weight: 700;
+    font-family: var(--font-primary);
+    transition: background 0.2s;
+    white-space: nowrap !important;
+}
+
+.phone-dropdown a:hover {
+    background-color: var(--color-light-bg);
+    color: var(--color-primary-hover);
 }
 
 .burger {
@@ -719,6 +812,9 @@ small { font-size: 0.875rem; }
     padding-top: 100px;
     padding-bottom: 60px;
     overflow: hidden;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 .hero-screen--inner {
@@ -775,15 +871,15 @@ small { font-size: 0.875rem; }
     margin: 0 auto;
 }
 
-.hero-socials {
+body .hero-socials { 
     position: absolute;
-    right: 40px;
+    right: 30px !important; 
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     gap: 16px;
-    z-index: var(--z-normal);
+    z-index: 90 !important; 
 }
 
 .hero-socials a {
@@ -812,15 +908,14 @@ small { font-size: 0.875rem; }
 }
 
 /* ==========================================================================
-   11. SEARCH WIDGETS (УНИВЕРСАЛЬНЫЙ АНТРАЦИТ)
+   11. SEARCH WIDGETS
    ========================================================================== */
 #search-module {
     margin-top: -120px;
     position: relative;
     z-index: 10;
-    scroll-margin-top: 350px !important; /* ЦЕЙ РЯДОК РОБИТЬ МАГІЮ */
+    scroll-margin-top: 350px !important;
 }
-
 
 .search-widget-glass__wrapper {
     background: rgba(20, 20, 22, 0.75) !important; 
@@ -869,7 +964,6 @@ body div.os-container .os-search-panel select:focus {
     box-shadow: 0 0 15px rgba(255, 236, 0, 0.2) !important;
 }
 
-/* Кнопки поиска */
 body div.os-container .os-form-button,
 body div.os-container button.os-submit,
 body .unit-widget-container button,
@@ -910,8 +1004,32 @@ body div.os-container a.os-adv-search-link {
 
 body div.os-container .ui-menu-item { color: #333 !important; }
 
+body #search_mvoyage_all input[type="button"],
+body #search_mvoyage_all input[type="submit"],
+body #search_mvoyage_all button,
+body #search_mvoyage_all .btn_search {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 56px !important;
+    width: 100% !important; 
+    padding: 0 32px !important;
+    border-radius: 100px !important; 
+    background-color: var(--color-primary) !important;
+    color: #0A0A0A !important;
+    font-weight: 700 !important;
+    font-family: var(--font-primary) !important;
+    font-size: 1rem !important;
+    text-transform: uppercase !important;
+    border: none !important;
+    cursor: pointer !important;
+    -webkit-appearance: none !important; 
+    margin-top: 15px !important;
+    line-height: normal !important;
+}
+
 /* ==========================================================================
-   12. ФИКС ГОРЯЩИХ ТУРОВ (OTPUSK) - ЖЕСТКОЕ ПОЗИЦИОНИРОВАНИЕ 
+   12. ФИКС ГОРЯЩИХ ТУРОВ (OTPUSK)
    ========================================================================== */
 body .hot-block_tiles .hot-wrapper { 
     margin: 0 -10px 0 0 !important; 
@@ -927,7 +1045,7 @@ body .hot-block_tiles .hot-otp-form-wrap {
     overflow: hidden !important; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important; 
     position: relative !important; 
-    height: 300px !important; /* Фиксируем высоту карточки */
+    height: 300px !important;
 }
 
 body .hot-block_tiles .hot-otp-img {
@@ -952,12 +1070,11 @@ body .hot-block_tiles .hot-otp-tour-block {
     z-index: 2 !important;
 }
 
-/* ЖЕСТКАЯ ПРИВЯЗКА ТЕКСТА К ВЕРХУ ЦЕНЫ (Ограничение по высоте и ширине) */
 body .hot-block_tiles .hot-otp-tour-info { 
     position: absolute !important; 
     left: 15px !important; 
-    bottom: 55px !important; /* Текст ВСЕГДА заканчивается на 55px от низа карточки */
-    width: calc(100% - 30px) !important; /* На всю ширину с отступами */
+    bottom: 55px !important;
+    width: calc(100% - 30px) !important;
     max-width: 100% !important;
     padding: 0 !important; margin: 0 !important; 
     background: transparent !important;
@@ -971,7 +1088,7 @@ body .hot-block_tiles .hot-otp-description {
     font-weight: 700 !important; 
     margin-bottom: 4px !important;
     display: -webkit-box !important; 
-    -webkit-line-clamp: 2 !important; /* Максимум 2 строки */
+    -webkit-line-clamp: 2 !important; 
     -webkit-box-orient: vertical !important; 
     overflow: hidden !important; 
     white-space: normal !important;
@@ -987,13 +1104,12 @@ body .hot-block_tiles .hot-otp-place {
     text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
 }
 
-/* ЖЕСТКАЯ ПРИВЯЗКА ЦЕНЫ К НИЗУ (Разведение цены и текста) */
 body .hot-block_tiles .hot-price-block { 
     position: absolute !important;
     left: 15px !important; 
     right: 15px !important; 
-    bottom: 15px !important; /* Цена ВСЕГДА на 15px от низа */
-    height: 35px !important; /* Фиксированная высота блока цены */
+    bottom: 15px !important;
+    height: 35px !important;
     display: flex !important;
     align-items: flex-end !important;
     justify-content: space-between !important;
@@ -1019,20 +1135,19 @@ body .hot-block_tiles .hot-otp-price {
     justify-content: flex-end !important;
 }
 
-/* ЗАПРЕТ ПЕРЕНОСА ВАЛЮТЫ НА НОВУЮ СТРОКУ */
 body .hot-block_tiles .hot-otp-price a { 
     font-family: var(--font-display) !important; 
     font-size: 1.35rem !important; 
     font-weight: 800 !important; 
     color: var(--color-primary) !important; 
     text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important; 
-    white-space: nowrap !important; /* ВАЛЮТА И ЦИФРЫ ВМЕСТЕ */
+    white-space: nowrap !important;
     display: inline-block !important; 
     line-height: 1 !important;
 }
 
 /* ==========================================================================
-   13. ФИКС КРУИЗОВ MVOYAGE (БЕЛАЯ ВЫДАЧА И АНТРАЦИТОВЫЙ ФИЛЬТР)
+   13. ФИКС КРУИЗОВ MVOYAGE
    ========================================================================== */
 body #search_mvoyage_all { color: #1A1A1A !important; }
 
@@ -1058,7 +1173,6 @@ body #search_mvoyage_all .selection-filter { background-color: transparent !impo
 .step a { color: #fff !important; }
 .infodiv .whathinclide { color: var(--color-primary) !important; }
 
-/* СВЕТЛАЯ ТЕМА ВЫДАЧИ РЕЗУЛЬТАТОВ */
 body #routers, body .cruise_result_row, body #search_mvoyage_all .white-bg { background-color: #FFFFFF !important; color: #1A1A1A !important; border-radius: 16px !important; padding: 16px !important; box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important; border: 1px solid #EAEAEA !important; }
 body #routers *, body .cruise_result_row * { color: #1A1A1A !important; text-shadow: none !important; }
 body #routers a, body .cruise_result_row a { color: var(--color-accent-blue) !important; }
@@ -1132,20 +1246,7 @@ table.table-shedule>tbody>tr>th { color: #1A1A1A !important; background: #F7F9FC
 .cb-row svg { stroke: var(--color-primary); }
 .cb-row a { color: var(--color-white); }
 .cb-row a:hover { color: var(--color-primary); }
-.lead-split__form-wrap { flex: 0 0 40%; display: flex; align-items: center; justify-content: center; padding: 60px 40px !important; background-color: #F7F9FC !important; }
-
-.custom-form { width: 100%; max-width: 500px; }
-.custom-form h3 { color: var(--color-dark) !important; }
-.form-row { display: flex; gap: 24px; }
-.col-6 { flex: 1; min-width: 0; }
-.cf-group { position: relative; margin-bottom: 32px; }
-.cf-input { width: 100%; background-color: transparent; border: none; border-bottom: 1px solid #CCCCCC !important; color: var(--color-dark) !important; font-size: 1.125rem; padding: 16px 0 8px; transition: border-color var(--transition-fast); }
-.cf-textarea { resize: vertical; min-height: 100px; }
-.cf-label { position: absolute; left: 0; top: 16px; font-size: 1.125rem; color: #666666 !important; transition: 0.3s var(--ease-out-expo); pointer-events: none; }
-.cf-line { position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--color-dark) !important; transition: width 0.4s var(--ease-out-expo); }
-.cf-input:focus, .cf-input:not(:placeholder-shown) { border-bottom-color: transparent !important; }
-.cf-input:focus ~ .cf-label, .cf-input:not(:placeholder-shown) ~ .cf-label { top: -12px; font-size: 0.75rem; color: var(--color-dark) !important; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
-.cf-input:focus ~ .cf-line { width: 100%; }
+.lead-split__form-wrap { flex: 0 0 40%; display: flex; align-items: center; justify-content: center; padding: 60px 40px 60px 80px !important; background-color: #F7F9FC !important; }
 
 /* ==========================================================================
    18. BLOG GRID
@@ -1174,6 +1275,7 @@ table.table-shedule>tbody>tr>th { color: #1A1A1A !important; background: #F7F9FC
 .diploma-card:hover::after { opacity: 1; }
 .diploma-card img { max-width: 100%; height: auto; max-height: 350px; object-fit: contain; border-radius: 4px; }
 .diploma-horizontal { grid-column: span 2; } 
+.diploma-horizontal img { max-height: 250px !important; }
 
 .reviews-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin-top: 40px; }
 .review-card { background: #fff; padding: 32px; border-radius: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #EAEAEA; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; }
@@ -1227,7 +1329,7 @@ table.table-shedule>tbody>tr>th { color: #1A1A1A !important; background: #F7F9FC
 .accordion__trigger[aria-expanded="true"] + .accordion__content .accordion__inner { padding-bottom: 24px; }
 
 /* ==========================================================================
-   22. PARTNERS 
+   22. PARTNERS
    ========================================================================== */
 .partners-colored-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; margin-top: 40px; }
 .partners-colored-grid img { max-width: 140px; height: auto; max-height: 60px; object-fit: contain; filter: none !important; opacity: 1 !important; transition: transform 0.3s ease; }
@@ -1238,7 +1340,7 @@ table.table-shedule>tbody>tr>th { color: #1A1A1A !important; background: #F7F9FC
    ========================================================================== */
 .footer { background-color: var(--color-dark-surface); color: var(--color-white); padding: 80px 0 32px; }
 .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 64px; margin-bottom: 64px; }
-.footer__logo { width: 200px; filter: brightness(0) invert(1); }
+.footer__logo { width: 200px; filter: none !important; }
 .footer__desc { color: var(--color-text-light); max-width: 300px; }
 .footer__title { color: var(--color-white); font-size: 1.25rem; margin-bottom: 24px; }
 .footer__nav li { margin-bottom: 12px; }
@@ -1257,17 +1359,58 @@ table.table-shedule>tbody>tr>th { color: #1A1A1A !important; background: #F7F9FC
 /* ==========================================================================
    24. FLOATING WIDGETS
    ========================================================================== */
-.floating-widget { position: fixed; bottom: 40px; right: 40px; display: flex; flex-direction: column; gap: 16px; z-index: var(--z-floating); align-items: flex-end; }
-.fw-btn { width: 64px; height: 64px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: var(--shadow-lg); transition: transform var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-fast); position: relative; }
-.fw-btn:hover { transform: scale(1.1); }
-.fw-btn--tg { background-color: var(--color-accent-blue); }
-.fw-btn--tg:hover { background-color: var(--color-accent-blue-hover); box-shadow: 0 16px 32px rgba(42, 171, 238, 0.4); }
-.fw-btn--call { background-color: var(--color-primary); animation: pulseCall 2.5s infinite; }
-.fw-btn--call:hover { animation: none; background-color: var(--color-primary-hover); }
+#bingc-phone-button,
+.bingc-phone-button {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+.floating-widget { 
+    position: fixed !important; 
+    bottom: 25px !important; 
+    right: 25px !important; 
+    display: flex !important; 
+    flex-direction: column !important; 
+    gap: 15px !important; 
+    z-index: 999999 !important; 
+    align-items: flex-end; 
+}
+
+.fw-btn { 
+    width: 60px !important; 
+    height: 60px !important; 
+    border-radius: 50% !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important; 
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important; 
+    transition: transform 0.2s ease, background-color 0.2s ease !important; 
+    border: none !important; 
+    cursor: pointer !important; 
+    outline: none !important; 
+    position: relative; 
+}
+
+.fw-btn:hover { transform: scale(1.08) !important; }
+.fw-btn--tg { background-color: #2AABEE !important; }
+.fw-btn--tg:hover { background-color: #2298D6 !important; }
+.fw-btn--call { background-color: #FFEC00 !important; animation: yellowPulse 2s infinite !important; }
+.fw-btn--call:hover { background-color: #E5D400 !important; }
+
+@keyframes yellowPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 236, 0, 0.7); }
+    70% { box-shadow: 0 0 0 20px rgba(255, 236, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 236, 0, 0); }
+}
+
 .fw-btn__tooltip { position: absolute; right: calc(100% + 16px); top: 50%; transform: translateY(-50%) translateX(10px); background-color: var(--color-dark); color: var(--color-white); padding: 12px 20px; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; white-space: nowrap; opacity: 0; visibility: hidden; transition: all 0.3s var(--ease-out-expo); pointer-events: none; }
 .fw-btn__tooltip::after { content: ''; position: absolute; top: 50%; left: 100%; transform: translateY(-50%); border-width: 6px; border-style: solid; border-color: transparent transparent transparent var(--color-dark); }
 .fw-btn:hover .fw-btn__tooltip { opacity: 1; visibility: visible; transform: translateY(-50%) translateX(0); }
-@keyframes pulseCall { 0% { box-shadow: 0 0 0 0 rgba(255, 236, 0, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(255, 236, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 236, 0, 0); } }
 
 /* ==========================================================================
    25. MODAL & CUSTOM UI CONTROLS
@@ -1354,169 +1497,7 @@ table.table-shedule>tbody>tr>th { color: #1A1A1A !important; background: #F7F9FC
     .nav__list { flex-direction: column; align-items: center; gap: 24px; width: 100%; display: flex !important; }
     .nav__link { color: var(--color-dark) !important; font-size: 1.25rem !important; font-weight: 700; }
     .nav__chevron { display: none; }
-    .burger { display: flex; position: relative; z-index: 1000; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; }
-    .burger__line { width: 30px; height: 2px; background-color: var(--color-dark) !important; transition: all 0.3s ease; }
-    .burger.is-active .burger__line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .burger.is-active .burger__line:nth-child(2) { opacity: 0; }
-    .burger.is-active .burger__line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-}
-
-@media screen and (max-width: 1024px) {
-    .parallax-wrapper { display: none; }
-    .features-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
     
-    .lead-split { flex-direction: column; min-height: auto; }
-    .lead-split__visual { height: 400px; flex: 1 1 100%; width: 100%;}
-    .lead-split__visual-content { padding: 60px 5%; align-items: center; text-align: center; }
-    .lead-split__form-wrap { flex: 1 1 100%; width: 100%; padding: 60px 5% !important; }
-    
-    .blog-tz-grid { grid-template-columns: repeat(2, 1fr); }
-    .blog-card--large { grid-column: span 2; grid-row: span 1; height: 300px; }
-
-    .tg-promo-box { padding: 40px !important; grid-template-columns: 1fr; text-align: center; gap: 40px; }
-    .iphone-frame { transform: rotate(0); margin-top: 40px;}
-    .footer__grid { grid-template-columns: 1fr 1fr; }
-    .hero-screen__content { margin-top: 120px !important; }
-    
-    .about-us__container { grid-template-columns: 1fr; gap: 40px; }
-}
-
-@media screen and (max-width: 768px) {
-    .hero-screen__title { font-size: 2.5rem !important; padding-top: 40px !important; }
-    .hero-socials { display: none; } 
-    
-    .custom-bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-    .c-bento-large, .c-bento-wide, .c-bento-standard { grid-column: span 1; height: 250px; }
-    
-    .blog-tz-grid { grid-template-columns: 1fr; }
-    .blog-card--large { grid-column: span 1; }
-    
-    .diploma-horizontal { grid-column: span 1; }
-    .leave-review-box { padding: 32px 24px; }
-
-    .form-row { flex-direction: column; gap: 0; }
-    .col-6 { width: 100%; }
-    .counter-group { justify-content: flex-start; margin-top: 24px; }
-    
-    .modal-content { padding: 40px 24px; }
-    .modal-title { font-size: 2rem; margin-bottom: 24px; }
-    .floating-widget { bottom: 20px; right: 20px; }
-    .fw-btn { width: 56px; height: 56px; }
-}
-
-@media screen and (max-width: 480px) {
-    .features-grid { grid-template-columns: 1fr; }
-    .footer__grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-    .footer__contact-list li { justify-content: center; }
-    .footer__socials { justify-content: center; }
-    .cb-row { font-size: 1.25rem; }
-    .ui-counter input { width: 30px; font-size: 1rem; }
-    
-    body .hot-block_tiles .hot-otp-img, body .hot-block_tiles .hot-otp-tour-block { width: 100% !important; margin-right: 0 !important; } 
-    body .hot-block_tiles .hot-wrapper { margin-right: 0 !important; }
-}
-
-
-/* ==========================================================================
-   ПРАВКИ ВІД КЛІЄНТА
-   ========================================================================== */
-
-/* 1. Футер: кольорове лого (прибираємо білий фільтр) */
-.footer__logo {
-    filter: none !important; 
-}
-
-/* 2. Антрацитова підсвітка меню з жовтою полоскою */
-.mega-menu__link:hover, 
-.dropdown-simple a:hover {
-    background-color: #2B2B2D !important; /* Антрацит */
-    color: var(--color-white) !important;
-    border-bottom: 2px solid var(--color-primary);
-}
-
-/* 3. Випадаючий список телефонів у шапці */
-.header__phone-wrapper {
-    position: relative;
-    display: inline-block;
-    padding-bottom: 10px; /* зона для ховеру */
-    margin-bottom: -10px;
-}
-.header__phone-main {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--color-dark) !important;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-}
-.header__phone-main svg { transition: transform 0.3s ease; }
-.header__phone-wrapper:hover .header__phone-main svg { transform: rotate(180deg); }
-
-.phone-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: #fff;
-    box-shadow: var(--shadow-md);
-    border-radius: 12px;
-    padding: 8px 0;
-    min-width: 180px;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 1000;
-    border: 1px solid #EAEAEA;
-}
-.header__phone-wrapper:hover .phone-dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-}
-.phone-dropdown a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    color: var(--color-dark);
-    font-weight: 700;
-    font-family: var(--font-primary);
-    transition: background 0.2s;
-    white-space: nowrap !important; /* Саме цей рядок забороняє перенесення */
-}
-.phone-dropdown a:hover {
-    background-color: var(--color-light-bg);
-    color: var(--color-primary-hover);
-}
-
-/* 4. Форма заявки: відступ зліва */
-.lead-split__form-wrap {
-    padding: 60px 40px 60px 80px !important; /* Додано більший відступ зліва (80px) */
-}
-@media (max-width: 1024px) {
-    .lead-split__form-wrap { padding: 60px 5% !important; }
-}
-
-/* 5. Сертифікати: зменшення горизонтальних */
-.diploma-horizontal img {
-    max-height: 250px !important; /* Було 350px, зробили менше */
-}
-
-
-body div.os-container button.os-submit, 
-body .unit-widget-container button { 
-    background-color: var(--color-primary) !important; 
-    color: #000 !important; 
-}
-
-/* ==========================================================================
-   ФИКС БУРГЕРА И РАСКРЫТИЕ ПОДМЕНЮ НА МОБИЛЬНЫХ 
-   (ВСТАВИТЬ В САМЫЙ КОНЕЦ ФАЙЛА STYLE.CSS)
-   ========================================================================== */
-@media screen and (max-width: 1150px) {
-    /* 1. Жестко возвращаем бургер на место */
     .burger, .js-burger {
         display: flex !important;
         flex-direction: column !important;
@@ -1528,7 +1509,11 @@ body .unit-widget-container button {
         z-index: 1000 !important;
     }
 
-    /* 2. Раскрываем списки (Туры, Услуги) внутри меню */
+    .burger__line { width: 30px; height: 2px; background-color: var(--color-dark) !important; transition: all 0.3s ease; }
+    .burger.is-active .burger__line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .burger.is-active .burger__line:nth-child(2) { opacity: 0; }
+    .burger.is-active .burger__line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
     .has-dropdown {
         display: flex !important;
         flex-direction: column !important;
@@ -1566,7 +1551,6 @@ body .unit-widget-container button {
         gap: 15px !important;
     }
     
-    /* 3. Прячем лишние элементы (картинки, стрелочки) в мобильном виде */
     .mega-menu__title, 
     .menu-promo,
     .mega-menu__icon-box,
@@ -1574,7 +1558,6 @@ body .unit-widget-container button {
         display: none !important; 
     }
     
-    /* 4. Стилизуем внутренние ссылки, чтобы они выглядели аккуратно */
     .mega-menu__link, 
     .dropdown-simple a {
         font-size: 1.05rem !important;
@@ -1594,171 +1577,471 @@ body .unit-widget-container button {
     }
 }
 
+@media screen and (max-width: 1024px) {
+    .parallax-wrapper { display: none; }
+    .features-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    
+    .lead-split { flex-direction: column; min-height: auto; }
+    .lead-split__visual { height: 400px; flex: 1 1 100%; width: 100%;}
+    .lead-split__visual-content { padding: 60px 5%; align-items: center; text-align: center; }
+    .lead-split__form-wrap { flex: 1 1 100%; width: 100%; padding: 60px 5% !important; }
+    
+    .blog-tz-grid { grid-template-columns: repeat(2, 1fr); }
+    .blog-card--large { grid-column: span 2; grid-row: span 1; height: 300px; }
+
+    .tg-promo-box { padding: 40px !important; grid-template-columns: 1fr; text-align: center; gap: 40px; }
+    .iphone-frame { transform: rotate(0); margin-top: 40px;}
+    .footer__grid { grid-template-columns: 1fr 1fr; }
+    .hero-screen__content { margin-top: 120px !important; }
+    
+    .about-us__container { grid-template-columns: 1fr; gap: 40px; }
+}
+
 /* ==========================================================================
-   ПОЛНЫЙ И ОКОНЧАТЕЛЬНЫЙ ФИКС ШАПКИ И ИКОНОК
+   29. ПОЛНАЯ АДАПТАЦИЯ МОДАЛКИ РОЗШИРЕНОГО ПОШУКУ (ДО 768px)
    ========================================================================== */
+@media screen and (max-width: 768px) {
+    .hero-screen__title { font-size: 2.5rem !important; padding-top: 40px !important; }
+    .hero-socials { display: none; } 
+    
+    .custom-bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .c-bento-large, .c-bento-wide, .c-bento-standard { grid-column: span 1; height: 250px; }
+    
+    .blog-tz-grid { grid-template-columns: 1fr; }
+    .blog-card--large { grid-column: span 1; }
+    
+    .diploma-horizontal { grid-column: span 1; }
+    .leave-review-box { padding: 32px 24px; }
 
-/* 1. Умная шапка (чтобы текст не обрезался и не переносился) */
-.header__container {
-    gap: 15px !important;
-    flex-wrap: nowrap !important;
-}
-.header__nav {
-    flex: 1 1 auto !important;
-    display: flex !important;
-    justify-content: center !important;
-}
-.nav__list {
-    display: flex !important;
-    /* Умные отступы: плавно уменьшаются на небольших экранах */
-    gap: clamp(10px, 1.5vw, 24px) !important; 
-    flex-wrap: nowrap !important;
-}
-.nav__link {
-    white-space: nowrap !important;
-    /* Умный шрифт: чуть сжимается, чтобы всё влезло в 1 строку */
-    font-size: clamp(0.7rem, 1vw, 0.85rem) !important; 
+    .form-row { flex-direction: column; gap: 0; }
+    .col-6 { width: 100%; }
+    .counter-group { justify-content: flex-start; margin-top: 24px; }
+    
+    .modal-content { padding: 40px 24px; }
+    .modal-title { font-size: 2rem; margin-bottom: 24px; }
+    .floating-widget { bottom: 20px; right: 20px; }
+    .fw-btn { width: 56px; height: 56px; }
+
+    /* 1. КАРКАС МОДАЛЬНОГО ОКНА */
+    .new_f-container,
+    div[class*="f-container"] {
+        margin-bottom: 30px !important;
+        position: relative !important;
+    }
+
+    .new_f-ext-container,
+    div[class*="ext-container"] {
+        position: relative !important;
+        top: 10px !important;
+        left: 0 !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        background: #2b2b2d !important;
+        border-radius: 16px !important;
+        padding: 14px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+        z-index: 99999 !important;
+        
+        height: 560px !important;
+        min-height: 500px !important;
+        max-height: 85vh !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+    }
+
+    .new_f-ext-container[style*="display: block"],
+    div[class*="ext-container"][style*="display: block"] {
+        display: flex !important;
+    }
+
+    /* 2. СИНИЙ ЗАГОЛОВОК */
+    .new_f-ext-head,
+    .new_f-ext-title,
+    div[class*="ext-head"],
+    div[class*="ext-title"] {
+        flex: 0 0 auto !important;
+        width: 100% !important;
+        position: relative !important;
+        margin-bottom: 12px !important;
+        background: #2AABEE !important;
+        padding: 12px 14px !important;
+        border-radius: 8px !important;
+        color: #FFFFFF !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        z-index: 10 !important;
+    }
+
+    /* 3. ЗОНА СКРОЛЛА */
+    .new_f-ext-body,
+    .new_f-ext-content,
+    div[class*="ext-body"],
+    form[class*="ext-form"] {
+        flex: 1 1 auto !important;
+        height: 340px !important;
+        max-height: calc(85vh - 180px) !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-y !important;
+        padding-right: 6px !important;
+        padding-top: 6px !important;
+        margin-bottom: 10px !important;
+        position: relative !important;
+    }
+
+    .new_f-ext-bl,
+    div[class*="ext-bl"],
+    div[class*="ext-group"] {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        right: auto !important;
+        bottom: auto !important;
+        width: 100% !important;
+        margin-bottom: 16px !important;
+        clear: both !important;
+        display: block !important;
+    }
+
+    .new_f-ext-container h3,
+    .new_f-ext-container strong,
+    .new_f-ext-subtitle,
+    div[class*="ext-title-sub"] {
+        display: block !important;
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        color: #ffffff !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        margin-bottom: 8px !important;
+        clear: both !important;
+    }
+
+    .new_f-ext-container ul,
+    .new_f-ext-container div[class*="list"],
+    .new_f-ext-container div[class*="items"] {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: flex-start !important;
+        gap: 6px !important;
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 6px 0 10px 0 !important;
+    }
+
+    .new_f-ext-container li,
+    .new_f-ext-container label,
+    .new_f-ext-container div[class*="item"] {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        flex: 1 1 calc(33.33% - 6px) !important;
+        min-width: 50px !important;
+        padding: 6px 2px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border-radius: 6px !important;
+        font-size: 13px !important;
+        color: #FFFFFF !important;
+        white-space: nowrap !important;
+    }
+
+    /* 4. ШКАЛА ОЦЕНОК (СДВИГ ЦИФР ВПРАВО ПОД ЗАСЕЧКИ) */
+    
+    .new_f-ext-bl:has(div[class*="scale"]),
+    div[class*="ext-bl"]:has(div[class*="slider"]) {
+        position: relative !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    /* Линия ползунка */
+    div[class*="slider"],
+    div[class*="range"],
+    .ui-slider {
+        position: relative !important;
+        width: 100% !important;
+        margin: 16px 0 10px 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 4. ШКАЛА ОЦЕНОК (ИДЕАЛЬНОЕ ВЫРАВНИВАНИЕ ЦИФР ПО ЗАСЕЧКАМ) */
+    
+    div[class*="rating-scale"],
+    div[class*="rating_scale"],
+    ul[class*="rating"],
+    div[class*="slider-scale"],
+    div[class*="marks"],
+    .new_f-ext-bl div[class*="scale"] {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        position: relative !important;
+        margin: 6px 0 0 0 !important;
+        
+        /* Боковые отступы точно компенсируют ширину круглого ползунка */
+        padding-left: 8px !important;  
+        padding-right: 8px !important; 
+        box-sizing: border-box !important;
+    }
+
+    /* Элементы с цифрами */
+    div[class*="rating-scale"] >,
+    div[class*="rating_scale"] >,
+    ul[class*="rating"] >,
+    div[class*="slider-scale"] >,
+    div[class*="marks"] >,
+    .new_f-ext-bl div[class*="scale"] > * {
+        flex: 1 1 0px !important; /* Дает абсолютно одинаковую ширину каждой ячейке */
+        width: 0 !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        color: #FFFFFF !important;
+        background: transparent !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+        white-space: nowrap !important;
+        float: none !important;
+        position: relative !important;
+    }
+
+    /* Стиль цифр */
+    div[class*="rating-scale"] *,
+    div[class*="rating_scale"] *,
+    ul[class*="rating"] *,
+    div[class*="slider-scale"] *,
+    div[class*="marks"] *,
+    .new_f-ext-bl div[class*="scale"] * {
+        flex: 1 1 auto !important;
+        width: auto !important;
+        min-width: 18px !important;
+        height: auto !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 2px 0 0 0 !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        color: #FFFFFF !important;
+        background: transparent !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+        white-space: nowrap !important;
+        float: none !important;
+        position: relative !important;
+    }
+
+    /* Засечки над цифрами */
+    div[class*="rating-scale"] *::before,
+    div[class*="rating_scale"] *::before,
+    ul[class*="rating"] *::before,
+    .new_f-ext-bl div[class*="scale"] *::before {
+        content: '' !important;
+        position: absolute !important;
+        top: -6px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 1px !important;
+        height: 5px !important;
+        background-color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    /* 5. КНОПКА «ОЧИСТИТИ ФІЛЬТРИ» (Самостоятельный верхний элемент) */
+    .new_f-ext-clear-btn,
+    a[class*="clear"],
+    button[class*="clear"],
+    .os-adv-search-clear {
+        display: block !important;
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        margin: 8px 0 10px 0 !important;
+        padding: 6px 0 !important;
+        color: #2AABEE !important;
+        text-decoration: underline !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        text-align: center !important;
+        cursor: pointer !important;
+        clear: both !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        z-index: 20 !important;
+    }
+
+    /* 6. ПОЛНЫЙ СБРОС СДВОЕНИЯ: ЖЕСТКОЕ РАЗДЕЛЕНИЕ «ЗАСТОСУВАТИ» И «ВІДМІНА» */
+    .new_f-ext-bl-submit,
+    .new_f-ext-bl:last-child,
+    div[class*="ext-footer"],
+    div[class*="dropdown-buttons"] {
+        flex: 0 0 auto !important;
+        position: relative !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 10px !important;
+        margin-top: auto !important;
+        padding-top: 10px !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+        width: 100% !important;
+        background: none !important; /* УБИВАЕТ сплошную желтую заливку родителя */
+        background-color: transparent !important;
+        box-shadow: none !important;
+        z-index: 100 !important;
+    }
+
+    /* Сбрасываем абсолютные подложки Отпуска внутри блока кнопок */
+    .new_f-ext-bl-submit *,
+    div[class*="ext-footer"] * {
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        box-shadow: none !important;
+        background: none !important;
+    }
+
+    /* СТИЛЬ КНОПКИ ВІДМІНА (Слева) */
+    .new_f-dropdown-btn-cancel,
+    button[class*="cancel"],
+    .new_f-ext-container a[class*="cancel"] {
+        flex: 1 1 48% !important;
+        width: 48% !important;
+        height: 44px !important;
+        background-color: rgba(255, 255, 255, 0.15) !important;
+        color: #FFFFFF !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        border-radius: 8px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        text-decoration: none !important;
+        pointer-events: auto !important;
+        z-index: 101 !important;
+    }
+
+    /* СТИЛЬ КНОПКИ ЗАСТОСУВАТИ (Справа - Единственный желтый прямоугольник) */
+    .new_f-dropdown-btn-apply,
+    button[class*="apply"],
+    .new_f-ext-container input[type="submit"],
+    .new_f-ext-container button[type="submit"],
+    .new_f-ext-bl-submit input,
+    .new_f-ext-bl-submit button {
+        flex: 1 1 48% !important;
+        width: 48% !important;
+        height: 44px !important;
+        background-color: #FFEC00 !important;
+        color: #000000 !important;
+        border: none !important;
+        border-radius: 8px !important;
+        font-size: 14px !important;
+        font-weight: 800 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        pointer-events: auto !important;
+        z-index: 101 !important;
+    }
 }
 
-/* 2. Иконки соцсетей (спасаем от обрезки краем экрана) */
-body .hero-socials { 
-    right: 40px !important; /* Отодвигаем далеко от края */
-    z-index: 90 !important; 
+@media screen and (max-width: 480px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .footer__grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .footer__contact-list li { justify-content: center; }
+    .footer__socials { justify-content: center; }
+    .cb-row { font-size: 1.25rem; }
+    .ui-counter input { width: 30px; font-size: 1rem; }
+    
+    body .hot-block_tiles .hot-otp-img, body .hot-block_tiles .hot-otp-tour-block { width: 100% !important; margin-right: 0 !important; } 
+    body .hot-block_tiles .hot-wrapper { margin-right: 0 !important; }
 }
+/* БЛОК "ТРАНСПОРТ": ВЗРАЩАЕМ И ДЕЛАЕМ ВИДИМЫМИ ЧЕКБОКСЫ / ГАЛОЧКИ */
 
-/* 3. Кнопка в шапке (Таблетка) */
-body .header__actions .btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: 48px !important; 
-    padding: 0 20px !important;
-    border-radius: 100px !important; 
-    background-color: var(--color-primary) !important;
-    color: #0A0A0A !important;
-    border: none !important;
-    font-weight: 700 !important; 
-    font-family: var(--font-primary) !important;
-    font-size: 0.9rem !important;
-    white-space: nowrap !important; 
-    flex-shrink: 0 !important; /* Запрещаем кнопке сплющиваться */
-}
-body .header__actions .btn span { 
-    margin: 0 !important; 
-    padding: 0 !important; 
-    line-height: normal !important; 
-}
-
-/* 4. Телефон в шапке */
-body .header__phone,
-body .header__phone-main {
-    white-space: nowrap !important;
-    font-size: clamp(0.85rem, 1.2vw, 1rem) !important; 
-}
-
-/* 5. Кнопка ПОИСК (MVoyage) */
-body #search_mvoyage_all input[type="button"],
-body #search_mvoyage_all input[type="submit"],
-body #search_mvoyage_all button,
-body #search_mvoyage_all .btn_search {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: 56px !important;
-    width: 100% !important; 
-    padding: 0 32px !important;
-    border-radius: 100px !important; 
-    background-color: var(--color-primary) !important;
-    color: #0A0A0A !important;
-    font-weight: 700 !important;
-    font-family: var(--font-primary) !important;
-    font-size: 1rem !important;
-    text-transform: uppercase !important;
-    border: none !important;
+/* 1. Включаем видимость стандартных чекбоксов/радиокнопок внутри блока транспорта */
+div[class*="transport"] input[type="checkbox"],
+div[class*="transport"] input[type="radio"],
+.new_f-ext-bl:has(div[class*="transport"]) input,
+div[class*="ext-bl"]:has(:contains("Транспорт")) input {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 18px !important;
+    height: 18px !important;
+    margin-right: 10px !important;
     cursor: pointer !important;
-    -webkit-appearance: none !important; 
-    margin-top: 15px !important;
-    line-height: normal !important;
+    position: relative !important;
+    z-index: 5 !important;
+    accent-color: #ffcc00 !important; /* Желтый цвет галочки в стиле Otpusk */
 }
 
-/* ==========================================================================
-   СПАСАЕМ ИКОНКИ СОЦСЕТЕЙ (ЖЕСТКАЯ БЛОКИРОВКА ШИРИНЫ ЭКРАНА)
-   ========================================================================== */
-
-/* ==========================================================================
-   СПАСАЕМ ИКОНКИ СОЦСЕТЕЙ (ЖЕСТКАЯ БЛОКИРОВКА ШИРИНЫ ЭКРАНА)
-   ========================================================================== */
-
-html, body {
-    width: 100% !important;
-    max-width: 100% !important; /* Запрещаем странице растягиваться шире видимой части экрана */
-    overflow-x: hidden !important; 
+/* 2. Выравниваем элементы списка (текст + чекбокс) по левому краю */
+div[class*="transport"] label,
+div[class*="transport"] li,
+div[class*="transport"] div,
+.new_f-ext-bl:has(div[class*="transport"]) label {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding: 6px 0 !important;
+    cursor: pointer !important;
+    color: #ffffff !important;
+    font-size: 14px !important;
 }
 
-.hero-screen {
-    width: 100% !important;
-    max-width: 100% !important;
+/* 3. Если чекбоксы сделаны кастомными псевдоэлементами (::before / ::after) */
+div[class*="transport"] label::before,
+div[class*="transport"] li::before {
+    display: inline-block !important;
+    content: '' !important;
+    width: 16px !important;
+    height: 16px !important;
+    border: 2px solid #ffffff !important;
+    border-radius: 3px !important;
+    margin-right: 10px !important;
     box-sizing: border-box !important;
 }
 
-body .hero-socials { 
-    right: 30px !important; /* Принудительно отталкиваем на 30px от края */
-    z-index: 90 !important; 
-}
-/* ==========================================================================
-   ПОДГОТОВКА BINOTEL: Размещаем его под желтой кнопкой
-   ========================================================================= */
-/* Скрываем сам кружок с трубкой и текст (display:none не ломает модалку здесь) */
-#bingc-phone-button,
-#bingc-passive-get-phone-form {
-    display: none !important;
-}
-
-/* Убираем фоны, тени и смещаем родительский блок Бинотела ТОЧНО под желтую кнопку */
-#bingc-passive {
-    background: transparent !important;
-    box-shadow: none !important;
-    
-    position: fixed !important;
-    right: 30px !important; /* Соответствует отступу hero-socials */
-    bottom: 40px !important; /* Соответствует bottom floating-widget */
-    
-    /* Делаем его размер точно как у нашей желтой трубки */
-    width: 64px !important;
-    height: 64px !important;
-    
-    margin: 0 !important;
-    padding: 0 !important;
-    
-    /* Скрываем его от глаз (делаем прозрачным), но оставляем функциональным для скрипта */
-    opacity: 0 !important; 
-    z-index: 100 !important; /* Меньше, чем у нашей желтой кнопки */
-}
-
-/* Убедимся, что наша желтая кнопка сверху */
-.floating-widget .fw-btn--call {
-    z-index: 201 !important;
-}
-
-
-
-/* ==========================================================================
-   АБСОЛЮТНИЙ ФІКС ПОДВІЙНОГО СКРОЛУ (ПЕРЕБИВАЄ СТОРОННІ СКРИПТИ)
-   ========================================================================== */
-html {
-    /* Дозволяємо головний скрол тільки на рівні html */
-    overflow-y: auto !important; 
-    overflow-x: hidden !important;
-}
-
-body {
-    /* Жорстко забороняємо body мати власну вертикальну прокрутку */
-    overflow-y: visible !important; 
-    
-    /* Сучасний метод обрізки горизонталі без створення вертикального скролу */
-    overflow-x: clip !important;    
-    
-    /* Скидаємо можливі 100% висоти від скриптів, які створюють хибне вікно */
-    height: auto !important;        
-    position: relative !important;
+/* 4. Показываем пункт "Екскурсійні тури", если он был скрыт */
+div[class*="transport"] *:contains("Екскурсійні"),
+div[class*="transport"] *:contains("экскурсионные"),
+.new_f-ext-bl [data-type*="excursion"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }

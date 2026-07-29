@@ -17,7 +17,9 @@
     
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- ВСТРОЕННЫЕ СТИЛИ (ВСЕ ФИКСЫ И ВАУ-ЭФФЕКТЫ) -->
+    <!-- Supabase JS Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
         :root {
             --color-primary: #FFEC00 !important;
@@ -34,6 +36,58 @@
         .lang-btn { color: #666 !important; }
         .lang-btn.is-active { color: #0A0A0A !important; background: #fff !important; box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;}
 
+        /* ТЕЛЕФОН В ШАПКЕ */
+        .header__phone-wrapper { position: relative; display: inline-block; padding-bottom: 8px; margin-bottom: -8px; }
+        .header__phone-main {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1A1A1A !important;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .header__phone-main svg.phone-icon { stroke: #1A1A1A; flex-shrink: 0; }
+        .header__phone-main svg.arrow-icon { transition: transform 0.3s ease; stroke: #1A1A1A; flex-shrink: 0; }
+        .header__phone-wrapper:hover .header__phone-main svg.arrow-icon { transform: rotate(180deg); }
+
+        .phone-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: #FFFFFF;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            border-radius: 12px;
+            padding: 8px 0;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid #EAEAEA;
+        }
+        .header__phone-wrapper:hover .phone-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .phone-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            color: #1A1A1A;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: var(--font-primary);
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap !important;
+        }
+        .phone-dropdown a:hover { background-color: #F7F9FC; color: #0A0A0A; }
+
         /* Герой */
         .hero-screen__title { 
             font-family: var(--font-primary) !important; 
@@ -45,185 +99,348 @@
             text-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
 
-/* ==========================================================================
-   HERO 630px И ПОЛНАЯ СИНХРОНИЗАЦИЯ ПОИСКА (РУССКАЯ ВЕРСИЯ)
-   ========================================================================== */
+        .hero-screen {
+            position: relative !important;
+            overflow: visible !important; 
+            height: 580px !important;
+        }
 
-/* Геро-блок с высотой 630px */
-.hero-search { 
-    position: relative; 
-    width: 100%; 
-    height: 560px !important; 
-    min-height: 56px !important;
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    overflow: hidden; 
-    padding-top: 80px; 
-    padding-bottom: 0; 
-}
-.hero-search__bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-.hero-search__bg img { width: 100%; height: 100%; object-fit: cover !important; object-position: top center !important; }
-.hero-search__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%); }
+        .hero-screen__bg,
+        .hero-screen__img {
+            height: 100% !important;
+            object-fit: cover !important;
+        }
 
-.hero-search__content { 
-    width: 100%; 
-    max-width: 900px; 
-    text-align: center !important; 
-    position: relative; 
-    z-index: 2; 
-    margin: 0 auto !important; 
-    padding-bottom: 40px;
-}
-.hero-search__title { 
-    font-family: var(--font-primary) !important; 
-    font-size: clamp(2.5rem, 5vw, 4.5rem); 
-    font-weight: 800; 
-    color: #fff; 
-    line-height: 1.1; 
-    text-shadow: 0 4px 15px rgba(0,0,0,0.5); 
-    text-align: center !important; 
-    margin: 0 !important; 
-}
+        .hero-screen__content {
+            padding-bottom: 0 !important;
+            margin-bottom: 0 !important;
+        }
 
-/* Соцсети справа */
-.hero-socials-vertical { 
-    position: absolute !important; 
-    right: 30px !important; 
-    top: 50% !important; 
-    transform: translateY(-50%) !important; 
-    display: flex !important; 
-    flex-direction: column; 
-    gap: 12px; 
-    z-index: 90 !important; 
-}
-.hero-socials-vertical a { 
-    width: 48px !important; 
-    height: 48px !important; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    color: #fff; 
-    background: rgba(15, 15, 15, 0.7) !important; 
-    backdrop-filter: blur(5px);
-    border-radius: 50% !important;
-    transition: all 0.3s ease; 
-}
-.hero-socials-vertical a:hover { color: #FFEC00; transform: scale(1.1); background: rgba(0, 0, 0, 0.9) !important; }
+        #search-module-wrapper { 
+            position: relative !important; 
+            z-index: 99 !important; 
+            transform: translateY(45px) !important; 
+            margin-top: -120px !important;    
+            margin-bottom: 60px !important;   
+        }
 
-/* Нахлёст модуля поиска */
-#search-module-wrapper { position: relative; z-index: 10; margin-top: -100px !important; padding-bottom: 80px; }
+        #search-module { 
+            position: relative !important; 
+            z-index: 99 !important; 
+            width: 100% !important;
+            max-width: 940px !important;
+            margin: 0 auto !important;
+        }
 
-body .new_f-container { 
-    background: rgba(0, 0, 0, 0.5) !important; 
-    backdrop-filter: blur(8px) !important; 
-    -webkit-backdrop-filter: blur(8px) !important;
-    border-radius: 15px !important; 
-    position: relative; 
-    z-index: 20 !important; 
-    max-width: 940px !important; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); 
-    margin: 0 auto !important; 
-}
+        body .new_f-container { 
+            background: rgba(0, 0, 0, 0.55) !important; 
+            backdrop-filter: blur(8px) !important; 
+            -webkit-backdrop-filter: blur(8px) !important;
+            border-radius: 15px !important; 
+            position: relative !important; 
+            z-index: 20 !important; 
+            max-width: 940px !important; 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important; 
+            margin: 0 auto !important; 
+        }
 
-body .new_f-wrapper-bg-imgs, body .new_f-title, body .new_f-tip-active { display: none !important; }
-body .new_f-form { padding-top: 30px !important; }
+        body .new_f-wrapper-bg-imgs, body .new_f-title, body .new_f-tip-active { 
+            display: none !important; 
+        }
 
-/* Кнопка Найти */
-body .new_f-form .new_f-form-submit,
-body .new_os .new_f-form-submit { 
-    background: #000000 !important; 
-    color: #ffffff !important; 
-    border-radius: 0 15px 15px 0 !important; 
-    transition: background .3s ease !important; 
-}
-body .new_f-form .new_f-form-submit:hover { 
-    background: #FFEC00 !important; 
-    color: #000000 !important; 
-}
+        body .new_f-form { 
+            padding-top: 30px !important; 
+        }
 
-/* Расширенный поиск */
-body .new_f-ext-container {
-    background: #555555 !important;
-    border-radius: 0 0 12px 12px !important;
-    padding: 25px 25px 85px 25px !important;
-    position: relative !important;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.4) !important;
-    z-index: 15 !important;
-}
-body .new_f-ext-container *, body .new_f-ext-bl label { color: #ffffff !important; }
-body .new_f-label-name, body .new_f-ext-col-serv .new_weight-bold { color: #4da5ff !important; }
+        body .new_f-dates-container#new_f-dates-container * { 
+            box-shadow: none !important; 
+            font-family: var(--font-primary), sans-serif !important; 
+        }
 
-/* Разводка кнопок «Сбросить» (слева) и «Применить» (справа) */
-body .new_f-ext-container .new_f-dropdown-body-bottom, body .new_f-ext-body-bottom {
-    position: absolute !important;
-    bottom: 20px !important;
-    left: 25px !important;
-    right: 25px !important;
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    height: 45px !important;
-}
+        body .new_f-dropdown-btn .cnt::after, body .new_f-dropdown-btn::after { 
+            content: ''; 
+            position: absolute; 
+            top: 17px; 
+            right: 8px; 
+            pointer-events: none; 
+            border-style: solid; 
+            border-width: 6px 4px 0; 
+            border-color: #000 transparent transparent !important; 
+        }
 
-body .new_f-ext-clear-btn { position: static !important; color: #4da5ff !important; text-decoration: underline !important; font-size: 14px; order: 1 !important; }
-body .new_f-container .new_f-dropdown-btn-apply { position: static !important; background: #FFEC00 !important; color: #1A1A1A !important; border-radius: 10px !important; padding: 0 32px !important; height: 44px !important; font-weight: 800 !important; order: 2 !important; }
+        body .new_f-datepicker-wrap button { 
+            height: 30px; 
+            width: 100%; 
+            border-radius: 10px; 
+            display: block; 
+            padding: 0 0 1px 6px !important; 
+            font-size: 14px; 
+            background: #E1E7EF; 
+            border: none; 
+            cursor: text; 
+            text-align: left !important; 
+            outline: 0 none; 
+            color: #666 !important; 
+            font-weight: 400 !important; 
+            margin: 0; 
+        }
 
-/* Фильтры и Валюта (Замена оранжевого на Жёлтый) */
-body .new_r-filter-value, body .new_r-filter .new_r-filter-val {
-    color: #1A1A1A !important; background: #FFEC00 !important; padding: 2px 8px !important; border-radius: 6px !important; font-weight: 700 !important;
-}
-body [class*="-cur"] span.active, body [class*="-currency"] .active, body .new_f-cur label.active, body .new_r-currency-switch label input:checked + span {
-    background: #FFEC00 !important; color: #1A1A1A !important; font-weight: 800 !important;
-}
+        body .new_f-search-dates-wrap svg { 
+            position: absolute; 
+            width: 17px; 
+            top: 10px; 
+            left: 7px; 
+            fill: #000 !important; 
+        }
 
-/* Карточки выдачи и Овальная кнопка */
-body .new_r-item-wrap, body .new_r-item { border-radius: 16px !important; background: #fff !important; box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important; margin-bottom: 20px !important; overflow: hidden !important; }
-body .new_r-more-wrap a, body .new_r-show-more-results, body .new_r-more, body .new_r-show-more {
-    display: inline-flex !important; background: #FFEC00 !important; color: #1A1A1A !important; border-radius: 50px !important; padding: 16px 42px !important; font-size: 16px !important; font-weight: 700 !important; border: none !important; margin: 0 auto 15px auto !important; float: none !important;
-}
+        body .new_f-form-field.to { 
+            width: 204px; 
+            border-left-color: #D4D4D4; 
+            border-radius: 15px 0 0 15px !important; 
+        }
 
-        /* Преимущества */
+        body .new_f-form .new_f-form-submit,
+        body .new_os .new_f-form-submit { 
+            background: #FFEC00 !important; 
+            color: #1A1A1A !important; 
+            border-radius: 0 15px 15px 0 !important; 
+            box-shadow: none !important; 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            width: 107px !important; 
+            font-weight: 800 !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            transition: background .3s ease !important; 
+        }
+
+        body .new_f-form .new_f-form-submit:hover { 
+            background: #E5D400 !important; 
+            color: #000000 !important; 
+        }
+
+        body .new_f-ext-container {
+            background: #555555 !important;
+            border-radius: 0 0 12px 12px !important;
+            padding: 25px 25px 85px 25px !important; 
+            position: relative !important;
+            border: none !important;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4) !important;
+            z-index: 15 !important;
+            height: auto !important;
+            max-height: none !important;
+            overflow: visible !important;
+        }
+
+        body .new_f-ext-container *,
+        body .new_f-ext-bl label { 
+            color: #ffffff !important; 
+        }
+
+        body .new_f-label-name,
+        body .new_f-ext-col-serv .new_weight-bold {
+            color: #4da5ff !important;
+        }
+
+        body .new_f-ext-container .new_f-dropdown-body-bottom,
+        body .new_f-ext-body-bottom,
+        body .new_f-ext-footer {
+            position: absolute !important;
+            bottom: 20px !important;
+            left: 25px !important;
+            right: 25px !important;
+            top: auto !important;
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: space-between !important; 
+            padding: 0 !important;
+            margin: 0 !important;
+            width: auto !important;
+            height: 45px !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            z-index: 30 !important;
+        }
+
+        body .new_f-ext-clear-btn,
+        body .new_f-ext-container .new_f-ext-clear-btn {
+            position: static !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            color: #4da5ff !important;
+            text-decoration: underline !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            background: transparent !important;
+            border: none !important;
+            cursor: pointer !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            white-space: nowrap !important;
+            order: 1 !important;
+        }
+
+        body .new_f-ext-clear-btn:hover,
+        body .new_f-ext-container .new_f-ext-clear-btn:hover {
+            color: #72b8ff !important;
+        }
+
+        body .new_f-container .new_f-dropdown-btn-apply,
+        body .new_f-ext-container .new_f-dropdown-btn-apply {
+            position: static !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            background: #FFEC00 !important;
+            color: #1A1A1A !important;
+            border-radius: 10px !important;
+            padding: 0 32px !important;
+            height: 44px !important;
+            line-height: 44px !important;
+            font-size: 15px !important;
+            font-weight: 800 !important;
+            border: none !important;
+            margin: 0 !important;
+            cursor: pointer !important;
+            white-space: nowrap !important;
+            order: 2 !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+            transition: background .3s ease !important;
+        }
+
+        body .new_f-container .new_f-dropdown-btn-apply:hover,
+        body .new_f-ext-container .new_f-dropdown-btn-apply:hover {
+            background: #E5D400 !important;
+            color: #000000 !important;
+        }
+
+        body .new_r-item-wrap,
+        body .new_r-item {
+            border-radius: 16px !important;
+            background-color: #ffffff !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+            border: 1px solid #f0f0f0 !important;
+            margin-bottom: 20px !important;
+            overflow: hidden !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+        }
+
+        body .new_r-item-wrap:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        body .new_r-item-img {
+            border-radius: 16px 0 0 16px !important;
+            object-fit: cover !important;
+        }
+
+        body .new_r-item-price, 
+        body .new_t-bl-price, 
+        body .os-price-btn {
+            background: #FFEC00 !important;
+            color: #1a1a1a !important;
+            border-radius: 12px !important;
+            border: none !important;
+            padding: 12px 20px !important;
+            box-shadow: 0 4px 12px rgba(255, 236, 0, 0.3) !important;
+            font-weight: 800 !important;
+            transition: background 0.2s ease !important;
+        }
+
+        body .new_r-item-price:hover, 
+        body .os-price-btn:hover {
+            background: #E5D400 !important;
+        }
+
+        body .new_r-more-wrap,
+        body .new_result-info,
+        body .new_r-show-more-wrap {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            margin: 40px 0 !important;
+            clear: both !important;
+            float: none !important;
+            position: relative !important;
+        }
+
+        body .new_r-more-wrap a,
+        body .new_r-show-more-results,
+        body .new_r-more,
+        body .new_r-show-more {
+            position: relative !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: #FFEC00 !important;
+            color: #1A1A1A !important;
+            border-radius: 50px !important;            
+            padding: 16px 42px !important;
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            border: none !important;
+            box-shadow: 0 4px 15px rgba(255, 236, 0, 0.3) !important;
+            cursor: pointer !important;
+            text-decoration: none !important;
+            margin: 0 auto 15px auto !important;
+            float: none !important;
+            transition: all 0.3s ease !important;
+        }
+
+        body .new_r-more-wrap a:hover,
+        body .new_r-show-more-results:hover,
+        body .new_r-more:hover {
+            background: #E5D400 !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(255, 236, 0, 0.4) !important;
+        }
+
+        body .new_r-more-wrap > div,
+        body .new_result-info-text,
+        body .new_result-info span {
+            color: #2D3748 !important;
+            font-weight: 700 !important;
+            font-size: 18px !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            display: block !important;
+            float: none !important;
+        }
+
+        body .new_r-filter-value,
+        body .new_r-filter .new_r-filter-val {
+            color: #1A1A1A !important;              
+            background: #FFEC00 !important;          
+            padding: 2px 8px !important;
+            border-radius: 6px !important;
+            font-weight: 700 !important;
+        }
+
+        body [class*="-cur"] span.active, 
+        body [class*="-currency"] .active, 
+        body .new_f-cur label.active, 
+        body .new_r-currency-switch label input:checked + span,
+        body .new_r-currency-switch label.active span,
+        body .new_r-currency-switch label.active {
+            background: #FFEC00 !important;          
+            color: #1A1A1A !important;              
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
+            font-weight: 800 !important;
+        }
+
         .feature-card { text-align: center; }
         .feature-card__icon-wrap { margin: 0 auto 24px !important; background-color: var(--color-primary); box-shadow: 0 0 24px rgba(255, 236, 0, 0.4); color: #0A0A0A; }
         .feature-card:hover .feature-card__icon-wrap { transform: scale(1.1); }
 
-        /* Модалка */
-        .modal-dialog { background-color: #F7F9FC !important; }
-        .modal-title, .cf-label { color: #1A1A1A !important; }
-        .cf-input { color: #1A1A1A !important; border-bottom-color: #CCCCCC !important; }
-        .ui-checkbox { color: #1A1A1A !important; }
-        .ui-counter, .ui-counter button { border-color: #DDD !important; background-color: #FFF !important; color: #1A1A1A !important; }
-        .ui-counter input { color: #1A1A1A !important; }
-        .checkmark { border-color: #CCC !important; background-color: #FFF !important; }
-        .modal-close { background-color: rgba(0,0,0,0.05) !important; color: #1A1A1A !important; }
-        .modal-close:hover { background-color: var(--color-primary) !important; }
-
-        /* Lead Form (60/40) */
-        .lead-split { display: flex; flex-direction: row; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg); }
-        .lead-split__visual { flex: 0 0 60%; position: relative; overflow: hidden;}
-        .lead-split__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-        .lead-split__visual-content { position: relative; z-index: 1; padding: 60px; height: 100%; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); }
-        .lead-split__form-wrap { flex: 0 0 40%; background-color: #F7F9FC !important; padding: 60px 40px !important; display: flex; align-items: center; justify-content: center;}
-        #main-lead-form .cf-label { color: #666 !important; }
-        #main-lead-form .cf-input { color: #1A1A1A !important; border-bottom-color: #CCC !important; }
-        #main-lead-form h3 { color: #1A1A1A !important; }
-        .cf-input:focus ~ .cf-label, .cf-input:not(:placeholder-shown) ~ .cf-label { top: -12px; font-size: 0.75rem; color: var(--color-dark) !important; text-transform: uppercase; font-weight: 700; }
-        .cf-line { background-color: var(--color-dark) !important; }
-
-        /* Награды (13 ДИПЛОМОВ) */
-        .diplomas-wow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; grid-auto-flow: dense; margin-top: 40px; }
-        .diploma-card { background: #fff; border-radius: 16px; padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; z-index: 1; border: 1px solid #F0F0F0; }
-        .diploma-card::after { content: ''; position: absolute; inset: 0; border-radius: 16px; box-shadow: 0 20px 50px rgba(255, 236, 0, 0.3); opacity: 0; transition: opacity 0.5s ease; z-index: -1; }
-        .diploma-card:hover { transform: scale(1.05) translateY(-10px); z-index: 10; border-color: var(--color-primary); }
-        .diploma-card:hover::after { opacity: 1; }
-        .diploma-card img { max-width: 100%; height: auto; max-height: 350px; object-fit: contain; border-radius: 4px; }
-        .diploma-horizontal { grid-column: span 2; } 
-
-        /* ==========================================================================
-           СТАТИЧНАЯ СЕТКА ГОРЯЩИХ ТУРОВ (ИДЕАЛЬНЫЙ КЛОН С ПРАВИЛЬНЫМ ВЫРАВНИВАНИЕМ)
-           ========================================================================== */
         .static-hot-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -256,7 +473,6 @@ body .new_r-more-wrap a, body .new_r-show-more-results, body .new_r-more, body .
             transform: scale(1.05);
         }
         
-        /* Шапка с градиентом */
         .hot-card__header {
             position: absolute;
             top: 0; left: 0;
@@ -287,7 +503,6 @@ body .new_r-more-wrap a, body .new_r-show-more-results, body .new_r-more, body .
             font-weight: 700;
         }
 
-        /* Жесткий темный подвал */
         .hot-card__bottom {
             background: rgba(15, 15, 15, 0.85); 
             position: absolute;
@@ -299,33 +514,31 @@ body .new_r-more-wrap a, body .new_r-show-more-results, body .new_r-more, body .
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            align-items: center; /* Идеальное выравнивание по центру */
-            gap: 15px; /* Гарантированный отступ */
+            align-items: center; 
+            gap: 15px; 
             box-sizing: border-box;
             min-height: 75px;
             border-radius: 0 0 12px 12px;
         }
         
-        /* Инфо слева */
         .hot-card__info {
-            flex: 1; /* Забирает оставшееся пространство */
-            min-width: 0; /* Позволяет тексту обрезаться */
+            flex: 1; 
+            min-width: 0; 
             font-size: 12px;
             line-height: 1.3;
             color: rgba(255, 255, 255, 0.9);
             font-style: italic;
             display: -webkit-box;
-            -webkit-line-clamp: 3; /* Максимум 3 строки */
+            -webkit-line-clamp: 3; 
             -webkit-box-orient: vertical;
             overflow: hidden;
             font-family: var(--font-primary), sans-serif;
             text-align: left;
-            margin-bottom: 0; /* Убран лишний отступ */
+            margin-bottom: 0; 
         }
         
-        /* Цена справа */
         .hot-card__price-box {
-            flex-shrink: 0; /* Не сжимается */
+            flex-shrink: 0; 
             display: flex;
             flex-direction: column;
             align-items: flex-end;
@@ -339,7 +552,7 @@ body .new_r-more-wrap a, body .new_r-show-more-results, body .new_r-more, body .
             font-family: var(--font-display), sans-serif;
             line-height: 1;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-            white-space: nowrap; /* Валюта не переносится */
+            white-space: nowrap; 
         }
         .hot-card__price-hint {
             color: #FFFFFF;
@@ -352,159 +565,160 @@ body .new_r-more-wrap a, body .new_r-show-more-results, body .new_r-more, body .
             width: 100%;
             text-align: right;
         }
-        /* ==========================================================================
-   ФИКС КНОПКИ ПОИСКА (ЖЕЛТАЯ) И ВЕРТИКАЛЬНЫХ СОЦСЕТЕЙ
-   ========================================================================== */
 
-/* Жёлтая кнопка "Найти" */
-body .new_f-form .new_f-form-submit,
-body .new_os .new_f-form-submit,
-body #search-module .new_f-form-submit { 
-    background: #FFEC00 !important; 
-    color: #1A1A1A !important; 
-    border-radius: 0 15px 15px 0 !important; 
-    box-shadow: none !important; 
-    margin: 0 !important; 
-    padding: 0 !important; 
-    width: 107px !important; 
-    font-weight: 800 !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    transition: background .3s ease !important; 
-}
-
-body .new_f-form .new_f-form-submit:hover,
-body .new_os .new_f-form-submit:hover { 
-    background: #E5D400 !important; 
-    color: #000000 !important; 
-}
-
-/* Вертикальные круглые иконки соцсетей справа */
-.hero-socials-vertical { 
-    position: absolute !important; 
-    right: 30px !important; 
-    top: 50% !important; 
-    transform: translateY(-50%) !important; 
-    display: flex !important; 
-    flex-direction: column !important; 
-    gap: 12px !important; 
-    z-index: 90 !important; 
-    background: transparent !important; 
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    list-style: none !important;
-}
-
-.hero-socials-vertical a { 
-    width: 48px !important; 
-    height: 48px !important; 
-    display: flex !important; 
-    align-items: center !important; 
-    justify-content: center !important; 
-    color: #ffffff !important; 
-    background: rgba(15, 15, 15, 0.7) !important; 
-    backdrop-filter: blur(5px) !important;
-    -webkit-backdrop-filter: blur(5px) !important;
-    border-radius: 50% !important;
-    transition: all 0.3s ease !important; 
-    text-decoration: none !important;
-}
-
-.hero-socials-vertical a svg { 
-    width: 22px !important; 
-    height: 22px !important; 
-}
-
-.hero-socials-vertical a:hover { 
-    color: #1A1A1A !important; 
-    background: #FFEC00 !important; 
-    transform: scale(1.1) !important; 
-}
-        /* ==========================================================================
-   1. ЖЁЛТЫЕ КАРТОЧКИ ВЫДАЧИ
-   ========================================================================== */
-body .new_r-item-price, 
-body .new_t-bl-price, 
-body .new_t-price,
-body .os-price-btn,
-body .new_price-btn {
-    background: #FFEC00 !important;          /* Ярко-жёлтый фон */
-    color: #1A1A1A !important;               /* Тёмный чёткий текст */
-    border-radius: 8px !important;
-    border: none !important;
-    padding: 10px 15px !important;
-    box-shadow: 0 4px 10px rgba(255, 236, 0, 0.3) !important;
-}
-
-body .new_r-item-price *, 
-body .new_t-bl-price *,
-body .new_price-value,
-body .new_price-desc { 
-    color: #1A1A1A !important;               /* Весь внутренний текст тёмный */
-}
-
-body .new_r-item-price:hover, 
-body .os-price-btn:hover { 
-    background: #E5D400 !important;          /* Эффект наведения */
-}
-/* ==========================================================================
-   ЖЁСТКОЕ УМЕНЬШЕНИЕ ВЫСОТЫ БАННЕРА (И КАРТИНКИ)
-   ========================================================================== */
-
-/* 1. Сжимаем контейнер секции */
-.hero-screen {
-    height: 630px !important;        /* Поставь 400px или 450px, если нужно еще ниже */
-    min-height: 630px !important;
-    max-height: 630px !important;
-    padding-top: 100px !important;   /* Уменьшаем верхний отступ под хедером */
-    padding-bottom: 0 !important;
-    overflow: hidden !important;
-}
-
-/* 2. Сжимаем саму фоновую картинку */
-.hero-screen__bg,
-.hero-screen__img {
-    height: 100% !important;
-    max-height: 630px !important;
-    object-fit: cover !important;
-    object-position: center center !important; /* Центрирует пляж по вертикали */
-}
-
-/* 3. Уменьшаем отступ над заголовком */
-.hero-screen__content {
-    padding-bottom: 20px !important;
-    margin-bottom: 0 !important;
-}
-
-/* 4. Подтягиваем модуль поиска выше к картинке */
-#search-module-wrapper {
-    margin-top: -60px !important;   /* Регулирует нахлёст поиска на картинку */
-}
-
-        /* Адаптив сетки */
         @media (max-width: 1200px) { .static-hot-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (max-width: 900px) { .static-hot-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 600px) { .static-hot-grid { grid-template-columns: 1fr; } }
 
+        /* Плавающие кнопки */
+        .floating-widget {
+            position: fixed !important;
+            bottom: 25px !important;
+            right: 25px !important;
+            z-index: 999999 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+        }
 
-        /* ОТЗЫВЫ И ФОРМА ОТЗЫВОВ */
-        .reviews-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin-top: 40px; }
-        .review-card { background: #fff; padding: 32px; border-radius: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #EAEAEA; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; }
-        .review-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--color-primary); }
-        .review-card__header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-        .review-card__avatar { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; background: var(--color-primary-light); color: var(--color-dark); }
-        .review-card__stars { color: #FFB400; font-size: 1.25rem; letter-spacing: 2px; }
-        .review-card__text { color: var(--color-text-muted); font-size: 1rem; line-height: 1.6; font-style: italic; flex-grow: 1;}
-        .leave-review-box { background: var(--color-dark); color: #fff; border-radius: 24px; padding: 48px; margin-top: 60px; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
-        .leave-review-box::before { content: ''; position: absolute; top: 0; left: 0; width: 8px; height: 100%; background: var(--color-primary); }
-        .interactive-stars { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 8px; }
+        .fw-btn {
+            width: 60px !important;
+            height: 60px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
+            transition: transform 0.2s ease !important;
+            border: none !important;
+            cursor: pointer !important;
+        }
+
+        .fw-btn--tg {
+            background-color: #2AABEE !important;
+        }
+
+        .fw-btn--call {
+            background-color: #FFEC00 !important;
+        }
+
+        .fw-btn:hover {
+            transform: scale(1.08) !important;
+        }
+
+        .modal-dialog { background-color: #F7F9FC !important; }
+        .modal-title, .cf-label { color: #1A1A1A !important; }
+        .cf-input { color: #1A1A1A !important; border-bottom-color: #CCCCCC !important; }
+        .ui-checkbox { color: #1A1A1A !important; }
+        .ui-counter, .ui-counter button { border-color: #DDD !important; background-color: #FFF !important; color: #1A1A1A !important; }
+        .ui-counter input { color: #1A1A1A !important; }
+        .checkmark { border-color: #CCC !important; background-color: #FFF !important; }
+        .modal-close { background-color: rgba(0,0,0,0.05) !important; color: #1A1A1A !important; }
+        .modal-close:hover { background-color: var(--color-primary) !important; }
+
+        .lead-split { display: flex; flex-direction: row; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg); }
+        .lead-split__visual { flex: 0 0 60%; position: relative; overflow: hidden;}
+        .lead-split__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .lead-split__visual-content { position: relative; z-index: 1; padding: 60px; height: 100%; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); }
+        .lead-split__form-wrap { flex: 0 0 40%; background-color: #F7F9FC !important; padding: 60px 40px !important; display: flex; align-items: center; justify-content: center;}
+        #main-lead-form .cf-label { color: #666 !important; }
+        #main-lead-form .cf-input { color: #1A1A1A !important; border-bottom-color: #CCC !important; }
+        #main-lead-form h3 { color: #1A1A1A !important; }
+        .cf-input:focus ~ .cf-label, .cf-input:not(:placeholder-shown) ~ .cf-label { top: -12px; font-size: 0.75rem; color: var(--color-dark) !important; text-transform: uppercase; font-weight: 700; }
+        .cf-line { background-color: var(--color-dark) !important; }
+
+        .diplomas-wow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; grid-auto-flow: dense; margin-top: 40px; }
+        .diploma-card { background: #fff; border-radius: 16px; padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; z-index: 1; border: 1px solid #F0F0F0; }
+        .diploma-card::after { content: ''; position: absolute; inset: 0; border-radius: 16px; box-shadow: 0 20px 50px rgba(255, 236, 0, 0.3); opacity: 0; transition: opacity 0.5s ease; z-index: -1; }
+        .diploma-card:hover { transform: scale(1.05) translateY(-10px); z-index: 10; border-color: var(--color-primary); }
+        .diploma-card:hover::after { opacity: 1; }
+        .diploma-card img { max-width: 100%; height: auto; max-height: 350px; object-fit: contain; border-radius: 4px; }
+        .diploma-horizontal { grid-column: span 2; } 
+
+        /* ==========================================
+           ВНЕШНИЕ ОТЗЫВЫ И КАРТОЧКИ (ИЗ ABOUT-RU.HTML)
+           ========================================== */
+        .external-reviews-bar { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; margin-bottom: 40px; }
+        .ext-review-btn { display: inline-flex; align-items: center; gap: 12px; padding: 14px 28px; border-radius: 100px; background: #FFFFFF; border: 1px solid #EAEAEA; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-weight: 700; font-size: 0.95rem; color: #1A1A1A; text-decoration: none; transition: all 0.3s ease; }
+        .ext-review-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-color: var(--color-primary); }
+        .ext-review-btn--google svg { fill: #4285F4; }
+        .ext-review-btn--fb svg { fill: #1877F2; }
+
+        .reviews-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; margin-top: 20px; }
+        .review-card { background: #fff; padding: 28px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #EAEAEA; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; position: relative; }
+        .review-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-color: var(--color-primary); }
+        .review-card__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+        .review-card__user-info { display: flex; align-items: center; gap: 14px; }
+        .review-card__avatar { width: 50px; height: 50px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: #FFEC00; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+        .review-card__avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .review-card__meta { display: flex; flex-direction: column; gap: 2px; }
+        .review-card__name { font-size: 1.1rem; font-weight: 700; color: #1A1A1A; margin: 0; line-height: 1.2; }
+        .review-card__date { font-size: 0.75rem; color: #888; font-weight: 500; }
+        .review-card__stars { color: #FFB400; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 12px; }
+        .review-card__text { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6; flex-grow: 1; }
+
+        .review-card__admin-reply { margin-top: 16px; padding: 14px 16px; background: #F7F9FC; border-left: 3px solid var(--color-primary); border-radius: 0 12px 12px 0; font-size: 0.88rem; }
+        .admin-reply__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+        .admin-reply__author { font-weight: 700; color: #0A0A0A; }
+        .admin-reply__date { font-size: 0.7rem; color: #999; }
+        .admin-reply__text { color: #555; margin: 0; font-style: italic; }
+
+        .review-card.is-hidden { display: none !important; }
+
+        /* ДВУХКОЛОНОЧНЫЙ БЛОК ДЛЯ ФОРМЫ ОТЗЫВА */
+        .review-split-container {
+            background: #FFFFFF;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.08);
+            border: 1px solid #EAEAEA;
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: stretch;
+        }
+        .review-split__image-col {
+            position: relative;
+            background: #111;
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+            overflow: hidden;
+        }
+        .review-split__image-col img.bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.85;
+        }
+        .review-split__overlay-text {
+            position: relative;
+            z-index: 2;
+            color: #FFFFFF;
+            text-align: left;
+        }
+        .review-split__overlay-text h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 800;
+            line-height: 1.25;
+            color: #FFFFFF;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            margin: 0;
+        }
+        .review-split__form-col {
+            padding: 48px 40px;
+        }
+
+        .interactive-stars { display: flex; flex-direction: row-reverse; justify-content: flex-start; gap: 8px; }
         .interactive-stars input { display: none; }
-        .interactive-stars label { cursor: pointer; width: 32px; height: 32px; background-image: url('assets/about/star_rate.png'); background-size: cover; filter: grayscale(100%) opacity(0.4); transition: filter 0.2s ease; }
+        .interactive-stars label { cursor: pointer; width: 28px; height: 28px; background-image: url('assets/about/star_rate.png'); background-size: cover; filter: grayscale(100%) opacity(0.3); transition: filter 0.2s ease; }
         .interactive-stars label:hover, .interactive-stars label:hover ~ label, .interactive-stars input:checked ~ label { filter: grayscale(0%) opacity(1); }
 
-        /* Блог */
         .blog-tz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
         .blog-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .blog-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
@@ -514,29 +728,20 @@ body .os-price-btn:hover {
         .blog-card__content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
         .blog-card__date { font-size: 0.75rem; color: #999; margin-bottom: 8px; }
         .blog-card__title { font-size: 1.125rem; font-weight: 700; margin-bottom: 12px; font-family: var(--font-primary); color: var(--color-dark); }
-        .blog-card__btn { margin-top: auto; align-self: flex-start; background: var(--color-primary); padding: 8px 24px; border-radius: 50px; font-size: 0.875rem; font-weight: 700; color: #0A0A0A; text-decoration: none;}
+        .blog-card__btn { margin-top: auto; align-self: flex-start; background: var(--color-primary); padding: 8px 24px; border-radius: 50px; font-size: 0.875rem; font-weight: 700; color: #0A0A0A; }
         .blog-card__btn:hover { background: var(--color-primary-hover); }
         .blog-card--large .blog-card__content { position: absolute; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); width: 100%; color: #fff; }
         .blog-card--large .blog-card__title { font-size: 1.5rem; color: #fff; }
 
-        /* ТЕЛЕГРАМ ПРОМО */
         .telegram-promo-fullscreen { background: #F7F9FC !important; min-height: auto; padding: 100px 0 !important; }
         .tg-promo-box { background: #FFFFFF !important; border: 1px solid #EAEAEA !important; border-radius: 32px !important; padding: 60px 5% !important; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; box-shadow: 0 20px 50px rgba(0,0,0,0.05) !important; }
         .iphone-frame { width: 320px; height: 650px; background-color: #f0f0f0; border: 14px solid #1c1c1e; border-radius: 50px; box-shadow: 0 30px 60px rgba(0,0,0,0.15), inset 0 0 0 2px #555; position: relative; margin: 0 auto; transform: perspective(1000px) rotateY(-10deg) rotateX(4deg) translateY(10px); transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .tg-promo-box:hover .iphone-frame { transform: perspective(1000px) rotateY(-2deg) rotateX(0deg) translateY(-5px); }
-        .iphone-frame::before { content: ''; position: absolute; left: -18px; top: 120px; width: 4px; height: 30px; background: #1c1c1e; border-radius: 4px 0 0 4px; } 
-        .iphone-frame::after { content: ''; position: absolute; left: -18px; top: 170px; width: 4px; height: 50px; background: #1c1c1e; border-radius: 4px 0 0 4px; } 
-        .iphone-power { position: absolute; right: -18px; top: 140px; width: 4px; height: 60px; background: #1c1c1e; border-radius: 0 4px 4px 0; }
-        .dynamic-island { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 100px; height: 30px; background: #000; border-radius: 20px; z-index: 20; box-shadow: inset 0 -1px 2px rgba(255,255,255,0.2); }
-        .iphone-screen { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #E4ECEF url('assets/hero/hero-cruises.webp') center/cover no-repeat; border-radius: 34px; overflow: hidden; padding: 70px 16px 16px; display: flex; flex-direction: column; gap: 16px; }
-        .iphone-screen::before { content: ''; position: absolute; inset: 0; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); z-index: 0; }
 
-        /* Партнеры */
         .partners-colored-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; margin-top: 40px; }
         .partners-colored-grid img { max-width: 140px; height: auto; max-height: 60px; object-fit: contain; filter: none !important; opacity: 1 !important; transition: transform 0.3s ease; }
         .partners-colored-grid img:hover { transform: scale(1.1); }
 
-        /* Bento Grid */
         .custom-bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 280px); gap: 24px; margin-top: 40px; }
         .custom-bento-item { position: relative; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; text-decoration: none; color: #fff; background-color: var(--color-dark); box-shadow: var(--shadow-sm); }
         .custom-bento-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.7s ease; }
@@ -548,7 +753,6 @@ body .os-price-btn:hover {
         .c-bento-wide { grid-column: span 2; grid-row: span 1; }
         .c-bento-standard { grid-column: span 1; grid-row: span 1; }
 
-        /* Адаптив */
         @media (max-width: 1024px) {
             .lead-split { flex-direction: column; }
             .lead-split__visual, .lead-split__form-wrap { flex: 1 1 100%; width: 100%; }
@@ -558,18 +762,10 @@ body .os-price-btn:hover {
             .tg-promo-box { padding: 40px !important; grid-template-columns: 1fr; text-align: center; gap: 40px; }
             .iphone-frame { transform: rotate(0); margin-top: 40px; }
         }
-        @media (max-width: 768px) {
-            .header__actions .btn, .header__phone { display: none; }
-            .hero-screen__title { font-size: 2.5rem !important; }
-            .hero-socials { display: none; } 
-            .custom-bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-            .c-bento-large, .c-bento-wide, .c-bento-standard { grid-column: span 1; height: 250px; }
-            .blog-tz-grid { grid-template-columns: 1fr; }
-            .blog-card--large { grid-column: span 1; }
-            .diploma-horizontal { grid-column: span 1; } 
-            .leave-review-box { padding: 32px 24px; }
-        }
         @media (max-width: 991px) {
+            .review-split-container { grid-template-columns: 1fr; }
+            .review-split__image-col { min-height: 240px; padding: 24px; }
+            .review-split__form-col { padding: 32px 24px; }
             .header__contacts, .header .btn--solid-yellow { display: none !important; }
             .header__logo img { max-width: 120px !important; }
             .header__actions { gap: 15px; }
@@ -583,9 +779,19 @@ body .os-price-btn:hover {
             .nav__chevron { display: none; }
             .burger { position: relative; z-index: 1000; display: flex; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; }
             .burger__line { width: 30px; height: 2px; background-color: var(--color-dark) !important; transition: all 0.3s ease; }
-            .burger.is-active .burger__line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .burger.is-active .burger__line:nth-child(2) { opacity: 0; }
-            .burger.is-active .burger__line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        }
+        @media (max-width: 768px) {
+            .header__actions .btn, .header__phone { display: none; }
+            .hero-screen__title { font-size: 2.5rem !important; }
+            .hero-socials { display: none; } 
+            .custom-bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .c-bento-large, .c-bento-wide, .c-bento-standard { grid-column: span 1; height: 250px; }
+            .blog-tz-grid { grid-template-columns: 1fr; }
+            .blog-card--large { grid-column: span 1; }
+            .diploma-horizontal { grid-column: span 1; } 
+            .external-reviews-bar { flex-direction: column; width: 100%; }
+            .ext-review-btn { width: 100%; justify-content: center; }
+            .reviews-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -604,131 +810,134 @@ body .os-price-btn:hover {
     </div>
 
     <header class="header js-header" role="banner">
-    <div class="container header__container">
-        <a href="index-ru.html" class="header__logo" aria-label="Главная страница Лимон Туров">
-            <img src="assets/hero/logo1.png" alt="Лимон Туров Турагентство" width="180" height="auto" class="logo-img" onerror="this.src='assets/img/logo.png'">
-        </a>
+        <div class="container header__container">
+            <a href="index-ru.html" class="header__logo" aria-label="Главная страница Лимон Туров">
+                <img src="assets/hero/logo1.png" alt="Лимон Туров Турагентство" width="180" height="auto" class="logo-img" onerror="this.src='assets/img/logo.png'">
+            </a>
 
-        <nav class="header__nav nav" role="navigation" aria-label="Главное меню">
-            <ul class="nav__list">
-                <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
-                    <a href="search-tour-ru.html" class="nav__link">Туры <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-                    <div class="mega-menu" role="menu">
-                        <div class="mega-menu__inner container">
-                            <div class="mega-menu__col">
-                                <h4 class="mega-menu__title">Направления и поиск</h4>
-                                <ul class="mega-menu__list">
-                                    <li role="none"><a href="search-tour-ru.html" class="mega-menu__link" role="menuitem"><span>Поиск тура</span></a></li>
-                                    <li role="none"><a href="hot-tours-ru.html" class="mega-menu__link" role="menuitem"><span>Горящие туры</span></a></li>
-                                    <li role="none"><a href="excursions-ru.html" class="mega-menu__link" role="menuitem"><span>Экскурсионные туры</span></a></li>
-                                    <li role="none"><a href="cruises-ru.html" class="mega-menu__link" role="menuitem"><span>Круизы</span></a></li>
-                                </ul>
+            <nav class="header__nav nav" role="navigation" aria-label="Главное меню">
+                <ul class="nav__list">
+                    <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="search-tour-ru.html" class="nav__link">Туры <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+                        <div class="mega-menu" role="menu">
+                            <div class="mega-menu__inner container">
+                                <div class="mega-menu__col">
+                                    <h4 class="mega-menu__title">Направления и поиск</h4>
+                                    <ul class="mega-menu__list">
+                                        <li role="none"><a href="search-tour-ru.html" class="mega-menu__link" role="menuitem"><span>Поиск тура</span></a></li>
+                                        <li role="none"><a href="hot-tours-ru.html" class="mega-menu__link" role="menuitem"><span>Горящие туры</span></a></li>
+                                        <li role="none"><a href="excursions-ru.html" class="mega-menu__link" role="menuitem"><span>Экскурсионные туры</span></a></li>
+                                        <li role="none"><a href="cruises-ru.html" class="mega-menu__link" role="menuitem"><span>Круизы</span></a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                
-                <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
-                    <a href="#services" class="nav__link">Услуги <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-                    <ul class="dropdown-simple" role="menu">
-                        <li role="none"><a href="hotels-ru.html" role="menuitem">Отели</a></li>
-                        <li role="none"><a href="flights-ru.html" role="menuitem">Авиабилеты</a></li>
-                        
-                    </ul>
-                </li>
-                
-                <li class="nav__item"><a href="about-ru.html" class="nav__link">О компании</a></li>
-                <li class="nav__item"><a href="faq-ru.html" class="nav__link">Частые вопросы</a></li>
-                <li class="nav__item"><a href="contacts-ru.html" class="nav__link">Контакты</a></li>
-            </ul>
-        </nav>
+                    </li>
+                    
+                    <li class="nav__item has-dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#services" class="nav__link">Услуги <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+                        <ul class="dropdown-simple" role="menu">
+                            <li role="none"><a href="hotels-ru.html" role="menuitem">Отели</a></li>
+                            <li role="none"><a href="flights-ru.html" role="menuitem">Авиабилеты</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav__item"><a href="about-ru.html" class="nav__link">О компании</a></li>
+                    <li class="nav__item"><a href="faq-ru.html" class="nav__link">Частые вопросы</a></li>
+                    <li class="nav__item"><a href="contacts-ru.html" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
 
-        <div class="header__actions">
-            <div class="lang-switcher" aria-label="Переключатель языков">
-                <button class="lang-btn" aria-pressed="false">UA</button>
-                <span class="lang-sep"></span>
-                <button class="lang-btn is-active" aria-pressed="true">RU</button>
-            </div>
-            <div class="header__contacts">
-                <span class="header__contacts-hint" style="font-size: 0.75rem; color: #666;">Мы на связи</span>
-                <div class="header__phone-wrapper">
-                    <div class="header__phone-main">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        +38 (099) 533-72-27
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="phone-dropdown">
-                        <a href="tel:+380995337227">+38 (099) 533-72-27</a>
-                        <a href="tel:+380995337447">+38 (099) 533-74-47</a>
+            <div class="header__actions">
+                <div class="lang-switcher" aria-label="Переключатель языков">
+                    <button class="lang-btn" aria-pressed="false" onclick="location.href='index.html'">UA</button>
+                    <span class="lang-sep"></span>
+                    <button class="lang-btn is-active" aria-pressed="true">RU</button>
+                </div>
+                
+                <div class="header__contacts">
+                    <span class="header__contacts-hint" style="font-size: 0.75rem; color: #666;">Мы на связи</span>
+                    <div class="header__phone-wrapper">
+                        <span class="header__phone-main">
+                            <svg class="phone-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            +38 (099) 533-72-27
+                            <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                        </span>
+                        <div class="phone-dropdown">
+                            <a href="tel:+380995337227">+38 (099) 533-72-27</a>
+                            <a href="tel:+380995337447">+38 (099) 533-74-47</a>
+                        </div>
                     </div>
                 </div>
+
+                <button class="btn btn--solid-yellow js-open-modal" aria-label="Открыть форму подбора тура">
+                    <span>Подобрать тур</span>
+                </button>
+                <button class="burger js-burger" aria-label="Открыть мобильное меню" aria-expanded="false">
+                    <span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span>
+                </button>
             </div>
-            <button class="btn btn--solid-yellow js-open-modal" aria-label="Открыть форму подбора тура">
-                <span>Подобрать тур</span>
-            </button>
-            <button class="burger js-burger" aria-label="Открыть мобильное меню" aria-expanded="false">
-                <span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span>
-            </button>
         </div>
-    </div>
-</header>
+    </header>
 
     <main id="main-content" role="main">
-        <!-- HERO-БЛОК (630px) -->
-<section class="hero-screen">
-    <div class="hero-screen__bg">
-        <img src="assets/hero/hero-main.webp" alt="Идеальный отдых" class="hero-screen__img" fetchpriority="high" onerror="this.src='assets/img/luxfoncom_4278.jpg'">
-        <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.6) 100%);"></div>
-    </div>
+        <!-- HERO СЕКЦИЯ -->
+        <section class="hero-screen">
+            <div class="hero-screen__bg">
+                <img src="assets/hero/hero-main.webp" alt="Идеальный отдых" class="hero-screen__img" fetchpriority="high" onerror="this.src='assets/img/luxfoncom_4278.jpg'">
+                <div class="hero-screen__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.6) 100%);"></div>
+            </div>
 
-    <div class="container hero-screen__container">
-        <div class="hero-screen__content text-center">
-            <h1 class="hero-screen__title js-split-text">
-                Поиск туров по всем <br>
-                <span class="text-gradient">туроператорам</span>
-            </h1>
-        </div>
-    </div>
-    
-    <ul class="hero-socials">
+            <div class="container hero-screen__container">
+                <div class="hero-screen__content text-center">
+                    <h1 class="hero-screen__title js-split-text">
+                        Поиск туров по всем <br>
+                        <span class="text-gradient">туроператорам</span>
+                    </h1>
+                </div>
+            </div>
+            
+            <ul class="hero-socials">
                 <li><a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a></li>
                 <li><a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a></li>
                 <li><a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a></li>
                 <li><a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a></li>
             </ul>
-</section>
+        </section>
 
-<!-- ПЛАВАЮЩИЙ МОДУЛЬ ПОИСКА OTPUSK -->
-<section id="search-module-wrapper">
-    <div class="container">
-        <script>
-            var osGeo = ''; 
-            var osDefaultDeparture = 1831; 
-            var osDefaultDuration = ''; 
-            var osDateFrom = ''; 
-            var osDateTo = ''; 
-            var osHotelCategory = ''; 
-            var osFood = ''; 
-            var osTransport = ''; 
-            var osTarget = ''; 
-            var osContainer = null; 
-            var osTourContainer = null; 
-            var osLang = 'ru'; /* Русский язык интерфейса */
-            var osTourTargetBlank = true; 
-            var osOrderUrl = null; 
-            var osCurrencies = ['uah', 'eur']; 
-            var osDefaultCurrency = 'uah'; 
-            var osAutoStart = false; 
-        </script>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=cyrillic" rel="stylesheet">
-        <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/form.css" type="text/css" />
-        <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/result.css" type="text/css" />
-        <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/tour.css" type="text/css" />
-        <script src="https://api.otpusk.com/api/2.4/session?access_token=2c1f4-78bec-0741d-68154-053c8"></script>
-        <script src="https://export.otpusk.com/js/onsite/"></script>
-        <script src="https://export.otpusk.com/js/order"></script>
-    </div>
-</section>
+        <!-- МОДУЛЬ ПОИСКА -->
+        <section id="search-module-wrapper">
+            <div class="container">
+                <div class="search-widget-glass" id="search-module">
+                    <script>
+                        window.osGeo = window.osGeo || ''; 
+                        window.osDefaultDeparture = window.osDefaultDeparture || 1831; 
+                        window.osDefaultDuration = window.osDefaultDuration || ''; 
+                        window.osDateFrom = window.osDateFrom || ''; 
+                        window.osDateTo = window.osDateTo || ''; 
+                        window.osHotelCategory = window.osHotelCategory || ''; 
+                        window.osFood = window.osFood || ''; 
+                        window.osTransport = window.osTransport || ''; 
+                        window.osTarget = window.osTarget || ''; 
+                        window.osContainer = window.osContainer || null; 
+                        window.osTourContainer = window.osTourContainer || null; 
+                        window.osLang = 'ru'; 
+                        window.osTourTargetBlank = true; 
+                        window.osOrderUrl = window.osOrderUrl || null; 
+                        window.osCurrencies = ['uah', 'eur']; 
+                        window.osDefaultCurrency = 'uah'; 
+                        window.osAutoStart = false; 
+                    </script>
+                    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=cyrillic" rel="stylesheet">
+                    <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/form.css" type="text/css" />
+                    <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/result.css" type="text/css" />
+                    <link rel="Stylesheet" href="https://export.otpusk.com/os/onsite/tour.css" type="text/css" />
+                    <script src="https://api.otpusk.com/api/2.4/session?access_token=2c1f4-78bec-0741d-68154-053c8"></script>
+                    <script src="https://export.otpusk.com/js/onsite/"></script>
+                    <script src="https://export.otpusk.com/js/order"></script>
+                </div>
+            </div>
+        </section>
 
         <!-- ПОЧЕМУ ВЫБИРАЮТ НАС -->
         <section class="section features" id="about">
@@ -740,44 +949,32 @@ body .os-price-btn:hover {
 
                 <div class="features-grid">
                     <div class="feature-card js-reveal" style="transition-delay: 0s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        </div>
+                        <div class="feature-card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                         <h3 class="feature-card__title">13 лет в мире туризма</h3>
                         <p class="feature-card__desc">Лично инспектируем отели, тестируем новые направления и постоянно отслеживаем изменения в туристической отрасли.</p>
                     </div>
                     <div class="feature-card js-reveal" style="transition-delay: 0.1s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                        </div>
+                        <div class="feature-card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
                         <h3 class="feature-card__title">Поддержка 24/7</h3>
                         <p class="feature-card__desc">Мы всегда на связи, чтобы помочь вам в любой ситуации — до, во время и после путешествия.</p>
                     </div>
                     <div class="feature-card js-reveal" style="transition-delay: 0.2s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                        </div>
+                        <div class="feature-card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
                         <h3 class="feature-card__title">Гарантия лучшей цены</h3>
                         <p class="feature-card__desc">Сотрудничаем со всеми туроператорами напрямую и знаем секрет, где найти эксклюзивные и самые выгодные условия для вас.</p>
                     </div>
                     <div class="feature-card js-reveal" style="transition-delay: 0.3s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                        </div>
+                        <div class="feature-card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
                         <h3 class="feature-card__title">Официальность и безопасность</h3>
                         <p class="feature-card__desc">Работаем в офисе и онлайн. Подписываем официальный договор и принимаем оплату исключительно на расчетные счета компании.</p>
                     </div>
                     <div class="feature-card js-reveal" style="transition-delay: 0.4s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        </div>
+                        <div class="feature-card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
                         <h3 class="feature-card__title">Индивидуальный подход</h3>
                         <p class="feature-card__desc">Никаких шаблонных решений — только туры, подобранные в соответствии с вашими потребностями, бюджетом и пожеланиями.</p>
                     </div>
                     <div class="feature-card js-reveal" style="transition-delay: 0.5s">
-                        <div class="feature-card__icon-wrap">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                        </div>
+                        <div class="feature-card__icon-wrap"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
                         <h3 class="feature-card__title">Нам доверяют</h3>
                         <p class="feature-card__desc">Наше агентство выбирают из года в год, потому что мы щедро делимся с клиентами вниманием, опытом, эмоциями и знаниями.</p>
                     </div>
@@ -785,7 +982,7 @@ body .os-price-btn:hover {
             </div>
         </section>
 
-        <!-- ГОРЯЩИЕ ТУРЫ (СТАТИЧЕСКАЯ СЕТКА) -->
+        <!-- ГОРЯЩИЕ ТУРЫ (12 КАРТОЧЕК НА РУССКОМ) -->
         <section class="section bg-light" id="hot-tours" aria-labelledby="hot-tours-title">
             <div class="container">
                 <div class="section-header js-reveal d-flex justify-between align-end" style="display: flex; justify-content: space-between; align-items: flex-end;">
@@ -796,8 +993,6 @@ body .os-price-btn:hover {
                 </div>
 
                 <div class="static-hot-grid js-reveal">
-                    
-                    <!-- 1. Турция -->
                     <a href="hot-tours-ru.html" class="hot-card">
                         <img src="https://newimg.otpusk.com/2/320x240/00/03/53/21/3532131.webp" alt="Турция" class="hot-card__bg">
                         <div class="hot-card__header">
@@ -805,7 +1000,7 @@ body .os-price-btn:hover {
                             <div class="hot-card__hotel">Ozkaymak Marina Hotel 5*, <strong>Кемер</strong></div>
                         </div>
                         <div class="hot-card__bottom">
-                            <div class="hot-card__info">31 июл. на 9 ночей / 10 дней, автобус Киев, ультра все включено</div>
+                            <div class="hot-card__info">31 иул. на 9 ночей / 10 дней, автобус Киев, ультра все включено</div>
                             <div class="hot-card__price-box">
                                 <div class="hot-card__price-val">103 228 ₴</div>
                                 <div class="hot-card__price-hint">за двоих</div>
@@ -813,7 +1008,6 @@ body .os-price-btn:hover {
                         </div>
                     </a>
 
-                    <!-- 2. Египет -->
                     <a href="hot-tours-ru.html" class="hot-card">
                         <img src="https://newimg.otpusk.com/2/320x240/00/04/32/82/4328294.webp" alt="Египет" class="hot-card__bg">
                         <div class="hot-card__header">
@@ -821,7 +1015,7 @@ body .os-price-btn:hover {
                             <div class="hot-card__hotel">KaiSol Romance Resort Sahl Hasheesh 5*, <strong>Сахл Хашиш</strong></div>
                         </div>
                         <div class="hot-card__bottom">
-                            <div class="hot-card__info">30 июл. на 7 ночей / 8 дней, авиа Варшава, все включено</div>
+                            <div class="hot-card__info">30 иул. на 7 ночей / 8 дней, авиа Варшава, все включено</div>
                             <div class="hot-card__price-box">
                                 <div class="hot-card__price-val">183 250 ₴</div>
                                 <div class="hot-card__price-hint">за двоих</div>
@@ -829,7 +1023,6 @@ body .os-price-btn:hover {
                         </div>
                     </a>
 
-                    <!-- 3. Болгария -->
                     <a href="hot-tours-ru.html" class="hot-card">
                         <img src="https://newimg.otpusk.com/2/320x240/00/00/78/60/786047.webp" alt="Болгария" class="hot-card__bg">
                         <div class="hot-card__header">
@@ -837,7 +1030,7 @@ body .os-price-btn:hover {
                             <div class="hot-card__hotel">Sol Nessebar Palace Hotel 5*, <strong>Несебр</strong></div>
                         </div>
                         <div class="hot-card__bottom">
-                            <div class="hot-card__info">25 июл. на 8 ночей / 9 дней, автобус Киев, все включено</div>
+                            <div class="hot-card__info">25 иул. на 8 ночей / 9 дней, автобус Киев, все включено</div>
                             <div class="hot-card__price-box">
                                 <div class="hot-card__price-val">142 239 ₴</div>
                                 <div class="hot-card__price-hint">за двоих</div>
@@ -845,7 +1038,6 @@ body .os-price-btn:hover {
                         </div>
                     </a>
 
-                    <!-- 4. Албания -->
                     <a href="hot-tours-ru.html" class="hot-card">
                         <img src="https://newimg.otpusk.com/2/320x240/00/04/26/07/4260704.webp" alt="Албания" class="hot-card__bg">
                         <div class="hot-card__header">
@@ -853,7 +1045,7 @@ body .os-price-btn:hover {
                             <div class="hot-card__hotel">Edina 3*, <strong>Саранда</strong></div>
                         </div>
                         <div class="hot-card__bottom">
-                            <div class="hot-card__info">31 июл. на 12 ночей / 13 дней, автобус Киев, завтраки</div>
+                            <div class="hot-card__info">31 иул. на 12 ночей / 13 дней, автобус Киев, завтраки</div>
                             <div class="hot-card__price-box">
                                 <div class="hot-card__price-val">60 425 ₴</div>
                                 <div class="hot-card__price-hint">за двоих</div>
@@ -861,7 +1053,6 @@ body .os-price-btn:hover {
                         </div>
                     </a>
 
-                    <!-- 5. Греция -->
                     <a href="hot-tours-ru.html" class="hot-card">
                         <img src="https://newimg.otpusk.com/2/320x240/00/04/69/17/4691761.webp" alt="Греция" class="hot-card__bg">
                         <div class="hot-card__header">
@@ -869,7 +1060,7 @@ body .os-price-btn:hover {
                             <div class="hot-card__hotel">Yria Beach Hotel 4*, <strong>о. Крит – Ираклион</strong></div>
                         </div>
                         <div class="hot-card__bottom">
-                            <div class="hot-card__info">22 июл. на 6 ночей / 7 дней, авиа Кишинев, завтраки</div>
+                            <div class="hot-card__info">22 иул. на 6 ночей / 7 дней, авиа Кишинев, завтраки</div>
                             <div class="hot-card__price-box">
                                 <div class="hot-card__price-val">35 332 ₴</div>
                                 <div class="hot-card__price-hint">за одного</div>
@@ -877,7 +1068,6 @@ body .os-price-btn:hover {
                         </div>
                     </a>
 
-                    <!-- 6. Кипр -->
                     <a href="hot-tours-ru.html" class="hot-card">
                         <img src="https://newimg.otpusk.com/2/320x240/00/00/29/25/292503.webp" alt="Кипр" class="hot-card__bg">
                         <div class="hot-card__header">
@@ -885,7 +1075,7 @@ body .os-price-btn:hover {
                             <div class="hot-card__hotel">Radisson Beach Resort 4*, <strong>Ларнака</strong></div>
                         </div>
                         <div class="hot-card__bottom">
-                            <div class="hot-card__info">27 июл. на 6 ночей / 7 дней, авиа Кишинев, завтраки</div>
+                            <div class="hot-card__info">27 иул. на 6 ночей / 7 дней, авиа Кишинев, завтраки</div>
                             <div class="hot-card__price-box">
                                 <div class="hot-card__price-val">73 987 ₴</div>
                                 <div class="hot-card__price-hint">за двоих</div>
@@ -893,7 +1083,6 @@ body .os-price-btn:hover {
                         </div>
                     </a>
 
-                    <!-- 7. Черногория -->
                     <a href="hot-tours-ru.html" class="hot-card">
                         <img src="https://newimg.otpusk.com/2/320x240/00/05/07/71/5077107.webp" alt="Черногория" class="hot-card__bg">
                         <div class="hot-card__header">
@@ -909,7 +1098,6 @@ body .os-price-btn:hover {
                         </div>
                     </a>
 
-                    <!-- 8. Болгария (Дубль) -->
                     <a href="hot-tours-ru.html" class="hot-card">
                         <img src="https://newimg.otpusk.com/2/320x240/00/00/78/60/786047.webp" alt="Болгария" class="hot-card__bg">
                         <div class="hot-card__header">
@@ -917,7 +1105,7 @@ body .os-price-btn:hover {
                             <div class="hot-card__hotel">MPM Astoria 4*, <strong>Солнечный Берег</strong></div>
                         </div>
                         <div class="hot-card__bottom">
-                            <div class="hot-card__info">28 июл. на 7 ночей / 8 дней, автобус Одесса, все включено</div>
+                            <div class="hot-card__info">28 иул. на 7 ночей / 8 дней, автобус Одесса, все включено</div>
                             <div class="hot-card__price-box">
                                 <div class="hot-card__price-val">38 500 ₴</div>
                                 <div class="hot-card__price-hint">за двоих</div>
@@ -925,7 +1113,6 @@ body .os-price-btn:hover {
                         </div>
                     </a>
 
-                    <!-- 9. Турция (Дубль) -->
                     <a href="hot-tours-ru.html" class="hot-card">
                         <img src="https://newimg.otpusk.com/2/320x240/00/03/53/21/3532131.webp" alt="Турция" class="hot-card__bg">
                         <div class="hot-card__header">
@@ -941,7 +1128,6 @@ body .os-price-btn:hover {
                         </div>
                     </a>
 
-                    <!-- 10. Египет (Дубль) -->
                     <a href="hot-tours-ru.html" class="hot-card">
                         <img src="https://newimg.otpusk.com/2/320x240/00/04/32/82/4328294.webp" alt="Египет" class="hot-card__bg">
                         <div class="hot-card__header">
@@ -957,7 +1143,6 @@ body .os-price-btn:hover {
                         </div>
                     </a>
 
-                    <!-- 11. Греция (Дубль) -->
                     <a href="hot-tours-ru.html" class="hot-card">
                         <img src="https://newimg.otpusk.com/2/320x240/00/04/69/17/4691761.webp" alt="Греция" class="hot-card__bg">
                         <div class="hot-card__header">
@@ -973,7 +1158,6 @@ body .os-price-btn:hover {
                         </div>
                     </a>
 
-                    <!-- 12. Черногория (Дубль) -->
                     <a href="hot-tours-ru.html" class="hot-card">
                         <img src="https://newimg.otpusk.com/2/320x240/00/05/07/71/5077107.webp" alt="Черногория" class="hot-card__bg">
                         <div class="hot-card__header">
@@ -988,12 +1172,11 @@ body .os-price-btn:hover {
                             </div>
                         </div>
                     </a>
-
                 </div>
             </div>
         </section>
 
-        <!-- ОТКРЫВАЙТЕ МИР (Bento Grid) -->
+        <!-- BENTO GRID -->
         <section class="section" id="destinations">
             <div class="container">
                 <div class="section-header js-reveal text-center">
@@ -1003,7 +1186,7 @@ body .os-price-btn:hover {
 
                 <div class="custom-bento-grid js-reveal">
                     <a href="hot-tours-ru.html" class="custom-bento-item c-bento-large" aria-label="Греция + Албания">
-                        <img src="assets/hero/hero-hotels.webp" alt="Греция Албанія" class="custom-bento-img" loading="lazy" onerror="this.src='assets/img/5089.jpg'">
+                        <img src="assets/hero/hero-hotels.webp" alt="Греция Албания" class="custom-bento-img" loading="lazy" onerror="this.src='assets/img/5089.jpg'">
                         <div class="custom-bento-content">
                             <h3 class="custom-bento-title">Греция + Албания</h3>
                             <p class="custom-bento-desc">от 530 €</p>
@@ -1036,23 +1219,16 @@ body .os-price-btn:hover {
                 </div>
             </div>
         </section>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-        <!-- LEAD FORM (60/40 Split, Светлая форма) -->
-        <section class="lead-section" id="lead-form-section" style="background-color: var(--color-white);">
+
+        <!-- LEAD FORM -->
+        <section class="lead-section" id="lead-form-section" style="background-color: var(--color-white); padding-top: 60px;">
             <div class="lead-split container" style="padding: 0; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg);">
-                
                 <div class="lead-split__visual">
                     <img src="assets/hero/hero-cars.webp" alt="Отдых" class="lead-split__img" style="opacity: 1;" loading="lazy" onerror="this.src='assets/img/50571182.jpg'">
                     <div class="lead-split__visual-content js-reveal" style="background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); padding: 60px;">
-                        <h2 class="h1" style="line-height: 1.1; color: #fff;">ОДИН КЛИК ДО ВАШЕЙ МЕЧТЫ<br><span style="color: var(--color-primary);">ЗАКАЗЫВАЙТЕ СЕЙЧАС</span></h2>
+                        <h2 class="h1" style="line-height: 1.1; color: #fff;">ОДИН КЛИК К ВАШЕЙ МЕЧТЕ<br><span style="color: var(--color-primary);">ЗАКАЗЫВАЙТЕ СЕЙЧАС</span></h2>
                         <div style="margin-top: 20px; color: #fff; font-family: var(--font-display); font-size: 1.25rem;">
-                            МЕСТО НАЗНАЧЕНИЯ: ПРЕКРАСНОЕ ПУТЕШЕСТВИЕ<br>
+                            МЕСТО НАЗНАЧЕНИЯ: МЕЧТАТЕЛЬНОЕ ПУТЕШЕСТВИЕ<br>
                             ИМЯ ПАССАЖИРА: СЧАСТЛИВЫЙ ПУТЕШЕСТВЕННИК
                         </div>
                     </div>
@@ -1083,17 +1259,14 @@ body .os-price-btn:hover {
                         </div>
 
                         <div class="js-reveal" style="transition-delay: 0.3s; margin-top: 32px;">
-                            <button type="submit" class="btn btn--solid-yellow btn--full">
-                                ОТПРАВИТЬ
-                            </button>
+                            <button type="submit" class="btn btn--solid-yellow btn--full">ОТПРАВИТЬ</button>
                         </div>
                     </form>
                 </div>
-
             </div>
         </section>
 
-        <!-- БЛОГ -->
+        <!-- БЛОГ (5 СТАТЕЙ) -->
         <section class="section" id="blog">
             <div class="container">
                 <div class="section-header text-center js-reveal">
@@ -1101,7 +1274,6 @@ body .os-price-btn:hover {
                 </div>
 
                 <div class="blog-tz-grid js-reveal">
-                    
                     <div class="blog-card blog-card--large">
                         <div style="position: relative; height: 100%;">
                             <img src="assets/hero/hero-main.webp" alt="Барселона" class="blog-card__img" loading="lazy" onerror="this.src='assets/img/107837.jpg'">
@@ -1148,12 +1320,11 @@ body .os-price-btn:hover {
                             <a href="rent-car-ru.html" class="blog-card__btn" style="text-decoration: none; display: inline-block; margin-bottom: 24px;">ПОДРОБНЕЕ</a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- НАГРАДЫ -->
+        <!-- НАГРАДЫ (13 СЕРТИФИКАТОВ) -->
         <section class="section bg-light text-center">
             <div class="container">
                 <div class="section-header js-reveal">
@@ -1162,16 +1333,11 @@ body .os-price-btn:hover {
                 </div>
                 
                 <div class="diplomas-wow-grid js-reveal">
-                    <!-- Вертикальные -->
                     <div class="diploma-card"><img src="assets/diplomas/cert-1.webp" alt="Диплом 1" loading="lazy" onerror="this.src='assets/diplomas/0001-min.jpg'"></div>
                     <div class="diploma-card"><img src="assets/diplomas/cert-2.webp" alt="Диплом 2" loading="lazy" onerror="this.src='assets/diplomas/IMG_0001-min.jpg'"></div>
                     <div class="diploma-card"><img src="assets/diplomas/cert-3.webp" alt="Диплом 3" loading="lazy" onerror="this.src='assets/diplomas/IMG_0002-min.jpg'"></div>
                     <div class="diploma-card"><img src="assets/diplomas/cert-4.webp" alt="Диплом 4" loading="lazy" onerror="this.src='assets/diplomas/IMG_0003-min-1.jpg'"></div>
-                    
-                    <!-- ГОРИЗОНТАЛЬНЫЙ (Растягивается на 2 колонки) -->
                     <div class="diploma-card diploma-horizontal"><img src="assets/diplomas/cert-5.webp" alt="Диплом Горизонтальный" loading="lazy" onerror="this.src='assets/diplomas/0001-2-min.jpg'"></div>
-                    
-                    <!-- Вертикальные -->
                     <div class="diploma-card"><img src="assets/diplomas/cert-6.webp" alt="Диплом 6" loading="lazy" onerror="this.src='assets/diplomas/IMG_0004-min-1.jpg'"></div>
                     <div class="diploma-card"><img src="assets/diplomas/cert-7.webp" alt="Диплом 7" loading="lazy" onerror="this.src='assets/diplomas/IMG_0005-min.jpg'"></div>
                     <div class="diploma-card"><img src="assets/diplomas/cert-8.webp" alt="Диплом 8" loading="lazy" onerror="this.src='assets/diplomas/IMG_0006-min-1.jpg'"></div>
@@ -1179,167 +1345,573 @@ body .os-price-btn:hover {
                     <div class="diploma-card"><img src="assets/diplomas/cert-10.webp" alt="Диплом 10" loading="lazy" onerror="this.src='assets/diplomas/0001-min.jpg'"></div>
                     <div class="diploma-card"><img src="assets/diplomas/cert-11.webp" alt="Диплом 11" loading="lazy" onerror="this.src='assets/diplomas/IMG_0001-min.jpg'"></div>
                     <div class="diploma-card"><img src="assets/diplomas/cert-12.webp" alt="Диплом 12" loading="lazy" onerror="this.src='assets/diplomas/IMG_0002-min.jpg'"></div>
-                    
-                    <!-- ГОРИЗОНТАЛЬНЫЙ (Растягивается на 2 колонки) -->
                     <div class="diploma-card diploma-horizontal"><img src="assets/diplomas/cert-13.webp" alt="Диплом Горизонтальный 2" loading="lazy" onerror="this.src='assets/diplomas/0001-2-min.jpg'"></div>
                 </div>
             </div>
         </section>
 
-        <!-- ОТЗЫВЫ -->
+        <!-- СЕКЦИЯ ОТЗЫВОВ (31 ОТЗЫВ НА РУССКОМ С SUPABASE) -->
         <section class="section text-center" id="reviews">
             <div class="container">
                 <div class="section-header js-reveal">
-                    <h2 class="h2 mb-2">Отзывы</h2>
+                    <span class="badge badge--dark">Репутация</span>
+                    <h2 class="h2 mt-3 mb-2">Отзывы о нашей работе</h2>
                     <p style="color: var(--color-text-muted);">Что о нас говорят путешественники.</p>
-                </div>
-
-                <div class="reviews-container js-reveal text-left" style="text-align: left;">
-    
-                <div class="review-card">
-                    <div class="review-card__header">
-                        <div class="review-card__avatar" style="padding: 0; overflow: hidden; background: transparent;">
-                            <img src="assets/about/ж-min.jpg" alt="Светлана" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                        </div>
-                        <div>
-                            <h4 class="review-card__name">Светлана</h4>
-                            <div class="review-card__stars">★★★★★</div>
-                        </div>
+                    
+                    <div class="external-reviews-bar">
+                        <a href="https://maps.app.goo.gl/Adstb2dExaHsY6is8" target="_blank" class="ext-review-btn ext-review-btn--google" aria-label="Читать отзывы в Google">
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.96.96 6.773 2.613l2.32-2.32C19.213 1.347 16.12 0 12.48 0 5.867 0 0 5.387 0 12s5.867 12 12.48 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+                            <span>Отзывы в Google</span>
+                        </a>
+                        <a href="https://www.facebook.com/limon.turov/reviews" target="_blank" class="ext-review-btn ext-review-btn--fb" aria-label="Читать отзывы в Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            <span>Отзывы в Facebook</span>
+                        </a>
                     </div>
-                    <p class="review-card__text">"Мы обратились впервые в агентство и не знали куда нам поехать. Зашли просто узнать, а вышли уже с путевкой! Все объяснили, все прошло как и обещали. Маршрут без опозданий. Спасибо девочкам, всегда были на связи. Обратимся еще!"</p>
                 </div>
 
-                <div class="review-card">
-                    <div class="review-card__header">
-                        <div class="review-card__avatar" style="padding: 0; overflow: hidden; background: transparent;">
-                            <img src="assets/about/м-min.jpg" alt="Сергей" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                        </div>
-                        <div>
-                            <h4 class="review-card__name">Сергей</h4>
-                            <div class="review-card__stars">★★★★★</div>
-                        </div>
-                    </div>
-                    <p class="review-card__text">"Заказывал здесь тур в Италию. Отдыхом доволен, главное что не было никакого обмана, все что мне обещали, так и было. Персонал вежливый, предложили несколько вариантов. Следующий отпуск планирую тоже с Лимон Туров. Рекомендую!"</p>
-                </div>
-
-                <div class="review-card">
-                    <div class="review-card__header">
-                        <div class="review-card__avatar" style="padding: 0; overflow: hidden; background: transparent;">
-                            <img src="assets/about/p7BlVMDJvxY-min.jpg" alt="Екатерина" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                        </div>
-                        <div>
-                            <h4 class="review-card__name">Екатерина</h4>
-                            <div class="review-card__stars">★★★★★</div>
-                        </div>
-                    </div>
-                    <p class="review-card__text">"Купили путевку в Египет. Отдых очень понравился. Задержек не было, самолет вылетел вовремя. Гид был всегда на связи. Через Лимон туров летали и наши друзья, тоже все было на высоте. Рекомендую всем знакомым!"</p>
-                </div>
-
-                <div class="review-card">
-                    <div class="review-card__header">
-                        <div class="review-card__avatar" style="padding: 0; overflow: hidden; background: transparent;">
-                            <img src="assets/about/MugT4hUBUWI-min.jpg" alt="Марина" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                        </div>
-                        <div>
-                            <h4 class="review-card__name">Марина</h4>
-                            <div class="review-card__stars">★★★★★</div>
-                        </div>
-                    </div>
-                    <p class="review-card__text">"Девочки из Лимон туров — лучшие!!! Фантастически приветливые, профессионалы своего дела! Всегда быстро и качественно подберут именно то, что нужно каждому клиенту. Путешествия с вами — это всегда масса положительных эмоций!"</p>
-                </div>
-
-                <div class="review-card">
-                    <div class="review-card__header">
-                        <div class="review-card__avatar" style="padding: 0; overflow: hidden; background: transparent;">
-                            <img src="assets/about/мм-min.jpg" alt="Олег" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                        </div>
-                        <div>
-                            <h4 class="review-card__name">Олег</h4>
-                            <div class="review-card__stars">★★★★★</div>
-                        </div>
-                    </div>
-                    <p class="review-card__text">"Отпуск удался. Нам подобрали и посоветовали роскошный отель, это была наша первая поездка. Если у нас возникали вопросы, мы связывались с менеджером — никаких проблем. Спасибо за теплую атмосферу!"</p>
-                </div>
-
-                <div class="review-card">
-                    <div class="review-card__header">
-                        <div class="review-card__avatar" style="padding: 0; overflow: hidden; background: transparent;">
-                            <img src="assets/about/жж-min.jpg" alt="Наталья" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                        </div>
-                        <div>
-                            <h4 class="review-card__name">Наталья</h4>
-                            <div class="review-card__stars">★★★★★</div>
-                        </div>
-                    </div>
-                    <p class="review-card__text">"В третий раз пользуюсь услугами Лимон туров. Нет ни одного замечания к организации нашего отдыха. Отдых прошел на УРА. Никаких задержек и накладок. Девочки, спасибо вам большое, что учли все наши пожелания!"</p>
-                </div>
-            </div>
-
-                <!-- Форма отправки отзыва -->
-                <div class="leave-review-box js-reveal text-left" style="text-align: left;">
-                    <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
-                        
-                        <div style="flex: 1 1 300px;">
-                            <h3 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: 16px; color: #fff;">Оставьте свой отзыв</h3>
-                            <p style="color: #CCC; margin-bottom: 24px;">Ваше мнение делает нас лучше! Расскажите другим путешественникам о своем опыте с «Лимон Туров».</p>
-                            
-                            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                                <a href="https://www.google.com/search?q=%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD+%D1%82%D1%83%D1%80%D0%BE%D0%B2" target="_blank" style="display: inline-flex; align-items: center; background: #fff; color: #333; padding: 10px 20px; border-radius: 50px; font-weight: 700; text-decoration: none;">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#EA4335" style="margin-right: 8px;"><path d="M21.35 11.1H12.18V13.83H18.69C18.36 17.64 15.19 19.27 12.19 19.27C8.36 19.27 5 16.25 5 12C5 7.9 8.2 4.73 12.2 4.73C15.29 4.73 17.1 6.7 17.1 6.7L19 4.72S16.12 1.98 12.18 1.98C6.63 1.98 1.34 6.42 1.34 12C1.34 17.7 6.82 22 12.18 22C17.9 22 22.18 17.83 22.18 12.18C22.18 11.73 22.1 11.1 22.1 11.1H21.35Z"/></svg>
-                                    Google Отзыв
-                                </a>
-                                <a href="https://www.facebook.com/limon.turov/" target="_blank" style="display: inline-flex; align-items: center; background: #1877F2; color: #fff; padding: 10px 20px; border-radius: 50px; font-weight: 700; text-decoration: none;">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
-                                    Facebook Отзыв
-                                </a>
+                <div class="reviews-container js-reveal text-left" id="reviews-list">
+                    <!-- 1. Светлана -->
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="assets/about/ж-min.jpg" alt="Светлана" onerror="this.src='https://ui-avatars.com/api/?name=Светлана&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Светлана</h4>
+                                    <span class="review-card__date">14.10.2023 at 11:20</span>
+                                </div>
                             </div>
                         </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Обратились впервые в агентство и не знали куда нам поехать. Зашли просто узнать, а вышли уже с путевкой! Все объяснили, все прошло как и обещали. Спасибо девочкам, всегда были на связи. Обратимся еще!"</p>
+                    </div>
 
-                        <div style="flex: 1 1 400px; background: rgba(255,255,255,0.05); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
-                            <form class="custom-form js-form" id="site-review-form" style="max-width: 100%;">
-                                
-                                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 24px;">
-                                    <span style="color: #fff; font-weight: 600;">Ваша оценка:</span>
-                                    <div class="interactive-stars">
-                                        <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
-                                        <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
-                                        <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
-                                        <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
-                                        <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
-                                    </div>
+                    <!-- 2. Сергей -->
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="assets/about/м-min.jpg" alt="Сергей" onerror="this.src='https://ui-avatars.com/api/?name=Сергей&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Сергей</h4>
+                                    <span class="review-card__date">18.08.2023 at 16:45</span>
                                 </div>
-
-                                <div class="cf-group">
-                                    <input type="text" id="rv-name" class="cf-input" required placeholder=" " style="color: #fff !important; border-bottom-color: rgba(255,255,255,0.2) !important;">
-                                    <label for="rv-name" class="cf-label" style="color: #999 !important;">Ваше имя *</label>
-                                    <span class="cf-line" style="background: var(--color-primary) !important;"></span>
-                                </div>
-                                <div class="cf-group">
-                                    <input type="email" id="rv-email" class="cf-input" required placeholder=" " style="color: #fff !important; border-bottom-color: rgba(255,255,255,0.2) !important;">
-                                    <label for="rv-email" class="cf-label" style="color: #999 !important;">Email (не публикуется) *</label>
-                                    <span class="cf-line" style="background: var(--color-primary) !important;"></span>
-                                </div>
-
-                                <div class="cf-group">
-                                    <textarea id="rv-text" class="cf-input cf-textarea" rows="3" required placeholder=" " style="color: #fff !important; border-bottom-color: rgba(255,255,255,0.2) !important;"></textarea>
-                                    <label for="rv-text" class="cf-label" style="color: #999 !important;">Текст отзыва *</label>
-                                    <span class="cf-line" style="background: var(--color-primary) !important;"></span>
-                                </div>
-                                
-                                <button type="submit" class="btn btn--solid-yellow btn--full" style="height: 48px; border-radius: 8px;">Опубликовать отзыв</button>
-                            </form>
+                            </div>
                         </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Заказывал здесь тур в Италию. Отдыхом доволен, главное что не было никакого обмана, все что мне обещали, так и было. Персонал вежливый, предложили несколько вариантов. Следующий отпуск планирую тоже с Лимон Туров. Рекомендую!"</p>
+                    </div>
+
+                    <!-- 3. Екатерина -->
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="assets/about/p7BlVMDJvxY-min.jpg" alt="Екатерина" onerror="this.src='https://ui-avatars.com/api/?name=Екатерина&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Екатерина</h4>
+                                    <span class="review-card__date">02.06.2023 at 09:15</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Купили путевку в Египет. Отдых очень понравился. Задержек не было, самолет вылетел вовремя. Гид был всегда на связи. Через Лимон Туров летали и наши друзья, тоже все было на высоте. Рекомендую всем!"</p>
+                    </div>
+
+                    <!-- 4. Марина -->
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="assets/about/MugT4hUBUWI-min.jpg" alt="Марина" onerror="this.src='https://ui-avatars.com/api/?name=Марина&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Марина</h4>
+                                    <span class="review-card__date">21.01.2023 at 14:02</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Девочки из Лимон Туров — лучшие!!! Невероятно приветливые, профессионалы своего дела! Всегда быстро и качественно подберут именно то, что нужно каждому клиенту. Путешествия с вами — это всегда масса позитивных эмоций!"</p>
+                    </div>
+
+                    <!-- 5. Олег -->
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="assets/about/мм-min.jpg" alt="Олег" onerror="this.src='https://ui-avatars.com/api/?name=Олег&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Олег</h4>
+                                    <span class="review-card__date">11.09.2022 at 18:30</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Отпуск удался. Нам подобрали и посоветовали шикарный отель, это была наша первая поездка. Если возникали вопросы, мы связывались с менеджером — никаких проблем. Спасибо за теплую атмосферу!"</p>
+                    </div>
+
+                    <!-- 6. Наталья -->
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="assets/about/жж-min.jpg" alt="Наталья" onerror="this.src='https://ui-avatars.com/api/?name=Наталья&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Наталья</h4>
+                                    <span class="review-card__date">04.07.2022 at 12:10</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"В третий раз пользуюсь услугами Лимон Туров. Ни одного замечания к организации нашего отдыха. Отпуск прошел на УРА. Никаких задержек и накладок. Девочки, спасибо вам огромное!"</p>
+                    </div>
+
+                    <!-- 7. Елена -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80" alt="Елена" onerror="this.src='https://ui-avatars.com/api/?name=Елена&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Елена</h4>
+                                    <span class="review-card__date">05.11.2018 at 15:41</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Отдыхать ездили в Египет. Очень переживали, так как это был наш первый отдых за границей с детьми. Девочки в агентстве молодцы! Все рассказали, все плюсы и минусы. Перелет прошел удачно. Отдых супер!!!"</p>
+                        <div class="review-card__admin-reply">
+                            <div class="admin-reply__header">
+                                <span class="admin-reply__author">Lt_admin</span>
+                                <span class="admin-reply__date">30.11.2018 at 15:28</span>
+                            </div>
+                            <p class="admin-reply__text">Спасибо за ваш отзыв! Заходите в гости)))</p>
+                        </div>
+                    </div>
+
+                    <!-- 8. Инна -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Инна" onerror="this.src='https://ui-avatars.com/api/?name=Инна&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Инна</h4>
+                                    <span class="review-card__date">30.11.2018 at 15:21</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Покупали в Лимон туров тур в Египет. Все очень понравилось. Девочки посоветовали классный отель (Султан гарденс). Отдых удался. Очень-очень рекомендую Лимон туров!"</p>
+                        <div class="review-card__admin-reply">
+                            <div class="admin-reply__header">
+                                <span class="admin-reply__author">Lt_admin</span>
+                                <span class="admin-reply__date">30.11.2018 at 15:29</span>
+                            </div>
+                            <p class="admin-reply__text">Спасибо, Инна! С вами приятно было работать))</p>
+                        </div>
+                    </div>
+
+                    <!-- 9. Любовь -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=120&q=80" alt="Любовь" onerror="this.src='https://ui-avatars.com/api/?name=Любовь&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Любовь</h4>
+                                    <span class="review-card__date">02.12.2018 at 12:55</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Мы, две пенсионерки, решили посмотреть мир. Обратились в фирму "Лимон туров". Менеджер Алина посоветовала нам тур "Пражское дежавю + Вена", рассказала что брать с собой. Тур был замечательный. Искренне благодарим за отлично проведенное время."</p>
+                    </div>
+
+                    <!-- 10. Ольга -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=120&q=80" alt="Ольга" onerror="this.src='https://ui-avatars.com/api/?name=Ольга&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Ольга</h4>
+                                    <span class="review-card__date">03.01.2019 at 17:07</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Отдыхали впервые за границей. По рекомендации Лимон туров отдыхали в отеле Sultan Gardens. Отель оправдал все наши ожидания. Море и рыбки изумительные. Питание шикарное. Спасибо большое за хорошо организованный отдых."</p>
+                    </div>
+
+                    <!-- 11. Валентина -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&q=80" alt="Валентина" onerror="this.src='https://ui-avatars.com/api/?name=Валентина&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Валентина</h4>
+                                    <span class="review-card__date">17.01.2019 at 12:22</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Обратились в Лимон Туров по рекомендации друзей и ни разу не пожалели! Так как на отдых летели впервые, было много страхов. Но девочки доступно все рассказали, отель подобрали отличный. Всем рекомендую!"</p>
+                    </div>
+
+                    <!-- 12. Анатолий -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Анатолий" onerror="this.src='https://ui-avatars.com/api/?name=Анатолий&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Анатолий</h4>
+                                    <span class="review-card__date">11.02.2019 at 17:57</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Хотелось бы поблагодарить девочек из Лимон туров за отлично организованный отдых в Египте. Были в отеле Reef Oasis Blue Bay Resort 5*, очень понравилось. Теперь хотим в Турцию! За путевками только к вам!"</p>
+                    </div>
+
+                    <!-- 13. Александр -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80" alt="Александр" onerror="this.src='https://ui-avatars.com/api/?name=Александр&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Александр</h4>
+                                    <span class="review-card__date">13.02.2019 at 18:12</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Покупали путевку в Египет. Все супер. Подобрали именно то, что мы хотели. Всем рекомендую!"</p>
+                    </div>
+
+                    <!-- 14. Сергей -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&q=80" alt="Сергей" onerror="this.src='https://ui-avatars.com/api/?name=Сергей&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Сергей</h4>
+                                    <span class="review-card__date">14.02.2019 at 12:09</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Ездили уже несколько раз от Лимон туров. Всегда все на высшем уровне. Все пожелания учтут. Отправляют только в проверенные отели. Обязательно еще сюда обратимся!"</p>
+                    </div>
+
+                    <!-- 15. Валюша -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80" alt="Валюша" onerror="this.src='https://ui-avatars.com/api/?name=Валюша&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Валюша</h4>
+                                    <span class="review-card__date">19.02.2019 at 13:06</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Девочки из 'Лимон туров' огромное вам спасибо за очередной отлично организованный отдых! Четыре раза летала в Египет с вашей помощью и все проходило на ура)"</p>
+                    </div>
+
+                    <!-- 16. Надежда -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=120&q=80" alt="Надежда" onerror="this.src='https://ui-avatars.com/api/?name=Надежда&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Надежда</h4>
+                                    <span class="review-card__date">08.03.2019 at 14:03</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Мы с мужем отдыхали в Сирен Гранд Отеле в феврале. Нам все очень понравилось. Особенно поразила красивая каскадная территория с множеством бассейнов. Ставлю оценку 9 из 10."</p>
+                    </div>
+
+                    <!-- 17. Любовь -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=120&q=80" alt="Любовь" onerror="this.src='https://ui-avatars.com/api/?name=Любовь&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Любовь</h4>
+                                    <span class="review-card__date">15.03.2019 at 14:21</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Здравствуйте! Хочу выразить огромную благодарность девочкам из турагентства за организацию нашего отдыха в Египте. Это было незабываемо. Классный отель, отличный сервис. Обязательно снова придем к вам!"</p>
+                    </div>
+
+                    <!-- 18. Анна -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=120&q=80" alt="Анна" onerror="this.src='https://ui-avatars.com/api/?name=Анна&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Анна</h4>
+                                    <span class="review-card__date">22.03.2019 at 16:42</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Отдыхали в Египте, все очень понравилось. Спасибо Лимон туров, девочки молодцы, посоветовали и подобрали по всем желаниям."</p>
+                    </div>
+
+                    <!-- 19. Анна -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=120&q=80" alt="Анна" onerror="this.src='https://ui-avatars.com/api/?name=Анна&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Анна</h4>
+                                    <span class="review-card__date">19.04.2019 at 23:01</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Отдыхали в Египте, просто супер. Девочки просто молодцы, подобрали нам все, что мы хотели. Очень подробно рассказали, объяснили. Придем еще обязательно."</p>
+                    </div>
+
+                    <!-- 20. Марина -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=120&q=80" alt="Марина" onerror="this.src='https://ui-avatars.com/api/?name=Марина&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Марина</h4>
+                                    <span class="review-card__date">25.04.2019 at 17:03</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Прекрасный отдых с прекрасным агентством! За границу летаем часто, раньше пользовались услугами других агентств, но полетев как-то с Лимон туров, уже ни на кого вас не променяем!"</p>
+                    </div>
+
+                    <!-- 21. Виктория -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=120&q=80" alt="Виктория" onerror="this.src='https://ui-avatars.com/api/?name=Виктория&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Виктория</h4>
+                                    <span class="review-card__date">05.05.2019 at 10:22</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Хотим сказать вам большое спасибо, нам очень понравилась поездка, только мало 🙁 в следующий раз будем знать, что в Египет как минимум дней на 12 нужно ехать)) Отель замечательный был. Успехов вам! 🤑"</p>
+                    </div>
+
+                    <!-- 22. Валерия -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=120&q=80" alt="Валерия" onerror="this.src='https://ui-avatars.com/api/?name=Валерия&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Валерия</h4>
+                                    <span class="review-card__date">08.05.2019 at 17:30</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Летали в Египет, девочки в агентстве приветливые и знают свое дело. Все доступно объяснили и подсказали. Это был наш первый полет за границу, спасибо за компетентность, все на высоте. Придем еще)"</p>
+                    </div>
+
+                    <!-- 23. Ирина Анисимова -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=120&q=80" alt="Ирина Анисимова" onerror="this.src='https://ui-avatars.com/api/?name=Ирина+Анисимова&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Ирина Анисимова</h4>
+                                    <span class="review-card__date">04.06.2019 at 15:30</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Очень благодарна замечательному коллективу профессионалов турагентства «Лимон туров» под руководством Надежды Дубовской. Уже не в первый раз девочки организовывают нам отдых в Турции. Все было отлично!"</p>
+                    </div>
+
+                    <!-- 24. Юлия -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Юлия" onerror="this.src='https://ui-avatars.com/api/?name=Юлия&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Юлия</h4>
+                                    <span class="review-card__date">10.06.2019 at 10:32</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Спасибо за отличный отдых девочкам турагентства 'Лимон туров'! Сделали предложение, от которого невозможно отказаться! Учли все пожелания и нюансы. Обязательно вернемся за новым путешествием!"</p>
+                    </div>
+
+                    <!-- 25. Антон Городецкий -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=120&q=80" alt="Антон" onerror="this.src='https://ui-avatars.com/api/?name=Антон+Городецкий&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Антон Городецкий</h4>
+                                    <span class="review-card__date">12.06.2019 at 13:57</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Спасибо! Отдых супер! Вылетели без задержек, все вовремя. Отель бомба! Отдыхали в Турции, Утопия 5*. Смело могу рекомендовать всем, кто сомневается в выборе турфирмы!"</p>
+                    </div>
+
+                    <!-- 26. Татьяна Лисютина -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=120&q=80" alt="Татьяна" onerror="this.src='https://ui-avatars.com/api/?name=Татьяна+Лисютина&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Татьяна Лисютина</h4>
+                                    <span class="review-card__date">22.06.2019 at 11:54</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Спасибо компании ЛИМОН ТУРОВ, подарившей незабываемые впечатления от фантастического отдыха. Приятный, вежливый, молодой, энергичный, профессиональный коллектив. ЛИМОН ТУРОВ стали для меня Знаком Качества!"</p>
+                    </div>
+
+                    <!-- 27. Оксана -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=120&q=80" alt="Оксана" onerror="this.src='https://ui-avatars.com/api/?name=Оксана&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Оксана</h4>
+                                    <span class="review-card__date">14.07.2019 at 10:54</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Только вернулись из Турции (Мармарис). Хороший вариант за свои деньги. Спасибо девочкам, подобрали отель по нашему запросу! Учли все пожелания! Обязательно к вам обратимся снова!)"</p>
+                    </div>
+
+                    <!-- 28. Anonymous -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Anonymous" onerror="this.src='https://ui-avatars.com/api/?name=Anonymous&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Anonymous</h4>
+                                    <span class="review-card__date">21.10.2019 at 13:27</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Были в Турции в Dosinia Luxury Resort 5* (Кемер). Очень понравился отдых, отель и сервис. Спасибо большое девочкам за организацию и подбор тура, полностью учли все наши пожелания."</p>
+                    </div>
+
+                    <!-- 29. Оксана -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=120&q=80" alt="Оксана" onerror="this.src='https://ui-avatars.com/api/?name=Оксана&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Оксана</h4>
+                                    <span class="review-card__date">13.11.2019 at 14:21</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Отдыхали в Египте в октябре. Немного волновались, так как летели впервые. Обратились в 'Лимон Туров', девочки очень приветливые, отдельная благодарность менеджеру Алине — все рассказала и подсказала все тонкости."</p>
+                    </div>
+
+                    <!-- 30. Татьяна -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=format&fit=crop&w=120&q=80" alt="Татьяна" onerror="this.src='https://ui-avatars.com/api/?name=Татьяна&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Татьяна</h4>
+                                    <span class="review-card__date">13.12.2019 at 21:47</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Собираясь в путешествие впервые, мы обошли много турагентств нашего города и остановили свой выбор на турагентстве Лимон туров, чему очень рады. Посоветовали отличный отель в Шарм-Эль-Шейхе. Отдых прошел сказочно!!!"</p>
+                    </div>
+
+                    <!-- 31. Галина Нестерова -->
+                    <div class="review-card is-hidden">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar"><img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=120&q=80" alt="Галина Нестерова" onerror="this.src='https://ui-avatars.com/api/?name=Галина+Нестерова&background=FFEC00&color=1A1A1A'"></div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">Галина Нестерова</h4>
+                                    <span class="review-card__date">13.01.2020 at 12:39</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">"Юбилей мужа решили отметить в Египте. По совету друзей обратились в агентство Лимон туров. И очень этому рады. Приятный, вежливый, молодой коллектив. Девочки менеджеры профессионалы своего дела!"</p>
                     </div>
                 </div>
 
+                <!-- КНОПКА ПОКАЗАТЬ / СВЕРНУТЬ -->
+                <div style="margin-top: 36px;" class="text-center">
+                    <button type="button" id="toggle-reviews-btn" class="btn btn--outline-dark" style="border-radius: 100px; padding: 0 36px; height: 50px; font-size: 0.95rem;">
+                        <span>Показать все отзывы</span>
+                    </button>
+                </div>
+
+                <!-- ДВУХКОЛОНОЧНЫЙ БЛОК: СЛЕВА ФОТО + ТЕКСТ, СПРАВА ФОРМА -->
+                <div class="review-split-container js-reveal text-left" id="site-review-form-block">
+                    <div class="review-split__image-col">
+                        <img src="assets/about/reviews.jpg" alt="Девушка с паспортом" class="bg-img" onerror="this.src='https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1000&q=80'">
+                        <div class="review-split__overlay-text">
+                            <h2>Что о нас говорят наши клиенты?</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="review-split__form-col">
+                        <h3 style="font-family: var(--font-display); font-size: 1.8rem; color: var(--color-dark); margin-bottom: 8px;">Оставить отзыв</h3>
+                        <p style="color: #666; font-size: 0.95rem; margin-bottom: 24px;">Заполните форму ниже, чтобы опубликовать ваш отзыв на сайте.</p>
+                        
+                        <form class="custom-form js-form" id="site-review-form" style="max-width: 100%;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; background: #F7F9FC; padding: 12px 18px; border-radius: 12px; border: 1px solid #EAEAEA;">
+                                <span style="color: var(--color-dark); font-weight: 700; font-size: 0.9rem;">Ваша оценка:</span>
+                                <div class="interactive-stars">
+                                    <input type="radio" id="star5" name="rating" value="5" checked><label for="star5"></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+                                </div>
+                            </div>
+
+                            <div class="cf-group" style="margin-bottom: 18px;">
+                                <input type="text" id="rv-name" name="Name" class="cf-input" required placeholder=" ">
+                                <label for="rv-name" class="cf-label">Ваше имя *</label>
+                                <span class="cf-line"></span>
+                            </div>
+
+                            <div class="cf-group" style="margin-bottom: 18px;">
+                                <input type="email" id="rv-email" name="Email" class="cf-input" required placeholder=" ">
+                                <label for="rv-email" class="cf-label">Email (не публикуется) *</label>
+                                <span class="cf-line"></span>
+                            </div>
+
+                            <div class="cf-group" style="margin-bottom: 24px;">
+                                <textarea id="rv-text" name="Review" class="cf-input cf-textarea" rows="3" required placeholder=" "></textarea>
+                                <label for="rv-text" class="cf-label">Текст отзыва *</label>
+                                <span class="cf-line"></span>
+                            </div>
+                            
+                            <button type="submit" class="btn btn--solid-yellow" style="padding: 0 36px; height: 50px; border-radius: 100px; width: 100%;">Опубликовать отзыв</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- ТЕЛЕГРАМ ПРОМО (IPHONE) -->
+        <!-- TELEGRAM PROMO -->
         <section class="section telegram-promo telegram-promo-fullscreen">
             <div class="container" style="height: 100%;">
                 <div class="tg-promo-box js-reveal">
-                    
                     <div class="tg-promo-box__content">
                         <h2 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 24px; color: #1A1A1A;">
                             Хотите получать лучшие подборки туров каждый день?
@@ -1361,16 +1933,247 @@ body .os-price-btn:hover {
                         </style>
                         
                         <div class="iphone-frame no-blur" aria-hidden="true" style="position: relative; overflow: hidden; padding: 0 !important; background: #000 !important; box-sizing: border-box !important;">
-                            
                             <div class="dynamic-island" style="position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 100px; height: 28px; background: #000 !important; border-radius: 20px; z-index: 10; box-shadow: none !important; border: none !important;"></div>
                             
                             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5;">
                                 <img src="assets/about/phone.jpg" alt="Telegram Лимон Туров" style="width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: top center !important; display: block !important; border-radius: inherit !important;">
                             </div>
-                            
                         </div>
                     </div>
-                    
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ (15 ПОЛНЫХ ПУНКТОВ АККОРДЕОНА) -->
+        <section class="section faq-section bg-light" id="faq" aria-labelledby="faq-title">
+            <div class="container max-w-800">
+                <div class="section-header text-center js-reveal">
+                    <h2 class="h2" id="faq-title">Полезная информация и советы</h2>
+                    <div class="divider"></div>
+                </div>
+                
+                <div class="accordion js-accordion js-reveal mt-5">
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-1" id="faq-header-1">
+                            <span class="accordion__title">✈️ Задержка или отмена рейса и права пассажиров</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-1" role="region" aria-labelledby="faq-header-1">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Регулярные и чартерные рейсы в Украине регулируются Воздушным кодексом. Что положено пассажиру?</p>
+                                <h5 style="color: var(--color-dark); margin-top: 12px; margin-bottom: 8px;">Регулярные рейсы:</h5>
+                                <ul class="faq-inner-list" style="color: var(--color-text-muted); padding-left: 20px;">
+                                    <li style="margin-bottom: 8px;"><strong>Задержка на 2 часа:</strong> прохладительные напитки.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Задержка на 4 часа:</strong> перекус (бутерброд/сэндвич) и напитки.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Задержка на 6 часов:</strong> горячее питание.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Задержка на ночь:</strong> отель, питание и трансфер за счет авиакомпании.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Более 5 часов:</strong> право на возврат полной стоимости билета или замена маршрута. В случае отмены рейса без предупреждения также предусмотрена финансовая компенсация (от 250 до 600 евро в зависимости от дальности).</li>
+                                </ul>
+                                <h5 style="color: var(--color-dark); margin-top: 16px; margin-bottom: 8px;">Чартерные рейсы:</h5>
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Билеты на чартерные рейсы предусматривают ограниченные права. Турист не может перенести или аннулировать билет. Заказчик чартера имеет право изменить время и дату вылета такого рейса.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-2" id="faq-header-2">
+                            <span class="accordion__title">💸 Компенсация за тур в случае задержки рейса</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-2" role="region" aria-labelledby="faq-header-2">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Что делать, если вы потеряли время отдыха на курорте из-за задержки вылета? В туризме счет отдыха идет по <strong>ночам/суткам</strong> (с 14:00 до 12:00 следующего дня), а не по часам.</p>
+                                <p style="color: var(--color-text-muted); line-height: 1.6; margin-top: 12px;">Компенсация предусмотрена только в случае, если вы провели в отеле <strong>на 1 ночь меньше</strong> (возврат средств за неиспользованную ночь). Если вы заехали в отель в 2 часа ночи вместо 20:00 — компенсация не предусмотрена, так как вы пользуетесь номером в эти сутки. Если вы должны были заселиться вчера в 14:00, а прилетели сегодня в 15:00 — компенсация положена!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-3" id="faq-header-3">
+                            <span class="accordion__title">❌ Что делать, если путевку отменили?</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-3" role="region" aria-labelledby="faq-header-3">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Тур могут отменить из-за невозможности авиаперевозки или отмены брони отеля. В таком случае туристу предлагают:</p>
+                                <ol style="color: var(--color-text-muted); line-height: 1.6; padding-left: 20px; margin-top: 12px;">
+                                    <li style="margin-bottom: 8px;">Перенести тур с исходными параметрами на другую дату или другой аэропорт вылета.</li>
+                                    <li style="margin-bottom: 8px;">Перебронировать путевку на тур с новыми параметрами (другая страна, отель).</li>
+                                    <li style="margin-bottom: 8px;">Запросить возможность аннулировать путевку без штрафа и вернуть деньги.</li>
+                                </ol>
+                                <p style="color: var(--color-text-muted); line-height: 1.6; margin-top: 12px;">Все детали согласовываются индивидуально в вашем турагентстве.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-4" id="faq-header-4">
+                            <span class="accordion__title">Passport Чем отличается биометрический паспорт от обычного?</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-4" role="region" aria-labelledby="faq-header-4">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Визуально биометрический паспорт выглядит так же: синяя обложка и 32 страницы. Главное отличие — наличие <strong>встроенного чипа</strong>, на котором хранится информация о владельце.</p>
+                                <p style="color: var(--color-text-muted); line-height: 1.6; margin-top: 12px;">Внешнее отличие — специальный международный значок биометрического документа на обложке (прямоугольник с кружком посередине).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-5" id="faq-header-5">
+                            <span class="accordion__title">🌍 В какие страны можно поехать по биометрическому паспорту?</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-5" role="region" aria-labelledby="faq-header-5">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Граждане Украины с биометрическим паспортом могут путешествовать без визы в более чем 190 стран мира, включая страны Шенгенской зоны. Вот основной перечень стран Европы и популярных курортов:</p>
+                                <ul style="column-count: 2; column-gap: 20px; color: var(--color-text-muted); padding-left: 20px; margin-top: 12px; font-size: 0.95rem;">
+                                    <li>Австрия</li><li>Албания</li><li>Бельгия</li><li>Болгария</li><li>Греция</li><li>Грузия</li><li>Доминиканская Республика</li><li>Египет (по прибытию)</li><li>Испания</li><li>Италия</li><li>Кипр</li><li>Мальдивы</li><li>Нидерланды</li><li>Германия</li><li>ОАЭ</li><li>Польша</li><li>Португалия</li><li>Турция</li><li>Франция</li><li>Хорватия</li><li>Черногория</li>
+                                </ul>
+                                <p style="color: var(--color-text-muted); line-height: 1.6; font-size: 0.85rem; margin-top: 12px;">*Детальные условия въезда могут меняться, уточняйте информацию у менеджера перед поездкой.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-6" id="faq-header-6">
+                            <span class="accordion__title">🚁 В какие страны можно брать квадрокоптер (дрон)?</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-6" role="region" aria-labelledby="faq-header-6">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Некоторые страны строго запрещают ввоз дронов. Краткий гайд:</p>
+                                <ul class="faq-inner-list" style="color: var(--color-text-muted); padding-left: 20px;">
+                                    <li style="margin-bottom: 8px;"><strong>Доминикана, Греция, Хорватия, Черногория, Болгария:</strong> Можно.</li>
+                                    <li style="margin-bottom: 8px;"><strong>ОАЭ:</strong> Можно, но нужна регистрация. Летать только в разрешенных зонах.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Египет, Турция, Ватикан:</strong> КАТЕГОРИЧЕСКИ НЕЛЬЗЯ.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Таиланд:</strong> Можно, но необходимо зарегистрировать в полиции.</li>
+                                    <li style="margin-bottom: 8px;"><strong>Испания:</strong> Можно, но нужна лицензия и страховка.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-7" id="faq-header-7">
+                            <span class="accordion__title">🔥 Что такое Акция Раннего бронирования?</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-7" role="region" aria-labelledby="faq-header-7">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Туроператоры за полгода до начала сезона открывают «Раннее бронирование» со скидками <strong>от 20% до 50%</strong> на проживание в отеле.</p>
+                                <p style="color: var(--color-text-muted); line-height: 1.6; margin-top: 12px;"><strong>Преимущества:</strong><br>1. Лучшие отели еще не «в стопе».<br>2. Экономия составляет в среднем 300-500 долларов на туре.<br>3. Оплата частями.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-8" id="faq-header-8">
+                            <span class="accordion__title">🪪 В какие страны можно полететь без загранпаспорта?</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-8" role="region" aria-labelledby="faq-header-8">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">В настоящее время граждане Украины могут посещать <strong>Турцию</strong> и <strong>Грузию</strong> имея при себе лишь внутренний биометрический паспорт в виде пластиковой <strong>ID-карты</strong>. Оформлять загранпаспорт для этих стран не обязательно.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-9" id="faq-header-9">
+                            <span class="accordion__title">📄 Что такое ваучер для поселения в отель?</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-9" role="region" aria-labelledby="faq-header-9">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Ваучер — это документ, который подтверждает вашу бронь в отеле, трансфер и выбранный тип питания. Он выдается в трех экземплярах:</p>
+                                <ul class="faq-inner-list" style="color: var(--color-text-muted); padding-left: 20px;">
+                                    <li style="margin-bottom: 8px;">Один экземпляр вы отдаете гиду в аэропорту (он отвечает за ваш трансфер).</li>
+                                    <li style="margin-bottom: 8px;">Второй экземпляр вы отдаете на рецепции отеля при заселении.</li>
+                                    <li style="margin-bottom: 8px;">Третий экземпляр (корешок) остается у вас.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-10" id="faq-header-10">
+                            <span class="accordion__title">⏱ Где проверить время вылета?</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-10" role="region" aria-labelledby="faq-header-10">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Турагенты всегда проверяют актуальность полетных данных и сообщают вам об изменениях. Однако вы можете самостоятельно отслеживать время вылета на <strong>онлайн-табло сайта аэропорта</strong> или на сайте авиакомпании по номеру своего рейса.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-11" id="faq-header-11">
+                            <span class="accordion__title">🛍 Выгодно ли покупать в Duty Free?</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-11" role="region" aria-labelledby="faq-header-11">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Существует миф, что товары в Duty Free всегда дешевле. Действительно, там нет налога на импорт, но в их стоимость заложена колоссальная цена аренды помещений в аэропорту. Поэтому наш лайфхак: перед поездкой сравните цены с городскими торговыми центрами.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-12" id="faq-header-12">
+                            <span class="accordion__title">👶 Цены на туры с детьми до 2-х лет (Инфанты)</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-12" role="region" aria-labelledby="faq-header-12">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Отдыхать с младенцами выгодно! Детям до 2 лет авиаперелет и проживание в отеле предоставляются <strong>бесплатно</strong>. Оплачиваются только сборы авиакомпании и страховка (обычно это $70-90 для Турции или Египта). В самолете такой ребенок летит на руках у родителей.</p>
+                                <p style="color: var(--color-text-muted); line-height: 1.6; margin-top: 8px;"><em>Внимание: ребенку не должно исполниться 2 года на момент возвращения из тура!</em></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-13" id="faq-header-13">
+                            <span class="accordion__title">📅 Сроки действия загранпаспортов</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-13" role="region" aria-labelledby="faq-header-13">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Для украинского биометрического загранпаспорта срок действия составляет <strong>10 лет</strong> для взрослых и <strong>4 года</strong> для детей. Продлевать старые паспорта нельзя — по истечении срока действия необходимо оформлять новый документ.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-14" id="faq-header-14">
+                            <span class="accordion__title">🚌 Что такое трансфер?</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-14" role="region" aria-labelledby="faq-header-14">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">Трансфер — это транспорт, который доставляет туристов из аэропорта в отель и обратно. Он бывает:</p>
+                                <ul class="faq-inner-list" style="color: var(--color-text-muted); padding-left: 20px;">
+                                    <li style="margin-bottom: 8px;"><strong>Групповой:</strong> обычно входит в стоимость пакетного тура (большой автобус).</li>
+                                    <li style="margin-bottom: 8px;"><strong>Индивидуальный:</strong> за доплату (вы никого не ждете и едете прямо в отель).</li>
+                                    <li style="margin-bottom: 8px;"><strong>VIP:</strong> возможность выбрать марку автомобиля премиум-класса.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion__item">
+                        <button class="accordion__trigger" aria-expanded="false" aria-controls="faq-content-15" id="faq-header-15">
+                            <span class="accordion__title">☝️ Могу ли я отказаться от сдачи биометрических данных?</span>
+                            <span class="accordion__icon"></span>
+                        </button>
+                        <div class="accordion__content" id="faq-content-15" role="region" aria-labelledby="faq-header-15">
+                            <div class="accordion__inner">
+                                <p style="color: var(--color-text-muted); line-height: 1.6;">В Украине выпускаются только биометрические загранпаспорта (со вшитым чипом). Все граждане обязательно сдают отпечатки пальцев. Исключение делается только по доказанным религиозным убеждениям. Дети до 12 лет отпечатки не сдают.</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -1379,16 +2182,15 @@ body .os-price-btn:hover {
         <section class="section bg-light" style="padding-bottom: 80px;">
             <div class="container text-center">
                 <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin-bottom: 8px;" class="js-reveal">Наши партнеры</h3>
-                
                 <div class="partners-colored-grid js-reveal">
-                    <img src="https://franchising.alliance.ua/_assets/media/8e7c42581a76cb3ac901498c2da6e45c.png" alt="Alliance" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
-                    <img src="https://www.i-travel.com.ua/wp-content/uploads/2020/02/Itravel-New-Logo.png" alt="Itravel" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
-                    <img src="https://www.trendwaytravel.com/Assets/img/logo.png" alt="Trendway" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
-                    <img src="https://corp.unit.travel/static/photos/touroperatorssellers/orig/89/89/21381043006304c9c11a830.png" alt="Unittravel" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
-                    <img src="https://s01.cdn-longitours.com/get/85/ce/03/301dedc7263fe12485ed81e0c22a33b38cc239b9d5c37adcd3732502b9/longitours-logo-l.png" alt="Longitours" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
-                    <img src="https://toco-tour.com.ua/_nuxt/logo.DEUcCnyY.png" alt="Toco tour" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
-                    <img src="https://kompastour.com/img/logo.svg" alt="Kompas" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
-                    <img src="https://eurotrips.ua/wp-content/themes/eurotrips/assets/img/logo.svg" alt="Eurotrips" loading="lazy" style="max-width: 110px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s;">
+                    <img src="https://franchising.alliance.ua/_assets/media/8e7c42581a76cb3ac901498c2da6e45c.png" alt="Alliance" loading="lazy">
+                    <img src="https://www.i-travel.com.ua/wp-content/uploads/2020/02/Itravel-New-Logo.png" alt="Itravel" loading="lazy">
+                    <img src="https://www.trendwaytravel.com/Assets/img/logo.png" alt="Trendway" loading="lazy">
+                    <img src="https://corp.unit.travel/static/photos/touroperatorssellers/orig/89/89/21381043006304c9c11a830.png" alt="Unittravel" loading="lazy">
+                    <img src="https://s01.cdn-longitours.com/get/85/ce/03/301dedc7263fe12485ed81e0c22a33b38cc239b9d5c37adcd3732502b9/longitours-logo-l.png" alt="Longitours" loading="lazy">
+                    <img src="https://toco-tour.com.ua/_nuxt/logo.DEUcCnyY.png" alt="Toco tour" loading="lazy">
+                    <img src="https://kompastour.com/img/logo.svg" alt="Kompas" loading="lazy">
+                    <img src="https://eurotrips.ua/wp-content/themes/eurotrips/assets/img/logo.svg" alt="Eurotrips" loading="lazy">
                     <img src="assets/about/logo.png" alt="Join up" loading="lazy">
                     <img src="assets/about/logo-717.png" alt="Anex" loading="lazy">
                     <img src="assets/about/logo-3374.webp" alt="Alf" loading="lazy">
@@ -1401,18 +2203,16 @@ body .os-price-btn:hover {
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer class="footer js-reveal" itemscope itemtype="https://schema.org/TravelAgency">
         <div class="container">
             <div class="footer__grid">
-                
                 <div class="footer__col footer__col--brand">
                     <img src="assets/hero/logo1.png" alt="Лимон Туров" class="footer__logo" itemprop="image" onerror="this.src='assets/img/logo.png'">
                     <p class="footer__desc mt-4">
                         <span itemprop="name" style="display:none;">Лимон Туров</span>
-                        <span itemprop="description">Мы создаем идеальные путешествия, учитывая все ваши пожелания. Ваш отпуск будет окутан заботой 24/7.</span>
+                        <span itemprop="description">Мы создаем идеальные путешествия, учитывая все ваши пожелания. Ваш отпуск будет окружен заботой 24/7.</span>
                     </p>
                 </div>
 
@@ -1456,21 +2256,19 @@ body .os-price-btn:hover {
                     </ul>
                     
                     <div class="footer__socials mt-4">
-                        <a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
-                        <a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
-                        <a href="https://invite.viber.com/?g2=AQBTgSHg4fZAHUiywoPrx%2FXpNn1fyQUNRdBqYur3CU2jmYeDQV09FUlR7oRKOstA" target="_blank" aria-label="Viber" itemprop="sameAs"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.9 10.9c0-5.4-4.5-9.8-10.1-9.8S.7 5.5.7 10.9c0 3.3 1.7 6.2 4.3 8l-.9 3.5 3.7-1.1c.9.2 1.9.4 2.9.4 5.6 0 10.1-4.4 10.1-9.8H20.9z"/></svg></a>
+                        <a href="https://www.facebook.com/limon.turov/" target="_blank" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
+                        <a href="https://www.instagram.com/limon.turiv" target="_blank" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" aria-label="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
                     </div>
                 </div>
-
             </div>
 
             <div class="footer__bottom">
                 <p>© <span id="current-year">2026</span> Лимон Туров. Все права защищены. <a href="oferta-ru.html" style="color: var(--color-text-muted); text-decoration: underline; margin-left: 10px;">Договор оферты</a></p>
                 <div class="footer__lang-switch">
-                    <a href="#" aria-label="Українська мова">УКР</a>
+                    <a href="index.html" aria-label="Украинский язык">УКР</a>
                     <span style="margin: 0 8px; color: var(--color-dark-border);">|</span>
-                    <a href="#" class="active" aria-label="Русский язык">РУС</a>
+                    <a href="index-ru.html" class="active" aria-label="Русский язык">РУС</a>
                 </div>
             </div>
         </div>
@@ -1478,15 +2276,19 @@ body .os-price-btn:hover {
 
     <!-- ПЛАВАЮЩИЕ ВИДЖЕТЫ -->
     <div class="floating-widget" role="complementary" aria-label="Виджеты связи">
-        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Написать в Telegram">
+        <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Telegram">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
         </a>
-        
-        <button class="fw-btn fw-btn--call js-binotel-trigger" aria-label="Заказать обратный звонок">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span class="fw-btn__tooltip">Заказать звонок (Binotel)</span>
+
+        <button type="button" class="fw-btn fw-btn--call bingc-action-open-passive-form" aria-label="Заказать звонок">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
         </button>
     </div>
+
+    <!-- BINOTEL SCRIPT -->
+    <script src="https://widgets.binotel.com/getcall/widgets/u9o8vbf0aiz3xdotcm2w.js" async></script>
 
     <!-- МОДАЛЬНОЕ ОКНО -->
     <div class="modal-backdrop js-modal" id="modal-tour" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -1539,7 +2341,7 @@ body .os-price-btn:hover {
 
                     <div class="cf-group mt-4">
                         <input type="text" class="cf-input" id="modal-duration" name="Duration" placeholder=" " required>
-                        <label for="modal-duration" class="cf-label">Продолжительность (напр., 7-10 ночей)</label>
+                        <label for="modal-duration" class="cf-label">Длительность (напр., 7-10 ночей)</label>
                         <span class="cf-line" style="background-color: var(--color-dark);"></span>
                     </div>
 
@@ -1580,47 +2382,142 @@ body .os-price-btn:hover {
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        /* Переключатель языков */
-        document.addEventListener('DOMContentLoaded', () => {
-            const langSwitchers = document.querySelectorAll('.lang-switcher');
-            langSwitchers.forEach(switcher => {
-                const btns = switcher.querySelectorAll('.lang-btn');
-                btns.forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        if (this.classList.contains('is-active')) return;
-                        const selectedLang = this.textContent.trim().toLowerCase();
-                        let currentPath = window.location.pathname;
-                        let currentFile = currentPath.split('/').pop() || 'index-ru.html'; 
-                        let newUrl = '';
-                        if (selectedLang === 'ru') {
-                            if (!currentFile.includes('-ru')) {
-                                newUrl = currentFile.replace('.html', '-ru.html');
-                                if(currentFile === '') newUrl = 'index-ru.html'; 
-                            }
-                        } else {
-                            if (currentFile.includes('-ru')) {
-                                newUrl = currentFile.replace('-ru.html', '.html');
-                            }
-                        }
-                        if (newUrl) window.location.href = newUrl;
-                    });
-                });
-            });
-        });
+        /* ИНИЦИАЛИЗАЦИЯ SUPABASE И РАБОТА С ОТЗЫВАМИ */
+        const SUPABASE_URL = 'https://nvtetfexmycpehcsnbie.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_3rWdZypDPW8d4styThrYAw_tAayYVzC';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Скрипт для лоадера
+        // 1. Динамическая загрузка реальных отзывов из базы Supabase
+        async function loadRealReviews() {
+            const { data: reviews, error } = await supabaseClient
+                .from('reviews')
+                .select('*')
+                .eq('is_approved', true)
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error('Ошибка загрузки отзывов:', error);
+                return;
+            }
+
+            const reviewsContainer = document.getElementById('reviews-list');
+            if (!reviewsContainer) return;
+
+            reviews.forEach(item => {
+                const dateFormatted = new Date(item.created_at).toLocaleDateString('ru-RU');
+                const starsStr = '★'.repeat(item.rating) + '☆'.repeat(5 - item.rating);
+                
+                const cardHtml = `
+                    <div class="review-card">
+                        <div class="review-card__header">
+                            <div class="review-card__user-info">
+                                <div class="review-card__avatar">
+                                    <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=FFEC00&color=1A1A1A" alt="${item.name}">
+                                </div>
+                                <div class="review-card__meta">
+                                    <h4 class="review-card__name">${item.name}</h4>
+                                    <span class="review-card__date">${dateFormatted}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__stars">${starsStr}</div>
+                        <p class="review-card__text">"${item.review_text}"</p>
+                    </div>
+                `;
+                reviewsContainer.insertAdjacentHTML('afterbegin', cardHtml);
+            });
+
+            updateReviewsCounter();
+        }
+
+        // Обновление счетчика в кнопке
+        function updateReviewsCounter() {
+            const toggleBtn = document.getElementById('toggle-reviews-btn');
+            if (toggleBtn) {
+                const totalCount = document.querySelectorAll('.review-card').length;
+                const btnSpan = toggleBtn.querySelector('span');
+                if (btnSpan && !toggleBtn.classList.contains('active')) {
+                    btnSpan.textContent = `Показать все ${totalCount} отзывов`;
+                }
+            }
+        }
+
+        // 2. Разворачивание / сворачивание отзывов
+        const toggleBtn = document.getElementById('toggle-reviews-btn');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function() {
+                const hiddenReviews = document.querySelectorAll('.review-card.is-hidden, .review-card.is-expanded');
+                let isExpanded = toggleBtn.classList.contains('active');
+                const btnSpan = toggleBtn.querySelector('span');
+
+                hiddenReviews.forEach(card => {
+                    if (isExpanded) {
+                        card.classList.add('is-hidden');
+                        card.classList.remove('is-expanded');
+                    } else {
+                        card.classList.remove('is-hidden');
+                        card.classList.add('is-expanded');
+                    }
+                });
+
+                if (isExpanded) {
+                    toggleBtn.classList.remove('active');
+                    updateReviewsCounter();
+                } else {
+                    toggleBtn.classList.add('active');
+                    if (btnSpan) btnSpan.textContent = 'Свернуть отзывы';
+                }
+            });
+        }
+
+        // 3. Сохранение нового отзыва в Supabase
+        const reviewForm = document.getElementById('site-review-form');
+        if (reviewForm) {
+            reviewForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const submitBtn = reviewForm.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Публикация...';
+
+                const name = document.getElementById('rv-name')?.value.trim();
+                const email = document.getElementById('rv-email')?.value.trim();
+                const text = document.getElementById('rv-text')?.value.trim();
+                const rating = parseInt(document.querySelector('input[name="rating"]:checked')?.value || '5');
+
+                const { error } = await supabaseClient
+                    .from('reviews')
+                    .insert([
+                        { name: name, email: email, review_text: text, rating: rating, is_approved: true }
+                    ]);
+
+                if (error) {
+                    alert('Не удалось отправить отзыв. Попробуйте еще раз.');
+                    console.error(error);
+                } else {
+                    alert('Спасибо! Ваш отзыв успешно опубликован.');
+                    reviewForm.reset();
+                    loadRealReviews();
+                }
+
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Опубликовать отзыв';
+            });
+        }
+
+        // Прелоадер
         function hideGlobalLoader() {
             const loader = document.getElementById('global-loader');
             if (loader && loader.style.display !== 'none') {
                 loader.style.opacity = '0';
+                loader.style.transition = 'opacity 0.5s ease';
                 setTimeout(() => { loader.style.display = 'none'; }, 500);
             }
         }
-        
-        document.addEventListener('DOMContentLoaded', hideGlobalLoader);
         window.addEventListener('load', hideGlobalLoader);
-        setTimeout(hideGlobalLoader, 1000);
+        setTimeout(hideGlobalLoader, 3500);
+
+        document.addEventListener('DOMContentLoaded', loadRealReviews);
     </script>
 </body>
 </html>

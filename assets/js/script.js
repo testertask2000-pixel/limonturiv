@@ -424,28 +424,140 @@ document.addEventListener('DOMContentLoaded', () => {
     // ИНТЕГРАЦИЯ BINOTEL (Привязка желтой кнопки)
     // ========================================================================
     const initBinotelTrigger = () => {
-        const triggers = document.querySelectorAll('.js-binotel-trigger');
-        
-        triggers.forEach(trigger => {
-            trigger.addEventListener('click', (e) => {
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.js-binotel-trigger');
+            if (btn) {
                 e.preventDefault();
+                e.stopPropagation();
                 
-                // Пробуем открыть окно официальной командой Бинотела (самый надежный способ)
+                // Вызываем модальное окно Binotel через глобальные методы API
                 if (typeof bingc !== 'undefined' && typeof bingc.showActive === 'function') {
                     bingc.showActive();
+                } else if (window.bingcgetcall && typeof window.bingcgetcall.call === 'function') {
+                    window.bingcgetcall.call();
                 } else {
-                    // Резервный метод: пробуем кликнуть по внутреннему контейнеру Бинотела
-                    // Он теперь находится точно под нашей кнопкой
-                    const binotelPassive = document.getElementById('bingc-passive');
-                    if (binotelPassive) binotelPassive.click();
+                    const binotelNative = document.querySelector('#bingc-phone-button, .bingc-phone-button');
+                    if (binotelNative) binotelNative.click();
                 }
-            });
-        });
+            }
+        }, true);
     };
-    
-    // Запускаем с небольшой задержкой, чтобы Бинотел успел подгрузиться
-    setTimeout(initBinotelTrigger, 2500);
+    /* ==========================================================================
+   УНИВЕРСАЛЬНЫЙ АВТОМАТИЧЕСКИЙ БИНОТЕЛЬ (ЖЕСТКИЙ ОБХОД ДЛЯ ВСЕХ СТРАНИЦ)
+   ========================================================================== */
+(function initGlobalBinotelIntegration() {
+    // 1. Авто-подключение внешнего скрипта Binotel (если его нет в HTML)
+    const BINOTEL_SCRIPT_URL = 'https://widgets.binotel.com/getcall/widgets/u9o8vbf0aiz3xdotcm2w.js';
+    if (!document.querySelector(`script[src="${BINOTEL_SCRIPT_URL}"]`)) {
+        const script = document.createElement('script');
+        script.src = BINOTEL_SCRIPT_URL;
+        script.async = true;
+        document.head.appendChild(script);
+    }
 
+    // 2. Авто-создание плавающего виджета
+    const createWidgetMarkup = () => {
+        if (document.querySelector('.floating-widget')) return;
+
+        const widgetHTML = `
+            <div class="floating-widget" style="position: fixed; bottom: 25px; right: 25px; z-index: 999999; display: flex; flex-direction: column; gap: 12px;">
+                <a href="https://t.me/+RaOD2fhct10TR5Jp" target="_blank" class="fw-btn fw-btn--tg" aria-label="Telegram" style="width: 60px; height: 60px; border-radius: 50%; background-color: #2AABEE; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transition: transform 0.2s ease;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </a>
+                <button type="button" class="fw-btn fw-btn--call js-binotel-force-trigger" aria-label="Заказать звонок" style="width: 60px; height: 60px; border-radius: 50%; background-color: #FFEC00; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transition: transform 0.2s ease;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                </button>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', widgetHTML);
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', createWidgetMarkup);
+    } else {
+        createWidgetMarkup();
+    }
+
+    // 3. БРОНЕБОЙНАЯ ФУНКЦИЯ ОТКРЫТИЯ ОКНА БИНОТЕЛЯ
+    function triggerBinotelOpen() {
+        // Вариант 1: Через официальные глобальные объекты API Binotel
+        if (window.bingcgetcall && typeof window.bingcgetcall.openWidget === 'function') {
+            window.bingcgetcall.openWidget();
+            return true;
+        }
+        if (window.bingcgetcall && typeof window.bingcgetcall.call === 'function') {
+            window.bingcgetcall.call();
+            return true;
+        }
+        if (window.bingc && typeof window.bingc.click === 'function') {
+            window.bingc.click();
+            return true;
+        }
+
+        // Вариант 2: Физический клик по скрытым кнопкам Binotel в DOM
+        const targetSelectors = [
+            '#bingc-phone-button',
+            '.bingc-phone-button-icon',
+            '.bingc-phone-button',
+            '#bingc-passive-phone-form',
+            '.bingc-passive-phone'
+        ];
+
+        for (let selector of targetSelectors) {
+            const el = document.querySelector(selector);
+            if (el) {
+                el.click();
+                // Генерируем настоящее событие мыши на случай, если обычный .click() перехвачен
+                const event = new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });
+                el.dispatchEvent(event);
+                return true;
+            }
+        }
+
+        // Вариант 3: Попытка принудительно отобразить скрытое окно Binotel
+        const passiveForm = document.querySelector('#bingc-passive') || document.querySelector('.bingc-passive-phone-container');
+        if (passiveForm) {
+            passiveForm.style.display = 'block';
+            passiveForm.style.opacity = '1';
+            passiveForm.style.visibility = 'visible';
+            return true;
+        }
+
+        return false;
+    }
+
+    // 4. Глобальный делегированный клик
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.js-binotel-force-trigger, .js-binotel-trigger, .bingc-action-open-passive-form, [data-binotel-call]');
+        if (btn) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            let success = triggerBinotelOpen();
+
+            // Если Бинотель ещё загружается с сервера, делаем повторные попытки с интервалом
+            if (!success) {
+                let retries = 0;
+                const interval = setInterval(() => {
+                    retries++;
+                    if (triggerBinotelOpen() || retries > 10) {
+                        clearInterval(interval);
+                    }
+                }, 300);
+            }
+        }
+    }, true);
+})();
+    initBinotelTrigger();
     /* ==========================================================================
    ГЛОБАЛЬНА ВІДПРАВКА ВСІХ ФОРМ ЧЕРЕЗ FORMSPREE
    ========================================================================== */
